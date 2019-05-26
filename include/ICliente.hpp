@@ -1,0 +1,6 @@
+
+
+class ICliente {
+public:
+    ~ICliente() {};
+};
