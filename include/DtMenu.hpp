@@ -1,11 +1,12 @@
-#ifndef _DTPRODUCTOSIMPLE_HPP
-#define _DTPRODUCTOSIMPLE_HPP
+#ifndef _DTMENU_HPP
+#define _DTMENU_HPP
 
 #include "DtProducto.hpp"
+#include "DtProductoEnMenu.hpp"
 
 class DtProductoSimple : public DtProducto {
 private:
-    /* data */
+    // set(DtProductoEnMenu) : productos;
 public:
     DtProductoSimple(/* args */);
     ~DtProductoSimple();

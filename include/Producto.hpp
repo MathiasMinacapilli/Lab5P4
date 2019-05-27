@@ -1,9 +1,21 @@
+#ifndef _PRODUCTO_HPP
+#define _PRODUCTO_HPP
 
+#include "DtProducto.hpp"
+using namespace std;
 
 class Producto {
 private:
-    /* data */
-public:
+    int codigo;
+    string descripcion;
+    float precio;
+    //constructor privado porque es abstracta
     Producto(/* args */);
+public:
+    virtual void eliminar() = 0;
+    DtProducto getDatosProducto();
+    //destructor
     ~Producto();
 };
+
+#endif
