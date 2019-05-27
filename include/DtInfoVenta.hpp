@@ -1,5 +1,5 @@
-
-
+#ifndef _DTINFOVENTA_HPP
+#define _DTINFOVENTA_HPP
 
 class DtInfoVenta {
 private:
@@ -8,3 +8,5 @@ public:
     DtInfoVenta(/* args */);
     ~DtInfoVenta();
 };
+
+#endif

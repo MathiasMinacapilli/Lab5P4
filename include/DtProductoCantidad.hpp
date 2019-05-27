@@ -1,5 +1,5 @@
-
-
+#ifndef _DTPRODUCTOCANTIDAD_HPP
+#define _DTPRODUCTOCANTIDAD_HPP
 
 class DtProductoCantidad
 {
@@ -9,3 +9,5 @@ public:
     DtProductoCantidad(/* args */);
     ~DtProductoCantidad();
 };
+
+#endif

@@ -1,4 +1,5 @@
-
+#ifndef _DTMESASMOZO_HPP
+#define _DTMESASMOZO_HPP
 
 class DtMesasMozo
 {
@@ -8,3 +9,5 @@ public:
     DtMesasMozo(/* args */);
     ~DtMesasMozo();
 };
+
+#endif

@@ -2,11 +2,10 @@
 #define _DTPRODUCTOENMENU_HPP
 
 
-class DtProductoEnMenu
-{
+class DtProductoEnMenu {
 private:
     int cantidad;
 public:
-    DtProductoCantidad(/* args */);
-    ~DtProductoCantidad();
 };
+
+#endif
