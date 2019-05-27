@@ -13,8 +13,8 @@ private:
    DtDireccion direccion;
    //set(DtActualizacion) etapaPedidos
 public:
-    DtFactura(/* args */);
-    ~DtFactura();
+    DtCliente(/* args */);
+    ~DtCliente();
 };
 
 #endif
