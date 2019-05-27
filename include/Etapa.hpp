@@ -1,10 +1,16 @@
+#ifndef _ETAPA_HPP
+#define _ETAPA_HPP
 
 
 
 class Etapa {
 private:
-    /* data */
+     Etapa(/* args */);
 public:
-    Etapa(/* args */);
+    virtual void avanzarEtapa() = 0;
+    virtual void cancelar() = 0; 
     ~Etapa();
 };
+
+
+#endif
