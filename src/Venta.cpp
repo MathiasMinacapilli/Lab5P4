@@ -12,6 +12,13 @@ Venta::Venta(int numero, float descuento, map<int, CantidadProducto*> cant_produ
     this->factura = factura;
 }
 
-void Venta::eliminarProducto(Producto prod, int cantidad) {
-    
+void Venta::eliminarProducto(Producto* prod, int cantidad) {
+    map<int, CantidadProducto*>::iterator it;
+    bool encontre_prod = false;
+    for(it = cant_producto.begin(); ((it != cant_producto.end()) && (!encontre_prod)); ++it) {
+        encontre_prod = (it->second)->estaProducto(prod->getCodigo)
+    }
+    if (encontre_prod == true) {
+        es_cero = (it->second)->disminuir(cantidad)
+    }
 }

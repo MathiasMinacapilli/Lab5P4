@@ -25,12 +25,12 @@ public:
     map<int, CantidadProducto*> getCant_Producto
     Factura* getFactura();
 
-    virtual void agregarProductoAVenta(Producto prod) = 0;
-    virtual bool buscarProducto(Producto p) = 0;
+    virtual void agregarProductoAVenta(Producto* prod) = 0;
+    virtual bool buscarProducto(Producto* p) = 0;
     virtual bool estaFacturada() = 0;
-    void eliminarProducto(Producto prod, int cantidad);
+    void eliminarProducto(Producto* prod, int cantidad);
     void facturar();
-    map<integer, DtProducto> obtenerProductos();
+    map<int, DtProducto> obtenerProductos();
     ~Venta();
 };
 
