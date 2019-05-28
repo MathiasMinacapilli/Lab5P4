@@ -12,6 +12,7 @@ class Venta {
 private:
     int numero;
     float descuento;
+protected:
     Venta(/*args*/);
 public:
     virtual void agregarProductoAVenta(Producto prod) = 0;
