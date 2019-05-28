@@ -10,7 +10,7 @@ class Repartidor : public Empleado {
 private:
    Transporte medioTransporte;
 public:
-    Repartidor(/* args */);
+    Repartidor(Transporte medioTransporte);
     ~Repartidor();
 };
 

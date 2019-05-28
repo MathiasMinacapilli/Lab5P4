@@ -7,8 +7,9 @@ class Empleado{
 private:
     int numero;
     string nombre;
+protected:
+    Empleado(int numero, string nombre);
 public:
-   Empleado(/* args */);
     ~Empleado();
 };
 

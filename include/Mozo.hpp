@@ -6,10 +6,8 @@
 using namespace std;
 
 class Mozo : public Empleado {
-private:
-   
 public:
-   Mozo(/* args */);
+   Mozo();
    ~Mozo();
 };
 
