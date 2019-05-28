@@ -1,7 +1,10 @@
 #ifndef _DTPRODUCTO_HPP
 #define _DTPRODUCTO_HPP
 
+//Librerias de C
 using namespace std;
+
+//Archivos
 
 class DtProducto {
 private:
@@ -9,7 +12,8 @@ private:
     string descripcion;
     float precio;
 public:
-    DtProducto(/* args */);
+    DtProducto(int codigo, string descripcion, float precio);
     ~DtProducto();
 };
+
 #endif

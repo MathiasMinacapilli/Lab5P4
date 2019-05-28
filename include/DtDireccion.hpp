@@ -1,8 +1,10 @@
 #ifndef _DTDIRECCION_HPP
 #define _DTDIRECCION_HPP
 
+//Librerias de C
 using namespace std;
 
+//Archivos 
 
 class DtDireccion{
 private:
@@ -11,13 +13,8 @@ private:
    string esquina1;
    string esquina2;
 public:
-    DtDireccion(/* args */);
+    DtDireccion(string calle, int numeroPuerta, string esquina1, string esquina2);
     ~DtDireccion();
 };
-
-class DtApto : public DtDireccion {
-    string nombreEdificio;
-    int numeroApto;
-}
 
 #endif

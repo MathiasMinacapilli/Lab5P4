@@ -1,10 +1,12 @@
 #ifndef _FACTURALOCAL_HPP
 #define _FACTURALOCAL_HPP
 
-#include "Factura.hpp";
-
+//Librerias de C
 #include <string>
 using namespace std;
+
+//Archivos
+#include "Factura.hpp";
 
 class FacturaLocal:public Factura {
 private:

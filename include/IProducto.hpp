@@ -1,3 +1,5 @@
+#ifndef _IPRODUCTO_HPP
+#define _IPRODUCTO_HPP
 
 //Librerias de C
 #include <string>
@@ -29,3 +31,5 @@ public:
     virtual void seleccionarProductoYCantidad(DtProductoCantidad producto_cantidad) = 0;
     virtual ~IProducto(){}; // virtual y vacío
 };
+
+#endif

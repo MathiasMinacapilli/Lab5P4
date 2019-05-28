@@ -1,12 +1,18 @@
 #ifndef _DTPRODUCTOCANTIDAD_HPP
 #define _DTPRODUCTOCANTIDAD_HPP
 
-class DtProductoCantidad
-{
+//Librerias de C
+using namespace std;
+
+//Archivos
+#include "DtProducto.hpp";
+
+class DtProductoCantidad{
 private:
-    /* data */
+    DtProducto producto;
+    int cantidad;
 public:
-    DtProductoCantidad(/* args */);
+    DtProductoCantidad(DtProducto producto, int cantidad);
     ~DtProductoCantidad();
 };
 

@@ -1,6 +1,10 @@
 #ifndef _ETAPA_HPP
 #define _ETAPA_HPP
 
+//Librerias de C
+using namespace std;
+
+//Archivos
 
 
 class Etapa {

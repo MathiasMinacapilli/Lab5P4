@@ -1,15 +1,17 @@
 #ifndef _CANTIDADPRODUCTO_HPP
 #define _CANTIDADPRODUCTO_HPP
 
-#include "DtProducto.hpp"
-
+//Librerias de C
 using namespace std;
+
+//Archivos
+#include "DtProducto.hpp"
 
 class CantidadProducto{
 private:
    int cantidad;
 public:
-   CantidadProducto(/* args */);
+   CantidadProducto(int cantidad);
    ~CantidadProducto();
    void aumentarCantidad(int cantidad);
    bool disminuir(int cant);

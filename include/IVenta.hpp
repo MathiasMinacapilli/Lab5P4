@@ -1,4 +1,5 @@
-
+#ifndef _IVENTA_HPP
+#define _IVENTA_HPP
 
 //Librerias de C
 #include <set>
@@ -31,3 +32,5 @@ public:
     virtual void seleccionarProductoYCantidad(DtProductoCantidad producto_cantidad) = 0;
     virtual ~IVenta(){}; // virtual y vacío
 };
+
+#endif

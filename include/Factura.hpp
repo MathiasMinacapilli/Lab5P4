@@ -6,9 +6,9 @@
 using namespace std;
 
 //Archivos
-#include "DtFechaYHora.hpp";
-#include "DtProductoCantidad.hpp";
-#include "Producto.hpp";
+#include "DtFechaYHora.hpp"
+#include "DtProductoCantidad.hpp"
+#include "Producto.hpp"
 
 class Factura {
 private:
@@ -20,6 +20,8 @@ private:
     float precioSubTotal;
     float precioTotal;
 public:
+    Factura(int codigo, DtFechaYHora fechaYHora, set<DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal);
+    ~Factura();
 };
 
 #endif

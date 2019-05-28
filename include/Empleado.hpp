@@ -1,6 +1,7 @@
 #ifndef _EMPLEADO_HPP
 #define _EMPLEADO_HPP
 
+//Librerias de C
 using namespace std;
 
 class Empleado{

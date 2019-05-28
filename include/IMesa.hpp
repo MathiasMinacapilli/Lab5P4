@@ -1,3 +1,5 @@
+#ifndef _IMESA_HPP
+#define _IMESA_HPP
 
 //Librerias de C
 #include <set>
@@ -19,3 +21,5 @@ public:
     virtual void seleccionarMesasVenta(set<int> numeros) = 0;
     ~IMesa() {};
 };
+
+#endif
