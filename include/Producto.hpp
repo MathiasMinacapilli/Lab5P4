@@ -10,10 +10,10 @@ private:
     string descripcion;
     float precio;
     //constructor privado porque es abstracta
-    Producto(int cod, string desc, float precio);
+    Producto(int codigo, string descripcion, float precio);
 public:
     virtual void eliminar() = 0;
-    virtual DtProducto getDatosProducto();
+    DtProducto getDatosProducto();
     //destructor
     ~Producto();
 };

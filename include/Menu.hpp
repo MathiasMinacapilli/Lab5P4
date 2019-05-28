@@ -18,7 +18,6 @@ public:
     Menu();
     ~Menu();
     
-    DtProducto getDatosProducto();
     void eliminar();
     void eliminarProducto(int cod);
     void agregarProducto(ProductoSimple *prod);

@@ -1,8 +1,10 @@
 #ifndef _MESA_HPP
 #define _MESA_HPP
 
+//Librerias de C
 #include <map>
 
+//Archivos
 #include "Empleado.hpp"
 #include "VentaLocal.hpp"
 
