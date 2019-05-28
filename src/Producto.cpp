@@ -13,6 +13,7 @@ Producto::Producto(int codigo, string descripcion, float precio) {
 
 DtProducto Producto::getDatosProducto() {
     DtProducto dtprod = DtProducto(this->codigo, this->descripcion, this->precio);
-
-    
+    return dtprod;    
 }
+
+

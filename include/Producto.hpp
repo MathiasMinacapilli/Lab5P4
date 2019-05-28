@@ -9,7 +9,9 @@ private:
     int codigo;
     string descripcion;
     float precio;
-    //constructor privado porque es abstracta
+    
+protected:
+    //constructor protected porque es abstracta
     Producto(int codigo, string descripcion, float precio);
 public:
     virtual void eliminar() = 0;
