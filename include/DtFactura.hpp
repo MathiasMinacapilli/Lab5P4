@@ -1,12 +1,22 @@
 #ifndef _DTFACTURA_HPP
 #define _DTFACTURA_HPP
 
+//Archivos
+#include "DtFechaYHora.hpp";
+#include "DtProductoCantidad.hpp";
+
+
 class DtFactura {
 private:
-    /* data */
+    int codigo;
+    DtFechaYHora fechaYHora;
+    DtProductoCantidad productos;
+    float iva;
+    float descuento;
+    float precioSubTotal;
+    float precioTotal;
 public:
-    DtFactura(/* args */);
-    ~DtFactura();
+    
 };
 
 #endif
