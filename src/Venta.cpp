@@ -16,9 +16,15 @@ void Venta::eliminarProducto(Producto* prod, int cantidad) {
     map<int, CantidadProducto*>::iterator it;
     bool encontre_prod = false;
     for(it = cant_producto.begin(); ((it != cant_producto.end()) && (!encontre_prod)); ++it) {
-        encontre_prod = (it->second)->estaProducto(prod->getCodigo)
+        encontre_prod = (it->second)->estaProducto(prod->getNumero());
     }
     if (encontre_prod == true) {
-        es_cero = (it->second)->disminuir(cantidad)
+        bool es_cero = (it->second)->disminuir(cantidad);
+        if (es_cero) {
+            (it->second)->quitarProducto();
+            CantidadProducto* cp = it->second;
+            cant_producto.erase(it);
+            delete cp;
+        }
     }
 }
