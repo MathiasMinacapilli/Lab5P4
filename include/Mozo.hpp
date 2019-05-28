@@ -1,13 +1,15 @@
 #ifndef _MOZO_HPP
 #define _MOZO_HPP
 
-#include "Empleado.hpp"
-
+//Librerias de C
 using namespace std;
+
+//Archivos
+#include "Empleado.hpp"
 
 class Mozo : public Empleado {
 public:
-   Mozo();
+   Mozo(int numero, string nombre);
    ~Mozo();
 };
 
