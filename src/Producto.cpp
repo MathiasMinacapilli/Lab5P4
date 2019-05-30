@@ -3,7 +3,7 @@
 using namespace std
 
 //Archivos
-#include "../include/Producto.hpp"
+#include "../include/Producto.hpp";
 
 Producto::Producto(int codigo, string descripcion, float precio) {
     this->codigo = codigo;
