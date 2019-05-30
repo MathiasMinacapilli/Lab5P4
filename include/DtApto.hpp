@@ -12,7 +12,9 @@ private:
     string nombreEdificio;
     int numeroApto;
 public:
-    DtApto(string calle, int numeroPuerta, string esquina1, string esquina2; string nombreEdificio, int numeroApto);
+    DtApto(string calle, int numeroPuerta, string esquina1, string esquina2, string nombreEdificio, int numeroApto);
+    string getNombreEdificio();
+    int getNumeroApto();
     ~DtApto();
 };
 

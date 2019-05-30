@@ -7,6 +7,11 @@ private:
     int mes;
     int anio;
 public:
+    DtFecha(int dia, int mes, int anio);
+    int getDia();
+    int getMes();
+    int getAnio();
+    ~DtFecha();
 };
 
 #endif

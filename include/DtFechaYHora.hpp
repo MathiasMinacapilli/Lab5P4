@@ -13,7 +13,10 @@ private:
     int minutos;
     int segundos;
 public:
-    DtFechaYHora(int hora, int minutos, int segundos);
+    DtFechaYHora(int dia, int mes, int anio, int hora, int minutos, int segundos);
+    int getHora();
+    int getMinutos();
+    int getSegundos();
     ~DtFechaYHora();
 };
 

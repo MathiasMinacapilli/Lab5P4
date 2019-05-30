@@ -5,7 +5,6 @@
 #include "DtFechaYHora.hpp";
 #include "DtProductoCantidad.hpp";
 
-
 class DtFactura {
 private:
     int codigo;
@@ -16,7 +15,15 @@ private:
     float precioSubTotal;
     float precioTotal;
 public:
-    
+    DtFactura(int codigo, DtFechaYHora fechaYHora, DtProductoCantidad productos, float iva, float descuento, float precioSubTotal, float precioTotal);
+    int getCodigo();
+    DtFechaYHora getFechaYHora();
+    DtProductoCantidad getProductos();
+    float getIva();
+    float getDescuento();
+    float getPrecioSubTotal();
+    float getPrecioTotal();
+    ~DtFactura();
 };
 
 #endif
