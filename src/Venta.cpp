@@ -36,9 +36,9 @@ map<int, DtProducto> Venta::obtenerProductos() {
   map<int, DtProducto> datosProductos;
   for(it = cant_producto.begin(); it != cant_producto.end(); ++it) {
       DtProducto datos = (it->second)->obtenerDatosProductos();
-      datosProductos.insert(pair<int, DtProducto>(datos.getCodigo(), datos))
+      datosProductos.insert(pair<int, DtProducto>(datos.getCodigo(), datos));
   }
-  return datosProductos
+  return datosProductos;
 }
 
 void Venta::eliminarProducto(Producto* prod, int cantidad) {
@@ -63,9 +63,9 @@ void Venta::facturar() {
     map<int, DtProducto> datosProductos;
     for(it = cant_producto.begin(); it != cant_producto.end(); ++it) {
         DtProducto datos = (it->second)->obtenerDatosProductos();
-        datosProductos.insert(pair<int, DtProducto>(datos.getCodigo(), datos))
+        datosProductos.insert(pair<int, DtProducto>(datos.getCodigo(), datos));
     }
-    Factura* factura = new Factura;
+    Factura* factura = new Factura(/* faltan cosas */);
     factura->setDatos(this->codigo, DatosProductos);
     this->factura = factura;
 }

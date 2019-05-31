@@ -4,9 +4,7 @@ using namespace std
 //Archivos
 #include "../include/Mozo.hpp"
 
-Mozo::Mozo(int numero, string nombre, map<int, *Mesa> mesasMozo) {
-    this -> numero = numero;
-    this -> nombre = nombre;
+Mozo::Mozo(int numero, string nombre, map<int, *Mesa> mesasMozo) : Empleado(numero, nombre){
     this -> mesasMozo = mesasMozo;
 }
 

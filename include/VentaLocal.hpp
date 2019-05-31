@@ -1,19 +1,16 @@
-
-#include "Venta.hpp";
-
 //Librerias de C
 #include <set>
 using namespace std;
 
 //Archivos
+#include "Venta.hpp";
 #include "Producto.hpp";
 
-class VentaLocal
-{
-private:
-    /* data */
+class VentaLocal : public Venta {
 public:
-    virtual void agregarProductoAVenta(Producto prod);
-    virtual bool buscarProducto(Producto p);
-    virtual bool estaFacturada();
+    VentaLocal(int numero, float descuento, map<int, CantidadProducto*> cant_producto, Factura* factura);
+    ~VentaLocal();
+    void agregarProductoAVenta(Producto *prod);
+    bool buscarProducto(Producto p);
+    bool estaFacturada();
 };
