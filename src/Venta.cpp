@@ -28,3 +28,15 @@ void Venta::eliminarProducto(Producto* prod, int cantidad) {
         }
     }
 }
+
+void Venta::facturar() {
+    map<int, CantidadProducto*>::iterator it;
+    map<int, DtProducto> DatosProductos;
+    for(it = cant_producto.begin(); it != cant_producto.end(); ++it) {
+        DtProducto datos = (it->second)->obtenerDatosProductos();
+        DatosProductos.insert(pair<int, DtProducto>(datos.getCodigo(), datos))
+    }
+    Factura* factura = new Factura;
+    factura->setDatos(this->codigo, DatosProductos);
+    this->factura = factura;
+}
