@@ -9,3 +9,13 @@ Empleado::Empleado(int numero, string nombre) {
     this->nombre = nombre;
 }
 
+int Empleado::getNumero() {
+  return this -> numero;
+}
+
+string Empleado::getNombre() {
+  return this -> nombre;
+}
+
+Empleado::~Empleado() {
+}

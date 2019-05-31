@@ -12,6 +12,8 @@ protected:
     Empleado(int numero, string nombre);
 public:
     ~Empleado();
+    int getNumero();
+    string getNombre();
 };
 
 #endif

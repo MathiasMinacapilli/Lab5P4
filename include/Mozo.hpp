@@ -6,11 +6,15 @@ using namespace std;
 
 //Archivos
 #include "Empleado.hpp"
+#include "Mesa.hpp"
 
 class Mozo : public Empleado {
+private:
+  map<int, *Mesa> mesasMozo;
 public:
-   Mozo(int numero, string nombre);
-   ~Mozo();
+  Mozo(int numero, string nombre, map<int, *Mesa> mesasMozo);
+  ~Mozo();
+  map<int, *Mesa> getMesasMozo();
 };
 
 #endif
