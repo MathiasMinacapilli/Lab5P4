@@ -10,11 +10,11 @@ using namespace std;
 class ProductoSimple : public Producto {
 public:
     //constructor y destructor
-    ProductoSimple();
+    ProductoSimple(int codigo, string descripcion, float precio);
     ~ProductoSimple();
     
     DtProductoSimple getDatos();
-    void eliminar()  
+    void eliminar();  
 
 };
 

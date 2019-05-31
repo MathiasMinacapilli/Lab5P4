@@ -1,5 +1,5 @@
-#ifndef _PRODUCTO_HPP
-#define _PRODUCTO_HPP
+#ifndef _PRODUCTOENMENU_HPP
+#define _PRODUCTOENMENU_HPP
 
 #include "Producto.hpp"
 
