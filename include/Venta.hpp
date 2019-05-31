@@ -17,7 +17,7 @@ private:
     map<int, CantidadProducto*> cant_producto;
     Factura* factura;
 protected:
-    Venta(int, float, map<int, CantidadProducto*>, Factura*);
+    Venta(int numero, float descuento, map<int, CantidadProducto*> cant_producto, Factura* factura);
 public:
     // Getters
     int getNumero();
