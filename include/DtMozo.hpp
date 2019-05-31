@@ -1,11 +1,13 @@
 #ifndef _DTMOZO_HPP
 #define _DTMOZO_HPP
 
-class DtMozo {
+#include "DtEmpleado.hpp";
+
+class DtMozo: public DtEmpleado {
 private:
-    /* data */
+
 public:
-    DtMozo(/* args */);
+    DtMozo(int numero, string nombre);
     ~DtMozo();
 };
 

@@ -1,11 +1,13 @@
 #ifndef _DTREPARTIDOR_HPP
 #define _DTREPARTIDOR_HPP
 
+#include "Transporte.hpp";
+
 class DtRepartidor {
 private:
-    /* data */
+    Transporte medioTransporte;
 public:
-    DtRepartidor(/* args */);
+    DtRepartidor(Transporte medioTransporte);
     ~DtRepartidor();
 };
 

@@ -1,12 +1,17 @@
 #ifndef _DTMESASMOZO_HPP
 #define _DTMESASMOZO_HPP
 
-class DtMesasMozo
-{
+#include <set>
+using namespace std;
+
+class DtMesasMozo {
 private:
-    /* data */
+    int codigoMozo;
+    set<integer> mesas;
 public:
-    DtMesasMozo(/* args */);
+    DtMesasMozo(int codigoMozo, set<int> mesas);
+    int getCodigoMozo();
+    set<int> getMesas();
     ~DtMesasMozo();
 };
 

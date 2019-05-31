@@ -5,9 +5,9 @@
 
 class DtProductoSimple : public DtProducto {
 private:
-    /* data */
+    
 public:
-    DtProductoSimple(/* args */);
+    DtProductoSimple(int codigo, string descripcion, float precio);
     ~DtProductoSimple();
 };
 
