@@ -20,7 +20,7 @@ public:
     
     void eliminar();
     void eliminarProducto(int cod);
-    void agregarProducto(ProductoSimple *prod);
+    void agregarProducto(ProductoSimple *prod, int cantidad);
     bool esVacio();
   
 

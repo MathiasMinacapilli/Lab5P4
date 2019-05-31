@@ -13,7 +13,7 @@ public:
     bool estaProducto(int cod);
     
     //constructor y destructor
-    ProductoEnMenu(int cant, ProductoSimple *prod);
+    ProductoEnMenu(int cantidad, ProductoSimple *producto);
     ~ProductoEnMenu();
 };
 

@@ -14,8 +14,15 @@ protected:
     //constructor protected porque es abstracta
     Producto(int codigo, string descripcion, float precio);
 public:
+	//getters
+	int getCodigo();
+    string getDescripcion();
+    float getPrecio();
+
+    //operaciones
     virtual void eliminar() = 0;
     DtProducto getDatosProducto();
+
     //destructor
     ~Producto();
 };
