@@ -5,19 +5,26 @@
 using namespace std;
 
 //Archivos
-#include "DtProducto.hpp"
+#include "Producto.hpp"
 
-class CantidadProducto{
+class CantidadProducto {
 private:
-   int cantidad;
+    int cantidad;
+    Producto* producto;
 public:
-   CantidadProducto(int cantidad);
-   ~CantidadProducto();
-   void aumentarCantidad(int cantidad);
-   bool disminuir(int cant);
-   bool estaProducto(int codigo);
-   DtProducto obtenerDatosProducto();
-   void quitarProducto();
+    // Constructor y Destructor
+    CantidadProducto(int cantidad, Producto* producto);
+    ~CantidadProducto();
+    // Getters y Setters
+    int getCantidad();
+    Producto* getProducto();
+    void setCantidad(int cantidad);
+    
+    void aumentarCantidad(int cantidad);
+    bool disminuir(int cant);
+    bool estaProducto(int codigo);
+    DtProducto obtenerDatosProducto();
+    void quitarProducto();
 };
 
 #endif

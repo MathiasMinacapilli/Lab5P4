@@ -10,6 +10,8 @@ using namespace std;
 #include "DtProductoCantidad.hpp"
 #include "Producto.hpp"
 
+const float valor_iva = 22
+
 class Factura {
 private:
     int codigo;
