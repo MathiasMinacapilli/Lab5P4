@@ -1,4 +1,7 @@
+//Librerias de C
+using namespace std;
 
+//Archivos
 #include "../include/Factura.hpp"
 
 Factura::Factura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productosCantidad, float iva, float descuento, float precioSubTotal, float precioTotal) {
@@ -11,4 +14,5 @@ Factura::Factura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantida
     this->precioTotal = precioTotal;
 }
 
-Factura::~Factura();
+Factura::~Factura() {
+}
