@@ -4,17 +4,13 @@
 //Librerias de C
 using namespace std;
 
-//Archivos
-
-
 class Etapa {
 private:
-     Etapa(/* args */);
+     Etapa();
 public:
-    virtual void avanzarEtapa() = 0;
-    virtual void cancelar() = 0; 
+    virtual Etapa avanzarEtapa() = 0;
+    virtual void cancelar() = 0;
     ~Etapa();
 };
-
 
 #endif

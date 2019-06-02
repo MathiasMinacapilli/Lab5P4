@@ -1,10 +1,12 @@
 #ifndef _REPARTIDOR_HPP
 #define _REPARTIDOR_HPP
 
+//Librerias de C
+using namespace std;
+
+//Archivos
 #include "Empleado.hpp"
 #include "Transporte.hpp"
-
-using namespace std;
 
 class Repartidor : public Empleado {
 private:

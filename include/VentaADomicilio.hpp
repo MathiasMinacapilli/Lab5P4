@@ -1,22 +1,22 @@
-
-#include "Venta.hpp";
+#ifndef _VENTAADOMICILIO_HPP
+#define _VENTAADOMICILIO_HPP
 
 //Librerias de C
 #include <set>
 using namespace std;
 
 //Archivos
-#include "DtProducto.hpp";
-#include "Producto.hpp";
-
+#include "Venta.hpp"
+#include "Etapa.hpp"
 
 class VentaADomicilio: public Venta{
 private:
-    Etapa etapa;
+    Etapa *etapa;
 public:
-    void agregarProductoAVenta(Producto prod);
-    bool buscarProducto(Producto p);
-    bool estaFacturada();
+    VentaADomicilio(int numero, float descuento, map<int, CantidadProducto*> cant_producto, Factura* factura, Etapa* etapa);
+    ~VentaADomicilio();
     void avanzarEtapaVenta();
     void cancelarVenta();
 };
+
+#endif
