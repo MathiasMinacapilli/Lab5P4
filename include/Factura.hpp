@@ -2,7 +2,7 @@
 #define _FACTURA_HPP
 
 //Librerias de C
-#include <set>
+#include <map>
 using namespace std;
 
 //Archivos
@@ -16,13 +16,13 @@ class Factura {
 private:
     int codigo;
     DtFechaYHora fechaYHora;
-    set<DtProductoCantidad> productos;
+    map<int, DtProductoCantidad> productosCantidad;
     float iva;
     float descuento;
     float precioSubTotal;
     float precioTotal;
 public:
-    Factura(int codigo, DtFechaYHora fechaYHora, set<DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal);
+    Factura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productosCantidad, float iva, float descuento, float precioSubTotal, float precioTotal);
     ~Factura();
 };
 
