@@ -6,7 +6,7 @@
 using namespace std;
 
 //Archivos
-#include "DtProducto.hpp";
+#include "DtProducto.hpp"
 
 class IFactura {
 public:
