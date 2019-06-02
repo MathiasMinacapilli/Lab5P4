@@ -3,17 +3,18 @@
 
 //Librerias de C
 using namespace std;
+#include <map>
 
 //Archivos
 #include "Cliente.hpp"
+#include "ICliente.hpp"
 
-class ControladorCliente {
+class ControladorCliente : public ICliente {
 private:
 	static ControladorCliente *instance;
 	ControladorCliente();
 	map<int, Cliente *> clientes;
-public:
-    ~ControladorCliente() {};
+
 };
 
 #endif
