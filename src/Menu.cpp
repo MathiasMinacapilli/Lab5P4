@@ -10,6 +10,8 @@ Menu::Menu(int codigo, string descripcion) : Producto(codigo, descripcion, 0){
 //??? no tiene productos, entonces precio queda en 0? 
 }
 
+Menu::~Menu(){}
+
 void Menu::agregarProducto(ProductoSimple *prod, int cantidad){
 	//busco el producto en el menu
 	map<int, ProductoEnMenu *>::iterator it = productos.find(prod->getCodigo());

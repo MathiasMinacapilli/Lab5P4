@@ -11,6 +11,8 @@ Producto::Producto(int codigo, string descripcion, float precio) {
     this->precio = precio;
 }
 
+Producto::~Producto(){}
+
 int Producto::getCodigo(){
 	return this->codigo;
 }

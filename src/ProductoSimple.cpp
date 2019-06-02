@@ -10,6 +10,8 @@ ProductoSimple::ProductoSimple(int codigo, string descripcion, float precio)
  : Producto(codigo, descripcion, precio) {
   }
 
+ProductoSimple::~ProductoSimple(){}
+
 DtProductoSimple Producto::getDatos() {
     DtProductoSimple dtprodsimple = DtProductoSimple(this->codigo, this->descripcion, this->precio);                                                                                                                                                                   
     return dtprod;    
