@@ -15,7 +15,7 @@ private:
     map<int, ProductoEnMenu *> productos;
 public:
     //constructor y destructor
-    Menu();
+    Menu(int codigo, string descripcion);
     ~Menu();
     
     void eliminar();

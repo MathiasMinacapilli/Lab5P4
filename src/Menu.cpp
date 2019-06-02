@@ -6,9 +6,23 @@ using namespace std
 #include "../include/Menu.hpp";
 
 //operaciones
+Menu::Menu(int codigo, string descripcion) : Producto(codigo, descripcion, 0){
+//??? no tiene productos, entonces precio queda en 0? 
+}
+
 void Menu::agregarProducto(ProductoSimple *prod, int cantidad){
-	ProductoEnMenu *pm = new ProductoEnMenu(cantidad, prod);
-	productos[prod->getCodigo()] = pm;
+	//busco el producto en el menu
+	map<int, ProductoEnMenu *>::iterator it = productos.find(prod->getCodigo());
+	//si el producto no esta
+	if (it == productos.end()){
+		//se crea el nuevo producto en menu 
+		ProductoEnMenu *pm = new ProductoEnMenu(cantidad, prod);
+		productos[prod->getCodigo()] = pm;
+	}
+	else 
+		it->second->aumentarCantidad(cantidad);
+	this->precio += (prod->getPrecio()*cantidad*0.9);
+
 }
 
 bool Menu::esVacio(){

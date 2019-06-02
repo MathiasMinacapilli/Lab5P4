@@ -1,8 +1,11 @@
+
 #ifndef _PRODUCTO_HPP
 #define _PRODUCTO_HPP
 
-#include "DtProducto.hpp"
 using namespace std;
+
+//Archivos
+#include "DtProductoSimple.hpp"
 
 class Producto {
 private:
