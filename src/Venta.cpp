@@ -31,15 +31,15 @@ Factura* Venta::getFactura() {
   return this -> factura;
 }
 
-void VentaLocal::agregarProductoAVenta(Producto* producto, DtProductoCantidad prod_cantidad) {
+void VentaLocal::agregarProductoAVenta(Producto* producto, int cantidad) {
   map<int, CantidadProducto*>::iterator it;
   bool esta_producto = false;
   for(it = cants_productos.begin(); ((it != cants_productos.end()) && (!esta_producto)); ++it)
       esta_producto = (it->second)->estaProducto(producto->getCodigo());
   if (esta_producto)
-      (it->second)->aumentarCantidad(prod_cantidad.getCantidad();
+      (it->second)->aumentarCantidad(cantidad);
   else {
-      CantidadProducto* cant_producto = new CantidadProducto(prod_cantidad.getCantidad(), producto)
+      CantidadProducto* cant_producto = new CantidadProducto(cantidad, producto)
       (this->cants_productos).insert(pair<int, CantidadProducto*>(cant_producto->getCodigo(), cant_producto))
   }
 }
