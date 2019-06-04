@@ -7,6 +7,7 @@ class DtProductoSimple : public DtProducto {
 private:
     
 public:
+    //constructor y destructor
     DtProductoSimple(int codigo, string descripcion, float precio);
     ~DtProductoSimple();
 };

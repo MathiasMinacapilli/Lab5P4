@@ -14,9 +14,11 @@ private:
     float precio;
 public:
     DtProducto(int codigo, string descripcion, float precio); //
+    //getters
     int getCodigo();
     string getDescripcion();
     float getPrecio();
+    //destructor
     ~DtProducto();
 };
 

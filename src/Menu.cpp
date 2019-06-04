@@ -7,7 +7,7 @@ using namespace std
 
 //operaciones
 Menu::Menu(int codigo, string descripcion) : Producto(codigo, descripcion, 0){
-//??? no tiene productos, entonces precio queda en 0? 
+	this->precio = 0;
 }
 
 Menu::~Menu(){}
