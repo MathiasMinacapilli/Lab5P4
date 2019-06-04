@@ -8,7 +8,7 @@ using namespace std;
 
 class VentaLocal : public Venta {
 public:
-    VentaLocal(int numero, float descuento, map<int, CantidadProducto*> cant_producto, Factura* factura);
+    VentaLocal(int numero, float descuento, Factura* factura);
     ~VentaLocal();
     void agregarProductoAVenta(Producto *prod);
     bool buscarProducto(Producto p);

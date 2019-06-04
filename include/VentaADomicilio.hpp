@@ -13,7 +13,7 @@ class VentaADomicilio: public Venta{
 private:
     Etapa *etapa;
 public:
-    VentaADomicilio(int numero, float descuento, map<int, CantidadProducto*> cant_producto, Factura* factura, Etapa* etapa);
+    VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa);
     ~VentaADomicilio();
     void avanzarEtapaVenta();
     void cancelarVenta();

@@ -18,14 +18,14 @@ private:
     map<int, CantidadProducto*> cants_productos;
     Factura* factura;
 protected:
-    Venta(int numero, float descuento, map<int, CantidadProducto*> cants_productos, Factura* factura);
+    Venta(int numero, float descuento, Factura* factura);
 public:
     ~Venta();
-    
+
     // Getters
     int getNumero();
     float getDescuento();
-    map<int, CantidadProducto*> getCants_Productos
+    map<int, CantidadProducto*> getCants_Productos();
     Factura* getFactura();
 
     void agregarProductoAVenta(Producto* producto, DtProductoCantidad prod_cantidad);

@@ -5,11 +5,11 @@ using namespace std
 //Archivos
 #include "../include/Venta.hpp"
 
-Venta::Venta(int numero, float descuento, map<int, CantidadProducto*> cants_productos, Factura* factura) {
+Venta::Venta(int numero, float descuento, Factura* factura) {
     this->numero = numero;
     this->descuento = descuento;
-    this->cants_productos = cants_productos;
     this->factura = factura;
+    cants_productos.clear();
 }
 
 Venta::~Venta() {

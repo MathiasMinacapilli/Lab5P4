@@ -4,7 +4,7 @@ using namespace std;
 //Archivos
 #include "../include/VentaADomicilio.hpp"
 
-VentaADomicilio::VentaADomicilio(int numero, float descuento, map<int, CantidadProducto*> cant_producto, Factura* factura, Etapa* etapa) : Venta (numero, descuento, cant_producto, factura) {
+VentaADomicilio::VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa) : Venta (numero, descuento, factura) {
   this -> etapa = etapa;
 }
 
