@@ -109,10 +109,39 @@ DtFactura ControladorVenta::generarFactura() {
 }
 
 //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
-map<int, DtFactura> ControladorVenta::getFacturasFecha() {
-  
+void ControladorVenta::ingresarFecha(DtFecha fecha) {
+  this -> fecha_venta = fecha;
 }
-float ControladorVenta::getTotalFacturadoFecha();
+
+map<int, DtFactura> ControladorVenta::getFacturasFecha() {
+  map<int, Venta*>::iterator it;
+  map<int, DtFactura> res;
+  Venta* venta;
+  Factura* factura;
+  DtFactura dtfactura;
+  for(it = ventas.begin(); it != ventas.end(); ++it) {
+    venta = it -> second;
+    if (venta -> estaFacturada()) {
+      factura = venta -> getFactura();
+      if (factura -> getFechaYHora == this -> fecha_venta) {
+        dtfactura = factura -> getDatosFactura();
+        res.insert(pair<int, DtFactura>(dtfactura -> getCodigo(), dtfactura));
+      }
+    }
+  }
+  return res;
+}
+
+/////////SEGUIIIIIRRR
+//ACAAAA
+//ACAAAAA!
+float ControladorVenta::getTotalFacturadoFecha() {
+  map<int, DtFactura> facturas = getFacturasFecha();
+  //map<int, DtFactura>::iterator it;
+
+
+
+}
 
 //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
 set<DtActualizacion> ControladorVenta::getListadoActualizaciones();

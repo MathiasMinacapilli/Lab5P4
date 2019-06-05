@@ -8,17 +8,20 @@ using namespace std;
 
 //Archivos
 #include "IVenta.hpp"
+//#include "DtFecha.hpp"
+//#include "DtFactura.hpp"
 
 class ControladorVenta : public IVenta {
 private:
   ControladorVenta();
   static ControladorVenta *instance;
   map<int, Venta*> ventas;
-  int numero_mesa; //ingresarNumeroMesa - numero
-  Producto* prod; //seleccionarProdYCant - prod
-  int cantidad; //seleccionarProdYCant - producto_cantidad.getCantidad
-  Venta* v; //getProductosVenta - v
-  int numero_venta;
+  int numero_mesa; //AGREGAR PRODUCTO A UNA VENTA - ingresarNumeroMesa - numero
+  Producto* prod; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - prod
+  int cantidad; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - producto_cantidad.getCantidad
+  Venta* v; //QUITAR PRODUCTO A UNA VENTA - getProductosVenta - v
+  int numero_venta; //INICIAR VENTA EN MESAS - iniciarVenta
+  DtFecha fecha_venta; //RESUMEN FACTUACION 1 DIA DADA LA FECHA - ingresarFecha - fecha
 public:
   ControladorVenta ControladorVenta::getInstance();
 
@@ -47,6 +50,7 @@ public:
   DtFactura ControladorVenta::generarFactura();
 
   //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
+  void ingresarFecha(DtFecha fecha);
   map<int, DtFactura> ControladorVenta::getFacturasFecha();
   float ControladorVenta::getTotalFacturadoFecha();
 
