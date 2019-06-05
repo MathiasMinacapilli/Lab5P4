@@ -6,8 +6,8 @@
 using namespace std;
 
 //Archivos
-#include "DtMesasMozo.hpp";
-#include "Venta.hpp";
+#include "DtMesasMozo.hpp"
+#include "Venta.hpp"
 
 class IMesa {
 public:

@@ -7,26 +7,32 @@ using namespace std;
 #include <map>
 
 //Archivos
-#include "IMesa.hpp";
+#include "IMesa.hpp"
+#include "IEmpleado.hpp"
 
 class ControladorMesa : public IMesa {
 private:
     ControladorMesa();
     static ControladorMesa *instance;
     map<int, Mesa*> mesas;
-    Mesa* mesa_recordada
+    Mesa* mesa_recordada;
+    set<int> posibles_mesas;
+    set<int> mesas_seleccionadas;
 public:
     //Asignar automáticamente mozos a mesas
     map<int, DtMesasMozo> asignarMozosAMesas();
-    //Iniciar Venta en Mesas - cancelarVenta() - 
+    //Iniciar Venta en Mesas - cancelarVenta()
     void cancelarVenta();
     //Facturación de una venta - generarFactura() - ControladorVenta
     void finalizarVenta();
+    //FALTA TERMINAR
+    //FALTA TERMINAR
+    Venta* obtenerVenta(int numero);
+    //Iniciar Venta en Mesas
     set<int> getMesasMozoSinVentas(int num_mozo);
+    void seleccionarMesasVenta(set<int> numeros);
     set<int> getMesasSeleccionadas();
     void iniciarVenta();
-    Venta obtenerVenta(int numero);
-    void seleccionarMesasVenta(set<int> numeros);
 };
 
 #endif

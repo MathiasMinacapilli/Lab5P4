@@ -7,9 +7,9 @@
 using namespace std;
 
 // Archivos
-#include "DtProductoCantidad.hpp";
-#include "Producto.hpp";
-#include "Facturar.hpp";
+#include "DtProductoCantidad.hpp"
+#include "Producto.hpp"
+#include "Factura.hpp"
 
 class Venta {
 private:
@@ -28,11 +28,15 @@ public:
     map<int, CantidadProducto*> getCants_Productos();
     Factura* getFactura();
 
+    // Setters
+    void setDescuento(float descuento);
+    void setFactura(Factura* factura);
+
     void agregarProductoAVenta(Producto* producto, DtProductoCantidad prod_cantidad);
     bool buscarProducto(Producto* producto);
     bool estaFacturada();
     void eliminarProducto(Producto* producto, int cantidad);
-    void facturar();
+    DtFactura facturar();
     map<int, DtProducto> obtenerProductos();
 };
 
