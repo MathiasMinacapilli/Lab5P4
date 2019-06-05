@@ -43,7 +43,7 @@ map<int, VentaLocal *> getVentasPasadas() {
 
 //Operaciones
 bool Mesa::noTieneVentas() {
-  return (ventaActual == NULL);
+  return (ventaActual == nullptr);
 }
 
 bool Mesa::esDelMozo(int numMozo) {
@@ -52,5 +52,5 @@ bool Mesa::esDelMozo(int numMozo) {
 
 void Mesa::terminarVenta() {
   ventasPasadas.insert(pair<int, VentaLocal>((this -> ventaActual).getNum(), this -> ventaActual));
-  this -> ventaActual = NULL;
+  this -> ventaActual = nullptr;
 }

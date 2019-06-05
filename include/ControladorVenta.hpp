@@ -15,41 +15,42 @@ private:
   static ControladorVenta *instance;
   map<int, Venta*> ventas;
   int numero_mesa; //ingresarNumeroMesa - numero
-  Producto prod; //seleccionarProdYCant - prod
+  Producto* prod; //seleccionarProdYCant - prod
   int cantidad; //seleccionarProdYCant - producto_cantidad.getCantidad
-  Venta v; //get<ProductosVenta - v
+  Venta* v; //getProductosVenta - v
+  int numero_venta;
 public:
   ControladorVenta ControladorVenta::getInstance();
 
-  //Baja Producto - eliminarProducto - ControladorProducto
+  //BAJA PRODUCTO - eliminarProducto - ControladorProducto
   bool ControladorVenta::estaEnVentaSinFacturar(Producto p);
 
-  //Iniciar Venta en Mesas - iniciarVenta - ControladorMesa
+  //INICIAR VENTA EN MESAS - iniciarVenta - ControladorMesa
   Venta ControladorVenta::crearVenta();
 
-  //Agregar Producto a una Venta
+  //AGREGAR PRODUCTO A UNA VENTA
   void ControladorVenta::ingresarNumeroMesa(int numero);
   map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles();
   void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad);
   void ControladorVenta::agregarProductoAVenta();
   void ControladorVenta::cancelarProductoAVenta();
 
-  //Quitar Producto a una Venta
+  //QUITAR PRODUCTO A UNA VENTA
   map<int, DtProducto> ControladorVenta::getProductosVenta (int numMesa);
   //seleccionarProdYCant
   void ControladorVenta::eliminarProductoDeVenta();
   void ControladorVenta::cancelarEliminarProductoDeVenta();
 
-  //Facturacion de una Venta
+  //FACTURACION DE UNA VENTA
   //ingresarNumeroMesa
   void ControladorVenta::ingresarPorcentajeDescuento(float descuento);
   DtFactura ControladorVenta::generarFactura();
 
-  //Resumen facturacion de 1 dia dada la fecha
+  //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
   map<int, DtFactura> ControladorVenta::getFacturasFecha();
   float ControladorVenta::getTotalFacturadoFecha();
 
-  //Consultar actualizaciones de pedidos a domicilio por parte del administrador
+  //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
   set<DtActualizacion> ControladorVenta::getListadoActualizaciones();
 
 };

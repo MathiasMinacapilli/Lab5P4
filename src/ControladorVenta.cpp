@@ -5,6 +5,8 @@ using namespace std;
 
 //Archivos
 #include "../include/ControladorVenta.hpp"
+//#include "../include/ControladorProducto.hpp"
+//#include "../include/ControladorMesa.hpp"
 
 ControladorVenta::ControladorVenta() {
 }
@@ -15,7 +17,7 @@ ControladorVenta ControladorVenta::getInstance() {
   return instance;
 }
 
-//Baja Producto - eliminarProducto - ControladorProducto
+//BAJA PRODUCTO - eliminarProducto - ControladorProducto
 bool ControladorVenta::estaEnVentaSinFacturar(Producto p) {
   map<int, Venta*>::iterator it;
   bool encontre_producto = false;
@@ -28,53 +30,89 @@ bool ControladorVenta::estaEnVentaSinFacturar(Producto p) {
   return encontre_producto;
 }
 
-//Iniciar Venta en Mesas - iniciarVenta - ControladorMesa
-//FALTA LO DEL NUMEROOOOO
-//ACAA
-//ACAA
-//ACAA
+//INICIAR VENTA EN MESAS - iniciarVenta - ControladorMesa
 Venta ControladorVenta::crearVenta() {
-  ve = new VentaLocal(/*numero random o contador de ventas*/, 0, NULL);
+  ve = new VentaLocal((this -> numero_venta) + 1, 0, NULL);
+  (this -> numero_venta)++;
   ventas.insert(pair<int, Venta>(ve -> getCodigo(), ve));
   return ve;
 }
 
-//Agregar Producto a una Venta
+//AGREGAR PRODUCTO A UNA VENTA
 void ControladorVenta::ingresarNumeroMesa(int numero) {
-  numero_mesa = numero;
+  this -> numero_mesa = numero;
 }
-
 map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles() {
   ControladorProducto *cont_prod;
   cont_prod = ControladorProducto::getInstance();
   map<int, DtProducto> dtprods = 	cont_prod -> getProductosDisponibles();
   return dtprods;
 }
-
 void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad) {
+  ControladorProducto *cont_prod;
+  cont_prod = ControladorProducto::getInstance();
+  Producto* prod = cont_prod -> encontrarProducto(producto_cantidad);
+  this -> prod = prod;
+  this - > cantidad = producto_cantidad.getCantidad();
+}
+void ControladorVenta::agregarProductoAVenta() {
+  ControladorMesa *cont_mesa;
+  cont_mesa = ControladorMesa::getInstance();
+  Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+  v -> agregarProductoAVenta(this -> prod, this -> cantidad);
+}
+void ControladorVenta::cancelarProductoAVenta() {
+  //QUE ONDA CON ESTO?
+  //QUE ES LIBERAR LA MEMORIA??
+  // AYUDAAA!!
+  prod = nullptr;
+  cantidad = 0;
+  v = nullptr;
+}
+
+//QUITAR PRODUCTO A VENTA
+map<int, DtProducto> ControladorVenta::getProductosVenta (int numMesa) {
+  ControladorMesa *cont_mesa;
+  cont_mesa = ControladorMesa::getInstance();
+  Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+  map<int, DtProducto> productos_venta = v -> obtenerProductos();
+  this -> v = v;
+}
+//seleccionarProdYCant
+void ControladorVenta::eliminarProductoDeVenta() {
+  (this -> v) -> eliminarProducto(this -> prod, this -> cantidad);
+}
+void ControladorVenta::cancelarEliminarProductoDeVenta() {
+  //QUE ONDA CON ESTO?
+  //QUE ES LIBERAR LA MEMORIA??
+  // AYUDAAA!!
+  prod = nullptr;
+  cantidad = 0;
+  v = nullptr;
+}
+
+//FACTURACION DE UNA VENTA
+//ingresarNumeroMesa
+void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
+  ControladorMesa *cont_mesa;
+  cont_mesa = ControladorMesa::getInstance();
+  Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+  v -> setDescuento(descuento);
+}
+DtFactura ControladorVenta::generarFactura() {
+  ControladorMesa *cont_mesa;
+  cont_mesa = ControladorMesa::getInstance();
+  Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+  DtFactura factura = v -> facturar();
+  cont_mesa -> finalizarVenta();
+  return factura;
+}
+
+//RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
+map<int, DtFactura> ControladorVenta::getFacturasFecha() {
   
 }
-void ControladorVenta::agregarProductoAVenta();
-void ControladorVenta::cancelarProductoAVenta();
-
-
-//Quitar Producto a una Venta
-map<int, DtProducto> ControladorVenta::getProductosVenta (int numMesa);
-//seleccionarProdYCant
-void ControladorVenta::eliminarProductoDeVenta();
-void ControladorVenta::cancelarEliminarProductoDeVenta();
-
-
-//Facturacion de una Venta
-//ingresarNumeroMesa
-void ControladorVenta::ingresarPorcentajeDescuento(float descuento);
-DtFactura ControladorVenta::generarFactura();
-
-
-//Resumen facturacion de 1 dia dada la fecha
-map<int, DtFactura> ControladorVenta::getFacturasFecha();
 float ControladorVenta::getTotalFacturadoFecha();
 
-
-//Consultar actualizaciones de pedidos a domicilio por parte del administrador
+//CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
 set<DtActualizacion> ControladorVenta::getListadoActualizaciones();
