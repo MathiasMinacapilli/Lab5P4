@@ -11,6 +11,7 @@ using namespace std;
 #include "Menu.hpp"
 #include "Producto.hpp"
 #include "DtProductoSimple.hpp"
+#include "IVenta.hpp"
 
 class ControladorProducto : public IProducto {
 private:
@@ -21,17 +22,18 @@ private:
 	map<int, ProductoSimple *> productosSimples;
 	map<int, Menu *> menus;
 	//atributos de cosas que debe recordar
-	DtProductoSimple datos_prod_simple;
-	int codigo_menu, cantidad_recordada;
-	string desc_menu; 
-	map<int, DtProductoCantidad> prod_cants_recordados; 
-
+	DtProductoSimple datos_prod_simple; //ingresarDatosProductoSimple
+	int codigo_menu;//ingresarMenu
+	string desc_menu; //ingresarMenu
+	map<int, DtProductoCantidad> prod_cants_recordados; //seleccionarProductoYCantidad 
+	Producto *producto_recordado; //seleccionarProducto
 
 public:
 	//operacion patron singleton
 	static ControladorProducto *getInstance();
 	
 	//operaciones de la clase
+	//caso de uso: alta producto
 	bool existeProductoSimple();
 	void ingresarDatosProducto(DtProductoSimple datos);
 	void ingresarProductoSimple();
@@ -42,17 +44,16 @@ public:
 	void ingresarMenu();
 	void cancelarMenu();
 	
-	bool eliminarProducto();
-	void eliminarProductoDeMenu(int cod);
-	void cancelarBajaProducto();
-	
-	Producto* encontrarProducto(DtProductoCantidad producto_cantidad);
+	//caso de uso: baja producto
 	map<int, DtProducto> getProductosDisponibles();
-	
 	void seleccionarProducto(int codigo_producto);
+	bool eliminarProducto();
+	void cancelarBajaProducto();
+	//baja producto -- eliminar() en ProductoSimple 
+	void eliminarProductoDeMenu(int cod);
 	
-
-
+	//caso de uso: agregar producto a venta -- seleccionarProdYCant
+	Producto* encontrarProducto(DtProductoCantidad producto_cantidad);
 
 }
 
