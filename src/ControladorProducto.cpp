@@ -21,7 +21,7 @@ void ControladorProducto::ingresarDatosProducto(DtProductoSimple datos){
 }
 
 void ControladorProducto::ingresarProductoSimple(){
-	ProductoSimple *nuevo_prod_simple = new ProductoSimple(this->datos_prod_simple.getCodigo(), this->datos_prod_simple.getDescripcion(), this->datos_prod_simple.getPrecio());
+	ProductoSimple *nuevo_prod_simple = new ProductoSimple((this->datos_prod_simple).getCodigo(), (this->datos_prod_simple).getDescripcion(), (this->datos_prod_simple).getPrecio());
 	this->productosSimples[nuevo_prod_simple.getCodigo()] = nuevo_prod_simple;
 }
 
@@ -37,7 +37,7 @@ map<int, DtProductoSimple> ControladorProducto::getProductosSimples(){
 	map<int, DtProductoSimple> resultado; 
 	map<int, ProductoSimple *>::iterator it;
 	for (it = this->productosSimples.begin(); it != this->productosSimples.end(); ++it)
-		resultado[it->second->getCodigo()] = it->second->getDatos();
+		resultado[(it->second)->getCodigo()] = (it->second)->getDatos();
 	return resultado;
 }
 
@@ -55,8 +55,8 @@ void ControladorProducto::ingresarMenu(){
 	//y agrego los productos correspondientes al menu
 	map<int, DtProductoCantidad>::iterator it;
 	for (it = this->prod_cants_recordados.begin(); it != this->prod_cants_recordados.end(); ++it){
-		Producto *p = this->productosSimples.find(it->second->getProducto()->getCodigo());
-		nuevo_menu->agregarProducto(p, it->second->getCantidad());
+		Producto *p = this->productosSimples.find((it->second)->getProducto()->getCodigo());
+		nuevo_menu->agregarProducto(p, (it->second)->getCantidad());
 	}
 }
 
@@ -73,10 +73,10 @@ map<int, DtProducto> ControladorProducto::getProductosDisponibles(){
 	map<int, DtProducto> resultado;
 	map<int, ProductoSimple *>::iterator it_prod_simp;
 	for(it_prod_simp = this->productosSimples.begin(); it_prod_simp != this->productosSimples.end(); ++it_prod_simp)
-		resultado[it_prod_simp->second->getCodigo()] = it_prod_simp->second->getDatosProducto();
+		resultado[(it_prod_simp->second)->getCodigo()] = (it_prod_simp->second)->getDatosProducto();
 	map<int, Menu *>::iterator it_menu;
 	for(it_menu = this->menus.begin(); it_menu != this->menu.end(); ++it_menu)
-		resultado[it_menu->second->getCodigo()] = it_menu->second->getDatosProducto();
+		resultado[(it_menu->second)->getCodigo()] = (it_menu->second)->getDatosProducto();
 	return resultado;
 }
 
