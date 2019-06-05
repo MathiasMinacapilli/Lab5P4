@@ -4,12 +4,14 @@ using namespace std;
 
 ControladorProducto::ControladorProducto(){}
 
+//PATRON SINGLETON
 ControladorProducto ControladorProducto::getInstance(){
 	if (instance == nullptr)
 		instance = new ControladorProducto();
 	return instance; 
 }
 
+//ALTA PRODUCTO
 bool ControladorProducto::existeProductoSimple(){
 	return !productosSimples.empty();
 }
@@ -65,6 +67,8 @@ void ControladorProducto::cancelarMenu(){
 	this->desc_menu = '';
 }
 
+
+//BAJA PRODUCTO
 map<int, DtProducto> ControladorProducto::getProductosDisponibles(){	
 	map<int, DtProducto> resultado;
 	map<int, ProductoSimple *>::iterator it_prod_simp;
@@ -110,6 +114,8 @@ void ControladorProducto::eliminarProductoDeMenu(int cod){
 		it->second->eliminarProducto(cod);
 }
 
+
+//AGREGAR PRODUCTO A VENTA
 Producto * ControladorProducto::encontrarProducto(DtProductoCantidad producto_cantidad){
 	int codigo = producto_cantidad.getProducto().getCodigo();
 	map<int, ProductoSimple *>::iterator it_ps = this->productosSimples.find(codigo);

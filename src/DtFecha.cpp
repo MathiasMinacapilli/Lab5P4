@@ -20,3 +20,9 @@ int DtFecha::getAnio() {
 }
 
 DtFecha::~DtFecha() {}
+
+bool DtFecha::operator==(const DtFecha &f2) {
+    return ((this->getAnio() == f2.getAnio()) && 
+        (this->getMes() == f2.getMes()) && 
+        (this->getDia() == f2.getDia()));
+}
