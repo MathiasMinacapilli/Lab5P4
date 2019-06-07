@@ -2,7 +2,6 @@
 #define _IEMPLEADO_HPP
 
 //Librerias de C
-
 using namespace std;
 
 //Archivos
@@ -12,7 +11,7 @@ using namespace std;
 
 class IEmpleado {
 public:
-    virtual Mozo getMozo(int num_mozo);
+    virtual Mozo *getMozo(int num_mozo);
     ~IEmpleado() {};
 };
 

@@ -19,7 +19,7 @@ private:
 	map<int, Cliente *> clientes;
 public:
 	//operacion patron singleton
-	static ControladorCliente getInstance();
+	static ControladorCliente *getInstance();
 	
 };
 

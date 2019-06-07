@@ -12,14 +12,14 @@ using namespace std;
 ControladorVenta::ControladorVenta() {
 }
 
-ControladorVenta ControladorVenta::getInstance() {
+ControladorVenta *ControladorVenta::getInstance() {
   if (instance == nullptr)
     instance = new ControladorVenta();
   return instance;
 }
 
 //BAJA PRODUCTO - eliminarProducto - ControladorProducto
-bool ControladorVenta::estaEnVentaSinFacturar(Producto p) {
+bool ControladorVenta::estaEnVentaSinFacturar(Producto *p) {
   map<int, Venta*>::iterator it;
   bool encontre_producto = false;
   bool existe_factura;
@@ -32,8 +32,8 @@ bool ControladorVenta::estaEnVentaSinFacturar(Producto p) {
 }
 
 //INICIAR VENTA EN MESAS - iniciarVenta - ControladorMesa
-Venta ControladorVenta::crearVenta() {
-  ve = new VentaLocal((this -> numero_venta) + 1, 0, NULL);
+VentaLocal *ControladorVenta::crearVenta() {
+  VentaLocal *ve = new VentaLocal((this -> numero_venta) + 1, 0, nullptr);
   (this -> numero_venta)++;
   ventas.insert(pair<int, Venta>(ve -> getCodigo(), ve));
   return ve;

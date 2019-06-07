@@ -8,6 +8,7 @@ using namespace std;
 //Archivos
 #include "Mozo.hpp"
 #include "Repartidor.hpp"
+#include "IEmpleado.hpp"
 
 
 class ControladorEmpleado : public IEmpleado{
@@ -18,8 +19,8 @@ private:
 	map<int, Repartidor *> repartidores;
 
 public:
-	static ControladorEmpleado getInstance();
-    virtual Mozo getMozo(int num_mozo);
+	static ControladorEmpleado *getInstance();
+    virtual Mozo *getMozo(int num_mozo);
 };
 
 #endif

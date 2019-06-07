@@ -1,8 +1,9 @@
-#include "../include/ControladorCliente.hpp";
+//Archivos
+#include "../include/ControladorCliente.hpp"
 
 ControladorCliente::ControladorCliente(){}
 
-ControladorCliente ControladorCliente::getInstance(){
+ControladorCliente *ControladorCliente::getInstance(){
 	if (instance == nullptr)
 		instance = new ControladorCliente();
 	return instance; 

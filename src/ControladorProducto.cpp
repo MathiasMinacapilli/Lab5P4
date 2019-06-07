@@ -1,11 +1,11 @@
-#include "../include/ControladorProducto.hpp";
+#include "../include/ControladorProducto.hpp"
 
 using namespace std;
 
-ControladorProducto::ControladorProducto(){}
+//ControladorProducto::ControladorProducto(){}
 
 //PATRON SINGLETON
-ControladorProducto ControladorProducto::getInstance(){
+ControladorProducto *ControladorProducto::getInstance(){
 	if (instance == nullptr)
 		instance = new ControladorProducto();
 	return instance; 
@@ -22,7 +22,7 @@ void ControladorProducto::ingresarDatosProducto(DtProductoSimple datos){
 
 void ControladorProducto::ingresarProductoSimple(){
 	ProductoSimple *nuevo_prod_simple = new ProductoSimple((this->datos_prod_simple).getCodigo(), (this->datos_prod_simple).getDescripcion(), (this->datos_prod_simple).getPrecio());
-	this->productosSimples[nuevo_prod_simple.getCodigo()] = nuevo_prod_simple;
+	this->productosSimples[nuevo_prod_simple->getCodigo()] = nuevo_prod_simple;
 }
 
 void ControladorProducto::cancelarProductoSimple(){
@@ -36,8 +36,10 @@ void ControladorProducto::ingresarDatosMenu(int codigo, string desc){
 map<int, DtProducto> ControladorProducto::getProductosSimples(){
 	map<int, DtProducto> resultado; 
 	map<int, ProductoSimple *>::iterator it;
-	for (it = this->productosSimples.begin(); it != this->productosSimples.end(); ++it)
-		resultado[(it->second)->getCodigo()] = (it->second)->getDatosProducto();
+	for (it = this->productosSimples.begin(); it != this->productosSimples.end(); ++it){
+			DtProducto prod = (it->second)->getDatosProducto();
+			resultado[(it->second)->getCodigo()] = prod;
+	}
 	return resultado;
 }
 
@@ -50,13 +52,16 @@ void ControladorProducto::ingresarMenu(){
 	//creo el nuevo menu con los parametros que el usuario ingreso anteriormente
 	Menu *nuevo_menu = new Menu(this->codigo_menu, this->desc_menu);
 	//guardo el menu en la coleccion de menus
-	menus[nuevo_menu.getCodigo()] = nuevo_menu;
+	menus[nuevo_menu->getCodigo()] = nuevo_menu;
 	//recorro los DtProductoCantidad recordados
 	//y agrego los productos correspondientes al menu
 	map<int, DtProductoCantidad>::iterator it;
 	for (it = this->prod_cants_recordados.begin(); it != this->prod_cants_recordados.end(); ++it){
-		Producto *p = this->productosSimples.find((it->second)->getProducto()->getCodigo());
-		nuevo_menu->agregarProducto(p, (it->second)->getCantidad());
+		map<int, ProductoSimple*>::iterator it_ps = (this->productosSimples).find((it->second).getProducto().getCodigo());
+		if(it_ps != productosSimples.end()){
+			ProductoSimple *p = it_ps->second;
+			nuevo_menu->agregarProducto(p, (it->second).getCantidad());
+		}
 	}
 }
 
@@ -64,7 +69,7 @@ void ControladorProducto::cancelarMenu(){
 	//libera la "memoria" (cosas recordadas)
 	this->prod_cants_recordados.clear();
 	this->codigo_menu = -1;
-	this->desc_menu = '';
+	this->desc_menu = ' ';
 }
 
 
@@ -75,7 +80,7 @@ map<int, DtProducto> ControladorProducto::getProductosDisponibles(){
 	for(it_prod_simp = this->productosSimples.begin(); it_prod_simp != this->productosSimples.end(); ++it_prod_simp)
 		resultado[(it_prod_simp->second)->getCodigo()] = (it_prod_simp->second)->getDatosProducto();
 	map<int, Menu *>::iterator it_menu;
-	for(it_menu = this->menus.begin(); it_menu != this->menu.end(); ++it_menu)
+	for(it_menu = this->menus.begin(); it_menu != this->menus.end(); ++it_menu)
 		resultado[(it_menu->second)->getCodigo()] = (it_menu->second)->getDatosProducto();
 	return resultado;
 }

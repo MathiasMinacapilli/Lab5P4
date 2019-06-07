@@ -7,7 +7,7 @@ using namespace std;
 #include "../include/ControladorMesa.hpp"
 
 //devolver instancia patron Singleton
-ControladorMesa ControladorMesa::getInstance(){
+ControladorMesa *ControladorMesa::getInstance(){
   if (instance == nullptr)
     instance = new ControladorMesa();
   return instance; 
@@ -20,6 +20,9 @@ map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
   //
   //
   //
+  map<int, DtMesasMozo> res;
+  res.clear();
+  return res;
 }
 
 //Facturación de una venta - generarFactura() - ControladorVenta
@@ -30,10 +33,10 @@ void ControladorMesa::finalizarVenta() {
 
 //Quitar Producto a una Venta - getProductosVenta() - ControladorVenta
 
-Venta* obtenerVenta(int numero) {
+Venta* ControladorMesa::obtenerVenta(int numero) {
     map<int, Mesa*>::iterator it = mesas.find(numero);
     Venta* ve = nullptr;
-    if (it != nullptr) {
+    if (it != mesas.end()) {
         ve = (it -> second) -> getVentaActual();
     }
     return ve;
@@ -46,11 +49,11 @@ set<int> ControladorMesa::getMesasMozoSinVentas(int num_mozo) {
   set<int> mesas_sin_venta;
   mesas_sin_venta.clear();
   for (it = mesas.begin(); it != mesas.end(); ++it) {
-    bool sin_venta := (it -> second) -> noTieneVentas();
+    bool sin_venta = (it -> second) -> noTieneVentas();
     if (sin_venta) {
       bool es_del_mozo = (it -> second) -> esDelMozo(num_mozo);
       if (es_del_mozo) {
-        mesas_sin_venta.insert((it -> second) -> getNumero());
+        mesas_sin_venta.insert((it -> second) -> getNum());
       }
     }
   }
@@ -77,9 +80,9 @@ set<int> ControladorMesa::getMesasSeleccionadas() {
 
 void ControladorMesa::iniciarVenta() {
   ControladorVenta* cont_venta = ControladorVenta::getInstance();
-  Venta* ve = cont_venta -> crearVenta();
+  VentaLocal* ve = cont_venta -> crearVenta();
   set<int>::iterator it_selecc;
-  for (it_selecc = mesas_seleccionadas.begin(); it_selecc != mesas_seleccionadas.end(); ++it) {
+  for (it_selecc = mesas_seleccionadas.begin(); it_selecc != mesas_seleccionadas.end(); ++it_selecc) {
     map<int, Mesa*>::iterator it_mesas = mesas.find(*it_selecc);
     if (it_mesas != mesas.begin()) {
       (it_mesas -> second) -> setVentaActual(ve);

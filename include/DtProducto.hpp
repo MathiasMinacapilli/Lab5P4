@@ -13,6 +13,7 @@ private:
     string descripcion;
     float precio;
 public:
+    DtProducto();
     DtProducto(int codigo, string descripcion, float precio); //
     //getters
     int getCodigo();

@@ -9,10 +9,11 @@ using namespace std;
 //Archivos
 #include "IProducto.hpp"
 #include "ProductoSimple.hpp"
+#include "DtProducto.hpp"
 #include "Menu.hpp"
 #include "Producto.hpp"
 #include "DtProductoSimple.hpp"
-#include "IVenta.hpp"
+#include "ControladorVenta.hpp"
 
 class ControladorProducto : public IProducto {
 private:
@@ -56,7 +57,7 @@ public:
 	//caso de uso: agregar producto a venta -- seleccionarProdYCant
 	Producto* encontrarProducto(DtProductoCantidad producto_cantidad);
 
-}
+};
 
 
 #endif

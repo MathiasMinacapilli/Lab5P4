@@ -8,6 +8,7 @@ private:
     int anio;
 public:
 	//constructor
+    DtFecha();
     DtFecha(int dia, int mes, int anio);
     //getters
     int getDia();

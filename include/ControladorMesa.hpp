@@ -8,7 +8,10 @@ using namespace std;
 
 //Archivos
 #include "IMesa.hpp"
-#include "IEmpleado.hpp"
+#include "Mesa.hpp"
+#include "DtMesasMozo.hpp"
+#include "ControladorVenta.hpp"
+#include "ControladorEmpleado.hpp"
 
 class ControladorMesa : public IMesa {
 private:
@@ -24,7 +27,7 @@ private:
     set<int> mesas_seleccionadas;
 public:
     //operacion patron Singleton
-    static ControladorMesa getInstance();
+    static ControladorMesa *getInstance();
     //Asignar automáticamente mozos a mesas
     map<int, DtMesasMozo> asignarMozosAMesas();
     //Facturación de una venta - generarFactura() - ControladorVenta

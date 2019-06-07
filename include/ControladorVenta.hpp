@@ -8,7 +8,9 @@ using namespace std;
 
 //Archivos
 #include "IVenta.hpp"
-//#include "DtFecha.hpp"
+#include "VentaLocal.hpp"
+#include "VentaADomicilio.hpp"
+#include "DtFecha.hpp"
 //#include "DtFactura.hpp"
 
 class ControladorVenta : public IVenta {
@@ -26,13 +28,13 @@ private:
   int numero_venta; //INICIAR VENTA EN MESAS - iniciarVenta
   DtFecha fecha_venta; //RESUMEN FACTUACION 1 DIA DADA LA FECHA - ingresarFecha - fecha
 public:
-  static ControladorVenta getInstance();
+  static ControladorVenta *getInstance();
 
   //BAJA PRODUCTO - eliminarProducto - ControladorProducto
-  bool estaEnVentaSinFacturar(Producto p);
+  bool estaEnVentaSinFacturar(Producto *p);
 
   //INICIAR VENTA EN MESAS - iniciarVenta - ControladorMesa
-  Venta crearVenta();
+  VentaLocal *crearVenta();
 
   //AGREGAR PRODUCTO A UNA VENTA
   void ingresarNumeroMesa(int numero);

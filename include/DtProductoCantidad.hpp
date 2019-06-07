@@ -12,6 +12,7 @@ private:
     DtProducto producto;
     int cantidad;
 public:
+	DtProductoCantidad();
     DtProductoCantidad(DtProducto producto, int cantidad);
     DtProducto getProducto();
     int getCantidad();
