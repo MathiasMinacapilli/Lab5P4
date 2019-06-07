@@ -12,14 +12,19 @@ using namespace std;
 
 class ControladorMesa : public IMesa {
 private:
+    //constructor
     ControladorMesa();
+    //instancia patron Singleton
     static ControladorMesa *instance;
+    
     map<int, Mesa*> mesas;
     Mesa* mesa_recordada;
     int num_mozo_recordado;
     set<int> posibles_mesas;
     set<int> mesas_seleccionadas;
 public:
+    //operacion patron Singleton
+    static ControladorMesa getInstance();
     //Asignar automáticamente mozos a mesas
     map<int, DtMesasMozo> asignarMozosAMesas();
     //Facturación de una venta - generarFactura() - ControladorVenta

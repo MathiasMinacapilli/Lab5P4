@@ -14,7 +14,7 @@ ControladorVenta::ControladorVenta() {
 
 ControladorVenta ControladorVenta::getInstance() {
   if (instance == nullptr)
-    instance = new ControladorVenta;
+    instance = new ControladorVenta();
   return instance;
 }
 
