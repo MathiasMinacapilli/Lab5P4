@@ -1,6 +1,3 @@
-//Librerias de C
-using namespace std;
-
 //Archivos
 #include "../include/EnCamino.hpp"
 #include "../include/Recibido.hpp"
@@ -12,10 +9,10 @@ EnCamino::EnCamino() : Etapa() {
 EnCamino::~EnCamino() {
 }
 
-Etapa EnCamino::avanzarEtapa() {
-  return new Recibido;
+Etapa *EnCamino::avanzarEtapa() {
+  return new Recibido();
 }
 
-Etapa EnCamino::cancelar() {
-  return new Cancelado;
+Etapa *EnCamino::cancelar() {
+  return new Cancelado();
 }

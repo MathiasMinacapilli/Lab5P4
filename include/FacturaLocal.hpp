@@ -8,7 +8,7 @@ using namespace std;
 //Archivos
 #include "Factura.hpp"
 
-class FacturaLocal:public Factura {
+class FacturaLocal : public Factura {
 private:
     string nombreMozo;
 public:

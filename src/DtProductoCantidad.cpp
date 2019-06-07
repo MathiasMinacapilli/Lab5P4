@@ -1,5 +1,5 @@
-
-#include "../include/DtProductoCantidad.hpp";
+//Archivos
+#include "../include/DtProductoCantidad.hpp"
 
 DtProductoCantidad::DtProductoCantidad(DtProducto producto, int cantidad) {
     this->producto = producto;

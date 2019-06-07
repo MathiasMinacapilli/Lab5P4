@@ -1,6 +1,3 @@
-//Librerias de C
-using namespace std;
-
 //Archivos
 #include "../include/Pedido.hpp"
 #include "../include/EnCamino.hpp"

@@ -1,7 +1,8 @@
 #ifndef _DTPRODUCTOENMENU_HPP
 #define _DTPRODUCTOENMENU_HPP
 
-#include "DtProductoSimple.hpp";
+//Archivos
+#include "DtProductoSimple.hpp"
 
 class DtProductoEnMenu {
 private:

@@ -1,6 +1,3 @@
-//Librerias de C
-using namespace std;
-
 //Archivos
 #include "../include/Factura.hpp"
 
@@ -37,5 +34,3 @@ DtFactura Factura::getDatosFactura(){
 	DtFactura datos = DtFactura(this->codigo, this->fechaYHora, this->productosCantidad, this->iva, this->descuento, this->precioSubTotal, this->precioTotal);
 	return datos;
 }
-
-

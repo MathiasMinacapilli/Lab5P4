@@ -1,7 +1,8 @@
 #ifndef _DTREPARTIDOR_HPP
 #define _DTREPARTIDOR_HPP
 
-#include "Transporte.hpp";
+//Archivos
+#include "Transporte.hpp"
 
 class DtRepartidor {
 private:

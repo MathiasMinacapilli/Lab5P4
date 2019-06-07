@@ -9,10 +9,9 @@ using namespace std;
 #include "DtProducto.hpp"
 
 class DtProductoSimple : public DtProducto {
-private:
-    
 public:
     //constructor y destructor
+    DtProductoSimple();
     DtProductoSimple(int codigo, string descripcion, float precio);
     ~DtProductoSimple();
 };

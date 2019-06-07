@@ -1,5 +1,5 @@
-
-#include "../include/DtProductoEnMenu.hpp";
+//Archivos
+#include "../include/DtProductoEnMenu.hpp"
 
 DtProductoEnMenu::DtProductoEnMenu(DtProductoSimple producto, int cantidad) {
     this->producto = producto;
