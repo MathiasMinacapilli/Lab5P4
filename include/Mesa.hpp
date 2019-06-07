@@ -6,9 +6,8 @@
 using namespace std;
 
 //Archivos
-#include "Empleado.hpp"
-#include "VentaLocal.hpp"
 #include "Mozo.hpp"
+#include "VentaLocal.hpp"
 
 class Mesa{
 private:
@@ -22,7 +21,7 @@ public:
     ~Mesa();
     //getters y setters
     int getNum();
-    Mozo* getMiMozo();
+    Mozo *getMiMozo();
     void setVentaActual(VentaLocal *v);
     Venta *getVentaActual();
     void agregarAVentasPasadas(VentaLocal *v);

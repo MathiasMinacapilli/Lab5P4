@@ -21,7 +21,7 @@ public:
     virtual void cancelarProductoAVenta() = 0;
     virtual Venta crearVenta() = 0;
     virtual void eliminarProductoDeVenta() = 0;
-    virtual bool estaEnVentaSinFacturar(Producto p) = 0;
+    virtual bool estaEnVentaSinFacturar(Producto *p) = 0;
     virtual DtFactura generarFactura() = 0;
     virtual map<int, DtFactura> getFacturasFecha() = 0;
     virtual set<DtActualizacion> getListadoActualizaciones() = 0;

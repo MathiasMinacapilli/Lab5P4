@@ -11,8 +11,8 @@ class EnCamino : public Etapa {
 public:
     EnCamino();
     ~EnCamino();
-    Etapa avanzarEtapa();
-    Etapa cancelar();
+    Etapa *avanzarEtapa();
+    Etapa *cancelar();
 };
 
 #endif

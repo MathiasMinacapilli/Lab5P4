@@ -10,6 +10,7 @@ using namespace std;
 // Archivos
 #include "DtProductoCantidad.hpp"
 #include "Producto.hpp"
+#include "CantidadProducto.hpp"
 #include "Factura.hpp"
 #include "DtActualizacion.hpp"
 

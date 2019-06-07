@@ -16,7 +16,10 @@ ControladorMesa ControladorMesa::getInstance(){
 //Asignar automáticamente mozos a mesas
 
 map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
-    
+    //FALTAA , TENEMOS DUDA 
+  //
+  //
+  //
 }
 
 //Facturación de una venta - generarFactura() - ControladorVenta

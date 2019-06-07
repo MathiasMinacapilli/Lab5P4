@@ -7,7 +7,7 @@ using namespace std;
 class DtMesasMozo {
 private:
     int codigoMozo;
-    set<integer> mesas;
+    set<int> mesas;
 public:
     DtMesasMozo(int codigoMozo, set<int> mesas);
     int getCodigoMozo();

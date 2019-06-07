@@ -19,7 +19,6 @@ using namespace std;
 //Archivos
 #include "include/ICliente.hpp"
 #include "include/IEmpleado.hpp"
-#include "include/IFactura.hpp"
 #include "include/IMesa.hpp"
 #include "include/IProducto.hpp"
 #include "include/IVenta.hpp"
@@ -30,20 +29,14 @@ using namespace std;
 -------Funciones De Validacion-------
 ----------------------------------
 */
+
+#if 0
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
 static bool esValidaFecha(int dia, int mes, int anio) {
     return ((1 <= dia) && (dia <= 31)) &&
         ((1 <= mes) && (mes <= 12)) &&
         (0 < anio);
 }
-
-1. Administrador
-2. Mozo
-3. Repartidor
-4. Cliente
-5. Cargar datos de prueba
-6. Salir
-
 
 
 
@@ -363,3 +356,8 @@ int main() {
     } //fin switch
     return 0;
 } //fin main
+#endif
+
+int main(){
+    return 0;
+}

@@ -22,12 +22,12 @@ public:
 	static Fabrica getInstance();
 
 	//obtener las interfaces
-	ICliente getICliente();
-	IEmpleado getIEmpleado();
-	IMesa getIMesa();
-	IProducto getIProducto();
-	IVenta getIVenta();
+	ICliente *getICliente();
+	IEmpleado *getIEmpleado();
+	IMesa *getIMesa();
+	IProducto *getIProducto();
+	IVenta *getIVenta();
 
-}
+};
 
 #endif

@@ -19,7 +19,7 @@ public:
     virtual void cancelarProductoSimple() = 0;
     virtual bool eliminarProducto() = 0;
     virtual bool eliminarProductoDeMenu(int cod) = 0;
-    virtual Producto encontrarProducto(DtProductoCantidad producto_cantidad) = 0;
+    virtual Producto *encontrarProducto(DtProductoCantidad producto_cantidad) = 0;
     virtual bool existeProductoSimple() = 0;
     virtual map<int, DtProducto> getProductosDisponibles() = 0;
     virtual map<int, DtProductoSimple> getProductosSimples() = 0;

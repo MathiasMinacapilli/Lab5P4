@@ -11,7 +11,7 @@ using namespace std;
 #include "Producto.hpp"
 #include "DtFactura.hpp"
 
-const float valor_iva = 22
+const float valor_iva = 22;
 
 class Factura {
 private:

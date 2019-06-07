@@ -5,11 +5,11 @@
 using namespace std;
 
 class Etapa {
-private:
+protected:
      Etapa();
 public:
-    virtual Etapa avanzarEtapa() = 0;
-    virtual void cancelar() = 0;
+    virtual Etapa *avanzarEtapa() = 0;
+    virtual Etapa *cancelar() = 0;
     ~Etapa();
 };
 

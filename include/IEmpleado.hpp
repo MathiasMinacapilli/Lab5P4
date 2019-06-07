@@ -6,7 +6,8 @@
 using namespace std;
 
 //Archivos
-#include "Empleado.hpp"
+#include "Mozo.hpp"
+#include "Repartidor.hpp"
 
 
 class IEmpleado {
