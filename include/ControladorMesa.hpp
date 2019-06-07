@@ -16,16 +16,14 @@ private:
     static ControladorMesa *instance;
     map<int, Mesa*> mesas;
     Mesa* mesa_recordada;
+    int num_mozo_recordado;
     set<int> posibles_mesas;
     set<int> mesas_seleccionadas;
 public:
     //Asignar automáticamente mozos a mesas
     map<int, DtMesasMozo> asignarMozosAMesas();
-    //Iniciar Venta en Mesas - cancelarVenta()
-    void cancelarVenta();
     //Facturación de una venta - generarFactura() - ControladorVenta
     void finalizarVenta();
-    //FALTA TERMINAR
     //FALTA TERMINAR
     Venta* obtenerVenta(int numero);
     //Iniciar Venta en Mesas
@@ -33,6 +31,7 @@ public:
     void seleccionarMesasVenta(set<int> numeros);
     set<int> getMesasSeleccionadas();
     void iniciarVenta();
+    void cancelarVenta();
 };
 
 #endif

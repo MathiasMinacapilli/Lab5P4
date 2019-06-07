@@ -10,28 +10,28 @@ map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
     
 }
 
-void ControladorMesa::cancelarVenta() {
-  //Quedó como pregunta que es liberar la memoria
-}
-
 void ControladorMesa::finalizarVenta() {
   mesa_recordada -> terminarVenta();
 }
 
+
+//Iniciar Venta en Mesas
+
 set<int> ControladorMesa::getMesasMozoSinVentas(int num_mozo) {
   map<int, Mesa*>::iterator it;
-  set<int> mozos_sin_venta;
-  mozos_sin_venta.clear();
+  set<int> mesas_sin_venta;
+  mesas_sin_venta.clear();
   for (it = mesas.begin(); it != mesas.end(); ++it) {
     bool sin_venta := (it -> second) -> noTieneVentas();
     if (sin_venta) {
       bool es_del_mozo = (it -> second) -> esDelMozo(num_mozo);
       if (es_del_mozo) {
-        mozos_sin_venta.insert((it -> second) -> getNumero());
+        mesas_sin_venta.insert((it -> second) -> getNumero());
       }
     }
   }
-  return mozos_sin_venta;
+  num_mozo_recordado = num_mozo;
+  return mesas_sin_venta;
 }
 
 void ControladorMesa::seleccionarMesasVenta(set<int> posibles_mesas) {
@@ -62,5 +62,10 @@ void ControladorMesa::iniciarVenta() {
     }
   }
   ControladorEmpleado* cont_empleado = ControladorEmpleado::getInstance();
-  Mozo* mozo_a_asignar = cont_empleado -> getMozo//QUE MOZO, FALTA TERMINAR
+  Mozo* mozo_a_asignar = cont_empleado -> getMozo(num_mozo_recordado);
+  ve -> setMozo(mozo_a_asignar);
+}
+
+void ControladorMesa::cancelarVenta() {
+  //Quedó como pregunta que es liberar la memoria
 }
