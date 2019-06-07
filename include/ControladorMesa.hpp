@@ -24,7 +24,7 @@ public:
     map<int, DtMesasMozo> asignarMozosAMesas();
     //Facturación de una venta - generarFactura() - ControladorVenta
     void finalizarVenta();
-    //FALTA TERMINAR
+    //Quitar Producto a una Venta - getProductosVenta() - ControladorVenta
     Venta* obtenerVenta(int numero);
     //Iniciar Venta en Mesas
     set<int> getMesasMozoSinVentas(int num_mozo);

@@ -6,14 +6,28 @@ using namespace std;
 //Archivos
 #include "../include/ControladorMesa.hpp"
 
+//Asignar automáticamente mozos a mesas
+
 map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
     
 }
+
+//Facturación de una venta - generarFactura() - ControladorVenta
 
 void ControladorMesa::finalizarVenta() {
   mesa_recordada -> terminarVenta();
 }
 
+//Quitar Producto a una Venta - getProductosVenta() - ControladorVenta
+
+Venta* obtenerVenta(int numero) {
+    map<int, Mesa*>::iterator it = mesas.find(numero);
+    Venta* ve = nullptr;
+    if (it != nullptr) {
+        ve = (it -> second) -> getVentaActual();
+    }
+    return ve;
+}
 
 //Iniciar Venta en Mesas
 
