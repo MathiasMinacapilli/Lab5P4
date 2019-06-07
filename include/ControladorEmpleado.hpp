@@ -18,6 +18,7 @@ private:
 	map<int, Repartidor *> repartidores;
 
 public:
+	static ControladorEmpleado getInstance();
     virtual Mozo getMozo(int num_mozo);
 };
 

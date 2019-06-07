@@ -6,6 +6,13 @@ using namespace std;
 //Archivos
 #include "../include/ControladorMesa.hpp"
 
+//devolver instancia patron Singleton
+ControladorMesa ControladorMesa::getInstance(){
+  if (instance == nullptr)
+    instance = new ControladorMesa();
+  return instance; 
+}
+
 //Asignar automáticamente mozos a mesas
 
 map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {

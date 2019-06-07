@@ -11,10 +11,16 @@ using namespace std;
 
 class ControladorCliente : public ICliente {
 private:
+	//instancia patron Singleton
 	static ControladorCliente *instance;
+	//Constructor
 	ControladorCliente();
+	//coleccion de clientes -- pseudoatributo
 	map<int, Cliente *> clientes;
-
+public:
+	//operacion patron singleton
+	static ControladorCliente getInstance();
+	
 };
 
 #endif

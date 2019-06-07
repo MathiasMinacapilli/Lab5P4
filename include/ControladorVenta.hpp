@@ -13,8 +13,11 @@ using namespace std;
 
 class ControladorVenta : public IVenta {
 private:
+  //constructor
   ControladorVenta();
+  //instancia patron Singleton
   static ControladorVenta *instance;
+  //coleccion de ventas
   map<int, Venta*> ventas;
   int numero_mesa; //AGREGAR PRODUCTO A UNA VENTA - ingresarNumeroMesa - numero
   Producto* prod; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - prod
@@ -23,7 +26,7 @@ private:
   int numero_venta; //INICIAR VENTA EN MESAS - iniciarVenta
   DtFecha fecha_venta; //RESUMEN FACTUACION 1 DIA DADA LA FECHA - ingresarFecha - fecha
 public:
-  ControladorVenta getInstance();
+  static ControladorVenta getInstance();
 
   //BAJA PRODUCTO - eliminarProducto - ControladorProducto
   bool estaEnVentaSinFacturar(Producto p);
