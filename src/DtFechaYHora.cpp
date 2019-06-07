@@ -23,5 +23,44 @@ int DtFechaYHora::getSegundos() {
     return this -> segundos;
 }
 
-DtFechaYHora::~DtFechaYHora() {
+bool DtFechaYHora::operator<=(const DtFechaYHora &f2){
+	if (this->getAnio() > f2.getAnio())
+		return false;
+	else if (this->getAnio() < f2.getAnio())
+		return true;
+	//son el mismo anio
+	else 
+		if(this->getMes() > f2.getMes())
+			return false;
+		else if (this->getMes() < f2.getMes())
+			return true;
+		//son el mismo mes
+		else 
+			if (this->getDia() > f2.getDia())
+				return false;
+			else if (this->getDia() < f2.getDia())
+				return true;
+			//son el mismo dia
+			else
+				if(this->getHora() > f2.getHora())
+					return false;
+				else if (this->getHora() < f2.getHora())
+					return true;
+				//son la misma hora
+				else
+					if (this->getMinutos() > f2.getMinutos())
+						return  false;
+					else if (this->getMinutos() < f2.getMinutos())
+						return true;
+					//son el mismo minuto
+					else
+						if (this->getSegundos() > f2.getSegundos())
+							return false;
+						else if (this->getSegundos() < f2.getSegundos())
+							return true;
+						//son iguales
+						else return true;
+
 }
+
+DtFechaYHora::~DtFechaYHora() {}

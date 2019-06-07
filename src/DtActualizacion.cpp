@@ -34,4 +34,8 @@ Etapa* DtActualizacion::getEtapaActual() {
     return this->etapaActual;
 }
 
+bool DtActualizacion::operator<(const DtActualizacion &act2){
+    return (this->fechaYHora <= act2.getFechaYHora());
+}
+
 DtActualizacion::~DtActualizacion() {}

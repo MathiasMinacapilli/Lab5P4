@@ -15,6 +15,7 @@ private:
     float precioSubTotal;
     float precioTotal;
 public:
+    DtFactura();    
     DtFactura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal);
     int getCodigo();
     DtFechaYHora getFechaYHora();

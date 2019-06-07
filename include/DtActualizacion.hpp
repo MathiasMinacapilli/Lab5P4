@@ -27,6 +27,7 @@ public:
     set<DtProducto> getDatosProducto();
     string getNombreRepartidor();
     Etapa* getEtapaActual();
+    bool operator<(const DtActualizacion&);
     ~DtActualizacion();
 };
 

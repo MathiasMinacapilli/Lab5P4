@@ -19,6 +19,7 @@ public:
     int getMinutos();
     int getSegundos();
     ~DtFechaYHora();
+    bool operator<=(const DtFechaYHora&);
 };
 
 #endif

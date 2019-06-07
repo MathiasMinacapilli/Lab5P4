@@ -37,7 +37,7 @@ public:
     void setDescuento(float descuento);
     void setFactura(Factura* factura);
 
-    void agregarProductoAVenta(Producto* producto, DtProductoCantidad prod_cantidad);
+    void agregarProductoAVenta(Producto* producto, int cantidad);
     bool buscarProducto(Producto* producto);
     bool estaFacturada();
     void eliminarProducto(Producto* producto, int cantidad);

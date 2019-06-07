@@ -35,7 +35,7 @@ bool ControladorVenta::estaEnVentaSinFacturar(Producto *p) {
 VentaLocal *ControladorVenta::crearVenta() {
   VentaLocal *ve = new VentaLocal((this -> numero_venta) + 1, 0, nullptr);
   (this -> numero_venta)++;
-  ventas.insert(pair<int, Venta>(ve -> getCodigo(), ve));
+  ventas.insert(pair<int, Venta*>(ve -> getNumero(), ve));
   return ve;
 }
 
@@ -54,7 +54,7 @@ void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad
   cont_prod = ControladorProducto::getInstance();
   Producto* prod = cont_prod -> encontrarProducto(producto_cantidad);
   this -> prod = prod;
-  this - > cantidad = producto_cantidad.getCantidad();
+  this -> cantidad = producto_cantidad.getCantidad();
 }
 void ControladorVenta::agregarProductoAVenta() {
   ControladorMesa *cont_mesa;
@@ -78,6 +78,7 @@ map<int, DtProducto> ControladorVenta::getProductosVenta (int numMesa) {
   Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
   map<int, DtProducto> productos_venta = v -> obtenerProductos();
   this -> v = v;
+  return productos_venta;
 }
 //seleccionarProdYCant
 void ControladorVenta::eliminarProductoDeVenta() {
@@ -125,10 +126,11 @@ map<int, DtFactura> ControladorVenta::getFacturasYTotalFecha(float &totalfactura
     venta = it -> second;
     if (venta -> estaFacturada()) {
       factura = venta -> getFactura();
-      if (factura -> getFechaYHora == this -> fecha_venta) {
+      DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
+      if (fecha_factura == this -> fecha_venta) {
         dtfactura = factura -> getDatosFactura();
-        res.insert(pair<int, DtFactura>(dtfactura -> getCodigo(), dtfactura));
-        totalfacturado +=  dtfactura -> getPrecioTotal();
+        res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
+        totalfacturado +=  dtfactura.getPrecioTotal();
       }
     }
   }
@@ -140,11 +142,14 @@ set<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
   set<DtActualizacion> res;
   set<DtActualizacion> aux;
   set<DtActualizacion>::iterator it_actualizacion;
+  pair<set<DtActualizacion>::iterator, bool> ptr;
   map<int, Venta*>::iterator it;
   for(it = ventas.begin(); it != ventas.end(); ++it) {
-    aux = ventas -> getActualizaciones();
-    for (it_actualizacion = aux.begin(); it_actualizacion != aux.end(); ++it_actualizacion)
-      res.insert(*it_actualizacion);
+    aux = (it -> second) -> getActualizaciones();
+    for (it_actualizacion = aux.begin(); it_actualizacion != aux.end(); ++it_actualizacion){
+          DtActualizacion dt_act = *it_actualizacion;
+          ptr = res.insert(dt_act);
+      }
   }
   return res;
 }
