@@ -39,7 +39,7 @@ public:
 	void ingresarProductoSimple();
 	void cancelarProductoSimple();
 	void ingresarDatosMenu(int codigo, string desc);
-	map<int, DtProductoSimple> getProductosSimples();
+	map<int, DtProducto> getProductosSimples();
 	void seleccionarProductoYCantidad (DtProductoCantidad producto_cantidad);
 	void ingresarMenu();
 	void cancelarMenu();

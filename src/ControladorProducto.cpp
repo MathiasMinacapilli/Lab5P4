@@ -33,11 +33,11 @@ void ControladorProducto::ingresarDatosMenu(int codigo, string desc){
 	this->desc_menu = desc;
 }
 
-map<int, DtProductoSimple> ControladorProducto::getProductosSimples(){
-	map<int, DtProductoSimple> resultado; 
+map<int, DtProducto> ControladorProducto::getProductosSimples(){
+	map<int, DtProducto> resultado; 
 	map<int, ProductoSimple *>::iterator it;
 	for (it = this->productosSimples.begin(); it != this->productosSimples.end(); ++it)
-		resultado[(it->second)->getCodigo()] = (it->second)->getDatos();
+		resultado[(it->second)->getCodigo()] = (it->second)->getDatosProducto();
 	return resultado;
 }
 

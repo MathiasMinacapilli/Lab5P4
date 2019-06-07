@@ -12,8 +12,7 @@ public:
     //constructor y destructor
     ProductoSimple(int codigo, string descripcion, float precio);
     ~ProductoSimple();
-    
-    DtProductoSimple getDatos();
+ 
     void eliminar();  
 
 };
