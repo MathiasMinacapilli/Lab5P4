@@ -12,11 +12,6 @@ ProductoSimple::ProductoSimple(int codigo, string descripcion, float precio)
 
 ProductoSimple::~ProductoSimple(){}
 
-DtProductoSimple Producto::getDatos() {
-    DtProductoSimple dtprodsimple = DtProductoSimple(this->codigo, this->descripcion, this->precio);                                                                                                                                                                   
-    return dtprod;    
-}
-
 
 void ProductoSimple::eliminar(){
 	controlador_producto = ControladorProducto::getInstance();
