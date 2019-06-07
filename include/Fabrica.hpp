@@ -5,25 +5,25 @@
 using namespace std;
 
 //Archivos
-#include "include/ICliente"
-#include "include/IEmpleado"
-#include "include/IFactura"
-#include "include/IMesa"
-#include "include/IProducto"
-#include "include/IVenta"
+#include "include/ICliente.hpp"
+#include "include/IEmpleado.hpp"
+#include "include/IMesa.hpp"
+#include "include/IProducto.hpp"
+#include "include/IVenta.hpp"
 
 class Fabrica{
 private:
 	//instancia del patron Singleton
 	static Fabrica *instance;
+	//constructor
+	Fabrica();
 public:
 	//funcion patron Singleton
 	static Fabrica getInstance();
 
-	//getters de las interfaces
+	//obtener las interfaces
 	ICliente getICliente();
 	IEmpleado getIEmpleado();
-	IFactura getIFactura();
 	IMesa getIMesa();
 	IProducto getIProducto();
 	IVenta getIVenta();
