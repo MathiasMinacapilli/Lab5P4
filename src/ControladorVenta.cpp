@@ -5,8 +5,9 @@ using namespace std;
 
 //Archivos
 #include "../include/ControladorVenta.hpp"
-//#include "../include/ControladorProducto.hpp"
-//#include "../include/ControladorMesa.hpp"
+#include "../include/ControladorProducto.hpp"
+#include "../include/ControladorMesa.hpp"
+#include "../include/DtFactura.hpp"
 
 ControladorVenta::ControladorVenta() {
 }
@@ -113,12 +114,13 @@ void ControladorVenta::ingresarFecha(DtFecha fecha) {
   this -> fecha_venta = fecha;
 }
 
-map<int, DtFactura> ControladorVenta::getFacturasFecha() {
+map<int, DtFactura> ControladorVenta::getFacturasYTotalFecha(float &totalfacturado) {
   map<int, Venta*>::iterator it;
   map<int, DtFactura> res;
   Venta* venta;
   Factura* factura;
   DtFactura dtfactura;
+  totalfacturado = 0;
   for(it = ventas.begin(); it != ventas.end(); ++it) {
     venta = it -> second;
     if (venta -> estaFacturada()) {
@@ -126,21 +128,11 @@ map<int, DtFactura> ControladorVenta::getFacturasFecha() {
       if (factura -> getFechaYHora == this -> fecha_venta) {
         dtfactura = factura -> getDatosFactura();
         res.insert(pair<int, DtFactura>(dtfactura -> getCodigo(), dtfactura));
+        totalfacturado +=  dtfactura -> getPrecioTotal();
       }
     }
   }
   return res;
-}
-
-/////////SEGUIIIIIRRR
-//ACAAAA
-//ACAAAAA!
-float ControladorVenta::getTotalFacturadoFecha() {
-  map<int, DtFactura> facturas = getFacturasFecha();
-  //map<int, DtFactura>::iterator it;
-
-
-
 }
 
 //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR

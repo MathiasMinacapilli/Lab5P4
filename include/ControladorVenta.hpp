@@ -23,39 +23,38 @@ private:
   int numero_venta; //INICIAR VENTA EN MESAS - iniciarVenta
   DtFecha fecha_venta; //RESUMEN FACTUACION 1 DIA DADA LA FECHA - ingresarFecha - fecha
 public:
-  ControladorVenta ControladorVenta::getInstance();
+  ControladorVenta getInstance();
 
   //BAJA PRODUCTO - eliminarProducto - ControladorProducto
-  bool ControladorVenta::estaEnVentaSinFacturar(Producto p);
+  bool estaEnVentaSinFacturar(Producto p);
 
   //INICIAR VENTA EN MESAS - iniciarVenta - ControladorMesa
-  Venta ControladorVenta::crearVenta();
+  Venta crearVenta();
 
   //AGREGAR PRODUCTO A UNA VENTA
-  void ControladorVenta::ingresarNumeroMesa(int numero);
-  map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles();
-  void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad);
-  void ControladorVenta::agregarProductoAVenta();
-  void ControladorVenta::cancelarProductoAVenta();
+  void ingresarNumeroMesa(int numero);
+  map<int, DtProducto> obtenerProductosDisponibles();
+  void seleccionarProdYCant(DtProductoCantidad producto_cantidad);
+  void agregarProductoAVenta();
+  void cancelarProductoAVenta();
 
   //QUITAR PRODUCTO A UNA VENTA
-  map<int, DtProducto> ControladorVenta::getProductosVenta (int numMesa);
+  map<int, DtProducto> getProductosVenta (int numMesa);
   //seleccionarProdYCant
-  void ControladorVenta::eliminarProductoDeVenta();
-  void ControladorVenta::cancelarEliminarProductoDeVenta();
+  void eliminarProductoDeVenta();
+  void cancelarEliminarProductoDeVenta();
 
   //FACTURACION DE UNA VENTA
   //ingresarNumeroMesa
-  void ControladorVenta::ingresarPorcentajeDescuento(float descuento);
-  DtFactura ControladorVenta::generarFactura();
+  void ingresarPorcentajeDescuento(float descuento);
+  DtFactura generarFactura();
 
   //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
   void ingresarFecha(DtFecha fecha);
-  map<int, DtFactura> ControladorVenta::getFacturasFecha();
-  float ControladorVenta::getTotalFacturadoFecha();
+  map<int, DtFactura> getFacturasYTotalFecha(float &totalfacturado);
 
   //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
-  set<DtActualizacion> ControladorVenta::getListadoActualizaciones();
+  set<DtActualizacion> getListadoActualizaciones();
 
 };
 
