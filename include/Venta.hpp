@@ -4,12 +4,14 @@
 // Librerias de C
 #include ctime
 #include <map>
+#include <set>
 using namespace std;
 
 // Archivos
 #include "DtProductoCantidad.hpp"
 #include "Producto.hpp"
 #include "Factura.hpp"
+#include "DtActualizacion.hpp"
 
 class Venta {
 private:
@@ -17,6 +19,7 @@ private:
     float descuento;
     map<int, CantidadProducto*> cants_productos;
     Factura* factura;
+    set<DtActualizacion> actualizaciones;
 protected:
     Venta(int numero, float descuento, Factura* factura);
 public:
@@ -27,6 +30,7 @@ public:
     float getDescuento();
     map<int, CantidadProducto*> getCants_Productos();
     Factura* getFactura();
+    set<DtActualizacion> getActualizaciones();
 
     // Setters
     void setDescuento(float descuento);

@@ -136,4 +136,15 @@ map<int, DtFactura> ControladorVenta::getFacturasYTotalFecha(float &totalfactura
 }
 
 //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
-set<DtActualizacion> ControladorVenta::getListadoActualizaciones();
+set<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
+  set<DtActualizacion> res;
+  set<DtActualizacion> aux;
+  set<DtActualizacion>::iterator it_actualizacion;
+  map<int, Venta*>::iterator it;
+  for(it = ventas.begin(); it != ventas.end(); ++it) {
+    aux = ventas -> getActualizaciones();
+    for (it_actualizacion = aux.begin(); it_actualizacion != aux.end(); ++it_actualizacion)
+      res.insert(*it_actualizacion);
+  }
+  return res;
+}
