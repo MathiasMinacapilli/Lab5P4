@@ -2,8 +2,8 @@
 #define _DTFACTURA_HPP
 
 //Archivos
-#include "DtFechaYHora.hpp";
-#include "DtProductoCantidad.hpp";
+#include "DtFechaYHora.hpp"
+#include "DtProductoCantidad.hpp"
 
 class DtFactura {
 private:

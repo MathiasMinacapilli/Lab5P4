@@ -3,6 +3,7 @@
 
 //Librerias de C
 using namespace std;
+#include <string>
 
 //Archivos
 #include "DtDireccion.hpp"

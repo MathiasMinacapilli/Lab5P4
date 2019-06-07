@@ -2,7 +2,7 @@
 #define _VENTA_HPP
 
 // Librerias de C
-#include ctime
+#include <ctime>
 #include <map>
 #include <set>
 using namespace std;

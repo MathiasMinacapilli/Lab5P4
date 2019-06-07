@@ -3,9 +3,9 @@
 
 //Librerias de C
 #include <set>
+#include <string>
 using namespace std;
 
-//Archivos 
 
 class DtDireccion {
 private:

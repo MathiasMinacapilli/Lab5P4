@@ -2,6 +2,7 @@
 #define _MOZO_HPP
 
 //Librerias de C
+#include <string>
 using namespace std;
 
 //Archivos

@@ -1,11 +1,12 @@
 #ifndef _PRODUCTOSIMPLE_HPP
 #define _PRODUCTOSIMPLE_HPP
 
-
-#include "Producto.hpp"
-
-
+//Librerias de C
 using namespace std;
+#include <string>
+
+//Archivos
+#include "Producto.hpp"
 
 class ProductoSimple : public Producto {
 public:

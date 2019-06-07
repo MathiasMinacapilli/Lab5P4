@@ -2,6 +2,8 @@
 #ifndef _PRODUCTO_HPP
 #define _PRODUCTO_HPP
 
+//Librerias de C
+#include <string>
 using namespace std;
 
 //Archivos

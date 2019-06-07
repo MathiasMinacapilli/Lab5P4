@@ -3,12 +3,13 @@
 
 //Librerias C
 #include <set>
+#include <string>
 using namespace std;
 
 //Archivos
-#include "DtFechaYHora.hpp";
-#include "DtProducto.hpp";
-#include "Etapa.hpp";
+#include "DtFechaYHora.hpp"
+#include "DtProducto.hpp"
+#include "Etapa.hpp"
 
 class DtActualizacion {
 private:

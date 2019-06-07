@@ -3,6 +3,7 @@
 
 //Librerias de C
 #include <map>
+#include <string>
 using namespace std;
 
 //Archivos

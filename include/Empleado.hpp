@@ -2,6 +2,7 @@
 #define _EMPLEADO_HPP
 
 //Librerias de C
+#include <string>
 using namespace std;
 
 class Empleado{

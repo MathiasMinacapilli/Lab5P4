@@ -2,9 +2,9 @@
 #define _IVENTA_HPP
 
 //Librerias de C
-#using namespace std;
 #include <map>
 #include <set>
+using namespace std;
 
 //Archivos
 #include "Venta.hpp"

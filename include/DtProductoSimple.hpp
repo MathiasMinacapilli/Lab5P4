@@ -1,6 +1,11 @@
 #ifndef _DTPRODUCTOSIMPLE_HPP
 #define _DTPRODUCTOSIMPLE_HPP
 
+//Librerias de C
+#include <string>
+using namespace std;
+
+//Archivos
 #include "DtProducto.hpp"
 
 class DtProductoSimple : public DtProducto {

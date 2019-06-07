@@ -5,11 +5,11 @@
 using namespace std;
 
 //Archivos
-#include "include/ICliente.hpp"
-#include "include/IEmpleado.hpp"
-#include "include/IMesa.hpp"
-#include "include/IProducto.hpp"
-#include "include/IVenta.hpp"
+#include "ICliente.hpp"
+#include "IEmpleado.hpp"
+#include "IMesa.hpp"
+#include "IProducto.hpp"
+#include "IVenta.hpp"
 
 class Fabrica{
 private:

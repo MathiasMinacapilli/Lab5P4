@@ -2,6 +2,7 @@
 #define _REPARTIDOR_HPP
 
 //Librerias de C
+#include <string>
 using namespace std;
 
 //Archivos

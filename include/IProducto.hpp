@@ -7,10 +7,10 @@
 using namespace std;
 
 //Archivos
-#include "DtProducto.hpp";
-#include "DtProductoCantidad.hpp";
-#include "DtProductoSimple.hpp";
-#include "Producto.hpp";
+#include "DtProducto.hpp"
+#include "DtProductoCantidad.hpp"
+#include "DtProductoSimple.hpp"
+#include "Producto.hpp"
 
 class IProducto { // interfaz
 public:

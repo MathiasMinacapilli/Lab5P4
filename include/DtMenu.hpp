@@ -3,8 +3,10 @@
 
 //Librerias de C
 #include <set>
+#include <string>
 using namespace std;
 
+//Archivos
 #include "DtProducto.hpp"
 #include "DtProductoEnMenu.hpp"
 
