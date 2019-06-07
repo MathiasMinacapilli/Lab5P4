@@ -14,6 +14,7 @@ private:
    string esquina1;
    string esquina2;
 public:
+    DtDireccion();
     DtDireccion(string calle, int numeroPuerta, string esquina1, string esquina2);
     string getCalle();
     int getNumeroPuerta();

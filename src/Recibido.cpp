@@ -7,10 +7,10 @@ Recibido::Recibido() : Etapa() {
 Recibido::~Recibido() {
 }
 
-Etapa *avanzarEtapa() {
+Etapa *Recibido::avanzarEtapa() {
     return this;
 }
 
-Etapa *cancelar() {
+Etapa *Recibido::cancelar() {
     return this;
 }

@@ -6,7 +6,7 @@
 using namespace std;
 
 //Archivos
-#include "DtEmpleado.hpp";
+#include "DtEmpleado.hpp"
 
 class DtMozo: public DtEmpleado {
 private:

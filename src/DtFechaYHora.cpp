@@ -1,5 +1,5 @@
 //Archivos
-#include "../include/DtFechaYHora.hpp";
+#include "../include/DtFechaYHora.hpp"
 
 DtFechaYHora::DtFechaYHora() {
 }
@@ -11,15 +11,15 @@ DtFechaYHora::DtFechaYHora(int dia, int mes, int anio, int hora, int minutos, in
     this -> segundos = segundos;
 }
 
-int DtFechaYHora::getHora() {
+int DtFechaYHora::getHora() const{
     return this -> hora;
 }
 
-int DtFechaYHora::getMinutos() {
+int DtFechaYHora::getMinutos() const{
     return this -> minutos;
 }
 
-int DtFechaYHora::getSegundos() {
+int DtFechaYHora::getSegundos() const{
     return this -> segundos;
 }
 

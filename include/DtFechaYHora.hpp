@@ -15,9 +15,9 @@ private:
 public:
     DtFechaYHora();
     DtFechaYHora(int dia, int mes, int anio, int hora, int minutos, int segundos);
-    int getHora();
-    int getMinutos();
-    int getSegundos();
+    int getHora() const;
+    int getMinutos() const;
+    int getSegundos() const;
     ~DtFechaYHora();
     bool operator<=(const DtFechaYHora&);
 };

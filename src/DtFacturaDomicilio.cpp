@@ -1,7 +1,9 @@
+//Archivos
+#include "../include/DtFacturaDomicilio.hpp"
 
-#include "../include/DtFacturaDomicilio.hpp";
+DtFacturaDomicilio::DtFacturaDomicilio() : DtFactura() {}
 
-DtFacturaDomicilio::DtFacturaDomicilio(int codigo, DtFechaYHora fechaYHora, DtProductoCantidad productos, float iva, float descuento, float precioSubTotal, float precioTotal, string nombreRepartidor, Transporte transporte)
+DtFacturaDomicilio::DtFacturaDomicilio(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal, string nombreRepartidor, Transporte transporte)
 :DtFactura(codigo, fechaYHora, productos, iva, descuento, precioSubTotal, precioTotal) {
     this->nombreRepartidor = nombreRepartidor;
     this->transporte = transporte;

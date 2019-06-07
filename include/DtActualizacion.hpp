@@ -21,13 +21,13 @@ private:
     Etapa* etapaActual;
 public:
     DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, set<DtProducto> datosProducto, string nombreRepartidor, Etapa* etapaActual);
-    DtFechaYHora getFechaYHora();
+    DtFechaYHora getFechaYHora() const;
     string getNombre();
     string getTelefono();
     set<DtProducto> getDatosProducto();
     string getNombreRepartidor();
     Etapa* getEtapaActual();
-    bool operator<(const DtActualizacion&);
+    bool operator<(const DtActualizacion&) const;
     ~DtActualizacion();
 };
 

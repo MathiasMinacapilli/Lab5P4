@@ -1,5 +1,5 @@
-
-#include "../include/DtMesasMozo.hpp";
+//Archivos
+#include "../include/DtMesasMozo.hpp"
 
 DtMesasMozo::DtMesasMozo(int codigoMozo, set<int> mesas) {
     this->codigoMozo = codigoMozo;

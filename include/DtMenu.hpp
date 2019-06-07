@@ -2,7 +2,7 @@
 #define _DTMENU_HPP
 
 //Librerias de C
-#include <set>
+#include <map>
 #include <string>
 using namespace std;
 
@@ -10,13 +10,13 @@ using namespace std;
 #include "DtProducto.hpp"
 #include "DtProductoEnMenu.hpp"
 
-class DtProductoSimple : public DtProducto {
+class DtMenu : public DtProducto {
 private:
-    set<DtProductoEnMenu> productos;
+    map<int, DtProductoEnMenu> productos;
 public:
-    DtProductoSimple(int codigo, string descripcion, float precio, set<DtProductoEnMenu> productos);
-    set<DtProductoEnMenu> getProductos();
-    ~DtProductoSimple();
+    DtMenu(int codigo, string descripcion, float precio, map<int, DtProductoEnMenu> productos);
+    map<int, DtProductoEnMenu> getProductos();
+    ~DtMenu();
 };
 
 #endif

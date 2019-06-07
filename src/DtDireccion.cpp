@@ -1,5 +1,7 @@
+//Archivos
+#include "../include/DtDireccion.hpp"
 
-#include "../include/DtDireccion.hpp";
+DtDireccion::DtDireccion(){}
 
 DtDireccion::DtDireccion(string calle, int numeroPuerta, string esquina1, string esquina2) {
     this->calle = calle;

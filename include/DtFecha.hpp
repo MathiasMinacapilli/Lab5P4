@@ -11,9 +11,9 @@ public:
     DtFecha();
     DtFecha(int dia, int mes, int anio);
     //getters
-    int getDia();
-    int getMes();
-    int getAnio();
+    int getDia() const;
+    int getMes() const;
+    int getAnio() const;
     //destructor
     ~DtFecha();
     //sobrecarga de operador de comparacion

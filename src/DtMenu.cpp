@@ -1,15 +1,15 @@
+//Archivos
+#include "../include/DtMenu.hpp"
 
-#include "../include/DtMenu.hpp";
-
-DtProductoSimple::DtProductoSimple(int codigo, string descripcion, float precio, set<DtProductoEnMenu> productos)
+DtMenu::DtMenu(int codigo, string descripcion, float precio, map<int, DtProductoEnMenu> productos)
 :DtProducto(codigo, descripcion, precio) {
     this->productos = productos;
 }
 
-set<DtProductoEnMenu> DtProductoSimple::getProductos() {
+map<int, DtProductoEnMenu> DtMenu::getProductos() {
     return this->productos;
 }
 
-DtProductoSimple::~DtProductoSimple() {
+DtMenu::~DtMenu() {
     //liberar memoria de productos?
 }

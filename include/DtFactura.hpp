@@ -1,6 +1,9 @@
 #ifndef _DTFACTURA_HPP
 #define _DTFACTURA_HPP
 
+//Librerias de C
+#include <map>
+
 //Archivos
 #include "DtFechaYHora.hpp"
 #include "DtProductoCantidad.hpp"
@@ -19,7 +22,7 @@ public:
     DtFactura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal);
     int getCodigo();
     DtFechaYHora getFechaYHora();
-    DtProductoCantidad getProductos();
+    map<int, DtProductoCantidad> getProductos();
     float getIva();
     float getDescuento();
     float getPrecioSubTotal();

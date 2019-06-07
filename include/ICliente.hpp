@@ -4,10 +4,9 @@
 //Librerias de C
 using namespace std;
 
-//Archivos
-
-
 class ICliente {
+protected:
+	ICliente();
 public:
     ~ICliente() {};
 };

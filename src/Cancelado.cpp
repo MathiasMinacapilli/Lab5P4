@@ -7,10 +7,10 @@ Cancelado::Cancelado() : Etapa() {
 Cancelado::~Cancelado() {
 }
 
-Etapa *avanzarEtapa() {
+Etapa *Cancelado::avanzarEtapa() {
     return this;
 }
 
-Etapa *cancelar() {
+Etapa *Cancelado::cancelar() {
     return this;
 }

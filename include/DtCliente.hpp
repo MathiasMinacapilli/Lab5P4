@@ -8,7 +8,7 @@ using namespace std;
 
 //Archivos
 #include "DtDireccion.hpp"
-#include "DtActualizacion.hpp";
+#include "DtActualizacion.hpp"
 
 class DtCliente {
 private:

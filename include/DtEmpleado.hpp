@@ -5,8 +5,6 @@
 #include <string>
 using namespace std;
 
-//Archivos
-
 class DtEmpleado {
 private:
     int numero;

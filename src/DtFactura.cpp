@@ -1,5 +1,7 @@
+//Archivos
+#include "../include/DtFactura.hpp"
 
-#include "../include/DtFactura.hpp";
+DtFactura::DtFactura() {}
 
 DtFactura::DtFactura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal) {
     this->codigo = codigo;
@@ -19,7 +21,7 @@ DtFechaYHora DtFactura::getFechaYHora() {
     return this->fechaYHora;
 }
 
-DtProductoCantidad DtFactura::getProductos() {
+map<int, DtProductoCantidad> DtFactura::getProductos() {
     return this->productos;
 }
 

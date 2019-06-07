@@ -1,5 +1,5 @@
-
-#include "../include/DtActualizacion.hpp";
+//Archivos
+#include "../include/DtActualizacion.hpp"
 
 DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, set<DtProducto> datosProducto, string nombreRepartidor, Etapa* etapaActual) {
     this->fechaYHora = fechaYHora;
@@ -10,7 +10,7 @@ DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string 
     this->etapaActual = etapaActual;
 }
     
-DtFechaYHora DtActualizacion::getFechaYHora() {
+DtFechaYHora DtActualizacion::getFechaYHora() const{
     return this->fechaYHora;
 }
 
@@ -34,8 +34,10 @@ Etapa* DtActualizacion::getEtapaActual() {
     return this->etapaActual;
 }
 
-bool DtActualizacion::operator<(const DtActualizacion &act2){
-    return (this->fechaYHora <= act2.getFechaYHora());
+bool DtActualizacion::operator<(const DtActualizacion &act2) const{
+    DtFechaYHora dt_fecha_hora1 = this->fechaYHora;
+    DtFechaYHora dt_fecha_hora2 = act2.getFechaYHora();
+    return (dt_fecha_hora1 <= dt_fecha_hora2);
 }
 
 DtActualizacion::~DtActualizacion() {}

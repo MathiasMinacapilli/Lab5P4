@@ -1,5 +1,5 @@
-
-#include "../include/DtEmpleado.hpp";
+//Archivos
+#include "../include/DtEmpleado.hpp"
 
 DtEmpleado::DtEmpleado(int numero, string nombre) {
     this->numero = numero;

@@ -2,7 +2,7 @@
 #include <string>
 
 //Archivos
-#include "../include/DtProducto.hpp";
+#include "../include/DtProducto.hpp"
 
  DtProducto::DtProducto(int codigo, string descripcion, float precio) {
  	this -> codigo = codigo;
