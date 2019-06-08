@@ -17,8 +17,15 @@ bool ControladorProducto::existeProductoSimple(){
 	return !productosSimples.empty();
 }
 
+/* Ingresa los datos del producto al sistema, si ya existe un producto
+con el codigo ingresado se lanza una excepcion. */
 void ControladorProducto::ingresarDatosProducto(DtProductoSimple datos){
-	this->datos_prod_simple = datos;
+	DtProductoCantidad datos_producto = DtProductoCantidad(DtProducto(datos.getCodigo, datos.getDescripcion, datos.getPrecio), 1);
+	if(this->encontrarProducto(datos_producto) == nullptr) {
+		this->datos_prod_simple = datos;
+	} else {
+		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
+	}
 }
 
 void ControladorProducto::ingresarProductoSimple(){
@@ -38,8 +45,8 @@ map<int, DtProducto> ControladorProducto::getProductosSimples(){
 	map<int, DtProducto> resultado;
 	map<int, ProductoSimple *>::iterator it;
 	for (it = this->productosSimples.begin(); it != this->productosSimples.end(); ++it){
-			DtProducto prod = (it->second)->getDatosProducto();
-			resultado[(it->second)->getCodigo()] = prod;
+		DtProducto prod = (it->second)->getDatosProducto();
+		resultado[(it->second)->getCodigo()] = prod;
 	}
 	return resultado;
 }
