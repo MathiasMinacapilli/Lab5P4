@@ -8,6 +8,10 @@
 #include "../include/ControladorMesa.hpp"
 #include "../include/DtFactura.hpp"
 
+
+//inicializacion de instancia
+ControladorVenta *ControladorVenta::instance = nullptr;
+
 //ControladorVenta::ControladorVenta() {}
 
 ControladorVenta *ControladorVenta::getInstance() {

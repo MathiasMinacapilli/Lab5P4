@@ -1,6 +1,8 @@
 //Archivos
 #include "../include/ControladorProducto.hpp"
 
+ControladorProducto *ControladorProducto::instance = nullptr;
+
 //ControladorProducto::ControladorProducto(){}
 
 //PATRON SINGLETON

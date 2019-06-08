@@ -21,3 +21,5 @@ string DtProducto::getDescripcion() {
 float DtProducto::getPrecio() {
     return this->precio;
 }
+
+DtProducto::~DtProducto(){}
