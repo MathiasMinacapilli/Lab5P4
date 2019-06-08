@@ -99,7 +99,7 @@ void ControladorProducto::seleccionarProducto(int codigo_producto){
 		//no existe producto con ese codigo
 		else {
 			this->producto_recordado = nullptr;
-			throw new invalid_argument ("No existe producto con ese código.")
+			throw new invalid_argument ("No existe producto con ese código.");
 		}
 	}
 }
