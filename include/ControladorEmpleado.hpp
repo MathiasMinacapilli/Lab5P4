@@ -20,8 +20,11 @@ private:
 	//pseudoatributos que representan colecciones de empleados
 	map<int, Mozo *> mozos;
 	map<int, Repartidor *> repartidores;
+	//contador de numeros de empleados
+	int ultimo_id;
 	//atributos de memoria controlador
 	string nombre_recordado;
+	Transporte transporte_recordado;
 
 public:
 	//operacion patron Singleton
@@ -36,6 +39,8 @@ public:
     void cancelarMozo();
 	
 	Mozo *getMozo(int num_mozo);
+
+	~ControladorEmpleado();
 
 };
 

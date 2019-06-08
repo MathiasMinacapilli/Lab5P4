@@ -4,6 +4,7 @@ using namespace std;
 //Archivos
 #include "../include/Fabrica.hpp"
 
+Fabrica *Fabrica::instance = nullptr;
 
 Fabrica *Fabrica::getInstance(){
 	if (instance == nullptr)

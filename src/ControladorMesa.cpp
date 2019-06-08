@@ -5,6 +5,9 @@
 //Archivos
 #include "../include/ControladorMesa.hpp"
 
+//inicializacion instancia patron Singleton
+ControladorMesa *ControladorMesa::instance = nullptr;
+
 //devolver instancia patron Singleton
 ControladorMesa *ControladorMesa::getInstance(){
   if (instance == nullptr)
