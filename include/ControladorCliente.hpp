@@ -3,6 +3,8 @@
 
 //Librerias de C
 #include <map>
+#include <string>
+using namespace std;
 
 //Archivos
 #include "Cliente.hpp"
@@ -10,6 +12,7 @@
 
 class ControladorCliente : public ICliente {
 private:
+	string telefono;
 	//instancia patron Singleton
 	static ControladorCliente *instance;
 	//Constructor
@@ -18,6 +21,7 @@ private:
 	map<int, Cliente *> clientes;
 public:
 	//operacion patron singleton
+	void ingresarTelefono(string telefono);
 	static ControladorCliente *getInstance();
 
 };

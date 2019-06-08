@@ -8,6 +8,7 @@ class ICliente {
 protected:
 	ICliente();
 public:
+	virtual void ingresarTelefono(string telefono) = 0;
     ~ICliente();
 };
 
