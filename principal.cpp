@@ -118,6 +118,7 @@ int main() {
                         do{
                             cout << "Ingrese R para ingresar un repartidor, M para ingresar un mozo: ";
                             cin >> tipo_empleado;
+                            bool confirmacion_incorrecta;
                             //se ingresa repartidor
                             if (tipo_empleado == "R"){
                                 tipo_incorrecto = false;
@@ -158,7 +159,7 @@ int main() {
                                 system("clear");
                                 cout << "Desea confirmar el ingreso del repartidor? S/N \n";
                                 string confirma_repartidor; 
-                                bool confirmacion_incorrecta = false;
+                                confirmacion_incorrecta = false;
                                 do{
                                     cin >> confirma_repartidor;
                                     if (confirma_repartidor == "S"){
@@ -170,17 +171,53 @@ int main() {
                                         if (confirma_repartidor == "N"){
                                             confirmacion_incorrecta = false;
                                             iempleado->cancelarRepartidor();
+                                            msj = "Ingreso de repartidor cancelado";
                                         }
                                         else{
                                             confirmacion_incorrecta = true;
                                             cout << "Debe ingresar S o N. Por favor intente de nuevo: "
-                                            msj = "Ingreso de repartidor cancelado";
                                         }
                                 }while(confirmacion_incorrecta);
 
+                            }
+                            else
+                                //se ingresa mozo
+                                if (tipo_empleado == "M"){
+                                    tipo_incorrecto = false;
+                                    cout << "Desea confirmar el ingreso del mozo? S/N \n";
+                                    string confirma_mozo; 
+                                    confirmacion_incorrecta = false;
+                                    do{
+                                        cin >> confirma_mozo;
+                                        if (confirma_mozo == "S"){
+                                            confirmacion_incorrecta = false;
+                                            iempleado->ingresarMozo();
+                                            msj = "Mozo agregado correctamente\n";
+                                        }
+                                        else
+                                            if (confirma_mozo == "N"){
+                                                confirmacion_incorrecta = false;
+                                                iempleado->cancelarMozo();
+                                                msj = "Ingreso de mozo cancelado";
+                                            }
+                                            else{
+                                                confirmacion_incorrecta = true;
+                                                cout << "Debe ingresar S o N. Por favor intente de nuevo: "
+                                            }
+                                    }while(confirmacion_incorrecta);
 
-                    } catch(exception* e) {
-
+                                }
+                                //tipo incorrecto
+                                else{
+                                    cout << "Error. Debe ingresar R o M. \n"
+                                    tipo_incorrecto = true;
+                                }
+                        }while(tipo_incorrecto);
+                    } catch(exception *e) {
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
                 #endif
