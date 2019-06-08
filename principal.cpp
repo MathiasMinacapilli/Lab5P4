@@ -17,6 +17,8 @@
 using namespace std;
 
 //Archivos
+#include "include/DtProductoSimple.hpp"
+#include "include/DtMenu.hpp"
 #include "include/ICliente.hpp"
 #include "include/IEmpleado.hpp"
 #include "include/IMesa.hpp"
@@ -45,11 +47,11 @@ static bool esValidaFecha(int dia, int mes, int anio) {
 
 int main() {
     Fabrica *fabrica = Fabrica::getInstance();
-    ICliente icliente = fabrica -> getICliente();
-    IEmpleado iempleado = fabrica -> getIEmpleado();
-    IMesa imesa = fabrica -> getIMesa();
-    IProducto iproducto = fabrica -> getIProducto();
-    IVenta iventa = fabrica -> getIVenta();
+    ICliente *icliente = fabrica -> getICliente();
+    IEmpleado *iempleado = fabrica -> getIEmpleado();
+    IMesa *imesa = fabrica -> getIMesa();
+    IProducto *iproducto = fabrica -> getIProducto();
+    IVenta *iventa = fabrica -> getIVenta();
     bool salir = false;
     string msj = "";
     int opcion_menu = 0;
@@ -76,7 +78,7 @@ int main() {
         case 1:
             try {
                 system("clear");
-                cout << "--------------------" << Administrador << "-------------------- \n \n"
+                cout << "--------------------" << "Administrador" << "-------------------- \n \n"
                     << " - Elija la opción deseada -  \n \n"
                     << " 1) Alta cliente. \n"
                     << " 2) Alta empleado. \n"
@@ -132,9 +134,49 @@ int main() {
                 /* 5) Baja de producto. */
                 case 5:
                     try {
-
-                    } catch() {
-
+                        map<int, DtProducto> productos_disponibles = iproducto -> getProductosDisponibles();
+                        map<int, DtProducto>::iterator it;
+                        for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
+                            cout << (it -> second).getCodigo()
+                                << " - "
+                                << (it -> second).getDescripcion()
+                                << "\n";
+                        }
+                        cout << "\nIngrese el código del producto que desea eliminar. \n"
+                            << " Código: ";
+                        int codigo;
+                        cin >> codigo;
+                        iproducto -> seleccionarProducto(codigo);
+                        cout << "\nUsted ingresó el código: "
+                            << codigo
+                            << "\nDesea eliminar el producto? S/N\n";
+                        string confirmacion;
+                        bool error = false;
+                        bool se_elimino = false;
+                        do {
+                            cin >> confirmacion;
+                            if (confirmacion == "S") {
+                                se_elimino = iproducto -> eliminarProducto();
+                                error = false;
+                            } else {
+                                if (confirmacion == "N") {
+                                    iproducto -> cancelarBajaProducto();
+                                    error = false;
+                                } else {
+                                    cout << "\nCaracter inválido. Ingrese S o N.\n";
+                                    error = true;
+                                }
+                            }
+                        } while (error);
+                        if (se_elimino)
+                            msj = "Se eliminó el producto correctamente.";
+                        else
+                            msj = "El producto no se eliminó.";
+                    } catch(exception *e) {
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
 
@@ -206,7 +248,7 @@ int main() {
         case 2:
             try {
                 system("clear");
-                cout << "--------------------" << Mozo << "-------------------- \n \n"
+                cout << "--------------------" << "Mozo" << "-------------------- \n \n"
                     << " - Elija la opción deseada -  \n \n"
                     << " 1) Agregar producto a una venta. \n"
                     << " 2) Facturacón de una venta. \n"
@@ -277,7 +319,7 @@ int main() {
             try {
 
                 system("clear");
-                cout << "--------------------" << Repartidor << "-------------------- \n \n"
+                cout << "--------------------" << "Repartidor" << "-------------------- \n \n"
                     << " - Elija la opción deseada -  \n \n"
                     << " 1) Modificar estado de un pedido. \n"
                     << " 0) Salir. \n \n"
@@ -318,7 +360,7 @@ int main() {
             try {
 
                 system("clear");
-                cout << "--------------------" << Cliente << "-------------------- \n \n"
+                cout << "--------------------" << "Cliente" << "-------------------- \n \n"
                     << " - Elija la opción deseada -  \n \n"
                     << " 1) Consultar actualizaciones de pedidos. \n"
                     << " 0) Salir. \n \n"

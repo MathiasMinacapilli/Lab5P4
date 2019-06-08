@@ -95,8 +95,10 @@ void ControladorProducto::seleccionarProducto(int codigo_producto){
 		if (it_m != this->menus.end())
 			this->producto_recordado = this->menus[codigo_producto];
 		//no existe producto con ese codigo
-		else
+		else {
 			this->producto_recordado = nullptr;
+			throw new invalid_argument ("No existe producto con ese código.")
+		}
 	}
 }
 
