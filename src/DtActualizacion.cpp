@@ -1,7 +1,7 @@
 //Archivos
 #include "../include/DtActualizacion.hpp"
 
-DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, set<DtProducto> datosProducto, string nombreRepartidor, Etapa* etapaActual) {
+DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, int telefono, set<DtProducto> datosProducto, string nombreRepartidor, Etapa* etapaActual) {
     this->fechaYHora = fechaYHora;
     this->nombre = nombre;
     this->telefono = telefono;
@@ -18,7 +18,7 @@ string DtActualizacion::getNombre() {
     return this->nombre;
 }
 
-string DtActualizacion::getTelefono() {
+int DtActualizacion::getTelefono() {
     return this->telefono;
 }
 

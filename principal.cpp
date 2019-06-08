@@ -32,8 +32,6 @@ using namespace std;
 ----------------------------------
 */
 
-//comienzo
-#if 0
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
 static bool esValidaFecha(int dia, int mes, int anio) {
     return ((1 <= dia) && (dia <= 31)) &&
@@ -120,7 +118,89 @@ int main() {
                 /* 2) Alta empleado. */
                 case 2:
                     try {
+                        string nombre;
+                        cout << "Ingrese el nombre del empleado a ingresar: ";
+                        cin >> nombre;
+                        iempleado->ingresarNombreEmpleado(nombre);
+                        string tipo_empleado;
+                        bool tipo_incorrecto = false;
+                        do{
+                            cout << "Ingrese R para ingresar un repartidor, M para ingresar un mozo: ";
+                            cin >> tipo_empleado;
+                            //se ingresa repartidor
+                            if (tipo_empleado == "R"){
+                                tipo_incorrecto = false;
+                                set<Transporte> transportes_disponibles = iempleado->getTransportes();
+                                cout << "Los transportes disponibles son: \n";
+                                set<Transporte>::iterator it_transportes;
+                                for (it_transportes = transportes_disponibles->begin(); it_transportes != transportes_disponibles->end(); ++it_transportes){
+                                    Transporte transporte = *it;
+                                    cout << transporte << "\n";
+                                }
+                                cout << "Seleccione su transporte: ";
+                                string t_seleccionado;
+                                Transporte transporte_elegido;
+                                bool transporte_incorrecto = false;
+                                do{
+                                    cin >> t_seleccionado;
+                                    if (t_seleccionado == "Pie"){
+                                        transporte_elegido = Pie;
+                                        transporte_incorrecto = false;
+                                    }
+                                    else
+                                        if (t_seleccionado == "Bici"){
+                                            transporte_elegido = Bici;
+                                            transporte_incorrecto = false;
+                                        }
+                                        else
+                                            if (t_seleccionado == "Moto"){
+                                                transporte_elegido = Moto;
+                                                transporte_incorrecto = false;
+                                            }
+                                            else{
+                                                cout << "Transporte incorrecto. Por favor seleccione un transporte de los mostrados anteriormente: ";
+                                                transporte_incorrecto = true;
+                                            }
 
+                                }while(transporte_incorrecto);
+                                iempleado->seleccionarTransporte(transporte_elegido);
+                                system("clear");
+                                cout << "Desea confirmar el ingreso del repartidor? S/N \n";
+                                string confirma_repartidor; 
+                                bool confirmacion_incorrecta = false;
+                                do{
+                                    cin >> confirma_repartidor;
+                                    if (confirma_repartidor == "S"){
+                                        confirmacion_incorrecta = false;
+                                        iempleado->ingresarRepartidor();
+                                        msj = "Repartidor agregado correctamente\n";
+                                    }
+                                    else
+                                        if (confirma_repartidor == "N"){
+                                            confirmacion_incorrecta = false;
+                                            iempleado->cancelarRepartidor();
+                                        }
+                                        else{
+                                            confirmacion_incorrecta = true;
+                                            cout << "Debe ingresar S o N. Por favor intente de nuevo: "
+                                            msj = "Ingreso de repartidor cancelado";
+                                        }
+                                }while(confirmacion_incorrecta);
+
+
+
+                            }
+                            else
+                                //se ingresa mozo
+                                if (tipo_empleado == "M"){
+                                    tipo_incorrecto = false;
+                                }
+                                //tipo incorrecto
+                                else{
+                                    cout << "Error. Debe ingresar R o M. \n"
+                                    tipo_incorrecto = true;
+                                }
+                        }while(tipo_incorrecto);
                     } catch() {
 
                     }
@@ -437,8 +517,4 @@ int main() {
     } //fin switch
     return 0;
 } //fin main
-#endif
 
-int main(){
-    return 0;
-}
