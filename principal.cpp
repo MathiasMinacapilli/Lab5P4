@@ -40,8 +40,23 @@ static bool esValidaFecha(int dia, int mes, int anio) {
         ((1 <= mes) && (mes <= 12)) &&
         (0 < anio);
 }
-
-
+/* Retorna true si y solo si str esta compuesto solamente por digitos */
+static bool son_digitos(string telefono) {
+    return all_of(telefono.begin(), telefono.end(), ::isdigit);
+}
+/* Obtiene la cedula de la entrada estandar */
+static string conseguir_telefono() {
+    cout << "Ingrese su número de teléfono. \n"
+        << " Teléfono: ";
+    string telefono;
+    cin >> telefono;
+    while ((telefono.size() != 9) || (!son_digitos(telefono))) {
+        cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
+            << " Teléfono: ";
+        cin >> telefono;
+    }
+    return telefono;
+}
 
 
 
@@ -212,7 +227,9 @@ int main() {
                 /* 9) Venta a domicilio. */
                 case 9:
                     try {
-                        
+                        cout << "\nIngrese su número de teléfono. \n";
+                        string telefono = conseguir_telefono();
+
                     } catch() {
 
                     }
