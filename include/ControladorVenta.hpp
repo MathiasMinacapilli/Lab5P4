@@ -2,9 +2,9 @@
 #define _CONTROLADORVENTA_HPP
 
 //Librerias de C
-using namespace std;
 #include <map>
 #include <set>
+using namespace std;
 
 //Archivos
 #include "IVenta.hpp"

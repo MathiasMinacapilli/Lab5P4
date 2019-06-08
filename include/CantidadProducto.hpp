@@ -1,9 +1,6 @@
 #ifndef _CANTIDADPRODUCTO_HPP
 #define _CANTIDADPRODUCTO_HPP
 
-//Librerias de C
-using namespace std;
-
 //Archivos
 #include "Producto.hpp"
 
@@ -19,7 +16,7 @@ public:
     int getCantidad();
     Producto* getProducto();
     void setCantidad(int cantidad);
-    
+
     void aumentarCantidad(int cantidad);
     bool disminuir(int cant);
     bool estaProducto(int codigo);

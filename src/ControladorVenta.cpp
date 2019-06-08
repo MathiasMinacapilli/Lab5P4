@@ -1,5 +1,4 @@
 //Librerias de C
-using namespace std;
 #include <map>
 #include <set>
 
@@ -46,7 +45,7 @@ void ControladorVenta::ingresarNumeroMesa(int numero) {
 map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles() {
   ControladorProducto *cont_prod;
   cont_prod = ControladorProducto::getInstance();
-  map<int, DtProducto> dtprods = 	cont_prod -> getProductosDisponibles();
+  map<int, DtProducto> dtprods = cont_prod -> getProductosDisponibles();
   return dtprods;
 }
 void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad) {

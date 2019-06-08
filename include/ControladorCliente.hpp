@@ -2,7 +2,6 @@
 #define _CONTROLADORCLIENTE_HPP
 
 //Librerias de C
-using namespace std;
 #include <map>
 
 //Archivos
@@ -20,7 +19,7 @@ private:
 public:
 	//operacion patron singleton
 	static ControladorCliente *getInstance();
-	
+
 };
 
 #endif
