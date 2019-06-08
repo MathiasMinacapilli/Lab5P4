@@ -1,5 +1,4 @@
 //Librerias de C
-using namespace std;
 #include <set>
 #include <map>
 
@@ -10,13 +9,13 @@ using namespace std;
 ControladorMesa *ControladorMesa::getInstance(){
   if (instance == nullptr)
     instance = new ControladorMesa();
-  return instance; 
+  return instance;
 }
 
 //Asignar automáticamente mozos a mesas
 
 map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
-    //FALTAA , TENEMOS DUDA 
+    //FALTAA , TENEMOS DUDA
   //
   //
   //

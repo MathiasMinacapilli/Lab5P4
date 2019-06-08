@@ -8,8 +8,7 @@
 #include "../include/ControladorMesa.hpp"
 #include "../include/DtFactura.hpp"
 
-ControladorVenta::ControladorVenta() {
-}
+//ControladorVenta::ControladorVenta() {}
 
 ControladorVenta *ControladorVenta::getInstance() {
   if (instance == nullptr)

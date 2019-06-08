@@ -1,6 +1,5 @@
+//Archivos
 #include "../include/ControladorProducto.hpp"
-
-using namespace std;
 
 //ControladorProducto::ControladorProducto(){}
 
@@ -8,7 +7,7 @@ using namespace std;
 ControladorProducto *ControladorProducto::getInstance(){
 	if (instance == nullptr)
 		instance = new ControladorProducto();
-	return instance; 
+	return instance;
 }
 
 //ALTA PRODUCTO
@@ -34,7 +33,7 @@ void ControladorProducto::ingresarDatosMenu(int codigo, string desc){
 }
 
 map<int, DtProducto> ControladorProducto::getProductosSimples(){
-	map<int, DtProducto> resultado; 
+	map<int, DtProducto> resultado;
 	map<int, ProductoSimple *>::iterator it;
 	for (it = this->productosSimples.begin(); it != this->productosSimples.end(); ++it){
 			DtProducto prod = (it->second)->getDatosProducto();
@@ -44,7 +43,7 @@ map<int, DtProducto> ControladorProducto::getProductosSimples(){
 }
 
 void ControladorProducto::seleccionarProductoYCantidad(DtProductoCantidad producto_cantidad){
-	this->prod_cants_recordados[producto_cantidad.getProducto().getCodigo()] = producto_cantidad;			
+	this->prod_cants_recordados[producto_cantidad.getProducto().getCodigo()] = producto_cantidad;
 }
 
 
@@ -74,7 +73,7 @@ void ControladorProducto::cancelarMenu(){
 
 
 //BAJA PRODUCTO
-map<int, DtProducto> ControladorProducto::getProductosDisponibles(){	
+map<int, DtProducto> ControladorProducto::getProductosDisponibles(){
 	map<int, DtProducto> resultado;
 	map<int, ProductoSimple *>::iterator it_prod_simp;
 	for(it_prod_simp = this->productosSimples.begin(); it_prod_simp != this->productosSimples.end(); ++it_prod_simp)
@@ -96,7 +95,7 @@ void ControladorProducto::seleccionarProducto(int codigo_producto){
 		if (it_m != this->menus.end())
 			this->producto_recordado = this->menus[codigo_producto];
 		//no existe producto con ese codigo
-		else 
+		else
 			this->producto_recordado = nullptr;
 	}
 }
@@ -130,7 +129,7 @@ Producto * ControladorProducto::encontrarProducto(DtProductoCantidad producto_ca
 	else {
 		map<int, Menu *>::iterator it_m = this->menus.find(codigo);
 		//si es un menu
-		if (it_m != this->menus.end())	
+		if (it_m != this->menus.end())
 			return this->menus[codigo];
 		else return nullptr;
 	}
