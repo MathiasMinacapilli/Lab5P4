@@ -15,6 +15,10 @@ ControladorEmpleado *ControladorEmpleado::getInstance(){
 
 Mozo *ControladorEmpleado::getMozo(int num_mozo){
 	map<int, Mozo*>::iterator it = this->mozos.find(num_mozo);
+	if (it != mozos.end())
+		return it->second;
+	else 
+		throw new invalid_argument("Error. No existe mozo con ese numero");
 }
 
 //ALTA EMPLEADO
