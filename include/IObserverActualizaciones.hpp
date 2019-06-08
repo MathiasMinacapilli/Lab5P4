@@ -5,8 +5,11 @@
 #include "DtActualizacion.hpp"
 
 class IObserverActualizaciones {
+protected:
+	IObserverActualizaciones();
 public:
 	virtual void notificar(DtActualizacion actualizacion) = 0;
+	virtual ~IObserverActualizaciones() {};
 };
 
 #endif

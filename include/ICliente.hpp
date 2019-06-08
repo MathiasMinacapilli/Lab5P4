@@ -8,7 +8,7 @@ class ICliente {
 protected:
 	ICliente();
 public:
-    ~ICliente() {};
+    ~ICliente();
 };
 
 #endif
