@@ -23,7 +23,7 @@ Mozo *ControladorEmpleado::getMozo(int num_mozo){
 
 //ALTA EMPLEADO
 
-void ControladorEmpleado::IngresarNombreEmpleado(string nombre){
+void ControladorEmpleado::ingresarNombreEmpleado(string nombre){
 	this->nombre_recordado = nombre;
 }
     

@@ -106,7 +106,6 @@ int main() {
                     break;
                 #endif
                 /* 2) Alta empleado. */
-                #if 0
                 case 2:
                     try {
                         string nombre;
@@ -125,8 +124,8 @@ int main() {
                                 set<Transporte> transportes_disponibles = iempleado->getTransportes();
                                 cout << "Los transportes disponibles son: \n";
                                 set<Transporte>::iterator it_transportes;
-                                for (it_transportes = transportes_disponibles->begin(); it_transportes != transportes_disponibles->end(); ++it_transportes){
-                                    Transporte transporte = *it;
+                                for (it_transportes = transportes_disponibles.begin(); it_transportes != transportes_disponibles.end(); ++it_transportes){
+                                    Transporte transporte = *it_transportes;
                                     cout << transporte << "\n";
                                 }
                                 cout << "Seleccione su transporte: ";
@@ -175,7 +174,7 @@ int main() {
                                         }
                                         else{
                                             confirmacion_incorrecta = true;
-                                            cout << "Debe ingresar S o N. Por favor intente de nuevo: "
+                                            cout << "Debe ingresar S o N. Por favor intente de nuevo: ";
                                         }
                                 }while(confirmacion_incorrecta);
 
@@ -202,14 +201,14 @@ int main() {
                                             }
                                             else{
                                                 confirmacion_incorrecta = true;
-                                                cout << "Debe ingresar S o N. Por favor intente de nuevo: "
+                                                cout << "Debe ingresar S o N. Por favor intente de nuevo: ";
                                             }
                                     }while(confirmacion_incorrecta);
 
                                 }
                                 //tipo incorrecto
                                 else{
-                                    cout << "Error. Debe ingresar R o M. \n"
+                                    cout << "Error. Debe ingresar R o M. \n";
                                     tipo_incorrecto = true;
                                 }
                         }while(tipo_incorrecto);
@@ -220,7 +219,7 @@ int main() {
                         break;
                     }
                     break;
-                #endif
+                
                 /* 3) Alta producto. */
                 case 3: {
                     system("clear");

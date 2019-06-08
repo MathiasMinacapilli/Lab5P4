@@ -1,7 +1,7 @@
 //Archivos
 #include "../include/Transporte.hpp"
 
-inline std::ostream& operator<<(std::ostream & os, Transporte t){
+std::ostream& operator<<(std::ostream & os, Transporte t){
   switch (t) {
   case Pie:
       os << "Pie";

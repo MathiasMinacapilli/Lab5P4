@@ -5,6 +5,6 @@
 
 enum Transporte {Pie, Bici, Moto};
 
-inline std::ostream& operator<<(std::ostream & os, Transporte t);
+std::ostream& operator<<(std::ostream & os, Transporte t);
 
 #endif
