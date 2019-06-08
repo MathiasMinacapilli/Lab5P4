@@ -22,4 +22,5 @@ float DtProducto::getPrecio() {
     return this->precio;
 }
 
-DtProducto::~DtProducto(){}
+DtProducto::~DtProducto(){
+}
