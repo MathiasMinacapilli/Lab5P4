@@ -20,7 +20,7 @@ private:
    set<DtActualizacion> etapaPedidos;
 public:
     DtCliente(int telefono, string nombre, DtDireccion direccion, string mail, string clave, set<DtActualizacion> etapaPedidos);
-    string getTelefono();
+    int getTelefono();
     string getNombre();
     DtDireccion getDireccion();
     string getMail();

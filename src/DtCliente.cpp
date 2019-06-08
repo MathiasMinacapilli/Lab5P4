@@ -1,7 +1,7 @@
 //Archivos
 #include "../include/DtCliente.hpp"
 
-DtCliente::DtCliente(string telefono, string nombre, DtDireccion direccion, string mail, string clave, set<DtActualizacion> etapaPedidos) {
+DtCliente::DtCliente(int telefono, string nombre, DtDireccion direccion, string mail, string clave, set<DtActualizacion> etapaPedidos) {
     this->telefono = telefono;
     this->nombre = nombre;
     this->direccion = direccion;
@@ -9,7 +9,7 @@ DtCliente::DtCliente(string telefono, string nombre, DtDireccion direccion, stri
     this->clave = clave;this->etapaPedidos = etapaPedidos;
 }
 
-string DtCliente::getTelefono() {
+int DtCliente::getTelefono() {
     return this->telefono;
 }
 

@@ -15,7 +15,7 @@ HDIR    = include
 CPPDIR  = src
 ODIR    = obj
 
-MODULOS = Cancelado CantidadProducto ControladorCliente ControladorEmpleado ControladorMesa ControladorProducto ControladorVenta DtActualizacion DtCliente DtDireccion DtEmpleado DtFactura DtFacturaDomicilio DtFacturaLocal DtFecha DtFechaYHora DtMenu DtMesasMozo DtMozo DtProducto DtProductoCantidad DtProductoEnMenu DtProductoSimple DtRepartidor Empleado EnCamino Etapa Fabrica Factura FacturaDomicilio FacturaLocal ICliente IEmpleado IMesa IProducto IVenta Menu Mesa Mozo Pedido Producto ProductoEnMenu ProductoSimple Recibido Repartidor Venta VentaADomicilio VentaLocal
+MODULOS = Cancelado CantidadProducto ControladorCliente ControladorEmpleado ControladorMesa ControladorProducto ControladorVenta DtActualizacion DtCliente DtDireccion DtEmpleado DtFactura DtFacturaDomicilio DtFacturaLocal DtFecha DtFechaYHora DtMenu DtMesasMozo DtMozo DtProducto DtProductoCantidad DtProductoEnMenu DtProductoSimple DtRepartidor Empleado EnCamino Etapa Fabrica Factura FacturaDomicilio FacturaLocal ICliente IEmpleado IMesa IProducto IVenta Menu Mesa Mozo Pedido Producto ProductoEnMenu ProductoSimple Recibido Repartidor Transporte Venta VentaADomicilio VentaLocal
 
 # variables que contienen la cadena de archivos para los .h, .cpp y .o
 HS   = $(MODULOS:%=$(HDIR)/%.hpp)
@@ -28,7 +28,7 @@ EJECUTABLE=principal
 # compilador
 CC = g++
 # opciones de compilación
-CCFLAGS = -Wall -g -I$(HDIR)
+CCFLAGS = -Wall -g -I$(HDIR) -std=gnu++0x
 
 # $< es una variable automatica de GNU Make que es el nombre de la primera dependencia
 # $@ es una variable automatica de GNU Make que es el nombre del archivo objetivo de la regla

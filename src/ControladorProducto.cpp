@@ -52,9 +52,12 @@ map<int, DtProducto> ControladorProducto::getProductosSimples(){
 }
 
 void ControladorProducto::seleccionarProductoYCantidad(DtProductoCantidad producto_cantidad){
-	this->prod_cants_recordados[producto_cantidad.getProducto().getCodigo()] = producto_cantidad;
+	if(this->encontrarProducto(producto_cantidad) == nullptr) {
+		this->prod_cants_recordados[producto_cantidad.getProducto().getCodigo()] = producto_cantidad;
+	} else {
+		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
+	}
 }
-
 
 void ControladorProducto::ingresarMenu(){
 	//creo el nuevo menu con los parametros que el usuario ingreso anteriormente

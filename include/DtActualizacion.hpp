@@ -23,7 +23,7 @@ public:
     DtActualizacion(DtFechaYHora fechaYHora, string nombre, int telefono, set<DtProducto> datosProducto, string nombreRepartidor, Etapa* etapaActual);
     DtFechaYHora getFechaYHora() const;
     string getNombre();
-    string getTelefono();
+    int getTelefono();
     set<DtProducto> getDatosProducto();
     string getNombreRepartidor();
     Etapa* getEtapaActual();

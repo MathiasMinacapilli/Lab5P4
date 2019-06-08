@@ -11,7 +11,7 @@ ControladorCliente *ControladorCliente::getInstance(){
 	return instance;
 }
 
-void ControladorCliente::ingresarTelefono(string telefono) {
+void ControladorCliente::ingresarTelefono(int telefono) {
 	this -> telefono = telefono;
 }
 
