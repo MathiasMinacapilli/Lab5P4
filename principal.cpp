@@ -30,7 +30,6 @@ using namespace std;
 ----------------------------------
 */
 
-
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
 static bool esValidaFecha(int dia, int mes, int anio) {
     return ((1 <= dia) && (dia <= 31)) &&
@@ -40,9 +39,24 @@ static bool esValidaFecha(int dia, int mes, int anio) {
 
 
 
+
+
+
+
 int main() {
+    Fabrica *fabrica = Fabrica::getInstance();
+    ICliente icliente = fabrica -> getICliente();
+    IEmpleado iempleado = fabrica -> getIEmpleado();
+    IMesa imesa = fabrica -> getIMesa();
+    IProducto iproducto = fabrica -> getIProducto();
+    IVenta iventa = fabrica -> getIVenta();
     bool salir = false;
     string msj = "";
+    int opcion_menu = 0;
+    int opcion_administrador = 0;
+    int opcion_mozo = 0;
+    int opcion_repartidor = 0;
+    int opcion_cliente = 0;
     system("clear");
     while(!salir) {
         system("clear");
