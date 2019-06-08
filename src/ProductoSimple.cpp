@@ -13,7 +13,7 @@ ProductoSimple::ProductoSimple(int codigo, string descripcion, float precio)
 ProductoSimple::~ProductoSimple(){}
 
 void ProductoSimple::eliminar(){
-	controlador_producto = ControladorProducto::getInstance();
+	ControladorProducto *controlador_producto = ControladorProducto::getInstance();
 	controlador_producto->eliminarProductoDeMenu(this->codigo);
 	delete this;
 

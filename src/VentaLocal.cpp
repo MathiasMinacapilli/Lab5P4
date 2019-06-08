@@ -1,7 +1,7 @@
 //Archivos
 #include "../include/VentaLocal.hpp"
 
-VentaLocal::(int numero, float descuento, Factura* factura):Venta(numero, descuento, factura) {
+VentaLocal::VentaLocal(int numero, float descuento, Factura* factura) : Venta(numero, descuento, factura) {
 }
 
 void VentaLocal::setMozo(Mozo *mozo){

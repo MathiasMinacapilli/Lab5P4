@@ -14,7 +14,7 @@ int ProductoEnMenu::getCantidad(){
 	return this->cantidad;
 }
 
-void aumentarCantidad(int cant){
+void ProductoEnMenu::aumentarCantidad(int cant){
 	this->cantidad += cant;
 }
 

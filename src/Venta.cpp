@@ -20,7 +20,7 @@ int Venta::getNumero() {
 }
 
 float Venta::getDescuento() {
-  return this -> descuento:
+  return this -> descuento;
 }
 
 map<int, CantidadProducto*> Venta::getCants_Productos() {
@@ -43,7 +43,7 @@ void Venta::setFactura(Factura* factura) {
   this -> factura = factura;
 }
 
-void VentaLocal::agregarProductoAVenta(Producto* producto, int cantidad) {
+void Venta::agregarProductoAVenta(Producto* producto, int cantidad) {
   map<int, CantidadProducto*>::iterator it;
   bool esta_producto = false;
   for(it = cants_productos.begin(); ((it != cants_productos.end()) && (!esta_producto)); ++it)
@@ -52,7 +52,7 @@ void VentaLocal::agregarProductoAVenta(Producto* producto, int cantidad) {
       (it->second)->aumentarCantidad(cantidad);
   else {
       CantidadProducto* cant_producto = new CantidadProducto(cantidad, producto);
-      (this->cants_productos).insert(pair<int, CantidadProducto*>(cant_producto->getCodigo(), cant_producto));
+      (this->cants_productos).insert(pair<int, CantidadProducto*>(cant_producto->getProducto()->getCodigo(), cant_producto));
   }
 }
 
@@ -87,20 +87,22 @@ void Venta::eliminarProducto(Producto* producto, int cantidad) {
 
 DtFactura Venta::facturar() {
     map<int, CantidadProducto*>::iterator it;
-    map<int, DtProducto> datos_productos;
+    map<int, DtProductoCantidad> datos_productos;
     int precio_sub_total = 0;
     for(it = cants_productos.begin(); it != cants_productos.end(); ++it) {
-        DtProducto datos = (it->second)->obtenerDatosProductos();
-        datos_productos.insert(pair<int, DtProducto>(datos.getCodigo(), datos));
+        DtProducto datos = (it->second)->getProducto()->getDatosProducto();
+        int cant = (it -> second)->getCantidad();
+        DtProductoCantidad prod_cant = DtProductoCantidad(datos, cant);
+        datos_productos.insert(pair<int, DtProductoCantidad>(datos.getCodigo(), prod_cant));
         precio_sub_total = precio_sub_total + (((it->second)->getProducto())->getPrecio());
     }
     int precio_total = precio_sub_total * (1 - this->descuento) * (1 + valor_iva);
     time_t t = time(0);
     tm* now = localtime(&t);
     DtFechaYHora fecha_y_hora = DtFechaYHora(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900, now->tm_hour, now->tm_min, now->tm_sec);
-    Factura* factura = new Factura(this->codigo, fecha_y_hora, datos_productos, valor_iva, this->descuento, precio_sub_total, precio_total);
+    Factura* factura = new Factura(this->numero, fecha_y_hora, datos_productos, valor_iva, this->descuento, precio_sub_total, precio_total);
     this->factura = factura;
-    DtFactura res = DtFactura(this->codigo, fecha_y_hora, datos_productos, valor_iva, this->descuento, precio_sub_total, precio_total);
+    DtFactura res = DtFactura(this->numero, fecha_y_hora, datos_productos, valor_iva, this->descuento, precio_sub_total, precio_total);
     return res;
 }
 
@@ -108,7 +110,7 @@ map<int, DtProducto> Venta::obtenerProductos() {
   map<int, CantidadProducto*>::iterator it;
   map<int, DtProducto> datos_productos;
   for(it = cants_productos.begin(); it != cants_productos.end(); ++it) {
-      DtProducto datos = (it->second)->obtenerDatosProductos();
+      DtProducto datos = (it->second)->getProducto() -> getDatosProducto();
       datos_productos.insert(pair<int, DtProducto>(datos.getCodigo(), datos));
   }
   return datos_productos;

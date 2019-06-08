@@ -1,9 +1,8 @@
 //Librerias de C
-#include <map>
-using namespace std
+using namespace std;
 
 //Archivos
-#include "../include/Producto.hpp";
+#include "../include/Producto.hpp"
 
 Producto::Producto(int codigo, string descripcion, float precio) {
     this->codigo = codigo;
@@ -17,11 +16,11 @@ int Producto::getCodigo(){
 	return this->codigo;
 }
 
-string Producto::getDescripciom(){
+string Producto::getDescripcion(){
 	return this->descripcion;
 }
 
-int Producto::getPrecio(){
+float Producto::getPrecio(){
 	return this->precio;
 }
 DtProducto Producto::getDatosProducto() {

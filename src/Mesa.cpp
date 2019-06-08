@@ -29,15 +29,15 @@ void Mesa::setVentaActual(VentaLocal *v) {
   this -> ventaActual = v;
 }
 
-Venta Mesa::*getVentaActual() {
+Venta *Mesa::getVentaActual() {
   return this -> ventaActual;
 }
 
 void Mesa::agregarAVentasPasadas(VentaLocal *v) {
-  ventasPasadas.insert(pair<int, VentaLocal>(v -> getNumero(), v));
+  ventasPasadas.insert(pair<int, VentaLocal*>(v -> getNumero(), v));
 }
 
-map<int, VentaLocal *> getVentasPasadas() {
+map<int, VentaLocal *> Mesa::getVentasPasadas() {
   return this -> ventasPasadas;
 }
 
@@ -47,10 +47,10 @@ bool Mesa::noTieneVentas() {
 }
 
 bool Mesa::esDelMozo(int numMozo) {
-  return ((this -> miMozo).getNumero() == numMozo);
+  return ((this -> miMozo) -> getNumero() == numMozo);
 }
 
 void Mesa::terminarVenta() {
-  ventasPasadas.insert(pair<int, VentaLocal>((this -> ventaActual).getNum(), this -> ventaActual));
+  ventasPasadas.insert(pair<int, VentaLocal*>((this -> ventaActual) -> getNumero(), this -> ventaActual));
   this -> ventaActual = nullptr;
 }

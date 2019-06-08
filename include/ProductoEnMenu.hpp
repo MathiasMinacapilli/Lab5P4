@@ -5,7 +5,7 @@
 using namespace std;
 
 //Archivos
-#include "Producto.hpp"
+#include "ProductoSimple.hpp"
 #include "DtProductoSimple.hpp"
 
 class ProductoEnMenu {

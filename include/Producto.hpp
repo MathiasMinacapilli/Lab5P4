@@ -28,7 +28,7 @@ public:
     DtProducto getDatosProducto();
 
     //destructor
-    ~Producto();
+    virtual ~Producto();
 };
 
 #endif
