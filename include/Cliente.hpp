@@ -14,7 +14,7 @@ using namespace std;
 class Cliente : public IObserverActualizaciones{
 private:
     string nombre;
-    string telefono;
+    int telefono;
     DtDireccion direccion;
     string mail;
     string clave;

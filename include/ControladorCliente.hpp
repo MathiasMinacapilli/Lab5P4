@@ -12,7 +12,7 @@ using namespace std;
 
 class ControladorCliente : public ICliente {
 private:
-	string telefono;
+	int telefono;
 	//instancia patron Singleton
 	static ControladorCliente *instance;
 	//Constructor
@@ -21,7 +21,7 @@ private:
 	map<int, Cliente *> clientes;
 public:
 	//operacion patron singleton
-	void ingresarTelefono(string telefono);
+	void ingresarTelefono(int telefono);
 	static ControladorCliente *getInstance();
 
 };

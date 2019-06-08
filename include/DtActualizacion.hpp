@@ -15,12 +15,12 @@ class DtActualizacion {
 private:
     DtFechaYHora fechaYHora;
     string nombre;
-    string telefono;
+    int telefono;
     set<DtProducto> datosProducto;
     string nombreRepartidor;
     Etapa* etapaActual;
 public:
-    DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, set<DtProducto> datosProducto, string nombreRepartidor, Etapa* etapaActual);
+    DtActualizacion(DtFechaYHora fechaYHora, string nombre, int telefono, set<DtProducto> datosProducto, string nombreRepartidor, Etapa* etapaActual);
     DtFechaYHora getFechaYHora() const;
     string getNombre();
     string getTelefono();
