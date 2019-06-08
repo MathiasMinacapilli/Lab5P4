@@ -26,6 +26,10 @@ IMesa *Fabrica::getIMesa(){
 	return ControladorMesa::getInstance();
 }
 
+IProducto *Fabrica::getIProducto(){
+	return ControladorProducto::getInstance();
+}
+
 IVenta *Fabrica::getIVenta(){
 	return ControladorVenta::getInstance();
 }

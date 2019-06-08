@@ -2,6 +2,7 @@
 #define _ICLIENTE_HPP
 
 //Librerias de C
+#include <string>
 using namespace std;
 
 class ICliente {
