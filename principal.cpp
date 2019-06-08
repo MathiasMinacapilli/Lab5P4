@@ -32,6 +32,7 @@ using namespace std;
 ----------------------------------
 */
 
+//comienzo
 #if 0
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
 static bool esValidaFecha(int dia, int mes, int anio) {

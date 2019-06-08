@@ -14,7 +14,7 @@ ControladorEmpleado *ControladorEmpleado::getInstance(){
 }
 
 Mozo *ControladorEmpleado::getMozo(int num_mozo){
-	map<int, Mozo*>::iterator it = this->mozos.find();
+	map<int, Mozo*>::iterator it = this->mozos.find(num_mozo);
 }
 
 //ALTA EMPLEADO
