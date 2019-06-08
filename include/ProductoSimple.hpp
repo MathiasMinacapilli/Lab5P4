@@ -2,8 +2,8 @@
 #define _PRODUCTOSIMPLE_HPP
 
 //Librerias de C
-using namespace std;
 #include <string>
+using namespace std;
 
 //Archivos
 #include "Producto.hpp"
@@ -13,8 +13,8 @@ public:
     //constructor y destructor
     ProductoSimple(int codigo, string descripcion, float precio);
     ~ProductoSimple();
- 
-    void eliminar();  
+
+    void eliminar();
 
 };
 
