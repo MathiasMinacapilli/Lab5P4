@@ -5,11 +5,11 @@
 using namespace std;
 
 //Archivos
-#include "ICliente.hpp"
-#include "IEmpleado.hpp"
-#include "IMesa.hpp"
-#include "IProducto.hpp"
-#include "IVenta.hpp"
+#include "ControladorCliente.hpp"
+#include "ControladorEmpleado.hpp"
+#include "ControladorMesa.hpp"
+#include "ControladorProducto.hpp"
+#include "ControladorVenta.hpp"
 
 class Fabrica{
 private:
@@ -19,7 +19,7 @@ private:
 	Fabrica();
 public:
 	//funcion patron Singleton
-	static Fabrica getInstance();
+	static Fabrica *getInstance();
 
 	//obtener las interfaces
 	ICliente *getICliente();

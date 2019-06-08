@@ -13,14 +13,30 @@ using namespace std;
 
 class ControladorEmpleado : public IEmpleado{
 private:
+	//instancia patron Singleton
 	static ControladorEmpleado *instance;
+	//Constructor
 	ControladorEmpleado();
+	//pseudoatributos que representan colecciones de empleados
 	map<int, Mozo *> mozos;
 	map<int, Repartidor *> repartidores;
+	//atributos de memoria controlador
+	string nombre_recordado;
 
 public:
+	//operacion patron Singleton
 	static ControladorEmpleado *getInstance();
-    virtual Mozo *getMozo(int num_mozo);
+    //caso de uso: Alta empleado
+    void IngresarNombreEmpleado(string nombre);
+    set<Transporte> getTransportes();
+    void seleccionarTransporte(Transporte t);
+    void ingresarRepartidor();
+    void cancelarRepartidor();
+    void ingresarMozo();
+    void cancelarMozo();
+	
+	Mozo *getMozo(int num_mozo);
+
 };
 
 #endif

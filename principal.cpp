@@ -380,3 +380,8 @@ int main() {
     } //fin switch
     return 0;
 } //fin main
+#endif
+
+int main(){
+    return 0;
+}
