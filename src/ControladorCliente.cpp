@@ -8,6 +8,9 @@ ControladorCliente::ControladorCliente(){}
 ControladorCliente *ControladorCliente::getInstance(){
 	if (instance == nullptr)
 		instance = new ControladorCliente();
-	return instance; 
+	return instance;
 }
 
+void ControladorCliente::ingresarTelefono(string telefono) {
+	this -> telefono = telefono;
+}
