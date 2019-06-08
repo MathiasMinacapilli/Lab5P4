@@ -54,6 +54,17 @@ static int conseguir_telefono() {
     return telefono;
 }
 
+static void es_valido_codigo(int codigo, map<int, DtProducto> productos_disponibles) {
+    map<int, DtProducto>::iterator it = productos_disponibles.find(codigo);
+    if (it == productos_disponibles.end())
+        throw new invalid_argument ("No existe producto con ese código.");
+}
+
+static void es_valida_cantidad(int cantidad) {
+    if (cantidad <= 0)
+        throw new invalid_argument ("Cantidad ingresada no válida.");
+}
+
 
 
 
@@ -162,7 +173,7 @@ int main() {
                         iproducto -> seleccionarProducto(codigo);
                         cout << "\nUsted ingresó el código: "
                             << codigo
-                            << "\nDesea eliminar el producto? S/N\n";
+                            << "\nDesea eliminar el producto? Ingrese S o N.\n";
                         string confirmacion;
                         bool error = false;
                         bool se_elimino = false;
@@ -225,6 +236,72 @@ int main() {
                     try {
                         cout << "\nIngrese su número de teléfono. \n";
                         int telefono = conseguir_telefono();
+                        map<int, Cliente*> clientes = icliente -> getClientes();
+                        map<int, Cliente*>::iterator it = clientes.find(telefono);
+                        if (it == clientes.end())
+                            altaCliente(telefono);
+                        else {
+                            map<int, DtProducto> productos_disponibles = iproducto -> getProductosDisponibles();
+                            map<int, DtProducto>::iterator it;
+                            for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
+                                cout << (it -> second).getCodigo()
+                                    << " - "
+                                    << (it -> second).getDescripcion()
+                                    << "\n";
+                            }
+                            bool quiero_agregar = true;
+                            while (quiero_agregar) {
+                                cout << "\nIngrese el código del producto y la cantidad que desea comprar. \n"
+                                    << " Código: ";
+                                int codigo;
+                                cin >> codigo;
+                                es_valido_codigo(codigo, productos_disponibles);
+                                cout << "\n Cantidad: ";
+                                int cantidad;
+                                es_valida_cantidad(cantidad);
+                                cin >> cantidad;
+                                DtProductoCantidad prod_y_cant = DtProductoCantidad(codigo, cantidad);
+                                iproducto -> seleccionarProductoYCantidad(prod_y_cant);
+                                cout << "\nDesea agregar más productos? Ingrese S o N. \n"
+                                string confirmacion;
+                                bool error = false;
+                                do {
+                                    cin >> confirmacion;
+                                    if (confirmacion == "S") {
+                                        quiero_agregar = true;
+                                        error = false;
+                                    } else {
+                                        if (confirmacion == "N") {
+                                            quiero_agregar = false;
+                                            error = false;
+                                        } else {
+                                            cout << "\nCaracter inválido. Ingrese S o N.\n";
+                                            error = true;
+                                        }
+                                    }
+                                } while (error);
+                            }
+                            cout << "\nDesea que el pedido sea entregado? Ingrese S o N. \n"
+                            cin >> confirmacion;
+                            error = false;
+                            do {
+                                cin >> confirmacion;
+                                if (confirmacion == "S") {
+                                    quiero_agregar = true;
+                                    error = false;
+                                } else {
+                                    if (confirmacion == "N") {
+                                        quiero_agregar = false;
+                                        error = false;
+                                    } else {
+                                        cout << "\nCaracter inválido. Ingrese S o N.\n";
+                                        error = true;
+                                    }
+                                }
+                            } while (error);
+
+
+
 
                     } catch() {
 
