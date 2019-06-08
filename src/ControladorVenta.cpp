@@ -99,6 +99,7 @@ void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
   Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
   v -> setDescuento(descuento);
 }
+
 DtFactura ControladorVenta::generarFactura() {
   ControladorMesa *cont_mesa;
   cont_mesa = ControladorMesa::getInstance();
