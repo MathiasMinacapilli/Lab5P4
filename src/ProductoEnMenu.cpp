@@ -1,4 +1,5 @@
-#include "../include/ProductoEnMenu.hpp";
+//Archivos
+#include "../include/ProductoEnMenu.hpp"
 
 ProductoEnMenu::ProductoEnMenu(int cantidad, ProductoSimple *producto){
 	this->cantidad = cantidad;

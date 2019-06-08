@@ -1,6 +1,6 @@
 //Librerias de C
-#include <map>
-using namespace std
+#include <string>
+using namespace std;
 
 //Archivos
 #include "../include/ProductoSimple.hpp"

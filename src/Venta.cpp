@@ -1,6 +1,6 @@
 //Librerias de C
-#include <set>
-using namespace std
+#include <map>
+using namespace std;
 
 //Archivos
 #include "../include/Venta.hpp"
