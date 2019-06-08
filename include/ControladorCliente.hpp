@@ -22,6 +22,7 @@ private:
 public:
 	//operacion patron singleton
 	void ingresarTelefono(int telefono);
+	map <int, Cliente*> getClientes();
 	static ControladorCliente *getInstance();
 
 };

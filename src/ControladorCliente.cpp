@@ -14,3 +14,7 @@ ControladorCliente *ControladorCliente::getInstance(){
 void ControladorCliente::ingresarTelefono(int telefono) {
 	this -> telefono = telefono;
 }
+
+map <int, Cliente*> ControladorCliente::getClientes() {
+	return this -> clientes;
+}
