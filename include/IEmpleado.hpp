@@ -26,7 +26,7 @@ public:
     virtual void cancelarMozo() = 0;
 
     //destructor
-    virtual ~IEmpleado() {}; // virtual y vacío
+    virtual ~IEmpleado(); // virtual y vacío
 };
 
 #endif

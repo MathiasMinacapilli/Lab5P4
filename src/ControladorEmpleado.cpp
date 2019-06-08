@@ -13,6 +13,10 @@ ControladorEmpleado *ControladorEmpleado::getInstance(){
 	return instance; 
 }
 
+Mozo *ControladorEmpleado::getMozo(int num_mozo){
+	map<int, Mozo*>::iterator it = this->mozos.find();
+}
+
 //ALTA EMPLEADO
 
 void ControladorEmpleado::IngresarNombreEmpleado(string nombre){
