@@ -1,10 +1,12 @@
 #ifndef _PRODUCTOENMENU_HPP
 #define _PRODUCTOENMENU_HPP
 
+//Librerias de C
+using namespace std;
+
+//Archivos
 #include "Producto.hpp"
 #include "DtProductoSimple.hpp"
-
-using namespace std;
 
 class ProductoEnMenu {
 private:
