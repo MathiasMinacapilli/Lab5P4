@@ -69,10 +69,11 @@ int main() {
                     << " 3) Alta producto. \n"
                     << " 4) Asignar automáticamente mozos a mesas. \n"
                     << " 5) Baja de producto. \n"
-                    << " 6) Información de un producto. \n"
-                    << " 7) Resumen facturación de 1 día dada la fecha. \n"
-                    << " 8) Venta a domicilio. \n"
-                    << " 9) Ventas de un mozo. \n"
+                    << " 6) Consultar actualizaciones de pedidos a domicilio. \n"
+                    << " 7) Información de un producto. \n"
+                    << " 8) Resumen facturación de 1 día dada la fecha. \n"
+                    << " 9) Venta a domicilio. \n"
+                    << " 10) Ventas de un mozo. \n"
                     << " 0) Salir. \n \n"
                     << " Opción: ";
                 cin >> opcion_administrador;
@@ -123,7 +124,7 @@ int main() {
                     }
                     break;
 
-                /* 6) Información de un producto. */
+                /* 6) Consultar actualizaciones de pedidos a domicilio. */
                 case 6:
                     try {
 
@@ -132,7 +133,7 @@ int main() {
                     }
                     break;
 
-                /* 7) Resumen facturación de 1 día dada la fecha. */
+                /* 7) Información de un producto. */
                 case 7:
                     try {
 
@@ -141,7 +142,7 @@ int main() {
                     }
                     break;
 
-                /* 8) Venta a domicilio. */
+                /* 8) Resumen facturación de 1 día dada la fecha. */
                 case 8:
                     try {
 
@@ -150,8 +151,17 @@ int main() {
                     }
                     break;
 
-                /* 9) Ventas de un mozo. */
+                /* 9) Venta a domicilio. */
                 case 9:
+                    try {
+
+                    } catch() {
+
+                    }
+                    break;
+
+                /* 10) Ventas de un mozo. */
+                case 10:
                     try {
 
                     } catch() {
@@ -169,7 +179,7 @@ int main() {
                     break;
 
                 default: {
-                    msj = "Número inválido. Ingrese valor entre 0 y 9.";
+                    msj = "Número inválido. Ingrese valor entre 0 y 10.";
                 }
                 break;
 
