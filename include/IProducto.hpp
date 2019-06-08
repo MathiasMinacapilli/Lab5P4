@@ -13,6 +13,8 @@ using namespace std;
 #include "Producto.hpp"
 
 class IProducto { // interfaz
+protected:
+    IProducto();
 public:
     virtual void cancelarBajaProducto() = 0;
     virtual void cancelarMenu() = 0;

@@ -15,6 +15,8 @@ using namespace std;
 #include "DtProductoCantidad.hpp"
 
 class IVenta { // interfaz
+protected:
+    IVenta();
 public:
     virtual void agregarProductoAVenta() = 0;
     virtual void cancelarEliminarProductoDeVenta() = 0;

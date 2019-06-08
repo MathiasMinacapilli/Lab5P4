@@ -11,6 +11,8 @@ using namespace std;
 #include "Venta.hpp"
 
 class IMesa {
+protected:
+    IMesa();
 public:
     virtual map<int, DtMesasMozo> asignarMozosAMesas() = 0;
     virtual void cancelarVenta() = 0;
