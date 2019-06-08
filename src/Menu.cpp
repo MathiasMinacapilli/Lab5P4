@@ -1,9 +1,9 @@
 //Librerias de C
 #include <map>
-using namespace std
+using namespace std;
 
 //Archivos
-#include "../include/Menu.hpp";
+#include "../include/Menu.hpp"
 
 //operaciones
 Menu::Menu(int codigo, string descripcion) : Producto(codigo, descripcion, 0){

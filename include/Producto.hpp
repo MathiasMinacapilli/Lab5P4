@@ -9,13 +9,12 @@ using namespace std;
 //Archivos
 #include "DtProductoSimple.hpp"
 
-class Producto {
-private:
+class Producto {  
+protected:
+    //atributos protected para que las subclases Menu y ProductoSimple puedan accederlos directamente
     int codigo;
     string descripcion;
     float precio;
-    
-protected:
     //constructor protected porque es abstracta
     Producto(int codigo, string descripcion, float precio);
 public:
