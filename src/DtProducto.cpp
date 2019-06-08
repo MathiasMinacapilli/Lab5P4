@@ -4,11 +4,15 @@
 //Archivos
 #include "../include/DtProducto.hpp"
 
- DtProducto::DtProducto(int codigo, string descripcion, float precio) {
+//constructor por defecto
+DtProducto::DtProducto(){}
+
+//constructor por parametros
+DtProducto::DtProducto(int codigo, string descripcion, float precio) {
  	this -> codigo = codigo;
  	this -> descripcion = descripcion;
  	this -> precio = precio;
- }
+}
 
 int DtProducto::getCodigo() {
     return this->codigo;

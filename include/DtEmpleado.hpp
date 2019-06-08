@@ -10,6 +10,7 @@ private:
     int numero;
     string nombre;
 public:
+	DtEmpleado();
     DtEmpleado(int numero, string nombre);
     int getNumero();
     string getNombre();

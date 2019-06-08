@@ -1,6 +1,10 @@
 //Archivos
 #include "../include/DtProductoCantidad.hpp"
 
+//constructor por defecto
+DtProductoCantidad::DtProductoCantidad(){}
+
+//constructor por parametros
 DtProductoCantidad::DtProductoCantidad(DtProducto producto, int cantidad) {
     this->producto = producto;
     this->cantidad = cantidad;

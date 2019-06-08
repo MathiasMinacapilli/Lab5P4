@@ -12,6 +12,7 @@ class DtMozo: public DtEmpleado {
 private:
 
 public:
+	DtMozo();
     DtMozo(int numero, string nombre);
     ~DtMozo();
 };

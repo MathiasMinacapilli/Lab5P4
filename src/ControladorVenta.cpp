@@ -12,7 +12,8 @@
 //inicializacion de instancia
 ControladorVenta *ControladorVenta::instance = nullptr;
 
-//ControladorVenta::ControladorVenta() {}
+//constructor
+ControladorVenta::ControladorVenta(){}
 
 ControladorVenta *ControladorVenta::getInstance() {
   if (instance == nullptr)

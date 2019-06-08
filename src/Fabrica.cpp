@@ -6,6 +6,8 @@ using namespace std;
 
 Fabrica *Fabrica::instance = nullptr;
 
+Fabrica::Fabrica(){}
+
 Fabrica *Fabrica::getInstance(){
 	if (instance == nullptr)
 		instance = new Fabrica();

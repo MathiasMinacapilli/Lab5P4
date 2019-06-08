@@ -46,3 +46,5 @@ void CantidadProducto::quitarProducto(){
 	this->producto = nullptr;
 	this->cantidad = 0;
 }
+
+CantidadProducto::~CantidadProducto(){}
