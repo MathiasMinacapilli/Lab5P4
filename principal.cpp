@@ -37,20 +37,9 @@ static bool esValidaFecha(int dia, int mes, int anio) {
     return ((1 <= dia) && (dia <= 31)) &&
         ((1 <= mes) && (mes <= 12)) &&
         (0 < anio);
-
-/* Obtiene la cedula de la entrada estandar */
-static int conseguir_telefono() {
-    cout << "Ingrese su número de teléfono. \n"
-        << " Teléfono: ";
-    int telefono = 0;
-    cin >> telefono;
-    while ((telefono < 100000000) || (telefono > 1000000000)) {
-        cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
-            << " Teléfono: ";
-        cin >> telefono;
-    }
-    return telefono;
 }
+
+
 
 
 
@@ -86,7 +75,7 @@ int main() {
         switch(opcion_menu) {
 
         /* 1) Administrador. */
-        case 1:
+        case 1: {
             try {
                 system("clear");
                 cout << "--------------------" << "Administrador" << "-------------------- \n \n"
@@ -107,15 +96,17 @@ int main() {
                 switch(opcion_administrador) {
 
                 /* 1) Alta cliente. */
+                #if 0
                 case 1:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 2) Alta empleado. */
+                #if 0
                 case 2:
                     try {
                         string nombre;
@@ -188,44 +179,136 @@ int main() {
                                 }while(confirmacion_incorrecta);
 
 
-
-                            }
-                            else
-                                //se ingresa mozo
-                                if (tipo_empleado == "M"){
-                                    tipo_incorrecto = false;
-                                }
-                                //tipo incorrecto
-                                else{
-                                    cout << "Error. Debe ingresar R o M. \n"
-                                    tipo_incorrecto = true;
-                                }
-                        }while(tipo_incorrecto);
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 3) Alta producto. */
-                case 3:
+                case 3: {
+                    system("clear");
                     try {
+                    bool quiero_agregar_mas = true;
+                    int tipo_producto = 0;
+                    do {
+                        cout << "Seleccione el tipo de producto que desea crear:\n"
+                            << "1) Producto Simple\n";
+                        if(iproducto->existeProductoSimple()) { //Muestro la opcion de crear un menu sii existe al menos un producto simple
+                            cout << "2) Menu\n";
+                        }
+                        cout << "Ingrese la opción: "; cin >> tipo_producto;
+                        bool existe_opcion = false;
+                        do {
+                            int codigo = 0;
+                            float precio = 0;
+                            string descripcion = "";
+                            switch(tipo_producto) {
+                            case 1: {
+                                //Agregar producto simple
+                                system("clear");
+                                cout << "Ingrese los datos del producto simple a ingresar:\n"
+                                    << "Codigo: "; cin >> codigo;
+                                cout << "\nDescripcion: "; cin >> descripcion;
+                                cout << "\nPrecio: "; cin >> precio;
+                                DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
+                                iproducto->ingresarDatosProducto(datos_producto_simple);
+                                do { 
+                                    string confirmar = "";
+                                    cout << "\n¿Está seguro que desea ingresar el producto simple? (S/N): "; cin >> confirmar;
+                                    existe_opcion = false;
+                                    if(confirmar == "S") {
+                                        iproducto->ingresarProductoSimple();
+                                        existe_opcion = true;
+                                    } else if(confirmar == "N") {
+                                        iproducto->cancelarProductoSimple();
+                                        existe_opcion = true;
+                                    } else {
+                                        existe_opcion = false;
+                                        cout << "\nLa opción seleccionada no es correcta.";
+                                    }
+                                } while(!existe_opcion);
+                                existe_opcion = true;
+                                break;
+                            }
+                            case 2: {
+                                //Agregar menu
+                                system("clear");
+                                cout << "Ingrese los datos del menu a ingresar:\n"
+                                    << "Codigo: "; cin >> codigo;
+                                cout << "\nDescripcion: "; cin >> descripcion;
+                                iproducto->ingresarDatosMenu(codigo, descripcion);
 
-                    } catch() {
-
-                    }
+                                map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
+                                map<int, DtProducto>::iterator it;
+                                //Muestro los productos simples para que se seleccione cuales integran el menu
+                                system("clear");
+                                for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
+                                    cout << (it->second).getCodigo() << "-" << (it->second).getDescripcion() << "\n";
+                                }
+                                //Selecciona Productos Simples
+                                bool desea_seleccionar_mas = true;
+                                do {
+                                    int codigo_producto_simple = 0;
+                                    int cantidad = 0;
+                                    cout << "Codigo: "; cin >> codigo_producto_simple;
+                                    cout << "\nCantidad: "; cin >> cantidad;
+                                    it = productos_simples.find(codigo_producto_simple);
+                                    if(it == productos_simples.end())
+                                        throw new invalid_argument("Se ingresó un código incorrecto.");
+                                    DtProductoCantidad datos_producto_cantidad = DtProductoCantidad(productos_simples[codigo_producto_simple], cantidad);
+                                    iproducto->seleccionarProductoYCantidad(datos_producto_cantidad);
+                                    string agregar_mas = "";
+                                    cout << "\n¿Desea seguir agregando productos? (S/N): "; cin >> agregar_mas;
+                                    if(agregar_mas == "S") {
+                                        desea_seleccionar_mas = true;
+                                    } else if(agregar_mas == "N") {
+                                        desea_seleccionar_mas = false;
+                                    } else {
+                                        desea_seleccionar_mas = false;
+                                        cout << "\nLa opción seleccionada no es correcta.";
+                                    }
+                                }while(desea_seleccionar_mas);
+                                do { 
+                                    string confirmar = "";
+                                    cout << "\n¿Está seguro que desea ingresar el menu? (S/N): "; cin >> confirmar;
+                                    existe_opcion = false;
+                                    if(confirmar == "S") {
+                                        iproducto->ingresarMenu();
+                                        existe_opcion = true;
+                                    } else if(confirmar == "N") {
+                                        iproducto->cancelarMenu();
+                                        existe_opcion = true;
+                                    } else {
+                                        existe_opcion = false;
+                                        cout << "\nLa opción seleccionada no es correcta.";
+                                    }
+                                } while(!existe_opcion);
+                                existe_opcion = false;
+                                break;
+                            }
+                            default:
+                                existe_opcion = false;
+                            }
+                        } while(!existe_opcion);
+                    } while(quiero_agregar_mas);
+                } catch(exception* e) {
+                    cout << e->what();
+                }
                     break;
+                }//case 3
 
                 /* 4) Asignar automáticamente mozos a mesas. */
+                #if 0
                 case 4:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 5) Baja de producto. */
-                case 5:
+                case 5: {
                     try {
                         map<int, DtProducto> productos_disponibles = iproducto -> getProductosDisponibles();
                         map<int, DtProducto>::iterator it;
@@ -272,75 +355,83 @@ int main() {
                         break;
                     }
                     break;
+                }//case 5
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
+                #if 0
                 case 6:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 7) Información de un producto. */
+                #if 0
                 case 7:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 8) Resumen facturación de 1 día dada la fecha. */
+                #if 0
                 case 8:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 9) Venta a domicilio. */
+                #if 0
                 case 9:
                     try {
                         cout << "\nIngrese su número de teléfono. \n";
                         int telefono = conseguir_telefono();
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 10) Ventas de un mozo. */
+                #if 0
                 case 10:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 0) Salir. */
+                #if 0
                 case 0:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 10.";
                 }
                 break;
-
-            } catch() {
-
+                }
+            } catch(exception* e) {
+                cout << e->what();
             }
             break;
-
+            
+        }//case 1
         /* 2) Mozo. */
-        case 2:
+        case 2: {
             try {
                 system("clear");
                 cout << "--------------------" << "Mozo" << "-------------------- \n \n"
@@ -353,64 +444,68 @@ int main() {
                     << " Opción: ";
                 cin >> opcion_mozo;
                 switch(opcion_mozo) {
-
                 /* 1) Agregar producto a una venta. */
+                #if 0
                 case 1:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 2) Facturacón de una venta. */
+                #if 0
                 case 2:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 3) Iniciar venta en mesas. */
+                #if 0
                 case 3:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 4) Quitar producto de una venta. */
+                #if 0
                 case 4:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 0) Salir. */
+                #if 0
                 case 0:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 4.";
                 }
                 break;
-
-            } catch() {
+                }//switch
+            } catch(exception* e) {
 
             }
             break;
-
+        }
         /* 3) Repartidor. */
-        case 3:
+        case 3: {
             try {
 
                 system("clear");
@@ -423,35 +518,37 @@ int main() {
                 switch(opcion_repartidor) {
 
                 /* 1) Modificar estado de un pedido. */
+                #if 0
                 case 1:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 0) Salir. */
+                #if 0
                 case 0:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 1.";
                 }
                 break;
-
-            } catch() {
+                }//switch
+            } catch(exception* e) {
 
             }
             break;
-
+        }
         /* 4) Cliente. */
-        case 4:
+        case 4: {
             try {
 
                 system("clear");
@@ -464,51 +561,55 @@ int main() {
                 switch(opcion_cliente) {
 
                 /* 1) Consultar actualizaciones de pedidos. */
+                #if 0
                 case 1:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 0) Salir. */
+                #if 0
                 case 0:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 1.";
                 }
                 break;
-
-            } catch() {
+                }//switch
+            } catch(exception* e) {
 
             }
             break;
-
+        }
         /* 5) Cargar datos de prueba. */
+        #if 0
         case 5:
             try {
 
-            } catch() {
+            } catch(exception* e) {
 
             }
             break;
-
+        #endif
         /* 0) Salir. */
+        #if 0
         case 0:
             try {
 
-            } catch() {
+            } catch(exception* e) {
 
             }
             break;
-
+        #endif
         default: {
             msj = "Número inválido. Ingrese valor entre 0 y 5.";
         }
@@ -516,5 +617,5 @@ int main() {
 
     } //fin switch
     return 0;
-} //fin main
-
+    } 
+}//fin main
