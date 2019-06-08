@@ -8,6 +8,9 @@
 //inicializacion instancia patron Singleton
 ControladorMesa *ControladorMesa::instance = nullptr;
 
+//constructor
+ControladorMesa::ControladorMesa(){}
+
 //devolver instancia patron Singleton
 ControladorMesa *ControladorMesa::getInstance(){
   if (instance == nullptr)
