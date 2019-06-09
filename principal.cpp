@@ -386,25 +386,28 @@ int main() {
                     }
                     break;
                 #endif
+
                 /* 5) Baja de producto. */
                 case 5:
                     try {
+                        system("clear");
+                        cout << "--------------------" << "Baja de producto" << "-------------------- \n \n";
                         map<int, DtProducto> productos_disponibles = iproducto -> getProductosDisponibles();
                         map<int, DtProducto>::iterator it;
+                        cout << "Estos son los productos disponibles. \n";
                         for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
-                            cout << (it -> second).getCodigo()
+                            cout << "  "
+                                << (it -> second).getCodigo()
                                 << " - "
                                 << (it -> second).getDescripcion()
                                 << "\n";
                         }
-                        cout << "\nIngrese el código del producto que desea eliminar. \n"
+                        cout << "\nIngrese el código del producto que desea dar de baja. \n"
                             << " Código: ";
                         int codigo;
                         cin >> codigo;
                         iproducto -> seleccionarProducto(codigo);
-                        cout << "\nUsted ingresó el código: "
-                            << codigo
-                            << "\nDesea eliminar el producto? Ingrese S o N.\n";
+                        cout << "\n¿Desea eliminar el producto? Ingrese S o N.\n";
                         bool se_elimino = confirmacion();
                         if (se_elimino)
                             se_elimino = iproducto -> eliminarProducto();
