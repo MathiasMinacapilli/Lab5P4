@@ -3,6 +3,7 @@
 
 //Librerias de C
 #include <string>
+#include <ostream>
 using namespace std;
 
 //Archivos
@@ -22,5 +23,7 @@ public:
     //destructor
     ~DtProducto();
 };
+
+ostream &operator<< (ostream&, DtProducto);
 
 #endif
