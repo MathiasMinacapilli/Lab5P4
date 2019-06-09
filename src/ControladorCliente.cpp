@@ -23,6 +23,12 @@ map <int, Cliente*> ControladorCliente::getClientes() {
 	return this -> clientes;
 }
 
+bool ControladorCliente::existeCliente(int telefono) {
+	map<int, Cliente*>::iterator it = clientes.find(telefono);
+	return (it != clientes.end());
+}
+
+
 //ALTA CLIENTE
 void ControladorCliente::ingresarDatosCliente(int telefono, string nombre, DtDireccion direccion){
 	map<int, Cliente*>::iterator it = this->clientes.find(telefono);
@@ -31,7 +37,7 @@ void ControladorCliente::ingresarDatosCliente(int telefono, string nombre, DtDir
 		this->nombre_recordado = nombre;
 		this->direccion_recordada = direccion;
 	}
-	else throw new invalid_argument("Error. Ya existe un cliente con ese telefono ingresado en el sistema."); 
+	else throw new invalid_argument("Error. Ya existe un cliente con ese telefono ingresado en el sistema.");
 }
 
 DtCliente ControladorCliente::getDatosIngresados(){

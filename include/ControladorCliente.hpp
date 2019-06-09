@@ -29,6 +29,7 @@ public:
 
 	void ingresarTelefono(int telefono);
 	map <int, Cliente*> getClientes();
+	bool existeCliente(int telefono);
 
 	//caso de uso Alta Cliente
 	void ingresarDatosCliente(int telefono, string nombre, DtDireccion direccion);
