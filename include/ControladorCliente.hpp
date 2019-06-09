@@ -12,18 +12,30 @@ using namespace std;
 
 class ControladorCliente : public ICliente {
 private:
-	int telefono;
 	//instancia patron Singleton
 	static ControladorCliente *instance;
 	//Constructor
 	ControladorCliente();
 	//coleccion de clientes -- pseudoatributo
 	map<int, Cliente *> clientes;
+	//atributos recordados
+	int telefono;
+	string nombre_recordado;
+	DtDireccion direccion_recordada;
+
 public:
 	//operacion patron singleton
+	static ControladorCliente *getInstance();
+
 	void ingresarTelefono(int telefono);
 	map <int, Cliente*> getClientes();
-	static ControladorCliente *getInstance();
+
+	//caso de uso Alta Cliente
+	void ingresarDatosCliente(int telefono, string nombre, DtDireccion direccion);
+	DtCliente getDatosIngresados();
+	void ingresarCliente();
+	void cancelarCliente();
+
 
 };
 

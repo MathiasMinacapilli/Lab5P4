@@ -16,8 +16,6 @@ private:
     string nombre;
     int telefono;
     DtDireccion direccion;
-    string mail;
-    string clave;
     set<DtActualizacion> etapaPedidos;
 public:
     void suscribirse();
