@@ -3,6 +3,7 @@
 
 //Librerias de C
 #include <map>
+#include <set>
 #include <string>
 using namespace std;
 
@@ -19,7 +20,7 @@ private:
 	//coleccion de clientes -- pseudoatributo
 	map<int, Cliente *> clientes;
 	//atributos recordados
-	int telefono;
+	int telefono_recordado;
 	string nombre_recordado;
 	DtDireccion direccion_recordada;
 

@@ -9,6 +9,7 @@ using namespace std;
 //Archivos
 #include "DtActualizacion.hpp"
 #include "DtDireccion.hpp"
+#include "DtCliente.hpp"
 #include "IObserverActualizaciones.hpp"
 
 class Cliente : public IObserverActualizaciones{
@@ -18,6 +19,8 @@ private:
     DtDireccion direccion;
     set<DtActualizacion> etapaPedidos;
 public:
+	Cliente();
+	Cliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
     void suscribirse();
     void bajaSuscripcion();
     void consultarPedidos();

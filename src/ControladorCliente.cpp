@@ -33,14 +33,31 @@ bool ControladorCliente::existeCliente(int telefono) {
 void ControladorCliente::ingresarDatosCliente(int telefono, string nombre, DtDireccion direccion){
 	map<int, Cliente*>::iterator it = this->clientes.find(telefono);
 	if (it == this->clientes.end()){
-		this->telefono = telefono;
+		this->telefono_recordado = telefono;
 		this->nombre_recordado = nombre;
 		this->direccion_recordada = direccion;
 	}
 	else throw new invalid_argument("Error. Ya existe un cliente con ese telefono ingresado en el sistema.");
 }
 
-DtCliente ControladorCliente::getDatosIngresados(){
-	set<DtActualizacion>
-
+void ControladorCliente::ingresarCliente(){
+	set<DtActualizacion> actualizaciones;
+	actualizaciones.clear();
+	Cliente nuevo_cliente = new Cliente(this->telefono_recordado, this->nombre_recordado, this->direccion_recordada, actualizaciones);
+	this->clientes[this->telefono_recordado] = nuevo_cliente;
 }
+
+void ControladorCliente::cancelarCliente(){
+	//SE LIBERA MEMORIA
+	//QUE ES ESO
+	//AYUDA
+}
+
+DtCliente ControladorCliente::getDatosIngresados(){
+	set<DtActualizacion> actualizaciones;
+	actualizaciones.clear();
+	DtCliente datos = DtCliente(this->telefono_recordado, this->nombre_recordado, this->direccion_recordada, actualizaciones);
+	return datos;
+}
+
+

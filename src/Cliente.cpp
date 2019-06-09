@@ -10,3 +10,13 @@ void Cliente::suscribirse() {}
 void Cliente::bajaSuscripcion() {}
 void Cliente::consultarPedidos() {}
 void Cliente::notificar(DtActualizacion actualizacion) {}
+
+//Constructor por defecto
+Cliente::Cliente(){}
+
+Cliente::Cliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos){
+	this->telefono = telefono;
+	this->nombre = nombre;
+	this->direccion = direccion;
+	this->etapaPedidos = etapaPedidos;
+}

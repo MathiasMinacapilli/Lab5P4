@@ -24,6 +24,8 @@ public:
     string getNombre();
     DtDireccion getDireccion();
     set<DtActualizacion> getEtapaPedidos();
+    //sobrecarga operador cout
+    ostream& operator<<(ostream & os, DtCliente);
     ~DtCliente();
 };
 
