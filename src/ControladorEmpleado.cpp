@@ -21,6 +21,27 @@ Mozo *ControladorEmpleado::getMozo(int num_mozo){
 		throw new invalid_argument("Error. No existe mozo con ese numero");
 }
 
+
+
+map<int, DtProducto> ControladorProducto::getProductosDisponibles(){
+	map<int, DtProducto> resultado;
+	map<int, ProductoSimple *>::iterator it_prod_simp;
+	for(it_prod_simp = this->productosSimples.begin(); it_prod_simp != this->productosSimples.end(); ++it_prod_simp)
+		resultado[(it_prod_simp->second)->getCodigo()] = (it_prod_simp->second)->getDatosProducto();
+	map<int, Menu *>::iterator it_menu;
+	for(it_menu = this->menus.begin(); it_menu != this->menus.end(); ++it_menu)
+		resultado[(it_menu->second)->getCodigo()] = (it_menu->second)->getDatosProducto();
+	return resultado;
+}
+
+map<int, Repartidor*> ControladorEmpleado::getRepartidoresDisponibles() {
+	map<int, Repartidor*> res;
+	map<int, Repartidor *>::iterator it;
+	for(it = repartidores.begin(); it != repartidores.end(); ++it)
+		res[(it->second) -> getNumero()] = (it -> second);
+	return res;
+}
+
 //ALTA EMPLEADO
 
 void ControladorEmpleado::ingresarNombreEmpleado(string nombre){

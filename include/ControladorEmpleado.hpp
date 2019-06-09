@@ -33,6 +33,7 @@ public:
     //caso de uso: Alta empleado
     void ingresarNombreEmpleado(string nombre);
     set<Transporte> getTransportes();
+	map<int, Repartidor*> getRepartidoresDisponibles();
     void seleccionarTransporte(Transporte t);
 	void seleccionarRepartidor(int numero_repartidor);
     void ingresarRepartidor();
