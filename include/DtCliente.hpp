@@ -12,21 +12,21 @@ using namespace std;
 
 class DtCliente {
 private:
-   int telefono;
-   string nombre;
-   DtDireccion direccion;
-   string mail;
-   string clave;
-   set<DtActualizacion> etapaPedidos;
+  int telefono;
+  string nombre;
+  DtDireccion direccion;
+  string mail;
+  string clave;
+  set<DtActualizacion> etapaPedidos;
 public:
-    DtCliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
-    int getTelefono();
-    string getNombre();
-    DtDireccion getDireccion();
-    set<DtActualizacion> getEtapaPedidos();
-    //sobrecarga operador cout
-    ostream& operator<<(ostream & os, DtCliente);
-    ~DtCliente();
+  DtCliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
+  int getTelefono();
+  string getNombre();
+  DtDireccion getDireccion();
+  set<DtActualizacion> getEtapaPedidos();
+  //sobrecarga operador cout
+  //ostream& operator<<(ostream & os, DtCliente datos);
+  ~DtCliente();
 };
 
 #endif

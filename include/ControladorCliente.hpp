@@ -10,6 +10,7 @@ using namespace std;
 //Archivos
 #include "Cliente.hpp"
 #include "ICliente.hpp"
+#include "DtCliente.hpp"
 
 class ControladorCliente : public ICliente {
 private:
