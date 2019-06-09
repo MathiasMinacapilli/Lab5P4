@@ -63,4 +63,14 @@ bool DtFechaYHora::operator<=(const DtFechaYHora &f2){
 
 }
 
+ostream &operator<< (ostream& o, DtFechaYHora dtfh) {
+    o << "Día: " << dtfh.getDia()
+			<< "\nMes: " << dtfh.getMes()
+			<< "\nAnio: " << dtfh.getAnio()
+			<< "\nHora: " << dtfh.getHora()
+			<< "\nMinutos: " << dtfh.getMinutos()
+			<< "\nSegundos: " << dtfh.getSegundos();
+		return o;
+}
+
 DtFechaYHora::~DtFechaYHora() {}

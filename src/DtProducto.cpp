@@ -28,3 +28,10 @@ float DtProducto::getPrecio() {
 
 DtProducto::~DtProducto(){
 }
+
+ostream &operator<< (ostream& o, DtProducto dtp) {
+    o << "Codigo: " << dtp.getCodigo()
+      << "\nDescripción: " << dtp.getDescripcion()
+      << "\nPrecio: " << dtp.getPrecio();
+    return o;
+}

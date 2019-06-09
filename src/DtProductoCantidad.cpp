@@ -21,3 +21,9 @@ int DtProductoCantidad::getCantidad() {
 DtProductoCantidad::~DtProductoCantidad() {
     //liberar memoria de producto??
 }
+
+ostream &operator<< (ostream& o, DtProductoCantidad dtpc) {
+    o << "- Producto -\n" << dtpc.getProducto()
+      << "\nCantidades del producto: " << dtpc.getCantidad;
+    return o;
+}

@@ -2,6 +2,7 @@
 #define _DTFECHAYHORA_HPP
 
 //Librerias de C
+#include <ostream>
 using namespace std;
 
 //Archivos
@@ -21,5 +22,7 @@ public:
     ~DtFechaYHora();
     bool operator<=(const DtFechaYHora&);
 };
+
+ostream &operator<< (ostream&, DtFechaYHora);
 
 #endif

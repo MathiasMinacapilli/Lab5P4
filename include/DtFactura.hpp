@@ -3,6 +3,9 @@
 
 //Librerias de C
 #include <map>
+#include <stdio.h>
+#include <ostream>
+using namespace std;
 
 //Archivos
 #include "DtFechaYHora.hpp"
@@ -29,5 +32,7 @@ public:
     float getPrecioTotal();
     ~DtFactura();
 };
+
+ostream &operator<< (ostream&, DtFactura);
 
 #endif
