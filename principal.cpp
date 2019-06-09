@@ -76,7 +76,6 @@ static bool confirmacion () {
     bool error = false;
     bool quiero_confirmar = false;
     do {
-        cin >> confirmacion;
         if (confirmacion == "S") {
             quiero_confirmar = true;
             error = false;
@@ -350,7 +349,7 @@ int main() {
                                 cout << "Por favor ingrese una opción correcta.\n";
                             }
                         } while(!existe_opcion);
-                        cout << "¿Desea seguir creando productos?: (S/N)"; 
+                        cout << "¿Desea seguir creando productos?: (S/N)";
                         if(confirmacion()) {
                             quiero_agregar_mas = true;
                         } else {
