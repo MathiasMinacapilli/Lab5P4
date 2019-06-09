@@ -95,6 +95,8 @@ DtFactura Venta::facturar() {
         DtProductoCantidad prod_cant = DtProductoCantidad(datos, cant);
         datos_productos.insert(pair<int, DtProductoCantidad>(datos.getCodigo(), prod_cant));
         precio_sub_total = precio_sub_total + (((it->second)->getProducto())->getPrecio());
+        //Aumentar la cantidad de vendidos en el producto. Lo aumento la cantidad del producto_cantidad
+        (it->second)->getProducto()->aumentarCantidadVendidos(it->second->getCantidad());
     }
     int precio_total = precio_sub_total * (1 - this->descuento) * (1 + valor_iva);
     time_t t = time(0);

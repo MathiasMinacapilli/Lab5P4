@@ -438,7 +438,7 @@ int main() {
                 case 7:
                     try {
                         system("clear");
-                        cout << "---------Productos:---------\n";
+                        cout << "--------------------" << "Información de un producto" << "-------------------- \n \n";
                         map<int, DtProducto> productos_disponibles = iproducto->getProductosDisponibles();
                         map<int, DtProducto>::iterator it;
                         //Muestro los productos disponibles para seleccionar cual se quiere ver su info
@@ -452,12 +452,13 @@ int main() {
                             cout << "Ingrese el código del producto que desea ver su información: "; cin >> codigo;
                             es_valido_el_codigo = iproducto->ingresarCodigoProductoAConsultar(codigo);
                             if(!es_valido_el_codigo) {
-                                cout << "¿Desea cancelar la consulta? (S/N): ";
+                                cout << "Código inválido, ¿Desea cancelar la consulta? (S/N): ";
                                 if(confirmacion()) {
                                     es_valido_el_codigo = true;
                                     cancelar = true;
                                 } else {
-                                    //algo
+                                    es_valido_el_codigo = false;
+                                    cancelar = false;
                                 }
                             }
                         } while(!es_valido_el_codigo);
@@ -466,11 +467,17 @@ int main() {
                             DtProducto prod = iproducto->getProducto();
                             cout << "-Codigo: " << prod.getCodigo()
                                 << "\n-Descripcion: " << prod.getDescripcion()
-                                << "\n-Precio: " << prod.getPrecio();
-                            cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                                << "\n-Precio: " << prod.getPrecio()
+                                << "\n-Cantidad vendidos: " << iproducto->getCantidadProductoTotalVendidos()
+                                << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                        } else {
+                            iproducto->cancelarInformacion();
                         }
                     } catch(exception* e) {
-                        cout << e->what();
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
 

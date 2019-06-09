@@ -17,15 +17,18 @@ protected:
     float precio;
     //constructor protected porque es abstracta
     Producto(int codigo, string descripcion, float precio);
+    int cantidadVendidos;
 public:
 	//getters
 	int getCodigo();
     string getDescripcion();
     float getPrecio();
+    int getCantidadVendidos();
 
     //operaciones
     virtual void eliminar() = 0;
     DtProducto getDatosProducto();
+    void aumentarCantidadVendidos(int i);
 
     //destructor
     virtual ~Producto();

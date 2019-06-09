@@ -156,6 +156,10 @@ bool ControladorProducto::ingresarCodigoProductoAConsultar(int codigo) {
 		return false;
 	}
 }
+/* Cancela el pedido de informacion de un producto */
+void ControladorProducto::cancelarInformacion() {
+	this->codigoProductoAConsultar = 0;
+}
 /* Devuelve los datos del producto con codigo recordado por el controlador */
 DtProducto ControladorProducto::getProducto() {
 	DtProducto dt_prod = DtProducto(this->codigoProductoAConsultar, "", 1);
@@ -164,7 +168,12 @@ DtProducto ControladorProducto::getProducto() {
 	DtProducto datos_prod = prod->getDatosProducto();
 	return datos_prod;
 }
-
+/* Devuelve la cantidad  */
 int ControladorProducto::getCantidadProductoTotalVendidos() {
-	return 0;
+	DtProductoCantidad datos_producto = DtProductoCantidad(DtProducto(this->codigoProductoAConsultar, "", 0), 1);
+	Producto* prod = encontrarProducto(datos_producto);
+	if(prod != nullptr) {
+		int cantidad_vendidos = prod->getCantidadVendidos();
+		return cantidad_vendidos;
+	}
 }
