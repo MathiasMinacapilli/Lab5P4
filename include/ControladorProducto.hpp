@@ -29,6 +29,7 @@ private:
 	string desc_menu; //ingresarMenu
 	map<int, DtProductoCantidad> prod_cants_recordados; //seleccionarProductoYCantidad 
 	Producto *producto_recordado; //seleccionarProducto
+	int codigoProductoAConsultar;
 
 public:
 	//operacion patron singleton
@@ -57,6 +58,10 @@ public:
 	//caso de uso: agregar producto a venta -- seleccionarProdYCant
 	Producto* encontrarProducto(DtProductoCantidad producto_cantidad);
 
+	//caso de uso: informacion de un producto
+	bool ingresarCodigoProductoAConsultar(int codigo);
+    DtProducto getProducto();
+    int getCantidadProductoTotalVendidos();
 };
 
 

@@ -148,3 +148,27 @@ Producto * ControladorProducto::encontrarProducto(DtProductoCantidad producto_ca
 		else return nullptr;
 	}
 }
+
+//Caso de uso: informacion de un producto
+/* Devuelve true sii el codigo no esta siendo usado por otro producto */
+bool ControladorProducto::ingresarCodigoProductoAConsultar(int codigo) {
+	DtProductoCantidad datos_producto = DtProductoCantidad(DtProducto(codigo, "", 0), 1);
+	if(encontrarProducto(datos_producto) != nullptr) {
+		this->codigoProductoAConsultar = codigo;
+		return true;
+	} else {
+		return false;
+	}
+}
+/* Devuelve los datos del producto con codigo recordado por el controlador */
+DtProducto ControladorProducto::getProducto() {
+	DtProducto dt_prod = DtProducto(this->codigoProductoAConsultar, "", 1);
+	DtProductoCantidad datos_producto = DtProductoCantidad(dt_prod, 1);
+	Producto* prod = encontrarProducto(datos_producto);
+	DtProducto datos_prod = prod->getDatosProducto();
+	return datos_prod;
+}
+
+int ControladorProducto::getCantidadProductoTotalVendidos() {
+	return 0;
+}

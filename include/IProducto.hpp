@@ -31,6 +31,11 @@ public:
     virtual void ingresarMenu() = 0;
     virtual void seleccionarProducto(int codigo_producto) = 0;
     virtual void seleccionarProductoYCantidad(DtProductoCantidad producto_cantidad) = 0;
+    //Informacion de un producto
+    virtual bool ingresarCodigoProductoAConsultar(int codigo) = 0;
+    virtual DtProducto getProducto() = 0;
+    virtual int getCantidadProductoTotalVendidos() = 0;
+    //Destructor
     virtual ~IProducto(){}; // virtual y vacío
 };
 

@@ -291,21 +291,12 @@ int main() {
                                 cout << " Precio: "; cin >> precio;
                                 DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
                                 iproducto->ingresarDatosProducto(datos_producto_simple);
-                                do {
-                                    string confirmar = "";
-                                    cout << "\n¿Está seguro que desea ingresar el producto simple? Ingrese S o N. \n"; cin >> confirmar;
-                                    existe_opcion = false;
-                                    if(confirmar == "S") {
-                                        iproducto->ingresarProductoSimple();
-                                        existe_opcion = true;
-                                    } else if(confirmar == "N") {
-                                        iproducto->cancelarProductoSimple();
-                                        existe_opcion = true;
-                                    } else {
-                                        existe_opcion = false;
-                                        cout << "\nLa opción seleccionada no es correcta.";
-                                    }
-                                } while(!existe_opcion);
+                                cout << "¿Desea confirmar el ingreso del producto? (S/N): ";
+                                if(confirmacion()) {
+                                    iproducto->ingresarProductoSimple();
+                                } else {
+                                    iproducto->cancelarProductoSimple();
+                                }
                                 existe_opcion = true;
                                 break;
                             }
@@ -338,52 +329,33 @@ int main() {
                                     DtProductoCantidad datos_producto_cantidad = DtProductoCantidad(productos_simples[codigo_producto_simple], cantidad);
                                     iproducto->seleccionarProductoYCantidad(datos_producto_cantidad);
                                     string agregar_mas = "";
-                                    cout << "\n¿Desea seguir agregando productos? (S/N): "; cin >> agregar_mas;
-                                    if(agregar_mas == "S") {
+                                    cout << "\n¿Desea seguir agregando productos? (S/N): ";
+                                    if(confirmacion()) {
                                         desea_seleccionar_mas = true;
-                                    } else if(agregar_mas == "N") {
-                                        desea_seleccionar_mas = false;
                                     } else {
                                         desea_seleccionar_mas = false;
-                                        cout << "\nLa opción seleccionada no es correcta.";
                                     }
                                 }while(desea_seleccionar_mas);
-                                do {
-                                    string confirmar = "";
-                                    cout << "\n¿Está seguro que desea ingresar el menu? (S/N): "; cin >> confirmar;
-                                    existe_opcion = false;
-                                    if(confirmar == "S") {
-                                        iproducto->ingresarMenu();
-                                        existe_opcion = true;
-                                    } else if(confirmar == "N") {
-                                        iproducto->cancelarMenu();
-                                        existe_opcion = true;
-                                    } else {
-                                        existe_opcion = false;
-                                        cout << "\nLa opción seleccionada no es correcta.";
-                                    }
-                                } while(!existe_opcion);
-                                existe_opcion = false;
+                                cout << "¿Desea confirmar el ingreso del menú? (S/N): ";
+                                if(confirmacion()) {
+                                    iproducto->ingresarMenu();
+                                } else {
+                                    iproducto->cancelarMenu();
+                                }
+                                existe_opcion = true;
                                 break;
                             }
                             default:
                                 existe_opcion = false;
+                                cout << "Por favor ingrese una opción correcta.\n";
                             }
                         } while(!existe_opcion);
-                        do {
-                            string confirmar = "";
-                            cout << "¿Desea seguir creando productos?: (S/N)"; cin >> confirmar;
-                            bool existe_opcion = false;
-                            if(confirmar == "S") {
-                                existe_opcion = true;
-                            } else if(confirmar == "N") {
-                                existe_opcion = true;
-                                quiero_agregar_mas = false;
-                            } else {
-                                existe_opcion = false;
-                                cout << "\nLa opción seleccionada no es correcta.";
-                            }
-                        } while(!existe_opcion);
+                        cout << "¿Desea seguir creando productos?: (S/N)"; 
+                        if(confirmacion()) {
+                            quiero_agregar_mas = true;
+                        } else {
+                            quiero_agregar_mas = false;
+                        }
                     } while(quiero_agregar_mas);
                 } catch(exception* e) {
                     cout << e->what();
@@ -449,15 +421,45 @@ int main() {
                     break;
                 #endif
                 /* 7) Información de un producto. */
-                #if 0
                 case 7:
                     try {
-
+                        system("clear");
+                        cout << "---------Productos:---------\n";
+                        map<int, DtProducto> productos_disponibles = iproducto->getProductosDisponibles();
+                        map<int, DtProducto>::iterator it;
+                        //Muestro los productos disponibles para seleccionar cual se quiere ver su info
+                        for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
+                            cout << (it->second).getCodigo() << "-" << (it->second).getDescripcion() << "\n";
+                        }
+                        int codigo = 0;
+                        bool es_valido_el_codigo = true;
+                        bool cancelar = false;
+                        do {
+                            cout << "Ingrese el código del producto que desea ver su información: "; cin >> codigo;
+                            es_valido_el_codigo = iproducto->ingresarCodigoProductoAConsultar(codigo);
+                            if(!es_valido_el_codigo) {
+                                cout << "¿Desea cancelar la consulta? (S/N): ";
+                                if(confirmacion()) {
+                                    es_valido_el_codigo = true;
+                                    cancelar = true;
+                                } else {
+                                    //algo
+                                }
+                            }
+                        } while(!es_valido_el_codigo);
+                        if(!cancelar) {
+                            string waste = "";
+                            DtProducto prod = iproducto->getProducto();
+                            cout << "-Codigo: " << prod.getCodigo()
+                                << "\n-Descripcion: " << prod.getDescripcion()
+                                << "\n-Precio: " << prod.getPrecio();
+                            cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                        }
                     } catch(exception* e) {
-
+                        cout << e->what();
                     }
                     break;
-                #endif
+
                 /* 8) Resumen facturación de 1 día dada la fecha. */
                 #if 0
                 case 8:
