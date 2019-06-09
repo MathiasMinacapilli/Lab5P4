@@ -27,10 +27,11 @@ using namespace std;
 #include "include/Fabrica.hpp"
 
 /*
-----------------------------------
--------Funciones De Validacion-------
-----------------------------------
+-------------------------------------
+-------Funciones De Validación-------
+-------------------------------------
 */
+
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
 static bool esValidaFecha(int dia, int mes, int anio) {
     return ((1 <= dia) && (dia <= 31)) &&
@@ -44,7 +45,7 @@ static int conseguir_telefono() {
         << " Teléfono: ";
     int telefono = 0;
     cin >> telefono;
-    while ((telefono < 100000000) || (telefono > 1000000000)) {
+    while ((telefono < 20000000) || (telefono >= 30000000)) {
         cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
             << " Teléfono: ";
         cin >> telefono;
@@ -95,10 +96,11 @@ static bool confirmacion () {
 static void altaCliente(int telefono) {
 }
 
+
 /*
-----------------------------------
--------Programa Principal-------
-----------------------------------
+------------------------------------------
+------------Programa Principal------------
+------------------------------------------
 */
 
 int main() {
@@ -466,7 +468,8 @@ int main() {
                 /* 9) Venta a domicilio. */
                 case 9:
                     try {
-                        cout << "\nIngrese su número de teléfono. \n";
+                        system("clear");
+                        cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
                         int telefono = conseguir_telefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
                         if (!esta_cliente)
