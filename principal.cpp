@@ -69,6 +69,28 @@ static void es_valido_numero_repartidor(int numero_repartidor, map<int, Repartid
         throw new invalid_argument ("No existe producto con ese código.");
 }
 
+static bool confirmacion () {
+    cin >> confirmacion;
+    error = false;
+    bool quiero_confirmar = false;
+    do {
+        cin >> confirmacion;
+        if (confirmacion == "S") {
+            quiero_confirmar = true;
+            error = false;
+        } else {
+            if (confirmacion == "N") {
+                quiero_confirmar = false;
+                error = false;
+            } else {
+                cout << "\nCaracter inválido. Ingrese S o N.\n";
+                error = true;
+            }
+        }
+    } while (error);
+    return quiero_confirmar;
+}
+
 int main() {
     Fabrica *fabrica = Fabrica::getInstance();
     ICliente *icliente = fabrica -> getICliente();
@@ -711,7 +733,7 @@ int main() {
 
             }
             break;
-        
+
         /* 3) Repartidor. */
         case 3:
             try {
