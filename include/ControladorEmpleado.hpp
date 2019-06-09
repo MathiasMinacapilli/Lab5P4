@@ -30,18 +30,17 @@ private:
 public:
 	//operacion patron Singleton
 	static ControladorEmpleado *getInstance();
+	Mozo* getMozo(int num_mozo);
+	map<int, Repartidor*> getRepartidoresDisponibles();
     //caso de uso: Alta empleado
     void ingresarNombreEmpleado(string nombre);
     set<Transporte> getTransportes();
-	map<int, Repartidor*> getRepartidoresDisponibles();
     void seleccionarTransporte(Transporte t);
 	void seleccionarRepartidor(int numero_repartidor);
     void ingresarRepartidor();
     void cancelarRepartidor();
     void ingresarMozo();
     void cancelarMozo();
-
-	Mozo *getMozo(int num_mozo);
 
 	~ControladorEmpleado();
 

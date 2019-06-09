@@ -2,6 +2,7 @@
 #define _IEMPLEADO_HPP
 
 //Librerias de C
+#include <map>
 #include <string>
 #include <set>
 using namespace std;
