@@ -7,3 +7,6 @@ Repartidor::Repartidor(int numero, string nombre, Transporte medioTransporte) : 
 
 Repartidor::~Repartidor() {
 }
+Transporte Repartidor::getTransporte() {
+    return this -> medioTransporte;
+}

@@ -20,6 +20,7 @@ public:
     virtual void IngresarNombreEmpleado(string nombre) = 0;
     virtual set<Transporte> getTransportes() = 0;
     virtual void seleccionarTransporte(Transporte t) = 0;
+    virtual void seleccionarRepartidor(int numero_repartidor) = 0;
     virtual void ingresarRepartidor() = 0;
     virtual void cancelarRepartidor() = 0;
     virtual void ingresarMozo() = 0;

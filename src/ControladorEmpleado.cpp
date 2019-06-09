@@ -10,14 +10,14 @@ ControladorEmpleado::ControladorEmpleado(){
 ControladorEmpleado *ControladorEmpleado::getInstance(){
 	if (instance == nullptr)
 		instance = new ControladorEmpleado();
-	return instance; 
+	return instance;
 }
 
 Mozo *ControladorEmpleado::getMozo(int num_mozo){
 	map<int, Mozo*>::iterator it = this->mozos.find(num_mozo);
 	if (it != mozos.end())
 		return it->second;
-	else 
+	else
 		throw new invalid_argument("Error. No existe mozo con ese numero");
 }
 
@@ -26,7 +26,7 @@ Mozo *ControladorEmpleado::getMozo(int num_mozo){
 void ControladorEmpleado::IngresarNombreEmpleado(string nombre){
 	this->nombre_recordado = nombre;
 }
-    
+
 set<Transporte> ControladorEmpleado::getTransportes(){
 	Transporte t1, t2, t3;
 	t1 = Bici;
@@ -42,6 +42,11 @@ set<Transporte> ControladorEmpleado::getTransportes(){
 void ControladorEmpleado::seleccionarTransporte(Transporte t){
 	this->transporte_recordado = t;
 }
+
+void ControladorEmpleado::seleccionarRepartidor(int numero_repartidor) {
+	this -> numero_repartidor = numero_repartidor;
+}
+
 
 void ControladorEmpleado::ingresarRepartidor(){
 	this->ultimo_id++;
@@ -72,4 +77,3 @@ void ControladorEmpleado::cancelarMozo(){
 }
 
 ControladorEmpleado::~ControladorEmpleado(){}
-

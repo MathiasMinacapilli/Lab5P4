@@ -24,6 +24,7 @@ private:
 	int ultimo_id;
 	//atributos de memoria controlador
 	string nombre_recordado;
+	int numero_repartidor;
 	Transporte transporte_recordado;
 
 public:
@@ -33,11 +34,12 @@ public:
     void IngresarNombreEmpleado(string nombre);
     set<Transporte> getTransportes();
     void seleccionarTransporte(Transporte t);
+	void seleccionarRepartidor(int numero_repartidor);
     void ingresarRepartidor();
     void cancelarRepartidor();
     void ingresarMozo();
     void cancelarMozo();
-	
+
 	Mozo *getMozo(int num_mozo);
 
 	~ControladorEmpleado();

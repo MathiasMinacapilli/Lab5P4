@@ -15,6 +15,7 @@ private:
 public:
     Repartidor(int numero, string nombre, Transporte medioTransporte);
     ~Repartidor();
+    Transporte getTransporte();
 };
 
 #endif
