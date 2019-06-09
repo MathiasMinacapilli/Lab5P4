@@ -14,9 +14,6 @@ ControladorCliente *ControladorCliente::getInstance(){
 	return instance;
 }
 
-void ControladorCliente::ingresarTelefono(int telefono) {
-	this -> telefono = telefono;
-}
 
 //devuelve la coleccion de clientes
 map <int, Cliente*> ControladorCliente::getClientes() {
@@ -43,7 +40,7 @@ void ControladorCliente::ingresarDatosCliente(int telefono, string nombre, DtDir
 void ControladorCliente::ingresarCliente(){
 	set<DtActualizacion> actualizaciones;
 	actualizaciones.clear();
-	Cliente nuevo_cliente = new Cliente(this->telefono_recordado, this->nombre_recordado, this->direccion_recordada, actualizaciones);
+	Cliente *nuevo_cliente = new Cliente(this->telefono_recordado, this->nombre_recordado, this->direccion_recordada, actualizaciones);
 	this->clientes[this->telefono_recordado] = nuevo_cliente;
 }
 

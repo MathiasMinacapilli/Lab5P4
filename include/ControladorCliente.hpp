@@ -29,7 +29,6 @@ public:
 	//operacion patron singleton
 	static ControladorCliente *getInstance();
 
-	void ingresarTelefono(int telefono);
 	map <int, Cliente*> getClientes();
 	bool existeCliente(int telefono);
 

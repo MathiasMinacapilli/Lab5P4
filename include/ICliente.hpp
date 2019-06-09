@@ -14,8 +14,6 @@ protected:
 	//constructor -- protected porque es abstracta
 	ICliente();
 public:
-	virtual void ingresarTelefono(int telefono) = 0;
-
 	//caso de uso Alta Cliente
 	virtual void ingresarDatosCliente(int telefono, string nombre, DtDireccion direccion) = 0;
 	virtual DtCliente getDatosIngresados() = 0;
