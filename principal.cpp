@@ -72,7 +72,7 @@ static void es_valido_numero_repartidor(int numero_repartidor, map<int, Repartid
 static bool confirmacion () {
     string confirmacion;
     cin >> confirmacion;
-    error = false;
+    bool error = false;
     bool quiero_confirmar = false;
     do {
         cin >> confirmacion;
@@ -539,47 +539,12 @@ int main() {
                                 DtProductoCantidad prod_y_cant = DtProductoCantidad(codigo, cantidad);
                                 iproducto -> seleccionarProductoYCantidad(prod_y_cant);
                                 cout << "\nDesea agregar más productos? Ingrese S o N. \n"
-
-
-
-
+                                quiero_agregar = confirmacion();
                                 string confirmacion;
                                 bool error = false;
-                                do {
-                                    cin >> confirmacion;
-                                    if (confirmacion == "S") {
-                                        quiero_agregar = true;
-                                        error = false;
-                                    } else {
-                                        if (confirmacion == "N") {
-                                            quiero_agregar = false;
-                                            error = false;
-                                        } else {
-                                            cout << "\nCaracter inválido. Ingrese S o N.\n";
-                                            error = true;
-                                        }
-                                    }
-                                } while (error);
                             }
                             cout << "\nDesea que el pedido sea entregado? Ingrese S o N. \n"
-                            cin >> confirmacion;
-                            error = false;
-                            bool quiero_recibir = false;
-                            do {
-                                cin >> confirmacion;
-                                if (confirmacion == "S") {
-                                    quiero_recibir = true;
-                                    error = false;
-                                } else {
-                                    if (confirmacion == "N") {
-                                        quiero_recibir = false;
-                                        error = false;
-                                    } else {
-                                        cout << "\nCaracter inválido. Ingrese S o N.\n";
-                                        error = true;
-                                    }
-                                }
-                            } while (error);
+                            bool quiero_recibir = confirmacion();
                             if (quiero_recibir) {
                                 map<int, Repartidor*> repartidores_disponibles = iempleado -> getRepartidoresDisponibles();
                                 map<int, Repartidor*>::iterator it_repartidores;
@@ -598,24 +563,7 @@ int main() {
                                 iempleado -> seleccionarRepartidor(numero_repartidor);
                             }
                             cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
-                            cin >> confirmacion;
-                            error = false;
-                            bool quiero_confirmar = false;
-                            do {
-                                cin >> confirmacion;
-                                if (confirmacion == "S") {
-                                    quiero_confirmar = true;
-                                    error = false;
-                                } else {
-                                    if (confirmacion == "N") {
-                                        quiero_confirmar = false;
-                                        error = false;
-                                    } else {
-                                        cout << "\nCaracter inválido. Ingrese S o N.\n";
-                                        error = true;
-                                    }
-                                }
-                            } while (error);
+                            bool quiero_confirmar = confirmacion();
                             if (quiero_confirmar) {
                                 /////
                                 ////
