@@ -92,6 +92,9 @@ static bool confirmacion () {
     return quiero_confirmar;
 }
 
+static void altaCliente(int telefono) {
+}
+
 /*
 ----------------------------------
 -------Programa Principal-------
@@ -461,7 +464,6 @@ int main() {
                     break;
                 #endif
                 /* 9) Venta a domicilio. */
-                #if 0
                 case 9:
                     try {
                         cout << "\nIngrese su número de teléfono. \n";
@@ -469,85 +471,84 @@ int main() {
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
                         if (!esta_cliente)
                             altaCliente(telefono);
-                        else {
-                            map<int, DtProducto> productos_disponibles = iproducto -> getProductosDisponibles();
-                            map<int, DtProducto>::iterator it;
-                            for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
-                                cout << (it -> second).getCodigo()
+                        map<int, DtProducto> productos_disponibles = iproducto -> getProductosDisponibles();
+                        map<int, DtProducto>::iterator it;
+                        for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
+                            cout << (it -> second).getCodigo()
+                                << " - "
+                                << (it -> second).getDescripcion()
+                                << "\n";
+                        }
+                        bool quiero_agregar = true;
+                        while (quiero_agregar) {
+                            cout << "\nIngrese el código del producto y la cantidad que desea comprar. \n"
+                                << " Código: ";
+                            int codigo;
+                            cin >> codigo;
+                            es_valido_codigo(codigo, productos_disponibles);
+                            cout << "\n Cantidad: ";
+                            int cantidad;
+                            cin >> cantidad;
+                            es_valida_cantidad(cantidad);
+                            /*
+
+
+                            PATEAR LOS CONTROLADORES!!!
+
+
+
+                            */
+                            it = productos_disponibles.find(codigo);
+                            DtProductoCantidad prod_y_cant = DtProductoCantidad((it -> second), cantidad);
+                            iproducto -> seleccionarProductoYCantidad(prod_y_cant);
+                            cout << "\nDesea agregar más productos? Ingrese S o N. \n";
+                            quiero_agregar = confirmacion();
+                            string confirmacion;
+                            bool error = false;
+                        }
+                        cout << "\nDesea que el pedido sea entregado? Ingrese S o N. \n";
+                        bool quiero_recibir = confirmacion();
+                        if (quiero_recibir) {
+                            map<int, Repartidor*> repartidores_disponibles = iempleado -> getRepartidoresDisponibles();
+                            map<int, Repartidor*>::iterator it_repartidores;
+                            for (it_repartidores = repartidores_disponibles.begin(); it_repartidores != repartidores_disponibles.end(); ++it_repartidores){
+                                cout << (it_repartidores -> second) -> getNumero()
                                     << " - "
-                                    << (it -> second).getDescripcion()
-                                    << "\n";
+                                    << (it_repartidores -> second) -> getNombre()
+                                    << " - "
+                                    << (it_repartidores -> second) -> getTransporte();
                             }
-                            bool quiero_agregar = true;
-                            while (quiero_agregar) {
-                                cout << "\nIngrese el código del producto y la cantidad que desea comprar. \n"
-                                    << " Código: ";
-                                int codigo;
-                                cin >> codigo;
-                                es_valido_codigo(codigo, productos_disponibles);
-                                cout << "\n Cantidad: ";
-                                int cantidad;
-                                cin >> cantidad;
-                                es_valida_cantidad(cantidad);
-                                /*
+                            cout << "\nIngrese el número del repartidor que desea. \n"
+                                << " Número: ";
+                            int numero_repartidor;
+                            cin >> numero_repartidor;
+                            /*
 
 
-                                PATEAR LOS CONTROLADORES!!!
+                            PATEAR LOS CONTROLADORES!!!
 
 
 
-                                */
-                                it = productos_disponibles.find(codigo);
-                                DtProductoCantidad prod_y_cant = DtProductoCantidad((it -> second), cantidad);
-                                iproducto -> seleccionarProductoYCantidad(prod_y_cant);
-                                cout << "\nDesea agregar más productos? Ingrese S o N. \n"
-                                quiero_agregar = confirmacion();
-                                string confirmacion;
-                                bool error = false;
-                            }
-                            cout << "\nDesea que el pedido sea entregado? Ingrese S o N. \n"
-                            bool quiero_recibir = confirmacion();
-                            if (quiero_recibir) {
-                                map<int, Repartidor*> repartidores_disponibles = iempleado -> getRepartidoresDisponibles();
-                                map<int, Repartidor*>::iterator it_repartidores;
-                                for (it_repartidores = repartidores_disponibles.begin(); it_repartidores != repartidores_disponibles.end(); ++it_repartidores){
-                                    cout << (it_repartidores -> second) -> getNumero()
-                                        << " - "
-                                        << (it_repartidores -> second) -> getNombre()
-                                        << " - "
-                                        << (it_repartidores -> second) -> getTransporte();
-                                }
-                                cout << "\nIngrese el número del repartidor que desea. \n"
-                                    << " Número: ";
-                                int numero_repartidor;
-                                cin >> numero_repartidor;
-                                /*
+                            */
+                            es_valido_numero_repartidor(numero_repartidor, repartidores_disponibles);
+                            iempleado -> seleccionarRepartidor(numero_repartidor);
+                        }
+                        cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
+                        bool quiero_confirmar = confirmacion();
+                        if (quiero_confirmar) {
+                            /*
 
 
-                                PATEAR LOS CONTROLADORES!!!
+                            PATEAR LOS CONTROLADORES!!!
 
 
 
-                                */
-                                es_valido_numero_repartidor(numero_repartidor, repartidores_disponibles);
-                                iempleado -> seleccionarRepartidor(numero_repartidor);
-                            }
-                            cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
-                            bool quiero_confirmar = confirmacion();
-                            if (quiero_confirmar) {
-                                /*
+                            */
+                            //generarFacturaVenta();
 
-
-                                PATEAR LOS CONTROLADORES!!!
-
-
-
-                                */
-                                //generarFacturaVenta();
-
-                            } else {
-                                iventa -> cancelarVentaADomicilio();
-                            }
+                        } else {
+                            //iventa -> cancelarVentaADomicilio();
+                        }
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -555,7 +556,6 @@ int main() {
                         break;
                     }
                     break;
-                #endif
                 /* 10) Ventas de un mozo. */
                 #if 0
                 case 10:
