@@ -17,7 +17,7 @@ protected:
     IEmpleado();
 public:
     virtual Mozo *getMozo(int num_mozo) = 0;
-    virtual void IngresarNombreEmpleado(string nombre) = 0;
+    virtual void ingresarNombreEmpleado(string nombre) = 0;
     virtual set<Transporte> getTransportes() = 0;
     virtual void seleccionarTransporte(Transporte t) = 0;
     virtual void ingresarRepartidor() = 0;
