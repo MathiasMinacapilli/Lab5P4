@@ -477,6 +477,7 @@ int main() {
                 case 8:
                     try {
                         system("clear");
+                        cout << "--------------------" << "Resumen facturación de 1 día dada la fecha" << "-------------------- \n \n";
                         int dia = 0;
                         int mes = 0;
                         int anio = 0;
@@ -494,7 +495,7 @@ int main() {
                         for (itf = facturas_fecha.begin(); itf != facturas_fecha.end(); ++itf) {
                             cout << (itf -> second) << "\n\n";
                         }
-                        cout << "Total facturado: " << total_facturado << "\n";
+                        cout << "Total facturado: " << total_facturado;
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
