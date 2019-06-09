@@ -31,14 +31,12 @@ using namespace std;
 -------Funciones De Validacion-------
 ----------------------------------
 */
-
-//comienzo
-#if 0
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
 static bool esValidaFecha(int dia, int mes, int anio) {
     return ((1 <= dia) && (dia <= 31)) &&
         ((1 <= mes) && (mes <= 12)) &&
         (0 < anio);
+}
 
 /* Obtiene la cedula de la entrada estandar */
 static int conseguir_telefono() {
@@ -70,10 +68,6 @@ static void es_valido_numero_repartidor(int numero_repartidor, map<int, Repartid
     if (it == repartidores_disponibles.end())
         throw new invalid_argument ("No existe producto con ese código.");
 }
-
-
-
-
 
 int main() {
     Fabrica *fabrica = Fabrica::getInstance();
@@ -126,14 +120,15 @@ int main() {
                 switch(opcion_administrador) {
 
                 /* 1) Alta cliente. */
+                #if 0
                 case 1:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 2) Alta empleado. */
                 case 2:
                     try {
@@ -279,6 +274,7 @@ int main() {
                     bool quiero_agregar_mas = true;
                     int tipo_producto = 0;
                     do {
+                        system("clear");
                         cout << "Seleccione el tipo de producto que desea crear:\n"
                             << "1) Producto Simple\n";
                         if(iproducto->existeProductoSimple()) { //Muestro la opcion de crear un menu sii existe al menos un producto simple
@@ -399,14 +395,15 @@ int main() {
                     break;
 
                 /* 4) Asignar automáticamente mozos a mesas. */
+                #if 0
                 case 4:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 5) Baja de producto. */
                 case 5:
                     try {
@@ -457,33 +454,37 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
+                #if 0
                 case 6:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 7) Información de un producto. */
+                #if 0
                 case 7:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 8) Resumen facturación de 1 día dada la fecha. */
+                #if 0
                 case 8:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 9) Venta a domicilio. */
+                #if 0
                 case 9:
                     try {
                         cout << "\nIngrese su número de teléfono. \n";
@@ -601,41 +602,43 @@ int main() {
 
 
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 10) Ventas de un mozo. */
+                #if 0
                 case 10:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 0) Salir. */
+                #if 0
                 case 0:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 10.";
                 }
                 break;
-
-            } catch() {
-
+                }//fin switch opcion_administrador
+            } catch(exception* e) {
+                cout << e->what();
             }
             break;
 
         /* 2) Mozo. */
-        case 2:
+        case 2: {
             try {
                 system("clear");
                 cout << "--------------------" << "Mozo" << "-------------------- \n \n"
@@ -650,60 +653,65 @@ int main() {
                 switch(opcion_mozo) {
 
                 /* 1) Agregar producto a una venta. */
+                #if 0
                 case 1:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 2) Facturacón de una venta. */
+                #if 0
                 case 2:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 3) Iniciar venta en mesas. */
+                #if 0
                 case 3:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 4) Quitar producto de una venta. */
+                #if 0
                 case 4:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 0) Salir. */
+                #if 0
                 case 0:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 4.";
                 }
                 break;
-
-            } catch() {
+                }//fin switch opcion_mozo
+            } catch(exception* e) {
 
             }
             break;
-
+        
         /* 3) Repartidor. */
         case 3:
             try {
@@ -718,29 +726,31 @@ int main() {
                 switch(opcion_repartidor) {
 
                 /* 1) Modificar estado de un pedido. */
+                #if 0
                 case 1:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 0) Salir. */
+                #if 0
                 case 0:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 1.";
                 }
                 break;
-
-            } catch() {
+                }//fin switch
+            } catch(exception* e) {
 
             }
             break;
@@ -759,42 +769,46 @@ int main() {
                 switch(opcion_cliente) {
 
                 /* 1) Consultar actualizaciones de pedidos. */
+                #if 0
                 case 1:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 /* 0) Salir. */
+                #if 0
                 case 0:
                     try {
 
-                    } catch() {
+                    } catch(exception* e) {
 
                     }
                     break;
-
+                #endif
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 1.";
                 }
                 break;
-
-            } catch() {
+                }//fin switch opcion_cliente
+            } catch(exception* e) {
 
             }
             break;
 
         /* 5) Cargar datos de prueba. */
-        case 5:
+        #if 0
+        case 5: {
             try {
 
-            } catch() {
+            } catch(exception* e) {
 
             }
             break;
-
+        }
+        #endif
         /* 0) Salir. */
         case 0:
             salir = true;
@@ -804,8 +818,9 @@ int main() {
         }
         break;
 
-    } //fin switch
+        } //fin try
     }
 
+    }//fin while(!salir)
     return 0;
 }//fin main
