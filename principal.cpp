@@ -497,7 +497,8 @@ int main() {
 
 
                                 */
-                                DtProductoCantidad prod_y_cant = DtProductoCantidad(codigo, cantidad);
+                                it = productos_disponibles.find(codigo);
+                                DtProductoCantidad prod_y_cant = DtProductoCantidad((it -> second), cantidad);
                                 iproducto -> seleccionarProductoYCantidad(prod_y_cant);
                                 cout << "\nDesea agregar más productos? Ingrese S o N. \n"
                                 quiero_agregar = confirmacion();
@@ -592,7 +593,7 @@ int main() {
                 cout << "--------------------" << "Mozo" << "-------------------- \n \n"
                     << " - Elija la opción deseada -  \n \n"
                     << " 1) Agregar producto a una venta. \n"
-                    << " 2) Facturacón de una venta. \n"
+                    << " 2) Facturación de una venta. \n"
                     << " 3) Iniciar venta en mesas. \n"
                     << " 4) Quitar producto de una venta. \n"
                     << " 0) Salir. \n \n"
@@ -610,7 +611,7 @@ int main() {
                     }
                     break;
                 #endif
-                /* 2) Facturacón de una venta. */
+                /* 2) Facturación de una venta. */
                 #if 0
                 case 2:
                     try {
