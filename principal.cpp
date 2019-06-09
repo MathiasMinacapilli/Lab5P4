@@ -32,6 +32,18 @@ using namespace std;
 -------------------------------------
 */
 
+/* Obtiene la fecha de la entrada estandar */
+static void obtenerFecha(int &dia, int &mes, int &anio) {
+    cout << "Ingrese el día de la fecha:\n";
+    cin >> dia;
+    system("clear");
+    cout << "Ingrese el mes de la fecha:\n";
+    cin >> mes;
+    system("clear");
+    cout << "Ingrese el anio de la fecha:\n";
+    cin >> anio;
+    system("clear");
+}
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
 static bool esValidaFecha(int dia, int mes, int anio) {
     return ((1 <= dia) && (dia <= 31)) &&
@@ -461,15 +473,36 @@ int main() {
                     break;
 
                 /* 8) Resumen facturación de 1 día dada la fecha. */
-                #if 0
+                
                 case 8:
                     try {
-
+                        system("clear");
+                        int dia = 0;
+                        int mes = 0;
+                        int anio = 0;
+                        obtenerFecha(dia, mes, anio);
+                        while (!esValidaFecha(dia, mes, anio)) {
+                            cout << "Fecha ingresada no valida. \n\n";
+                            obtenerFecha(dia, mes, anio);
+                        }
+                        DtFecha fecha = DtFecha(dia, mes, anio);
+                        iventa -> ingresarFecha(fecha);
+                        float total_facturado = 0;
+                        map<int, DtFactura> facturas_fecha;
+                        facturas_fecha = iventa -> getFacturasYTotalFecha(total_facturado);
+                        map<int, DtFactura>::iterator itf;
+                        for (itf = facturas_fecha.begin(); itf != facturas_fecha.end(); ++itf) {
+                            cout << (itf -> second) << "\n\n";
+                        }
+                        cout << "Total facturado: " << total_facturado;
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
-                #endif
+                
                 /* 9) Venta a domicilio. */
                 case 9:
                     try {

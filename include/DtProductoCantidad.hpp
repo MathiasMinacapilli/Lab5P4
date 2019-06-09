@@ -1,6 +1,9 @@
 #ifndef _DTPRODUCTOCANTIDAD_HPP
 #define _DTPRODUCTOCANTIDAD_HPP
 
+//Librerias de C
+#include <ostream>
+
 //Archivos
 #include "DtProducto.hpp"
 
@@ -15,5 +18,7 @@ public:
     int getCantidad();
     ~DtProductoCantidad();
 };
+
+ostream &operator<< (ostream&, DtProductoCantidad);
 
 #endif

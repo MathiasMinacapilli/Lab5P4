@@ -28,6 +28,7 @@ public:
     virtual map<int, DtFactura> getFacturasYTotalFecha(float &totalfacturado) = 0;
     virtual set<DtActualizacion> getListadoActualizaciones() = 0;
     virtual map<int, DtProducto> getProductosVenta(int numMesa) = 0;
+    virtual void ingresarFecha(DtFecha fecha) = 0;
     virtual void ingresarNumeroMesa(int numero) = 0;
     virtual void ingresarPorcentajeDescuento(float descuento) = 0;
     virtual bool ingresarTelefono(int telefono) = 0;
