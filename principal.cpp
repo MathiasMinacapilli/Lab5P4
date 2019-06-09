@@ -268,12 +268,13 @@ int main() {
                     int tipo_producto = 0;
                     do {
                         system("clear");
-                        cout << "Seleccione el tipo de producto que desea crear:\n"
-                            << "1) Producto Simple\n";
+                        cout << "--------------------" << "Alta producto" << "-------------------- \n \n";
+                        cout << "Seleccione el tipo de producto que desea crear. \n"
+                            << " 1) Producto simple. \n";
                         if(iproducto->existeProductoSimple()) { //Muestro la opcion de crear un menu sii existe al menos un producto simple
-                            cout << "2) Menu\n";
+                            cout << " 2) Menú. \n";
                         }
-                        cout << "Ingrese la opción: "; cin >> tipo_producto;
+                        cout << "Opción: "; cin >> tipo_producto;
                         bool existe_opcion = false;
                         do {
                             int codigo = 0;
@@ -283,15 +284,16 @@ int main() {
                             case 1: {
                                 //Agregar producto simple
                                 system("clear");
-                                cout << "Ingrese los datos del producto simple a ingresar:\n"
-                                    << "Codigo: "; cin >> codigo;
-                                cout << "Descripcion: "; cin >> descripcion;
-                                cout << "Precio: "; cin >> precio;
+                                cout << "--------------------" << "Agregar producto simple" << "-------------------- \n \n";
+                                cout << "Ingrese los datos del producto simple a ingresar. \n"
+                                    << " Codigo: "; cin >> codigo;
+                                cout << " Descripcion: "; cin >> descripcion;
+                                cout << " Precio: "; cin >> precio;
                                 DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
                                 iproducto->ingresarDatosProducto(datos_producto_simple);
                                 do {
                                     string confirmar = "";
-                                    cout << "\n¿Está seguro que desea ingresar el producto simple? (S/N): "; cin >> confirmar;
+                                    cout << "\n¿Está seguro que desea ingresar el producto simple? Ingrese S o N. \n"; cin >> confirmar;
                                     existe_opcion = false;
                                     if(confirmar == "S") {
                                         iproducto->ingresarProductoSimple();
@@ -310,9 +312,10 @@ int main() {
                             case 2: {
                                 //Agregar menu
                                 system("clear");
-                                cout << "Ingrese los datos del menu a ingresar:\n"
-                                    << "Codigo: "; cin >> codigo;
-                                cout << "\nDescripcion: "; cin >> descripcion;
+                                cout << "--------------------" << "Agregar menú" << "-------------------- \n \n";
+                                cout << "Ingrese los datos del menú a ingresar. \n"
+                                    << " Codigo: "; cin >> codigo;
+                                cout << " Descripcion: "; cin >> descripcion;
                                 iproducto->ingresarDatosMenu(codigo, descripcion);
 
                                 map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
