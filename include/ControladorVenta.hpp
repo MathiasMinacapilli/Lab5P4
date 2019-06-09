@@ -57,6 +57,7 @@ public:
 
   //VENTA A DOMICILIO
   bool ingresarTelefono(int telefono);
+  void cancelarVentaADomicilio();
 
   //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
   void ingresarFecha(DtFecha fecha);

@@ -151,13 +151,13 @@ int main() {
                 /* 1) Alta cliente. */
                 case 1:
                     try {
-                    	
+
 
                     } catch(exception* e) {
 
                     }
                     break;
-              
+
                 /* 2) Alta empleado. */
                 case 2:
                     try {
@@ -222,7 +222,7 @@ int main() {
                                         iempleado->cancelarRepartidor();
                                         msj = "Ingreso de repartidor cancelado";
                                     }
-                                    
+
                                 }
                                 else
                                     //se ingresa mozo
@@ -246,7 +246,7 @@ int main() {
                                     }
                             }while(tipo_incorrecto);
                             cout << "Desea agregar mas empleados? S/N\n";
-                            quiere_ingresar_empleado = confirmacion();                        
+                            quiere_ingresar_empleado = confirmacion();
                         }while(quiere_ingresar_empleado);
                     } catch(exception *e) {
                         system("clear");
@@ -466,13 +466,7 @@ int main() {
                     try {
                         cout << "\nIngrese su número de teléfono. \n";
                         int telefono = conseguir_telefono();
-
-
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
-
-                        //map<int, Cliente*> clientes = icliente -> getClientes();
-                        //map<int, Cliente*>::iterator it = clientes.find(telefono);
-
                         if (!esta_cliente)
                             altaCliente(telefono);
                         else {
@@ -495,6 +489,14 @@ int main() {
                                 int cantidad;
                                 cin >> cantidad;
                                 es_valida_cantidad(cantidad);
+                                /*
+
+
+                                PATEAR LOS CONTROLADORES!!!
+
+
+
+                                */
                                 DtProductoCantidad prod_y_cant = DtProductoCantidad(codigo, cantidad);
                                 iproducto -> seleccionarProductoYCantidad(prod_y_cant);
                                 cout << "\nDesea agregar más productos? Ingrese S o N. \n"
@@ -518,20 +520,38 @@ int main() {
                                     << " Número: ";
                                 int numero_repartidor;
                                 cin >> numero_repartidor;
+                                /*
+
+
+                                PATEAR LOS CONTROLADORES!!!
+
+
+
+                                */
                                 es_valido_numero_repartidor(numero_repartidor, repartidores_disponibles);
                                 iempleado -> seleccionarRepartidor(numero_repartidor);
                             }
                             cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
                             bool quiero_confirmar = confirmacion();
                             if (quiero_confirmar) {
+                                /*
 
+
+                                PATEAR LOS CONTROLADORES!!!
+
+
+
+                                */
+                                //generarFacturaVenta();
+
+                            } else {
+                                iventa -> cancelarVentaADomicilio();
                             }
-
-
-
-
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
                 #endif

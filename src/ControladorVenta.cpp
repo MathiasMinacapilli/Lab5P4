@@ -113,6 +113,16 @@ bool ControladorVenta::ingresarTelefono(int telefono) {
     return (cont_cliente -> existeCliente(telefono));
 }
 
+void ControladorVenta::cancelarVentaADomicilio() {
+    //QUE ONDA CON ESTO?
+    //QUE ES LIBERAR LA MEMORIA??
+    // AYUDAAA!!
+    prod = nullptr;
+    cantidad = 0;
+    v = nullptr;
+}
+
+
 DtFactura ControladorVenta::generarFactura() {
   ControladorMesa *cont_mesa;
   cont_mesa = ControladorMesa::getInstance();
