@@ -14,6 +14,7 @@ void Cliente::notificar(DtActualizacion actualizacion) {}
 //Constructor por defecto
 Cliente::Cliente(){}
 
+//constructor por parametros
 Cliente::Cliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos){
 	this->telefono = telefono;
 	this->nombre = nombre;
