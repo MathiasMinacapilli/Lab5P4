@@ -317,19 +317,21 @@ int main() {
                                     << " Código: "; cin >> codigo;
                                 cout << " Descripción: "; cin >> descripcion;
                                 iproducto->ingresarDatosMenu(codigo, descripcion);
-
                                 map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
                                 map<int, DtProducto>::iterator it;
-                                //Muestro los productos simples para que se seleccione cuales integran el menu
                                 system("clear");
+                                cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
+                                cout << "Estos son los productos disponibles. \n";
+                                //Muestro los productos simples para que se seleccione cuales integran el menu
                                 for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
-                                    cout << (it->second).getCodigo() << "-" << (it->second).getDescripcion() << "\n";
+                                    cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n \n";
                                 }
                                 //Selecciona Productos Simples
                                 bool desea_seleccionar_mas = true;
                                 do {
                                     int codigo_producto_simple = 0;
                                     int cantidad = 0;
+                                    cout << "Ingrese el código y la cantidad del producto que desea agregar al menú. \n";
                                     cout << " Código: "; cin >> codigo_producto_simple;
                                     cout << " Cantidad: "; cin >> cantidad;
                                     it = productos_simples.find(codigo_producto_simple);
@@ -473,7 +475,7 @@ int main() {
                     break;
 
                 /* 8) Resumen facturación de 1 día dada la fecha. */
-                
+
                 case 8:
                     try {
                         system("clear");
@@ -503,7 +505,7 @@ int main() {
                         break;
                     }
                     break;
-                
+
                 /* 9) Venta a domicilio. */
                 case 9:
                     try {
