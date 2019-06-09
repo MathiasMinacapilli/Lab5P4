@@ -36,11 +36,9 @@ using namespace std;
 static void obtenerFecha(int &dia, int &mes, int &anio) {
     cout << "Ingrese el día de la fecha:\n";
     cin >> dia;
-    system("clear");
     cout << "Ingrese el mes de la fecha:\n";
     cin >> mes;
-    system("clear");
-    cout << "Ingrese el anio de la fecha:\n";
+    cout << "Ingrese el ano de la fecha:\n";
     cin >> anio;
     system("clear");
 }
