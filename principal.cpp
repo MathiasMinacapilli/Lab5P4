@@ -70,6 +70,7 @@ static void es_valido_numero_repartidor(int numero_repartidor, map<int, Repartid
 }
 
 static bool confirmacion () {
+    string confirmacion;
     cin >> confirmacion;
     error = false;
     bool quiero_confirmar = false;
@@ -538,6 +539,10 @@ int main() {
                                 DtProductoCantidad prod_y_cant = DtProductoCantidad(codigo, cantidad);
                                 iproducto -> seleccionarProductoYCantidad(prod_y_cant);
                                 cout << "\nDesea agregar más productos? Ingrese S o N. \n"
+
+
+
+
                                 string confirmacion;
                                 bool error = false;
                                 do {
