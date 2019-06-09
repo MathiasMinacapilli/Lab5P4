@@ -27,6 +27,7 @@ private:
   Venta* v; //QUITAR PRODUCTO A UNA VENTA - getProductosVenta - v
   int numero_venta; //INICIAR VENTA EN MESAS - iniciarVenta
   DtFecha fecha_venta; //RESUMEN FACTUACION 1 DIA DADA LA FECHA - ingresarFecha - fecha
+  int telefono_recordado; //VENTA A DOMICILIO - ingresarTelefono - telefono
 public:
   static ControladorVenta *getInstance();
 
@@ -53,6 +54,9 @@ public:
   //ingresarNumeroMesa
   void ingresarPorcentajeDescuento(float descuento);
   DtFactura generarFactura();
+
+  //VENTA A DOMICILIO
+  bool ingresarTelefono(int telefono);
 
   //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
   void ingresarFecha(DtFecha fecha);

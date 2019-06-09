@@ -105,6 +105,14 @@ void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
   v -> setDescuento(descuento);
 }
 
+//VENTA A DOMICILIO
+bool ControladorVenta::ingresarTelefono(int telefono) {
+    this -> telefono_recordado = telefono;
+    ControladorCliente *cont_cliente;
+    cont_cliente = ControladorCliente::getInstance();
+    return (cont_cliente -> existeCliente(telefono));
+}
+
 DtFactura ControladorVenta::generarFactura() {
   ControladorMesa *cont_mesa;
   cont_mesa = ControladorMesa::getInstance();

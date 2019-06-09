@@ -38,7 +38,7 @@ static bool esValidaFecha(int dia, int mes, int anio) {
         (0 < anio);
 }
 
-/* Obtiene la cedula de la entrada estandar */
+/* Obtiene el número de teléfono. */
 static int conseguir_telefono() {
     cout << "Ingrese su número de teléfono. \n"
         << " Teléfono: ";
@@ -446,24 +446,13 @@ int main() {
                         cout << "\nUsted ingresó el código: "
                             << codigo
                             << "\nDesea eliminar el producto? Ingrese S o N.\n";
-                        string confirmacion;
-                        bool error = false;
-                        bool se_elimino = false;
-                        do {
-                            cin >> confirmacion;
-                            if (confirmacion == "S") {
-                                se_elimino = iproducto -> eliminarProducto();
-                                error = false;
-                            } else {
-                                if (confirmacion == "N") {
-                                    iproducto -> cancelarBajaProducto();
-                                    error = false;
-                                } else {
-                                    cout << "\nCaracter inválido. Ingrese S o N.\n";
-                                    error = true;
-                                }
-                            }
-                        } while (error);
+                        bool se_elimino = confirmacion();
+                        if (se_elimino)
+                            se_elimino = iproducto -> eliminarProducto();
+                        else {
+                            iproducto -> cancelarBajaProducto();
+                            se_elimino = false;
+                        }
                         if (se_elimino)
                             msj = "Se eliminó el producto correctamente.";
                         else
@@ -512,9 +501,14 @@ int main() {
                     try {
                         cout << "\nIngrese su número de teléfono. \n";
                         int telefono = conseguir_telefono();
-                        map<int, Cliente*> clientes = icliente -> getClientes();
-                        map<int, Cliente*>::iterator it = clientes.find(telefono);
-                        if (it == clientes.end())
+
+
+                        bool esta_cliente = iventa -> ingresarTelefono(telefono);
+
+                        //map<int, Cliente*> clientes = icliente -> getClientes();
+                        //map<int, Cliente*>::iterator it = clientes.find(telefono);
+
+                        if (!esta_cliente)
                             altaCliente(telefono);
                         else {
                             map<int, DtProducto> productos_disponibles = iproducto -> getProductosDisponibles();
@@ -565,13 +559,7 @@ int main() {
                             cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
                             bool quiero_confirmar = confirmacion();
                             if (quiero_confirmar) {
-                                /////
-                                ////
-                                ////
-                                ////
-                                ////
-                                ///
-                                //HACER LO DE ANTES COMO UNA FUNCION, LO DE ARRIBAAAAA!!!1
+
                             }
 
 
