@@ -256,8 +256,8 @@ int main() {
                                 system("clear");
                                 cout << "Ingrese los datos del producto simple a ingresar:\n"
                                     << "Codigo: "; cin >> codigo;
-                                cout << "\nDescripcion: "; cin >> descripcion;
-                                cout << "\nPrecio: "; cin >> precio;
+                                cout << "Descripcion: "; cin >> descripcion;
+                                cout << "Precio: "; cin >> precio;
                                 DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
                                 iproducto->ingresarDatosProducto(datos_producto_simple);
                                 do { 
@@ -336,6 +336,20 @@ int main() {
                             }
                             default:
                                 existe_opcion = false;
+                            }
+                        } while(!existe_opcion);
+                        do {
+                            string confirmar = "";
+                            cout << "¿Desea seguir creando productos?: (S/N)"; cin >> confirmar;
+                            bool existe_opcion = false;
+                            if(confirmar == "S") {
+                                existe_opcion = true;
+                            } else if(confirmar == "N") {
+                                existe_opcion = true;
+                                quiero_agregar_mas = false;
+                            } else {
+                                existe_opcion = false;
+                                cout << "\nLa opción seleccionada no es correcta.";
                             }
                         } while(!existe_opcion);
                     } while(quiero_agregar_mas);
@@ -715,21 +729,16 @@ int main() {
             break;
         #endif
         /* 0) Salir. */
-        #if 0
         case 0:
-            try {
-
-            } catch(exception* e) {
-
-            }
+            salir = true;
             break;
-        #endif
         default: {
             msj = "Número inválido. Ingrese valor entre 0 y 5.";
         }
         break;
 
     } //fin switch
-    return 0;
     } 
+    
+    return 0;
 }//fin main
