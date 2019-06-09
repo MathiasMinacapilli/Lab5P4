@@ -137,19 +137,265 @@ int main() {
                 /* 2) Alta empleado. */
                 case 2:
                     try {
+                        bool quiere_ingresar_empleado = false;
+                        do{
+                            system("clear");
+                            string nombre;
+                            cout << "Ingrese el nombre del empleado a ingresar: ";
+                            cin >> nombre;
+                            iempleado->ingresarNombreEmpleado(nombre);
+                            string tipo_empleado;
+                            bool tipo_incorrecto = false;
+                            do{
+                                cout << "Ingrese R para ingresar un repartidor, M para ingresar un mozo: ";
+                                cin >> tipo_empleado;
+                                bool confirmacion_incorrecta;
+                                //se ingresa repartidor
+                                if (tipo_empleado == "R"){
+                                    tipo_incorrecto = false;
+                                    set<Transporte> transportes_disponibles = iempleado->getTransportes();
+                                    cout << "Los transportes disponibles son: \n";
+                                    set<Transporte>::iterator it_transportes;
+                                    for (it_transportes = transportes_disponibles.begin(); it_transportes != transportes_disponibles.end(); ++it_transportes){
+                                        Transporte transporte = *it_transportes;
+                                        cout << transporte << "\n";
+                                    }
+                                    cout << "Seleccione su transporte: ";
+                                    string t_seleccionado;
+                                    Transporte transporte_elegido;
+                                    bool transporte_incorrecto = false;
+                                    do{
+                                        cin >> t_seleccionado;
+                                        if (t_seleccionado == "Pie"){
+                                            transporte_elegido = Pie;
+                                            transporte_incorrecto = false;
+                                        }
+                                        else
+                                            if (t_seleccionado == "Bici"){
+                                                transporte_elegido = Bici;
+                                                transporte_incorrecto = false;
+                                            }
+                                            else
+                                                if (t_seleccionado == "Moto"){
+                                                    transporte_elegido = Moto;
+                                                    transporte_incorrecto = false;
+                                                }
+                                                else{
+                                                    cout << "Transporte incorrecto. Por favor seleccione un transporte de los mostrados anteriormente: ";
+                                                    transporte_incorrecto = true;
+                                                }
 
-                    } catch() {
+                                    }while(transporte_incorrecto);
+                                    iempleado->seleccionarTransporte(transporte_elegido);
+                                    system("clear");
+                                    cout << "Desea confirmar el ingreso del repartidor? S/N \n";
+                                    string confirma_repartidor;
+                                    confirmacion_incorrecta = false;
+                                    do{
+                                        cin >> confirma_repartidor;
+                                        if (confirma_repartidor == "S"){
+                                            confirmacion_incorrecta = false;
+                                            iempleado->ingresarRepartidor();
+                                            msj = "Repartidor agregado correctamente\n";
+                                        }
+                                        else
+                                            if (confirma_repartidor == "N"){
+                                                confirmacion_incorrecta = false;
+                                                iempleado->cancelarRepartidor();
+                                                msj = "Ingreso de repartidor cancelado";
+                                            }
+                                            else{
+                                                confirmacion_incorrecta = true;
+                                                cout << "Debe ingresar S o N. Por favor intente de nuevo: ";
+                                            }
+                                    }while(confirmacion_incorrecta);
 
+                                }
+                                else
+                                    //se ingresa mozo
+                                    if (tipo_empleado == "M"){
+                                        tipo_incorrecto = false;
+                                        cout << "Desea confirmar el ingreso del mozo? S/N \n";
+                                        string confirma_mozo;
+                                        confirmacion_incorrecta = false;
+                                        do{
+                                            cin >> confirma_mozo;
+                                            if (confirma_mozo == "S"){
+                                                confirmacion_incorrecta = false;
+                                                iempleado->ingresarMozo();
+                                                msj = "Mozo agregado correctamente\n";
+                                            }
+                                            else
+                                                if (confirma_mozo == "N"){
+                                                    confirmacion_incorrecta = false;
+                                                    iempleado->cancelarMozo();
+                                                    msj = "Ingreso de mozo cancelado";
+                                                }
+                                                else{
+                                                    confirmacion_incorrecta = true;
+                                                    cout << "Debe ingresar S o N. Por favor intente de nuevo: ";
+                                                }
+                                        }while(confirmacion_incorrecta);
+
+                                    }
+                                    //tipo incorrecto
+                                    else{
+                                        cout << "Error. Debe ingresar R o M. \n";
+                                        tipo_incorrecto = true;
+                                    }
+                            }while(tipo_incorrecto);
+                            cout << "Desea agregar mas empleados? S/N\n";
+                            string quiere_ingresar_mas;
+                            bool respuesta_incorrecta = false;
+                            do{
+                                cin >> quiere_ingresar_mas;
+                                if (quiere_ingresar_mas == "N"){
+                                    quiere_ingresar_empleado = false;
+                                    respuesta_incorrecta = false;
+                                }
+                                else
+                                    if (quiere_ingresar_mas == "S"){
+                                        quiere_ingresar_empleado = true;
+                                        respuesta_incorrecta = false;
+                                    }
+                                    else {
+                                        cout << "Debe ingresar S o N. Vuelva a intentarlo: ";
+                                        respuesta_incorrecta = true;
+                                    }
+
+                            }while (respuesta_incorrecta);
+                        }while(quiere_ingresar_empleado);
+                    } catch(exception *e) {
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
 
                 /* 3) Alta producto. */
                 case 3:
                     try {
+                    bool quiero_agregar_mas = true;
+                    int tipo_producto = 0;
+                    do {
+                        cout << "Seleccione el tipo de producto que desea crear:\n"
+                            << "1) Producto Simple\n";
+                        if(iproducto->existeProductoSimple()) { //Muestro la opcion de crear un menu sii existe al menos un producto simple
+                            cout << "2) Menu\n";
+                        }
+                        cout << "Ingrese la opción: "; cin >> tipo_producto;
+                        bool existe_opcion = false;
+                        do {
+                            int codigo = 0;
+                            float precio = 0;
+                            string descripcion = "";
+                            switch(tipo_producto) {
+                            case 1: {
+                                //Agregar producto simple
+                                system("clear");
+                                cout << "Ingrese los datos del producto simple a ingresar:\n"
+                                    << "Codigo: "; cin >> codigo;
+                                cout << "Descripcion: "; cin >> descripcion;
+                                cout << "Precio: "; cin >> precio;
+                                DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
+                                iproducto->ingresarDatosProducto(datos_producto_simple);
+                                do {
+                                    string confirmar = "";
+                                    cout << "\n¿Está seguro que desea ingresar el producto simple? (S/N): "; cin >> confirmar;
+                                    existe_opcion = false;
+                                    if(confirmar == "S") {
+                                        iproducto->ingresarProductoSimple();
+                                        existe_opcion = true;
+                                    } else if(confirmar == "N") {
+                                        iproducto->cancelarProductoSimple();
+                                        existe_opcion = true;
+                                    } else {
+                                        existe_opcion = false;
+                                        cout << "\nLa opción seleccionada no es correcta.";
+                                    }
+                                } while(!existe_opcion);
+                                existe_opcion = true;
+                                break;
+                            }
+                            case 2: {
+                                //Agregar menu
+                                system("clear");
+                                cout << "Ingrese los datos del menu a ingresar:\n"
+                                    << "Codigo: "; cin >> codigo;
+                                cout << "\nDescripcion: "; cin >> descripcion;
+                                iproducto->ingresarDatosMenu(codigo, descripcion);
 
-                    } catch() {
-
-                    }
+                                map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
+                                map<int, DtProducto>::iterator it;
+                                //Muestro los productos simples para que se seleccione cuales integran el menu
+                                system("clear");
+                                for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
+                                    cout << (it->second).getCodigo() << "-" << (it->second).getDescripcion() << "\n";
+                                }
+                                //Selecciona Productos Simples
+                                bool desea_seleccionar_mas = true;
+                                do {
+                                    int codigo_producto_simple = 0;
+                                    int cantidad = 0;
+                                    cout << "Codigo: "; cin >> codigo_producto_simple;
+                                    cout << "\nCantidad: "; cin >> cantidad;
+                                    it = productos_simples.find(codigo_producto_simple);
+                                    if(it == productos_simples.end())
+                                        throw new invalid_argument("Se ingresó un código incorrecto.");
+                                    DtProductoCantidad datos_producto_cantidad = DtProductoCantidad(productos_simples[codigo_producto_simple], cantidad);
+                                    iproducto->seleccionarProductoYCantidad(datos_producto_cantidad);
+                                    string agregar_mas = "";
+                                    cout << "\n¿Desea seguir agregando productos? (S/N): "; cin >> agregar_mas;
+                                    if(agregar_mas == "S") {
+                                        desea_seleccionar_mas = true;
+                                    } else if(agregar_mas == "N") {
+                                        desea_seleccionar_mas = false;
+                                    } else {
+                                        desea_seleccionar_mas = false;
+                                        cout << "\nLa opción seleccionada no es correcta.";
+                                    }
+                                }while(desea_seleccionar_mas);
+                                do {
+                                    string confirmar = "";
+                                    cout << "\n¿Está seguro que desea ingresar el menu? (S/N): "; cin >> confirmar;
+                                    existe_opcion = false;
+                                    if(confirmar == "S") {
+                                        iproducto->ingresarMenu();
+                                        existe_opcion = true;
+                                    } else if(confirmar == "N") {
+                                        iproducto->cancelarMenu();
+                                        existe_opcion = true;
+                                    } else {
+                                        existe_opcion = false;
+                                        cout << "\nLa opción seleccionada no es correcta.";
+                                    }
+                                } while(!existe_opcion);
+                                existe_opcion = false;
+                                break;
+                            }
+                            default:
+                                existe_opcion = false;
+                            }
+                        } while(!existe_opcion);
+                        do {
+                            string confirmar = "";
+                            cout << "¿Desea seguir creando productos?: (S/N)"; cin >> confirmar;
+                            bool existe_opcion = false;
+                            if(confirmar == "S") {
+                                existe_opcion = true;
+                            } else if(confirmar == "N") {
+                                existe_opcion = true;
+                                quiero_agregar_mas = false;
+                            } else {
+                                existe_opcion = false;
+                                cout << "\nLa opción seleccionada no es correcta.";
+                            }
+                        } while(!existe_opcion);
+                    } while(quiero_agregar_mas);
+                } catch(exception* e) {
+                    cout << e->what();
+                }
                     break;
 
                 /* 4) Asignar automáticamente mozos a mesas. */
@@ -551,23 +797,15 @@ int main() {
 
         /* 0) Salir. */
         case 0:
-            try {
-
-            } catch() {
-
-            }
+            salir = true;
             break;
-
         default: {
             msj = "Número inválido. Ingrese valor entre 0 y 5.";
         }
         break;
 
     } //fin switch
-    return 0;
-} //fin main
-#endif
+    }
 
-int main(){
     return 0;
-}
+}//fin main

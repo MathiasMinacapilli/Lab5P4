@@ -1,8 +1,5 @@
 .vscode
 .DS_Store
 obj
-<<<<<<< Updated upstream
 test
-=======
-test
->>>>>>> Stashed changes
+principal

@@ -31,7 +31,7 @@ public:
 	//operacion patron Singleton
 	static ControladorEmpleado *getInstance();
     //caso de uso: Alta empleado
-    void IngresarNombreEmpleado(string nombre);
+    void ingresarNombreEmpleado(string nombre);
     set<Transporte> getTransportes();
     void seleccionarTransporte(Transporte t);
 	void seleccionarRepartidor(int numero_repartidor);
