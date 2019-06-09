@@ -19,12 +19,10 @@ private:
    string clave;
    set<DtActualizacion> etapaPedidos;
 public:
-    DtCliente(int telefono, string nombre, DtDireccion direccion, string mail, string clave, set<DtActualizacion> etapaPedidos);
+    DtCliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
     int getTelefono();
     string getNombre();
     DtDireccion getDireccion();
-    string getMail();
-    string getClave();
     set<DtActualizacion> getEtapaPedidos();
     ~DtCliente();
 };

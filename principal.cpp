@@ -92,6 +92,12 @@ static bool confirmacion () {
     return quiero_confirmar;
 }
 
+/*
+----------------------------------
+-------Programa Principal-------
+----------------------------------
+*/
+
 int main() {
     Fabrica *fabrica = Fabrica::getInstance();
     ICliente *icliente = fabrica -> getICliente();
@@ -143,15 +149,15 @@ int main() {
                 switch(opcion_administrador) {
 
                 /* 1) Alta cliente. */
-                #if 0
                 case 1:
                     try {
+                    	
 
                     } catch(exception* e) {
 
                     }
                     break;
-                #endif
+              
                 /* 2) Alta empleado. */
                 case 2:
                     try {
@@ -207,54 +213,31 @@ int main() {
                                     iempleado->seleccionarTransporte(transporte_elegido);
                                     system("clear");
                                     cout << "Desea confirmar el ingreso del repartidor? S/N \n";
-                                    string confirma_repartidor;
-                                    confirmacion_incorrecta = false;
-                                    do{
-                                        cin >> confirma_repartidor;
-                                        if (confirma_repartidor == "S"){
-                                            confirmacion_incorrecta = false;
-                                            iempleado->ingresarRepartidor();
-                                            msj = "Repartidor agregado correctamente\n";
-                                        }
-                                        else
-                                            if (confirma_repartidor == "N"){
-                                                confirmacion_incorrecta = false;
-                                                iempleado->cancelarRepartidor();
-                                                msj = "Ingreso de repartidor cancelado";
-                                            }
-                                            else{
-                                                confirmacion_incorrecta = true;
-                                                cout << "Debe ingresar S o N. Por favor intente de nuevo: ";
-                                            }
-                                    }while(confirmacion_incorrecta);
-
+                                    bool confirma_repartidor = confirmacion();
+                                    if (confirma_repartidor){
+                                        iempleado->ingresarRepartidor();
+                                         msj = "Repartidor agregado correctamente";
+                                    }
+                                    else {
+                                        iempleado->cancelarRepartidor();
+                                        msj = "Ingreso de repartidor cancelado";
+                                    }
+                                    
                                 }
                                 else
                                     //se ingresa mozo
                                     if (tipo_empleado == "M"){
                                         tipo_incorrecto = false;
                                         cout << "Desea confirmar el ingreso del mozo? S/N \n";
-                                        string confirma_mozo;
-                                        confirmacion_incorrecta = false;
-                                        do{
-                                            cin >> confirma_mozo;
-                                            if (confirma_mozo == "S"){
-                                                confirmacion_incorrecta = false;
-                                                iempleado->ingresarMozo();
-                                                msj = "Mozo agregado correctamente\n";
-                                            }
-                                            else
-                                                if (confirma_mozo == "N"){
-                                                    confirmacion_incorrecta = false;
-                                                    iempleado->cancelarMozo();
-                                                    msj = "Ingreso de mozo cancelado";
-                                                }
-                                                else{
-                                                    confirmacion_incorrecta = true;
-                                                    cout << "Debe ingresar S o N. Por favor intente de nuevo: ";
-                                                }
-                                        }while(confirmacion_incorrecta);
-
+                                        bool confirma_mozo = confirmacion();
+                                        if (confirma_mozo){
+                                            iempleado->ingresarMozo();
+                                            msj = "Mozo agregado correctamente";
+                                        }
+                                        else {
+                                            iempleado->cancelarMozo();
+                                            msj = "Ingreso de mozo cancelado";
+                                        }
                                     }
                                     //tipo incorrecto
                                     else{
@@ -263,25 +246,7 @@ int main() {
                                     }
                             }while(tipo_incorrecto);
                             cout << "Desea agregar mas empleados? S/N\n";
-                            string quiere_ingresar_mas;
-                            bool respuesta_incorrecta = false;
-                            do{
-                                cin >> quiere_ingresar_mas;
-                                if (quiere_ingresar_mas == "N"){
-                                    quiere_ingresar_empleado = false;
-                                    respuesta_incorrecta = false;
-                                }
-                                else
-                                    if (quiere_ingresar_mas == "S"){
-                                        quiere_ingresar_empleado = true;
-                                        respuesta_incorrecta = false;
-                                    }
-                                    else {
-                                        cout << "Debe ingresar S o N. Vuelva a intentarlo: ";
-                                        respuesta_incorrecta = true;
-                                    }
-
-                            }while (respuesta_incorrecta);
+                            quiere_ingresar_empleado = confirmacion();                        
                         }while(quiere_ingresar_empleado);
                     } catch(exception *e) {
                         system("clear");

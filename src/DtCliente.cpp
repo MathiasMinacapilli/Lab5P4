@@ -1,12 +1,12 @@
 //Archivos
 #include "../include/DtCliente.hpp"
 
-DtCliente::DtCliente(int telefono, string nombre, DtDireccion direccion, string mail, string clave, set<DtActualizacion> etapaPedidos) {
+//constructor por parametros 1
+DtCliente::DtCliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos) {
     this->telefono = telefono;
     this->nombre = nombre;
     this->direccion = direccion;
-    this->mail = mail;
-    this->clave = clave;this->etapaPedidos = etapaPedidos;
+    this->etapaPedidos = etapaPedidos;
 }
 
 int DtCliente::getTelefono() {
@@ -19,14 +19,6 @@ string DtCliente::getNombre() {
 
 DtDireccion DtCliente::getDireccion() {
     return this->direccion;
-}
-
-string DtCliente::getMail() {
-    return this->mail;
-}
-
-string DtCliente::getClave() {
-    return this->clave;
 }
 
 set<DtActualizacion> DtCliente::getEtapaPedidos() {
