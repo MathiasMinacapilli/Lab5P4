@@ -82,10 +82,10 @@ static void es_valido_numero_repartidor(int numero_repartidor, map<int, Repartid
 
 static bool confirmacion () {
     string confirmacion;
-    cin >> confirmacion;
     bool error = false;
     bool quiero_confirmar = false;
     do {
+        cin >> confirmacion;
         if (confirmacion == "S") {
             quiero_confirmar = true;
             error = false;
