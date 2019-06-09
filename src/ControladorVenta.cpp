@@ -6,6 +6,7 @@
 #include "../include/ControladorVenta.hpp"
 #include "../include/ControladorProducto.hpp"
 #include "../include/ControladorMesa.hpp"
+#include "../include/ControladorCliente.hpp"
 #include "../include/DtFactura.hpp"
 
 
