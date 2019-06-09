@@ -38,7 +38,7 @@ static void obtenerFecha(int &dia, int &mes, int &anio) {
     cin >> dia;
     cout << "Ingrese el mes de la fecha:\n";
     cin >> mes;
-    cout << "Ingrese el ano de la fecha:\n";
+    cout << "Ingrese el año de la fecha:\n";
     cin >> anio;
     system("clear");
 }
@@ -494,7 +494,7 @@ int main() {
                         for (itf = facturas_fecha.begin(); itf != facturas_fecha.end(); ++itf) {
                             cout << (itf -> second) << "\n\n";
                         }
-                        cout << "Total facturado: " << total_facturado;
+                        cout << "Total facturado: " << total_facturado << "\n";
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
