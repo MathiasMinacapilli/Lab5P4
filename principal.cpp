@@ -34,11 +34,11 @@ using namespace std;
 
 /* Obtiene la fecha de la entrada estandar */
 static void obtenerFecha(int &dia, int &mes, int &anio) {
-    cout << "Ingrese el día de la fecha:\n";
+    cout << "Ingrese el día de la fecha: ";
     cin >> dia;
-    cout << "Ingrese el mes de la fecha:\n";
+    cout << "\nIngrese el mes de la fecha: ";
     cin >> mes;
-    cout << "Ingrese el año de la fecha:\n";
+    cout << "\nIngrese el año de la fecha: ";
     cin >> anio;
     system("clear");
 }
