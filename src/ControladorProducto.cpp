@@ -1,3 +1,7 @@
+//Librerias de C
+#include <iostream>
+using namespace std;
+
 //Archivos
 #include "../include/ControladorProducto.hpp"
 
@@ -113,8 +117,13 @@ void ControladorProducto::seleccionarProducto(int codigo_producto){
 bool ControladorProducto::eliminarProducto(){
 	ControladorVenta *controlador_venta = ControladorVenta::getInstance();
 	bool esta_activo = controlador_venta->estaEnVentaSinFacturar(this->producto_recordado);
-	if (!esta_activo)
+	if (!esta_activo) {
+        if (dynamic_cast<ProductoSimple*>(producto_recordado) != nullptr)
+            productosSimples.erase(producto_recordado -> getCodigo());
+        else
+            menus.erase(producto_recordado -> getCodigo());
 		producto_recordado->eliminar();
+    }
 	return !esta_activo;
 }
 
@@ -124,8 +133,19 @@ void ControladorProducto::cancelarBajaProducto(){
 
 void ControladorProducto::eliminarProductoDeMenu(int cod){
 	map<int, Menu *>::iterator it;
-	for (it = this->menus.begin(); it != this->menus.end(); ++it)
-		it->second->eliminarProducto(cod);
+    map<int, ProductoEnMenu*> prods_menu;
+	for (it = this->menus.begin(); it != this->menus.end(); ++it) {
+        prods_menu = ((it -> second) -> getProductos());
+        if ((prods_menu.find(cod)) != prods_menu.end()) {
+            it->second->eliminarProducto(cod);
+            if(prods_menu.empty()) {
+                cout << "se ejecuto";
+                Menu* menu = it -> second;
+                menus.erase(menu -> getCodigo());
+                delete menu;
+            }
+        }
+    }
 }
 
 

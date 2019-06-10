@@ -21,6 +21,7 @@ public:
     Menu(int codigo, string descripcion);
     ~Menu();
     
+    map<int, ProductoEnMenu *> getProductos();
     void eliminar();
     void eliminarProducto(int cod);
     void agregarProducto(ProductoSimple *prod, int cantidad);

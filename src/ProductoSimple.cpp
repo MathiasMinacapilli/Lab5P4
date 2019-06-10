@@ -16,5 +16,4 @@ void ProductoSimple::eliminar(){
 	ControladorProducto *controlador_producto = ControladorProducto::getInstance();
 	controlador_producto->eliminarProductoDeMenu(this->codigo);
 	delete this;
-
 }

@@ -12,6 +12,13 @@ Menu::Menu(int codigo, string descripcion) : Producto(codigo, descripcion, 0){
 
 Menu::~Menu(){}
 
+
+map<int, ProductoEnMenu *> Menu::getProductos() {
+    return this -> productos;
+}
+
+
+
 void Menu::agregarProducto(ProductoSimple *prod, int cantidad){
 	//busco el producto en el menu
 	map<int, ProductoEnMenu *>::iterator it = productos.find(prod->getCodigo());
