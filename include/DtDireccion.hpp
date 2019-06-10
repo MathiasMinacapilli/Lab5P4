@@ -4,6 +4,7 @@
 //Librerias de C
 #include <set>
 #include <string>
+#include <iostream>
 using namespace std;
 
 
@@ -22,5 +23,8 @@ public:
     string getEsquina2();
     ~DtDireccion();
 };
+
+//sobrecarga operador cout
+ ostream &operator<< (ostream&, DtDireccion);
 
 #endif

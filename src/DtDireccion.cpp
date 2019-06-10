@@ -27,3 +27,8 @@ string DtDireccion::getEsquina2() {
 }
 
 DtDireccion::~DtDireccion() {}
+
+ostream& operator<<(ostream & os, DtDireccion dir){
+    os << dir.getCalle() << " " << dir.getNumeroPuerta() << ", entre " << dir.getEsquina1() << " y " << dir.getEsquina2();
+    return os;
+}

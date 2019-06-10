@@ -26,8 +26,8 @@ set<DtActualizacion> DtCliente::getEtapaPedidos() {
 }
 
 DtCliente::~DtCliente() {}
-/*
+
 ostream& operator<<(ostream & os, DtCliente datos){
-    os << "Telefono: " << datos.getTelefono() << "\n" << "Nombre: " << datos.getNombre() << "\n" << "Direccion: " <<datos.getDireccion()
+    os << "Telefono: " << datos.getTelefono() << "\n" << "Nombre: " << datos.getNombre() << "\n" << "Direccion: " <<datos.getDireccion();
+    return os;
 }
-*/

@@ -4,6 +4,7 @@
 //Librerias C
 #include <set>
 #include <string>
+#include <iostream>
 using namespace std;
 
 //Archivos
@@ -24,9 +25,10 @@ public:
   string getNombre();
   DtDireccion getDireccion();
   set<DtActualizacion> getEtapaPedidos();
-  //sobrecarga operador cout
-  //ostream& operator<<(ostream & os, DtCliente datos);
   ~DtCliente();
 };
+
+//sobrecarga operador cout
+  ostream& operator<<(ostream &, DtCliente);
 
 #endif
