@@ -166,7 +166,6 @@ int main() {
                 case 1:
                     try {
 
-
                     } catch(exception* e) {
 
                     }
@@ -270,7 +269,7 @@ int main() {
                     }
                     break;
 
-                /* 3) Alta producto. */
+                /* 3) Alta producto. (Hay Diagrama de Comunicacion) */
                 case 3:
                     try {
                     bool quiero_agregar_mas = true;
@@ -387,7 +386,7 @@ int main() {
                     break;
                 #endif
 
-                /* 5) Baja de producto. */
+                /* 5) Baja de producto. (Hay Diagrama de Comunicacion) */
                 case 5:
                     try {
                         system("clear");
@@ -612,15 +611,37 @@ int main() {
                     }
                     break;
                 /* 10) Ventas de un mozo. */
-                #if 0
                 case 10:
                     try {
+                        system("clear");
+                        cout << "--------------------" << "Ventas de un mozo" << "-------------------- \n \n";
+                        set<int> ids = iempleado->getIds();
+                        set<int>::iterator it;
+                        for(it = ids.begin(); it != ids.end(); ++it) {
+                            cout << "-" << (*it) << "\n";
+                        }
+                        int id_mozo, dia_ini, mes_ini, anio_ini, dia_fin, mes_fin, anio_fin;
+                        cout << "Seleccione el id del mozo: "; cin >> id_mozo;
+                        cout << "Ingrese la fecha desde la cual ver las ventas (dd/mm/aaaa): "; cin >> dia_ini; cin.get(); cin >> mes_ini; cin.get(); cin >> anio_ini;
+                        cout << "Ingrese la fecha hasta la cual ver las ventas (dd/mm/aaaa): "; cin >> dia_fin; cin.get(); cin >> mes_fin; cin.get(); cin >> anio_fin;
+                        DtFecha fecha_ini = DtFecha(dia_ini, mes_ini, anio_ini);
+                        DtFecha fecha_fin = DtFecha(dia_fin, mes_fin, anio_fin);
+                        iempleado->seleccionarIdyFechas(id_mozo, fecha_ini, fecha_fin);
+                        map<int, DtFactura> ventas_facturadas = iempleado->getVentasFacturadas();
+                        map<int, DtFactura>::iterator map_it;
+                        for(map_it = ventas_facturadas.begin(); map_it != ventas_facturadas.end(); ++map_it) {
+                            //Ver que imprimir
+                            cout << (map_it->second).getCodigo();
+                        }
 
+                        string waste;
+                        cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                        msj = "";
                     } catch(exception* e) {
 
                     }
                     break;
-                #endif
+                    
                 /* 0) Salir. */
                 #if 0
                 case 0:
@@ -656,7 +677,7 @@ int main() {
                 cin >> opcion_mozo;
                 switch(opcion_mozo) {
 
-                /* 1) Agregar producto a una venta. */
+                /* 1) Agregar producto a una venta. (Hay Diagrama de Comunicacion) */
                 #if 0
                 case 1:
                     try {
@@ -666,7 +687,7 @@ int main() {
                     }
                     break;
                 #endif
-                /* 2) Facturación de una venta. */
+                /* 2) Facturación de una venta. (Hay Diagrama de Comunicacion) */
                 #if 0
                 case 2:
                     try {
@@ -676,7 +697,7 @@ int main() {
                     }
                     break;
                 #endif
-                /* 3) Iniciar venta en mesas. */
+                /* 3) Iniciar venta en mesas. (Hay Diagrama de Comunicacion) */
                 #if 0
                 case 3:
                     try {
@@ -686,7 +707,7 @@ int main() {
                     }
                     break;
                 #endif
-                /* 4) Quitar producto de una venta. */
+                /* 4) Quitar producto de una venta. (Hay Diagrama de Comunicacion) */
                 #if 0
                 case 4:
                     try {

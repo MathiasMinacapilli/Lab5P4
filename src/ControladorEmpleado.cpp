@@ -84,4 +84,27 @@ void ControladorEmpleado::cancelarMozo(){
 	this->nombre_recordado = ' ';
 }
 
+//Caso de uso: Ventas de un Mozo
+/* Retorna un set de int que contienen todos los id de los mozos */
+set<int> ControladorEmpleado::getIds() {
+	set<int> ret;
+	map<int, Mozo*>::iterator it;
+	for(it = this->mozos.begin(); it != this->mozos.end(); ++it)
+		ret.insert((it->second)->getNumero());
+	return ret;
+}
+/* Selecciona el id y el rango de fechas para obtener las ventas facturadas 
+Chequeo de fechas??????????????????????*/
+void ControladorEmpleado::seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin) {
+	this->id_mozo_recordado = id;
+	this->fecha_ini_recordada = fecha_ini;
+	this->fecha_fin_recordada = fecha_fin;
+}
+/* Retorna una coleccion de DtFactura que representa las ventas facturadas
+asociadas al mozo que tiene el id que se selecciono */
+map<int, DtFactura> ControladorEmpleado::getVentasFacturadas() {
+	map<int, DtFactura> res;
+	return res;
+}
+
 ControladorEmpleado::~ControladorEmpleado(){}

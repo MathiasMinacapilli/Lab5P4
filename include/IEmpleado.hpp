@@ -11,6 +11,7 @@ using namespace std;
 #include "Mozo.hpp"
 #include "Repartidor.hpp"
 #include "Transporte.hpp"
+#include "DtFactura.hpp"
 
 class IEmpleado {
 protected:
@@ -27,7 +28,10 @@ public:
     virtual void cancelarRepartidor() = 0;
     virtual void ingresarMozo() = 0;
     virtual void cancelarMozo() = 0;
-
+    //Caso de uso: Ventas de un Mozo
+    virtual set<int> getIds() = 0;
+    virtual void seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin) = 0;
+    virtual map<int, DtFactura> getVentasFacturadas() = 0;
     //destructor
     virtual ~IEmpleado(); // virtual y vacío
 };

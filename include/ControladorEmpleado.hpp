@@ -26,6 +26,9 @@ private:
 	string nombre_recordado;
 	int numero_repartidor;
 	Transporte transporte_recordado;
+	int id_mozo_recordado;
+	DtFecha fecha_ini_recordada;
+	DtFecha fecha_fin_recordada;
 
 public:
 	//operacion patron Singleton
@@ -41,6 +44,10 @@ public:
     void cancelarRepartidor();
     void ingresarMozo();
     void cancelarMozo();
+    //Caso de uso: Ventas de un Mozo
+    set<int> getIds();
+    void seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin);
+    map<int, DtFactura> getVentasFacturadas();
 
 	~ControladorEmpleado();
 
