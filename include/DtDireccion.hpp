@@ -21,7 +21,7 @@ public:
     int getNumeroPuerta();
     string getEsquina1();
     string getEsquina2();
-    ~DtDireccion();
+    virtual ~DtDireccion();
 };
 
 //sobrecarga operador cout

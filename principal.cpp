@@ -102,7 +102,62 @@ static bool confirmacion () {
     return quiero_confirmar;
 }
 
-static void altaCliente(int telefono) {
+/*Caso de uso: ALTA CLIENTE*/
+//implementado como funcion porque es referenciado desde otro caso de uso
+static void altaCliente(int telefono, ICliente *icliente, string &mensaje) {
+    //ingresar datos del cliente
+    cout << "Ingrese su nombre: ";
+    string nombre;
+    cin >> nombre;
+    DtDireccion direccion;
+    cout << "Ingrese su dirección: ";
+    string calle;
+    cout << "Calle: ";
+    cin >> calle;
+    cout << "Número de puerta: ";
+    int nro;
+    cin >> nro; 
+    cout << "Esquina 1: ";
+    string esq1;
+    cin >> esq1;
+    cout << "Esquina 2: ";
+    string esq2;
+    cin >> esq2;
+    cout << "Es un apartamento? S/N \n";
+    bool es_apto = confirmacion();
+    if (es_apto){
+        cout << "Nombre edificio: ";
+        string nombre_edificio;
+        cin >> nombre_edificio;
+        cout<< "Número de apartamento: ";
+        int nro_apto; 
+        cin >> nro_apto;
+        direccion = DtApto(calle, nro, esq1, esq2, nombre_edificio, nro_apto);
+    }
+    else
+        direccion = DtDireccion(calle, nro, esq1, esq2);
+    try{
+        icliente->ingresarDatosCliente(telefono, nombre, direccion);
+        DtCliente datos = icliente->getDatosIngresados();
+        cout << "Los datos ingresados son: \n";
+        cout << datos << "\n";
+        cout << "Desea confirmar el ingreso del cliente? S/N \n";
+        bool confirma_cliente = confirmacion();
+        if (confirma_cliente){
+            icliente->ingresarCliente();
+            mensaje = "Cliente ingresado correctamente";
+        }
+        else{
+            icliente->cancelarCliente();
+            mensaje = "Ingreso de cliente cancelado";
+        }
+
+    }
+    catch(exception *e){
+        throw e;
+    }
+
+
 }
 
 
@@ -165,9 +220,15 @@ int main() {
                 /* 1) Alta cliente. */
                 case 1:
                     try {
-
+                        system("clear");
+                        cout << "--------------------" << "Alta Cliente" << "-------------------- \n \n";
+                        int telefono_cliente = conseguir_telefono();
+                        altaCliente(telefono_cliente, icliente, msj);
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
 
@@ -177,6 +238,7 @@ int main() {
                         bool quiere_ingresar_empleado = false;
                         do{
                             system("clear");
+                            cout << "--------------------" << "Alta Empleado" << "-------------------- \n \n";
                             string nombre;
                             cout << "Ingrese el nombre del empleado a ingresar: ";
                             cin >> nombre;
@@ -186,7 +248,6 @@ int main() {
                             do{
                                 cout << "Ingrese R para ingresar un repartidor, M para ingresar un mozo: ";
                                 cin >> tipo_empleado;
-                                bool confirmacion_incorrecta;
                                 //se ingresa repartidor
                                 if (tipo_empleado == "R"){
                                     tipo_incorrecto = false;
@@ -524,7 +585,7 @@ int main() {
                         int telefono = conseguir_telefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
                         if (!esta_cliente)
-                            altaCliente(telefono);
+                            altaCliente(telefono, icliente, msj);
                         map<int, DtProducto> productos_disponibles = iproducto -> getProductosDisponibles();
                         map<int, DtProducto>::iterator it;
                         for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){

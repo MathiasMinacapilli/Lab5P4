@@ -1,6 +1,10 @@
+//Archivos
+#include "../include/DtApto.hpp"
 
-#include "../include/DtApto.hpp";
+//constructor por defecto
+DtApto::DtApto():DtDireccion(){}
 
+//constructor por defecto
 DtApto::DtApto(string calle, int numeroPuerta, string esquina1, string esquina2, string nombreEdificio, int numeroApto)
 :DtDireccion(calle, numeroPuerta, esquina1, esquina2) {
     this->nombreEdificio = nombreEdificio;
@@ -16,3 +20,8 @@ int DtApto::getNumeroApto() {
 }
 
 DtApto::~DtApto() {}
+
+ostream& operator<<(ostream & os, DtApto dir){
+    os << dir.getCalle() << " " << dir.getNumeroPuerta() << ", entre " << dir.getEsquina1() << " y " << dir.getEsquina2() << ", edificio " << dir.getNombreEdificio() << " apto. " << dir.getNumeroApto();
+    return os;
+}

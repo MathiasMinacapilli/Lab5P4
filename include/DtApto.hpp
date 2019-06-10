@@ -13,10 +13,14 @@ private:
     string nombreEdificio;
     int numeroApto;
 public:
+	DtApto();
     DtApto(string calle, int numeroPuerta, string esquina1, string esquina2, string nombreEdificio, int numeroApto);
     string getNombreEdificio();
     int getNumeroApto();
     ~DtApto();
 };
+
+//sobrecarga operador cout
+ ostream &operator<< (ostream&, DtApto);
 
 #endif
