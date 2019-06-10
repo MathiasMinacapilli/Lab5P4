@@ -105,30 +105,33 @@ static bool confirmacion () {
 /*Caso de uso: ALTA CLIENTE*/
 //implementado como funcion porque es referenciado desde otro caso de uso
 static void altaCliente(int telefono, ICliente *icliente, string &mensaje) {
+    //consumo el enter que quedo del ingreso del telefono
+    getchar();
     //ingresar datos del cliente
     cout << "Ingrese su nombre: ";
     string nombre;
-    cin >> nombre;
+    getline(cin, nombre);
     DtDireccion direccion;
-    cout << "Ingrese su dirección: ";
+    cout << "Ingrese su dirección: \n";
     string calle;
     cout << "Calle: ";
-    cin >> calle;
+    getline(cin, calle);
     cout << "Número de puerta: ";
     int nro;
-    cin >> nro; 
+    cin >> nro;
+    getchar(); 
     cout << "Esquina 1: ";
     string esq1;
-    cin >> esq1;
+    getline(cin, esq1);
     cout << "Esquina 2: ";
     string esq2;
-    cin >> esq2;
+    getline(cin, esq2);
     cout << "Es un apartamento? S/N \n";
     bool es_apto = confirmacion();
     if (es_apto){
         cout << "Nombre edificio: ";
         string nombre_edificio;
-        cin >> nombre_edificio;
+        getline(cin, nombre_edificio);
         cout<< "Número de apartamento: ";
         int nro_apto; 
         cin >> nro_apto;
