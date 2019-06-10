@@ -473,6 +473,7 @@ int main() {
                                 << "\n-Precio: " << prod.getPrecio()
                                 << "\n-Cantidad vendidos: " << iproducto->getCantidadProductoTotalVendidos()
                                 << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                            /* FALTA POR HACER -> COMO VER SI ES UN MENU Y RECORRER SUS PRODUCTOS */
                         } else {
                             iproducto->cancelarInformacion();
                         }
@@ -802,16 +803,62 @@ int main() {
             break;
 
         /* 5) Cargar datos de prueba. */
-        #if 0
         case 5: {
             try {
+                //Cargo productos
+                DtProductoSimple producto_simple = DtProductoSimple(1, "Pizza", 100);
+                iproducto->ingresarDatosProducto(producto_simple);
+                iproducto->ingresarProductoSimple();
+                producto_simple = DtProductoSimple(2, "Hamburguesa", 70);
+                iproducto->ingresarDatosProducto(producto_simple);
+                iproducto->ingresarProductoSimple();
+                producto_simple = DtProductoSimple(3, "Coca", 50);
+                iproducto->ingresarDatosProducto(producto_simple);
+                iproducto->ingresarProductoSimple();
+                producto_simple = DtProductoSimple(4, "Papas Cheddar", 120);
+                iproducto->ingresarDatosProducto(producto_simple);
+                iproducto->ingresarProductoSimple();
+                
+                iproducto->ingresarDatosMenu(5, "Pizza+2Coca");
+                DtProducto producto = DtProducto(1, "Pizza", 100);
+                DtProductoCantidad producto_cantidad = DtProductoCantidad(producto, 1);
+                iproducto->seleccionarProductoYCantidad(producto_cantidad);
+                producto = DtProducto(3, "Coca", 50);
+                producto_cantidad = DtProductoCantidad(producto, 2);
+                iproducto->seleccionarProductoYCantidad(producto_cantidad);
+                iproducto->ingresarMenu();
+                iproducto->ingresarDatosMenu(6, "Hamburguesa+Papas Cheddar");
+                producto = DtProducto(2, "Hamburguesa", 70);
+                producto_cantidad = DtProductoCantidad(producto, 1);
+                iproducto->seleccionarProductoYCantidad(producto_cantidad);
+                producto = DtProducto(4, "Papas Cheddar", 120);
+                producto_cantidad = DtProductoCantidad(producto, 1);
+                iproducto->seleccionarProductoYCantidad(producto_cantidad);
+                iproducto->ingresarMenu();
 
+                //Cargo empleados
+                iempleado->ingresarNombreEmpleado("Mathi");
+                iempleado->ingresarMozo();
+                iempleado->ingresarNombreEmpleado("Seba");
+                iempleado->ingresarMozo();
+                iempleado->ingresarNombreEmpleado("Eli");
+                Transporte t = Bici;
+                iempleado->seleccionarTransporte(t);
+                iempleado->ingresarRepartidor();
+                iempleado->ingresarNombreEmpleado("Santi");
+                t = Moto;
+                iempleado->seleccionarTransporte(t);
+                iempleado->ingresarRepartidor();
+                msj = "Datos cargados correctamente.";
             } catch(exception* e) {
-
+                system("clear");
+                msj = e -> what();
+                delete e;
+                break;
             }
             break;
         }
-        #endif
+        
         /* 0) Salir. */
         case 0:
             salir = true;
