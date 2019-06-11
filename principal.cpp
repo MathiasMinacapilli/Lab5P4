@@ -50,17 +50,31 @@ static bool esValidaFecha(int dia, int mes, int anio) {
 }
 
 /* Obtiene el número de teléfono. */
-static int conseguir_telefono() {
+static int conseguirTelefono() {
     cout << "Ingrese su número de teléfono. \n"
         << " Teléfono: ";
-    int telefono = 0;
+    string telefono;
     cin >> telefono;
-    while ((telefono < 20000000) || (telefono >= 30000000)) {
-        cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
-            << " Teléfono: ";
-        cin >> telefono;
+    int tel = 0;
+    bool no_lo_consigo = true;
+    bool es_numero = false;
+    while (no_lo_consigo) {
+        es_numero = all_of(telefono.begin(), telefono.end(), ::isdigit);
+        if (es_numero) {
+            tel = stoi(telefono);
+            if ((tel < 20000000) || (tel >= 30000000)) {
+                cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
+                    << " Teléfono: ";
+                cin >> telefono;
+            } else
+                no_lo_consigo = false;
+        } else {
+            cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
+                    << " Teléfono: ";
+            cin >> telefono;
+        }
     }
-    return telefono;
+    return tel;
 }
 
 static void es_valido_codigo(int codigo, map<int, DtProducto> productos_disponibles) {
@@ -225,7 +239,7 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Alta Cliente" << "-------------------- \n \n";
-                        int telefono_cliente = conseguir_telefono();
+                        int telefono_cliente = conseguirTelefono();
                         altaCliente(telefono_cliente, icliente, msj);
                     } catch(exception* e) {
                         system("clear");
@@ -585,7 +599,7 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
-                        int telefono = conseguir_telefono();
+                        int telefono = conseguirTelefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
                         if (!esta_cliente)
                             altaCliente(telefono, icliente, msj);
@@ -722,7 +736,10 @@ int main() {
                 break;
                 }//fin switch opcion_administrador
             } catch(exception* e) {
-                cout << e->what();
+                system("clear");
+                msj = e -> what();
+                delete e;
+                break;
             }
             break;
 
@@ -751,16 +768,38 @@ int main() {
                     }
                     break;
                 #endif
+                    
+                    
+#if 0
                 /* 2) Facturación de una venta. (Hay Diagrama de Comunicacion) */
-                #if 0
                 case 2:
                     try {
-
+                        
+                        int num_mesa = conseguirNumeroMesa();
+                        iventa -> ingresarNumeroMesa(num_mesa);
+                        cout << "\nIngrese el porcentaje de descuento que desea aplicar. \n"
+                                << " Porcentaje: ";
+                            int porcentaje;
+                            cin >> porcentaje;
+                            if (
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
-                #endif
+#endif 
                 /* 3) Iniciar venta en mesas. (Hay Diagrama de Comunicacion) */
                 #if 0
                 case 3:
