@@ -47,16 +47,14 @@ static void obtenerFecha(int &dia, int &mes, int &anio) {
 static int conseguirNumeroMesa() {
     int numero;
     do {
-        cout << "Ingrese un número positivo: ";
+        cout << "Ingrese el número de mesa. \n"
+            << " Número: ";
         cin >> numero;
-        if (!(numero >= 0)) {
-            cout << "\nNúmero ingresado no valido."
-            system("clear");
-        }
+        if (!(numero >= 0))
+            cout << "\nNúmero ingresado no válido.";
+        
     } while (numero < 0);
-    cout << "\nNúmero ingresado correctamente.";
     return numero;
-    system("clear");
 }
 
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
@@ -289,7 +287,7 @@ int main() {
                     << " 8) Resumen facturación de 1 día dada la fecha. \n"
                     << " 9) Venta a domicilio. \n"
                     << " 10) Ventas de un mozo. \n"
-                    << " 0) Salir. \n \n"
+                    << " 0) Volver a pantalla principal. \n \n"
                     << " Opción: ";
                 cin >> opcion_administrador;
                 switch(opcion_administrador) {
@@ -778,16 +776,10 @@ int main() {
                     }
                     break;
                     
-                /* 0) Salir. */
-                #if 0
+                /* 0) Volver a pantalla principal. */
                 case 0:
-                    try {
-
-                    } catch(exception* e) {
-
-                    }
                     break;
-                #endif
+                    
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 10.";
                 }
@@ -811,7 +803,7 @@ int main() {
                     << " 2) Facturación de una venta. \n"
                     << " 3) Iniciar venta en mesas. \n"
                     << " 4) Quitar producto de una venta. \n"
-                    << " 0) Salir. \n \n"
+                    << " 0) Volver a pantalla principal. \n \n"
                     << " Opción: ";
                 cin >> opcion_mozo;
                 switch(opcion_mozo) {
@@ -836,24 +828,16 @@ int main() {
                     }
                     break;
                     
-                    #if 0
                 /* 2) Facturación de una venta. (Hay Diagrama de Comunicacion) */
                 case 2:
                     try {
-                        
+                        system ("clear");
+                        cout << "--------------------" << "Facturación de una venta" << "-------------------- \n \n";
                         int num_mesa = conseguirNumeroMesa();
                         iventa -> ingresarNumeroMesa(num_mesa);
                         float porcentaje = conseguirDescuento();
-                        cout << porcentaje;
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                        DtFactura factura = iventa -> generarFactura();
+                        cout << factura;
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -861,7 +845,7 @@ int main() {
                         break;
                     }
                     break;
-#endif 
+ 
                 /* 3) Iniciar venta en mesas */
                
                 case 3:
@@ -882,27 +866,24 @@ int main() {
 
                     }
                     break;
-                #endif
                 /* 4) Quitar producto de una venta. (Hay Diagrama de Comunicacion) */
-                #if 0
                 case 4:
                     try {
-
+                        system("clear");
+                        cout << "--------------------" << "Quitar producto de una venta" << "-------------------- \n \n";
+                        int num_mesa = conseguirNumeroMesa();
+                        map<int, DtProducto> productos_disponibles = iventa -> getProductosDisponibles(num_mesa);
+                        
+                        
                     } catch(exception* e) {
 
                     }
                     break;
-                #endif
+                    
                 /* 0) Salir. */
-                #if 0
                 case 0:
-                    try {
-
-                    } catch(exception* e) {
-
-                    }
                     break;
-                #endif
+
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 4.";
                 }
@@ -921,7 +902,7 @@ int main() {
                 cout << "--------------------" << "Repartidor" << "-------------------- \n \n"
                     << " - Elija la opción deseada -  \n \n"
                     << " 1) Modificar estado de un pedido. \n"
-                    << " 0) Salir. \n \n"
+                    << " 0) Volver a pantalla principal. \n \n"
                     << " Opción: ";
                 cin >> opcion_repartidor;
                 switch(opcion_repartidor) {
@@ -937,15 +918,9 @@ int main() {
                     break;
                 #endif
                 /* 0) Salir. */
-                #if 0
                 case 0:
-                    try {
-
-                    } catch(exception* e) {
-
-                    }
                     break;
-                #endif
+
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 1.";
                 }
@@ -964,7 +939,7 @@ int main() {
                 cout << "--------------------" << "Cliente" << "-------------------- \n \n"
                     << " - Elija la opción deseada -  \n \n"
                     << " 1) Consultar actualizaciones de pedidos. \n"
-                    << " 0) Salir. \n \n"
+                    << " 0) Volver a pantalla principal. \n \n"
                     << " Opción: ";
                 cin >> opcion_cliente;
                 switch(opcion_cliente) {
@@ -980,15 +955,9 @@ int main() {
                     break;
                 #endif
                 /* 0) Salir. */
-                #if 0
                 case 0:
-                    try {
-
-                    } catch(exception* e) {
-
-                    }
                     break;
-                #endif
+
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 1.";
                 }
@@ -1058,8 +1027,13 @@ int main() {
         
         /* 0) Salir. */
         case 0:
+            system("clear");
+            cout << "\n -------------------------------------------------------- \n";
+            cout << "\n GRACIAS POR USAR NUESTRO PROGRAMA, HASTA LA PRÓXIMA :) \n \n";
+            cout << "-------------------------------------------------------- \n \n";
             salir = true;
             break;
+            
         default: {
             msj = "Número inválido. Ingrese valor entre 0 y 5.";
         }
