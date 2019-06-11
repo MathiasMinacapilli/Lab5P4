@@ -43,6 +43,19 @@ static void obtenerFecha(int &dia, int &mes, int &anio) {
     system("clear");
 }
 
+static int conseguirCantidad() {
+    int cantidad;
+    do {
+        cout << "Ingrese la cantidad del producto a ingresar. \n"
+            << " Cantidad: ";
+        cin >> cantidad;
+        if (cantidad < 0)
+            cout << "\nCantidad ingresada no válida.";
+        
+    } while (cantidad < 0);
+    return cantidad;
+}
+
 /* Obtiene un numero positivo de la entrada estandar */
 static int conseguirNumeroMesa() {
     int numero;
@@ -50,7 +63,7 @@ static int conseguirNumeroMesa() {
         cout << "Ingrese el número de mesa. \n"
             << " Número: ";
         cin >> numero;
-        if (!(numero >= 0))
+        if (numero < 0)
             cout << "\nNúmero ingresado no válido.";
         
     } while (numero < 0);
@@ -817,6 +830,16 @@ int main() {
                         for (it = productos.begin(); it != productos.end(); ++it) {
                              cout << (it -> second) << "\n";
                         }
+                        cout << "Ingrese el código del producto a agregar a la venta: ";
+                        int codigo;
+                        cin >> codigo;
+                        while (!(iproducto -> ingresarCodigoProductoAConsultar(codigo))) {
+                            cout << "\n\nEl código no esta asociado a ningun producto disponible. Ingrese el código nuevamente: ";
+                            cin >> codigo;
+                        }
+                        DtProducto prod = iproducto -> getProducto();
+                        int cantidad = conseguirCantidad();
+                        DtProductoCantidad = new DtProductoCantidad(prod, cantidad);
                         
                     } catch(exception* e) {
 
