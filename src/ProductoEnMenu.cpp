@@ -14,6 +14,10 @@ int ProductoEnMenu::getCantidad(){
 	return this->cantidad;
 }
 
+ProductoSimple* ProductoEnMenu::getProducto() {
+	return this->producto;
+}
+
 void ProductoEnMenu::aumentarCantidad(int cant){
 	this->cantidad += cant;
 }

@@ -23,7 +23,7 @@ public:
     
     map<int, ProductoEnMenu *> getProductos();
     void eliminar();
-    void eliminarProducto(int cod);
+    bool eliminarProducto(int cod);
     void agregarProducto(ProductoSimple *prod, int cantidad);
     bool esVacio();
   

@@ -1,5 +1,6 @@
 //Librerias de C
 #include <map>
+#include <iostream>
 using namespace std;
 
 //Archivos
@@ -38,15 +39,19 @@ bool Menu::esVacio(){
 	return productos.empty();
 }
 
-void Menu::eliminarProducto(int cod){
+bool Menu::eliminarProducto(int cod){
 	map<int, ProductoEnMenu *>::iterator it = productos.find(cod);
 	//si el producto esta en el menu
-	if (it != productos.end()){
+	if (it != productos.end()) {
+		ProductoEnMenu* prod_menu = (it -> second);
 		productos.erase(cod);
-		delete (it->second);
+		delete prod_menu;
 	}
-	if (this->esVacio())
-		this->eliminar();
+	if (this->esVacio()) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 void Menu::eliminar(){

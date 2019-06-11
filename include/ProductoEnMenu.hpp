@@ -18,6 +18,7 @@ public:
 
     //getters
     int getCantidad();
+    ProductoSimple* getProducto();
 
     //constructor y destructor
     ProductoEnMenu(int cantidad, ProductoSimple *producto);

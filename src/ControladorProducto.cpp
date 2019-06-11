@@ -133,16 +133,16 @@ void ControladorProducto::cancelarBajaProducto(){
 
 void ControladorProducto::eliminarProductoDeMenu(int cod){
 	map<int, Menu *>::iterator it;
-    map<int, ProductoEnMenu*> prods_menu;
+  map<int, ProductoEnMenu*> prods_menu;
 	for (it = this->menus.begin(); it != this->menus.end(); ++it) {
         prods_menu = ((it -> second) -> getProductos());
-        if ((prods_menu.find(cod)) != prods_menu.end()) {
-            it->second->eliminarProducto(cod);
-            if(prods_menu.empty()) {
-                cout << "se ejecuto";
+				map<int, ProductoEnMenu*>::iterator it_p = (prods_menu.find(cod));
+        if ( it_p != prods_menu.end()) {
+            bool vacio_menu = (it->second) -> eliminarProducto(cod);
+            if(vacio_menu) {
                 Menu* menu = it -> second;
                 menus.erase(menu -> getCodigo());
-                delete menu;
+								menu -> eliminar();
             }
         }
     }
