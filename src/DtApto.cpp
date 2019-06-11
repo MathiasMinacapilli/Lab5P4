@@ -20,8 +20,3 @@ int DtApto::getNumeroApto() {
 }
 
 DtApto::~DtApto() {}
-
-ostream& operator<<(ostream & os, DtApto dir){
-    os << dir.getCalle() << " " << dir.getNumeroPuerta() << ", entre " << dir.getEsquina1() << " y " << dir.getEsquina2() << ", edificio " << dir.getNombreEdificio() << " apto. " << dir.getNumeroApto();
-    return os;
-}

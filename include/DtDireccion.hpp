@@ -25,6 +25,6 @@ public:
 };
 
 //sobrecarga operador cout
- ostream &operator<< (ostream&, DtDireccion);
+ostream &operator<< (ostream&, DtDireccion);
 
 #endif

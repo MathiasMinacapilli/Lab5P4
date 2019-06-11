@@ -38,7 +38,6 @@ public:
 	void ingresarCliente();
 	void cancelarCliente();
 
-
 };
 
 #endif

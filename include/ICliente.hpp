@@ -19,6 +19,7 @@ public:
 	virtual DtCliente getDatosIngresados() = 0;
 	virtual void ingresarCliente() = 0;
 	virtual void cancelarCliente() = 0;
+	virtual bool existeCliente(int telefono) = 0;
 
 	//destructor
     ~ICliente();

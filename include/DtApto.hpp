@@ -20,7 +20,4 @@ public:
     ~DtApto();
 };
 
-//sobrecarga operador cout
- ostream &operator<< (ostream&, DtApto);
-
 #endif

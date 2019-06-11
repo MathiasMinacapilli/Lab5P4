@@ -57,4 +57,3 @@ DtCliente ControladorCliente::getDatosIngresados(){
 	return datos;
 }
 
-

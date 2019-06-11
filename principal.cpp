@@ -119,62 +119,77 @@ static bool confirmacion () {
 /*Caso de uso: ALTA CLIENTE*/
 //implementado como funcion porque es referenciado desde otro caso de uso
 static void altaCliente(int telefono, ICliente *icliente, string &mensaje) {
-    //consumo el enter que quedo del ingreso del telefono
-    getchar();
-    //ingresar datos del cliente
-    cout << "Ingrese su nombre: ";
-    string nombre;
-    getline(cin, nombre);
-    DtDireccion direccion;
-    cout << "Ingrese su dirección: \n";
-    string calle;
-    cout << "Calle: ";
-    getline(cin, calle);
-    cout << "Número de puerta: ";
-    int nro;
-    cin >> nro;
-    getchar(); 
-    cout << "Esquina 1: ";
-    string esq1;
-    getline(cin, esq1);
-    cout << "Esquina 2: ";
-    string esq2;
-    getline(cin, esq2);
-    cout << "Es un apartamento? S/N \n";
-    bool es_apto = confirmacion();
-    if (es_apto){
-        cout << "Nombre edificio: ";
-        string nombre_edificio;
-        getline(cin, nombre_edificio);
-        cout<< "Número de apartamento: ";
-        int nro_apto; 
-        cin >> nro_apto;
-        direccion = DtApto(calle, nro, esq1, esq2, nombre_edificio, nro_apto);
-    }
-    else
-        direccion = DtDireccion(calle, nro, esq1, esq2);
-    try{
-        icliente->ingresarDatosCliente(telefono, nombre, direccion);
-        DtCliente datos = icliente->getDatosIngresados();
-        cout << "Los datos ingresados son: \n";
-        cout << datos << "\n";
-        cout << "Desea confirmar el ingreso del cliente? S/N \n";
-        bool confirma_cliente = confirmacion();
-        if (confirma_cliente){
-            icliente->ingresarCliente();
-            mensaje = "Cliente ingresado correctamente";
+    bool existe_cliente = icliente->existeCliente(telefono);
+    if (existe_cliente)
+        throw new invalid_argument("Error. Ya existe un cliente con ese telefono ingresado en el sistema. ");
+    else{
+        //consumo el enter que quedo del ingreso del telefono
+        getchar();
+        //ingresar datos del cliente
+        cout << "Ingrese su nombre: ";
+        string nombre;
+        getline(cin, nombre);
+        cout << "Ingrese su dirección: \n";
+        DtDireccion casa;
+        DtApto apto;
+        string calle;
+        cout << "Calle: ";
+        getline(cin, calle);
+        cout << "Número de puerta: ";
+        int nro;
+        cin >> nro;
+        getchar(); 
+        cout << "Esquina 1: ";
+        string esq1;
+        getline(cin, esq1);
+        cout << "Esquina 2: ";
+        string esq2;
+        getline(cin, esq2);
+        cout << "Es un apartamento? S/N \n";
+        bool es_apto = confirmacion();
+        getchar();
+        if (es_apto){
+            cout << "Nombre edificio: ";
+            string nombre_edificio;
+            getline(cin, nombre_edificio);
+            cout<< "Número de apartamento: ";
+            int nro_apto; 
+            cin >> nro_apto;
+            apto = DtApto(calle, nro, esq1, esq2, nombre_edificio, nro_apto);
         }
-        else{
-            icliente->cancelarCliente();
-            mensaje = "Ingreso de cliente cancelado";
+        else
+            casa = DtDireccion(calle, nro, esq1, esq2);
+        try{
+            if (es_apto){
+                icliente->ingresarDatosCliente(telefono, nombre, apto);
+                DtCliente datos = icliente->getDatosIngresados();
+                cout << "Los datos ingresados son: \n";
+                cout << datos << "\n";
+                cout << "   Edificio " << apto.getNombreEdificio() << " apto. " << apto.getNumeroApto() <<endl;
+            }
+            else{
+                icliente->ingresarDatosCliente(telefono, nombre, casa);
+                DtCliente datos = icliente->getDatosIngresados();
+                cout << "Los datos ingresados son: \n";
+                cout << datos << "\n";
+            }
+           
+            cout << "Desea confirmar el ingreso del cliente? S/N \n";
+            bool confirma_cliente = confirmacion();
+            if (confirma_cliente){
+                icliente->ingresarCliente();
+                mensaje = "Cliente ingresado correctamente";
+            }
+            else{
+                icliente->cancelarCliente();
+                mensaje = "Ingreso de cliente cancelado";
+            }
+
         }
-
+        catch(exception *e){
+            throw e;
+        }
     }
-    catch(exception *e){
-        throw e;
-    }
-
-
 }
 
 
