@@ -30,8 +30,8 @@ DtProducto::~DtProducto(){
 }
 
 ostream &operator<< (ostream& o, DtProducto dtp) {
-    o << "Codigo: " << dtp.getCodigo()
-      << "\nDescripción: " << dtp.getDescripcion()
-      << "\nPrecio: " << dtp.getPrecio();
+     o << " " << dtp.getCodigo()
+        << " - $" << dtp.getPrecio()
+        << "    " << dtp.getDescripcion();
     return o;
 }

@@ -488,10 +488,7 @@ int main() {
                         map<int, DtProducto>::iterator it;
                         cout << "Estos son los productos disponibles. \n";
                         for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
-                            cout << "  "
-                                << (it -> second).getCodigo()
-                                << " - "
-                                << (it -> second).getDescripcion()
+                             cout << (it -> second)
                                 << "\n";
                         }
                         cout << "\nIngrese el código del producto que desea dar de baja. \n"
