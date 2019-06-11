@@ -42,6 +42,23 @@ static void obtenerFecha(int &dia, int &mes, int &anio) {
     cin >> anio;
     system("clear");
 }
+
+/* Obtiene un numero positivo de la entrada estandar */
+static int conseguirNumeroMesa() {
+    int numero;
+    do {
+        cout << "Ingrese un número positivo: ";
+        cin >> numero;
+        if (!(numero >= 0)) {
+            cout << "\nNúmero ingresado no valido."
+            system("clear");
+        }
+    } while (numero < 0);
+    cout << "\nNúmero ingresado correctamente.";
+    return numero;
+    system("clear");
+}
+
 /* Chequea que la fecha obtenida de la entrada estandar sea valida */
 static bool esValidaFecha(int dia, int mes, int anio) {
     return ((1 <= dia) && (dia <= 31)) &&
@@ -771,18 +788,24 @@ int main() {
                 switch(opcion_mozo) {
 
                 /* 1) Agregar producto a una venta. (Hay Diagrama de Comunicacion) */
-                #if 0
+                
                 case 1:
                     try {
-
+                        system("clear");
+                        cout << "--------------------" << "Agregar producto a una venta" << "-------------------- \n \n";
+                        int numero_mesa = conseguirNumeroMesa();
+                        iventa -> ingresarNumeroMesa(numero_mesa);
+                        map<int, DtProducto> productos = iventa -> obtenerProductosDisponibles();
+                        map<int, DtProducto>::iterator it;
+                        for (it = productos.begin(); it != productos.end(); ++it) {
+                            
+                        }
                     } catch(exception* e) {
 
                     }
                     break;
-                #endif
                     
-                    
-#if 0
+                    #if 0
                 /* 2) Facturación de una venta. (Hay Diagrama de Comunicacion) */
                 case 2:
                     try {
