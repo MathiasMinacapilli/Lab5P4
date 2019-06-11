@@ -839,8 +839,8 @@ int main() {
                         }
                         DtProducto prod = iproducto -> getProducto();
                         int cantidad = conseguirCantidad();
-                        DtProductoCantidad = new DtProductoCantidad(prod, cantidad);
-                        
+                        DtProductoCantidad producto_cantidad = DtProductoCantidad(prod, cantidad);
+                        iventa -> seleccionarProdYCant(producto_cantidad);
                     } catch(exception* e) {
 
                     }
