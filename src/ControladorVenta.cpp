@@ -45,7 +45,12 @@ VentaLocal *ControladorVenta::crearVenta() {
 
 //AGREGAR PRODUCTO A UNA VENTA
 void ControladorVenta::ingresarNumeroMesa(int numero) {
-  this -> numero_mesa = numero;
+    ControladorMesa* cont_mesa = ControladorMesa::getInstance();
+    if (cont_mesa -> existeMesa(numero)){
+        this -> numero_mesa = numero;
+    } else {
+        throw new invalid_argument("\nNo existe mesa asociada al número ingresado.")
+    }
 }
 map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles() {
   ControladorProducto *cont_prod;

@@ -366,9 +366,8 @@ int main() {
                                     cout << "Desea confirmar el ingreso del repartidor? S/N \n";
                                     bool confirma_repartidor = confirmacion();
                                     if (confirma_repartidor){
-                                        int nro_repartidor = iempleado->ingresarRepartidor();
-                                        cout << "El numero del repartidor ingresado es " << nro_repartidor << endl;
-                                        msj = "Repartidor agregado correctamente";
+                                        iempleado->ingresarRepartidor();
+                                         msj = "Repartidor agregado correctamente";
                                     }
                                     else {
                                         iempleado->cancelarRepartidor();
@@ -828,9 +827,10 @@ int main() {
                         map<int, DtProducto> productos = iventa -> obtenerProductosDisponibles();
                         map<int, DtProducto>::iterator it;
                         cout << "Estos son los productos disponibles. \n";
-                        for (it = productos.begin(); it != productos.end(); ++it){
+                        for (it = productos.begin(); it != productos.end(); ++it) {
                              cout << (it -> second) << "\n";
                         }
+                        
                     } catch(exception* e) {
 
                     }

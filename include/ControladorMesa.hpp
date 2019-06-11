@@ -26,6 +26,7 @@ private:
     set<int> posibles_mesas;
     set<int> mesas_seleccionadas;
 public:
+    bool existeMesa(int num_mesa);
     //operacion patron Singleton
     static ControladorMesa *getInstance();
     //Asignar automáticamente mozos a mesas
