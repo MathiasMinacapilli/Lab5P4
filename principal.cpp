@@ -827,17 +827,16 @@ int main() {
                         iventa -> ingresarNumeroMesa(numero_mesa);
                         map<int, DtProducto> productos = iventa -> obtenerProductosDisponibles();
                         map<int, DtProducto>::iterator it;
-                        for (it = productos.begin(); it != productos.end(); ++it) {
-                            
+                        cout << "Estos son los productos disponibles. \n";
+                        for (it = productos.begin(); it != productos.end(); ++it){
+                             cout << (it -> second) << "\n";
                         }
                     } catch(exception* e) {
 
                     }
                     break;
-                #endif
                     
-                    
-#if 0
+                    #if 0
                 /* 2) Facturación de una venta. (Hay Diagrama de Comunicacion) */
                 case 2:
                     try {
@@ -883,7 +882,7 @@ int main() {
 
                     }
                     break;
-            
+                #endif
                 /* 4) Quitar producto de una venta. (Hay Diagrama de Comunicacion) */
                 #if 0
                 case 4:
