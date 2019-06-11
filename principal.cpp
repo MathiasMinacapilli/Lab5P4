@@ -831,11 +831,12 @@ int main() {
                         for (it = productos.begin(); it != productos.end(); ++it) {
                              cout << (it -> second) << "\n";
                         }
-                        cout << "Ingrese el código del producto a agregar a la venta: ";
+                        cout << "Ingrese el código del producto a agregar. \n"
+                                << " Código: ";
                         int codigo;
                         cin >> codigo;
                         while (!(iproducto -> ingresarCodigoProductoAConsultar(codigo))) {
-                            cout << "\n\nEl código no esta asociado a ningun producto disponible. Ingrese el código nuevamente: ";
+                            cout << "\nEl código no esta asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
                             cin >> codigo;
                         }
                         DtProducto prod = iproducto -> getProducto();
