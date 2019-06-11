@@ -15,9 +15,13 @@ void Cliente::notificar(DtActualizacion actualizacion) {}
 Cliente::Cliente(){}
 
 //constructor por parametros
-Cliente::Cliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos){
+Cliente::Cliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos){
 	this->telefono = telefono;
 	this->nombre = nombre;
 	this->direccion = direccion;
 	this->etapaPedidos = etapaPedidos;
+}
+
+string Cliente::getTelefono(){
+	return this->telefono;
 }

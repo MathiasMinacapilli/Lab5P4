@@ -15,12 +15,13 @@ using namespace std;
 class Cliente : public IObserverActualizaciones{
 private:
     string nombre;
-    int telefono;
+    string telefono;
     DtDireccion direccion;
     set<DtActualizacion> etapaPedidos;
 public:
 	Cliente();
-	Cliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
+	Cliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
+    string getTelefono();
     void suscribirse();
     void bajaSuscripcion();
     void consultarPedidos();

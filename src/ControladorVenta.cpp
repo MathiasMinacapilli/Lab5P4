@@ -112,7 +112,7 @@ void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
 }
 
 //VENTA A DOMICILIO
-bool ControladorVenta::ingresarTelefono(int telefono) {
+bool ControladorVenta::ingresarTelefono(string telefono) {
     this -> telefono_recordado = telefono;
     ControladorCliente *cont_cliente;
     cont_cliente = ControladorCliente::getInstance();

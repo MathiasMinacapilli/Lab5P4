@@ -16,20 +16,24 @@ ControladorCliente *ControladorCliente::getInstance(){
 
 
 //devuelve la coleccion de clientes
-map <int, Cliente*> ControladorCliente::getClientes() {
+set<Cliente *> ControladorCliente::getClientes() {
 	return this -> clientes;
 }
 
-bool ControladorCliente::existeCliente(int telefono) {
-	map<int, Cliente*>::iterator it = clientes.find(telefono);
-	return (it != clientes.end());
+bool ControladorCliente::existeCliente(string telefono) {
+	set<Cliente *>::iterator it;
+	bool encontre = false;
+	for (it = this->clientes.begin(); it != this->clientes.end() && !encontre; ++it){
+		Cliente *cliente = *it;
+		encontre = (cliente->getTelefono() == telefono);
+	}
+	return encontre;
 }
 
 
 //ALTA CLIENTE
-void ControladorCliente::ingresarDatosCliente(int telefono, string nombre, DtDireccion direccion){
-	map<int, Cliente*>::iterator it = this->clientes.find(telefono);
-	if (it == this->clientes.end()){
+void ControladorCliente::ingresarDatosCliente(string telefono, string nombre, DtDireccion direccion){
+	if (! (this->existeCliente(telefono)) ){
 		this->telefono_recordado = telefono;
 		this->nombre_recordado = nombre;
 		this->direccion_recordada = direccion;
@@ -41,13 +45,12 @@ void ControladorCliente::ingresarCliente(){
 	set<DtActualizacion> actualizaciones;
 	actualizaciones.clear();
 	Cliente *nuevo_cliente = new Cliente(this->telefono_recordado, this->nombre_recordado, this->direccion_recordada, actualizaciones);
-	this->clientes[this->telefono_recordado] = nuevo_cliente;
+	clientes.insert(nuevo_cliente);
 }
 
 void ControladorCliente::cancelarCliente(){
-	//SE LIBERA MEMORIA
-	//QUE ES ESO
-	//AYUDA
+	this->telefono_recordado = "no valido";
+	this->nombre_recordado = "no valido";
 }
 
 DtCliente ControladorCliente::getDatosIngresados(){

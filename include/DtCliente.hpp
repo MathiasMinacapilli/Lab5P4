@@ -13,15 +13,15 @@ using namespace std;
 
 class DtCliente {
 private:
-  int telefono;
+  string telefono;
   string nombre;
   DtDireccion direccion;
   string mail;
   string clave;
   set<DtActualizacion> etapaPedidos;
 public:
-  DtCliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
-  int getTelefono();
+  DtCliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
+  string getTelefono();
   string getNombre();
   DtDireccion getDireccion();
   set<DtActualizacion> getEtapaPedidos();

@@ -15,11 +15,11 @@ protected:
 	ICliente();
 public:
 	//caso de uso Alta Cliente
-	virtual void ingresarDatosCliente(int telefono, string nombre, DtDireccion direccion) = 0;
+	virtual void ingresarDatosCliente(string telefono, string nombre, DtDireccion direccion) = 0;
 	virtual DtCliente getDatosIngresados() = 0;
 	virtual void ingresarCliente() = 0;
 	virtual void cancelarCliente() = 0;
-	virtual bool existeCliente(int telefono) = 0;
+	virtual bool existeCliente(string telefono) = 0;
 
 	//destructor
     ~ICliente();

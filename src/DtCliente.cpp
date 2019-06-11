@@ -2,14 +2,14 @@
 #include "../include/DtCliente.hpp"
 
 //constructor por parametros 1
-DtCliente::DtCliente(int telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos) {
+DtCliente::DtCliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos) {
     this->telefono = telefono;
     this->nombre = nombre;
     this->direccion = direccion;
     this->etapaPedidos = etapaPedidos;
 }
 
-int DtCliente::getTelefono() {
+string DtCliente::getTelefono() {
     return this->telefono;
 }
 

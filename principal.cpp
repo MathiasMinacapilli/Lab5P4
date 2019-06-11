@@ -65,32 +65,27 @@ static bool esValidaFecha(int dia, int mes, int anio) {
 }
 
 /* Obtiene el número de teléfono. */
-static int conseguirTelefono() {
+static string conseguirTelefono() {
     cout << "Ingrese su número de teléfono. \n"
         << " Teléfono: ";
     string telefono;
     cin >> telefono;
-    int tel = 0;
     bool no_lo_consigo = true;
     bool es_numero = false;
     while (no_lo_consigo) {
         es_numero = all_of(telefono.begin(), telefono.end(), ::isdigit);
-        if (es_numero) {
-            tel = stoi(telefono);
-            if ((tel < 20000000) || (tel >= 30000000)) {
-                cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
-                    << " Teléfono: ";
-                cin >> telefono;
-            } else
-                no_lo_consigo = false;
-        } else {
-            cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
-                    << " Teléfono: ";
+        if (!es_numero) {
+            cout << "Teléfono no válido. Ingrese su número de teléfono. \n" 
+                << " Teléfono: ";
             cin >> telefono;
         }
+        else
+            no_lo_consigo = false;
     }
-    return tel;
-}
+    return telefono;
+    }
+    
+
 
 /* Obtiene el porcentaje de descuento. */
 static float conseguirDescuento() {
@@ -161,7 +156,7 @@ static bool confirmacion () {
 
 /*Caso de uso: ALTA CLIENTE*/
 //implementado como funcion porque es referenciado desde otro caso de uso
-static void altaCliente(int telefono, ICliente *icliente, string &mensaje) {
+static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
     bool existe_cliente = icliente->existeCliente(telefono);
     if (existe_cliente)
         throw new invalid_argument("Error. Ya existe un cliente con ese telefono ingresado en el sistema. ");
@@ -208,7 +203,7 @@ static void altaCliente(int telefono, ICliente *icliente, string &mensaje) {
                 DtCliente datos = icliente->getDatosIngresados();
                 cout << "Los datos ingresados son: \n";
                 cout << datos << "\n";
-                cout << "   Edificio " << apto.getNombreEdificio() << " apto. " << apto.getNumeroApto() <<endl;
+                cout << "           Edificio " << apto.getNombreEdificio() << " apto. " << apto.getNumeroApto() <<endl;
             }
             else{
                 icliente->ingresarDatosCliente(telefono, nombre, casa);
@@ -297,7 +292,7 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Alta Cliente" << "-------------------- \n \n";
-                        int telefono_cliente = conseguirTelefono();
+                        string telefono_cliente = conseguirTelefono();
                         altaCliente(telefono_cliente, icliente, msj);
                     } catch(exception* e) {
                         system("clear");
@@ -655,7 +650,7 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
-                        int telefono = conseguirTelefono();
+                        string telefono = conseguirTelefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
                         if (!esta_cliente)
                             altaCliente(telefono, icliente, msj);
@@ -866,6 +861,7 @@ int main() {
 
                     }
                     break;
+                
                 /* 4) Quitar producto de una venta. (Hay Diagrama de Comunicacion) */
                 case 4:
                     try {

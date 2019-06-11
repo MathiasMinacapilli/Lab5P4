@@ -31,7 +31,7 @@ public:
     virtual void ingresarFecha(DtFecha fecha) = 0;
     virtual void ingresarNumeroMesa(int numero) = 0;
     virtual void ingresarPorcentajeDescuento(float descuento) = 0;
-    virtual bool ingresarTelefono(int telefono) = 0;
+    virtual bool ingresarTelefono(string telefono) = 0;
     virtual map<int, DtProducto> obtenerProductosDisponibles() = 0;
     virtual void seleccionarProdYCant(DtProductoCantidad producto_cantidad) = 0;
     virtual ~IVenta(){}; // virtual y vacío

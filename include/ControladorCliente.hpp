@@ -2,7 +2,6 @@
 #define _CONTROLADORCLIENTE_HPP
 
 //Librerias de C
-#include <map>
 #include <set>
 #include <string>
 using namespace std;
@@ -19,9 +18,9 @@ private:
 	//Constructor
 	ControladorCliente();
 	//coleccion de clientes -- pseudoatributo
-	map<int, Cliente *> clientes;
+	set<Cliente *> clientes;
 	//atributos recordados
-	int telefono_recordado;
+	string telefono_recordado;
 	string nombre_recordado;
 	DtDireccion direccion_recordada;
 
@@ -29,11 +28,11 @@ public:
 	//operacion patron singleton
 	static ControladorCliente *getInstance();
 
-	map <int, Cliente*> getClientes();
-	bool existeCliente(int telefono);
+	set<Cliente *> getClientes();
+	bool existeCliente(string telefono);
 
 	//caso de uso Alta Cliente
-	void ingresarDatosCliente(int telefono, string nombre, DtDireccion direccion);
+	void ingresarDatosCliente(string telefono, string nombre, DtDireccion direccion);
 	DtCliente getDatosIngresados();
 	void ingresarCliente();
 	void cancelarCliente();
