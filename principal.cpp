@@ -892,10 +892,39 @@ int main() {
                         cout << "--------------------" << "Quitar producto de una venta" << "-------------------- \n \n";
                         int num_mesa = conseguirNumeroMesa();
                         map<int, DtProducto> productos_disponibles = iventa -> getProductosVenta(num_mesa);
-                        
-                        
+                        bool quiero_quitar = true;
+                        bool quiero_confirmar;
+                        while (quiero_quitar) {
+                            map<int, DtProducto>::iterator it;
+                            cout << "Estos son los productos disponibles. \n";
+                            for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it) {
+                                cout << (it -> second) << "\n";
+                            }
+                            //
+                            //
+                            //
+                            //
+                            //FALTA COPIAR LO DE SANTI DE AGREGAR PRODUCTO A UNA VENTA
+                            //
+                            //
+                            //
+                            cout << "\n¿Desea quitar el producto de la venta? Ingrese S o N.\n";
+                            quiero_confirmar = confirmacion();
+                            if (quiero_confirmar) {
+                                iventa -> eliminarProductoDeVenta();
+                                cout << "Se quitó el producto correctamente. \n";
+                            } else {
+                                iventa -> cancelarEliminarProductoDeVenta();
+                                cout << "El producto no se eliminó. \n";
+                            }
+                            cout << "\n¿Desea quitar más productos de la venta? Ingrese S o N.\n";
+                            quiero_quitar = confirmacion();
+                        }
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
                     
@@ -1047,7 +1076,7 @@ int main() {
         /* 0) Salir. */
         case 0:
             system("clear");
-            cout << "\n -------------------------------------------------------- \n";
+            cout << "\n-------------------------------------------------------- \n";
             cout << "\n GRACIAS POR USAR NUESTRO PROGRAMA, HASTA LA PRÓXIMA :) \n \n";
             cout << "-------------------------------------------------------- \n \n";
             salir = true;
