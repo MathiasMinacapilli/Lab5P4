@@ -11,7 +11,7 @@ ControladorMesa *ControladorMesa::instance = nullptr;
 //constructor
 ControladorMesa::ControladorMesa(){}
 
-bool existeMesa(int num_mesa) {
+bool ControladorMesa::existeMesa(int num_mesa) {
     map<int, Mesa*>::iterator it;
     for (it = mesas.begin(); it != mesas.end(); ++it) {
         if ((it -> second) -> getNum() == num_mesa) {

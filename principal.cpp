@@ -868,7 +868,7 @@ int main() {
                         system("clear");
                         cout << "--------------------" << "Quitar producto de una venta" << "-------------------- \n \n";
                         int num_mesa = conseguirNumeroMesa();
-                        map<int, DtProducto> productos_disponibles = iventa -> getProductosDisponibles(num_mesa);
+                        map<int, DtProducto> productos_disponibles = iventa -> getProductosVenta(num_mesa);
                         
                         
                     } catch(exception* e) {
