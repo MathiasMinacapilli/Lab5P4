@@ -25,6 +25,10 @@ Mozo* Mesa::getMiMozo() {
   return this -> miMozo;
 }
 
+void Mesa::setMozo(Mozo *m){
+  this->miMozo = m;
+}
+
 void Mesa::setVentaActual(VentaLocal *v) {
   this -> ventaActual = v;
 }

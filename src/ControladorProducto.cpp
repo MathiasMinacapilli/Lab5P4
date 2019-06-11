@@ -74,6 +74,7 @@ void ControladorProducto::ingresarMenu(){
 			nuevo_menu->agregarProducto(p, (it->second).getCantidad());
 		}
 	}
+	this->prod_cants_recordados.clear();
 }
 
 void ControladorProducto::cancelarMenu(){

@@ -56,13 +56,14 @@ void ControladorEmpleado::seleccionarRepartidor(int numero_repartidor) {
 }
 
 
-void ControladorEmpleado::ingresarRepartidor(){
+int ControladorEmpleado::ingresarRepartidor(){
 	this->ultimo_id++;
 	Repartidor *nuevo_repartidor = new Repartidor(this->ultimo_id, this->nombre_recordado, this->transporte_recordado);
 	//agrego repartidor a la coleccion de repartidores
 	this->repartidores[nuevo_repartidor->getNumero()] = nuevo_repartidor;
 	//"se olvida" del nombre recordado
 	this->nombre_recordado = ' ';
+	return nuevo_repartidor->getNumero();
 }
 
 void ControladorEmpleado::cancelarRepartidor(){
@@ -70,13 +71,14 @@ void ControladorEmpleado::cancelarRepartidor(){
 	this->nombre_recordado = ' ';
 }
 
-void ControladorEmpleado::ingresarMozo(){
+int ControladorEmpleado::ingresarMozo(){
 	this->ultimo_id++;
 	Mozo *nuevo_mozo = new Mozo(this->ultimo_id, this->nombre_recordado);
 	//agrego mozo a la coleccion de mozo
 	this->mozos[nuevo_mozo->getNumero()] = nuevo_mozo;
 	//"se olvida" del nombre recordado
 	this->nombre_recordado = ' ';
+	return nuevo_mozo->getNumero();
 
 }
 void ControladorEmpleado::cancelarMozo(){

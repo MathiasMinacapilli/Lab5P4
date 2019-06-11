@@ -338,8 +338,9 @@ int main() {
                                     cout << "Desea confirmar el ingreso del repartidor? S/N \n";
                                     bool confirma_repartidor = confirmacion();
                                     if (confirma_repartidor){
-                                        iempleado->ingresarRepartidor();
-                                         msj = "Repartidor agregado correctamente";
+                                        int nro_repartidor = iempleado->ingresarRepartidor();
+                                        cout << "El numero del repartidor ingresado es " << nro_repartidor << endl;
+                                        msj = "Repartidor agregado correctamente";
                                     }
                                     else {
                                         iempleado->cancelarRepartidor();
@@ -354,7 +355,8 @@ int main() {
                                         cout << "Desea confirmar el ingreso del mozo? S/N \n";
                                         bool confirma_mozo = confirmacion();
                                         if (confirma_mozo){
-                                            iempleado->ingresarMozo();
+                                            int nro_mozo = iempleado->ingresarMozo();
+                                            cout << "El numero del mozo ingresado es " << nro_mozo << endl;
                                             msj = "Mozo agregado correctamente";
                                         }
                                         else {
@@ -368,7 +370,7 @@ int main() {
                                         tipo_incorrecto = true;
                                     }
                             }while(tipo_incorrecto);
-                            cout << "Desea agregar mas empleados? S/N\n";
+                            cout << "\nDesea agregar mas empleados? S/N\n";
                             quiere_ingresar_empleado = confirmacion();
                         }while(quiere_ingresar_empleado);
                     } catch(exception *e) {
@@ -835,16 +837,27 @@ int main() {
                     }
                     break;
 #endif 
-                /* 3) Iniciar venta en mesas. (Hay Diagrama de Comunicacion) */
-                #if 0
+                /* 3) Iniciar venta en mesas */
+               
                 case 3:
                     try {
+                        system("clear");
+                        cout << "--------------------" << "Iniciar venta en mesas" << "-------------------- \n \n";
+                        cout << "Ingrese su numero de mozo: ";
+                        int nro;
+                        cin >> nro;
+                        set<int> mesas_mozo = imesa->getMesasMozoSinVentas(nro);
+                        cout << "Sus mesas sin ventas son: \n";
+                        set<int>::iterator it;
+                        for (it = mesas_mozo.begin(); it != mesas_mozo.end(); ++it){
+                            cout << *it << " ";
+                        }
 
                     } catch(exception* e) {
 
                     }
                     break;
-                #endif
+            
                 /* 4) Quitar producto de una venta. (Hay Diagrama de Comunicacion) */
                 #if 0
                 case 4:

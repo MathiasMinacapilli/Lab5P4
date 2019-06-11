@@ -40,9 +40,9 @@ public:
     set<Transporte> getTransportes();
     void seleccionarTransporte(Transporte t);
 	void seleccionarRepartidor(int numero_repartidor);
-    void ingresarRepartidor();
+    int ingresarRepartidor();
     void cancelarRepartidor();
-    void ingresarMozo();
+    int ingresarMozo();
     void cancelarMozo();
     //Caso de uso: Ventas de un Mozo
     set<int> getIds();

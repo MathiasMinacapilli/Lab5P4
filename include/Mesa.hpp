@@ -21,6 +21,7 @@ public:
     ~Mesa();
     //getters y setters
     int getNum();
+    void setMozo(Mozo *m);
     Mozo *getMiMozo();
     void setVentaActual(VentaLocal *v);
     Venta *getVentaActual();
