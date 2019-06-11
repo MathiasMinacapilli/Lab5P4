@@ -786,6 +786,7 @@ int main() {
                     
                 /* 0) Volver a pantalla principal. */
                 case 0:
+                        msj = "";
                     break;
                     
                 default: {
@@ -897,17 +898,20 @@ int main() {
                         while (quiero_quitar) {
                             map<int, DtProducto>::iterator it;
                             cout << "Estos son los productos disponibles. \n";
-                            for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it) {
+                            for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
                                 cout << (it -> second) << "\n";
+                            cout << "Ingrese el código del producto a quitar. \n"
+                                << " Código: ";
+                            int codigo;
+                            cin >> codigo;
+                            while (!(iproducto -> ingresarCodigoProductoAConsultar(codigo))) {
+                                cout << "\nEl código no esta asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
+                                cin >> codigo;
                             }
-                            //
-                            //
-                            //
-                            //
-                            //FALTA COPIAR LO DE SANTI DE AGREGAR PRODUCTO A UNA VENTA
-                            //
-                            //
-                            //
+                            DtProducto prod = iproducto -> getProducto();
+                            int cantidad = conseguirCantidad();
+                            DtProductoCantidad producto_cantidad = DtProductoCantidad(prod, cantidad);
+                            iventa -> seleccionarProdYCant(producto_cantidad);
                             cout << "\n¿Desea quitar el producto de la venta? Ingrese S o N.\n";
                             quiero_confirmar = confirmacion();
                             if (quiero_confirmar) {
@@ -930,6 +934,7 @@ int main() {
                     
                 /* 0) Salir. */
                 case 0:
+                        msj = "";
                     break;
 
                 default: {
@@ -966,7 +971,8 @@ int main() {
                     break;
                 #endif
                 /* 0) Salir. */
-                case 0:
+                case 0:        
+                        msj = "";
                     break;
 
                 default: {
