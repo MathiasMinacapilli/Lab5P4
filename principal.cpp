@@ -699,14 +699,13 @@ int main() {
                             iproducto -> seleccionarProductoYCantidad(prod_y_cant);
                             cout << "\nDesea agregar más productos? Ingrese S o N. \n";
                             quiero_agregar = confirmacion();
-                            string confirmacion;
-                            bool error = false;
                         }
                         cout << "\nDesea que el pedido sea entregado? Ingrese S o N. \n";
                         bool quiero_recibir = confirmacion();
                         if (quiero_recibir) {
                             map<int, Repartidor*> repartidores_disponibles = iempleado -> getRepartidoresDisponibles();
                             map<int, Repartidor*>::iterator it_repartidores;
+                            cout << "Estos son los repartidores disponibles. \n";
                             for (it_repartidores = repartidores_disponibles.begin(); it_repartidores != repartidores_disponibles.end(); ++it_repartidores){
                                 cout << (it_repartidores -> second) -> getNumero()
                                     << " - "
@@ -842,7 +841,7 @@ int main() {
                                 cout << "\nEl código no esta asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
                                 cin >> codigo;
                             }
-                            DtProducto prod = iproducto -> getProducto();
+                            DtProducto prod = productos[codigo];
                             int cantidad = conseguirCantidad();
                             DtProductoCantidad producto_cantidad = DtProductoCantidad(prod, cantidad);
                             iventa -> seleccionarProdYCant(producto_cantidad);
@@ -927,7 +926,7 @@ int main() {
                                 cout << "\nEl código no esta asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
                                 cin >> codigo;
                             }
-                            DtProducto prod = iproducto -> getProducto();
+                            DtProducto prod = productos_disponibles[codigo];
                             int cantidad = conseguirCantidad();
                             DtProductoCantidad producto_cantidad = DtProductoCantidad(prod, cantidad);
                             iventa -> seleccionarProdYCant(producto_cantidad);
