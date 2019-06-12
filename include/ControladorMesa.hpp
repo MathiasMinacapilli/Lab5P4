@@ -19,7 +19,7 @@ private:
     ControladorMesa();
     //instancia patron Singleton
     static ControladorMesa *instance;
-    
+
     map<int, Mesa*> mesas;
     Mesa* mesa_recordada;
     int num_mozo_recordado;
@@ -39,6 +39,7 @@ public:
     set<int> getMesasMozoSinVentas(int num_mozo);
     void seleccionarMesasVenta(set<int> numeros);
     set<int> getMesasSeleccionadas();
+    void agregarMesa(Mesa *m);
     void iniciarVenta();
     void cancelarVenta();
 };

@@ -93,6 +93,13 @@ set<int> ControladorMesa::getMesasSeleccionadas() {
   return mesas_a_seleccionar;
 }
 
+void ControladorMesa::agregarMesa(Mesa *m) {
+    if (!existeMesa(m -> getNum()))
+        mesas.insert(pair<int, Mesa*>(m -> getNum(), m));
+    else
+        throw new invalid_argument ("Ya existe ese número de mesa");
+}
+
 void ControladorMesa::iniciarVenta() {
   ControladorVenta* cont_venta = ControladorVenta::getInstance();
   VentaLocal* ve = cont_venta -> crearVenta();

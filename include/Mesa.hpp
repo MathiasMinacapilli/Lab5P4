@@ -17,7 +17,7 @@ private:
     map<int, VentaLocal *> ventasPasadas;
 public:
     //constructor y destructor
-    Mesa(int numero, Mozo *miMozo, VentaLocal *ventaActual, map<int, VentaLocal *> ventasPasadas);
+    Mesa(int numero, Mozo *miMozo, VentaLocal *ventaActual);
     ~Mesa();
     //getters y setters
     int getNum();

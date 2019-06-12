@@ -5,11 +5,11 @@ using namespace std;
 #include "../include/Mesa.hpp"
 
 //Constructor
-Mesa::Mesa(int numero, Mozo *miMozo, VentaLocal *ventaActual, map<int, VentaLocal *> ventasPasadas) {
+Mesa::Mesa(int numero, Mozo *miMozo, VentaLocal *ventaActual) {
   this -> numero = numero;
   this -> miMozo = miMozo;
   this -> ventaActual = ventaActual;
-  this -> ventasPasadas = ventasPasadas;
+  this -> ventasPasadas.clear();
 }
 
 //Destructor

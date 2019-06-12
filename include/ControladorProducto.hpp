@@ -27,14 +27,14 @@ private:
 	DtProductoSimple datos_prod_simple; //ingresarDatosProductoSimple
 	int codigo_menu;//ingresarMenu
 	string desc_menu; //ingresarMenu
-	map<int, DtProductoCantidad> prod_cants_recordados; //seleccionarProductoYCantidad 
+	map<int, DtProductoCantidad> prod_cants_recordados; //seleccionarProductoYCantidad
 	Producto *producto_recordado; //seleccionarProducto
 	int codigoProductoAConsultar;
 
 public:
 	//operacion patron singleton
 	static ControladorProducto *getInstance();
-	
+
 	//operaciones de la clase
 	//caso de uso: alta producto
 	bool existeProductoSimple();
@@ -46,15 +46,15 @@ public:
 	void seleccionarProductoYCantidad (DtProductoCantidad producto_cantidad);
 	void ingresarMenu();
 	void cancelarMenu();
-	
+
 	//caso de uso: baja producto
 	map<int, DtProducto> getProductosDisponibles();
 	void seleccionarProducto(int codigo_producto);
 	bool eliminarProducto();
 	void cancelarBajaProducto();
-	//baja producto -- eliminar() en ProductoSimple 
+	//baja producto -- eliminar() en ProductoSimple
 	void eliminarProductoDeMenu(int cod);
-	
+
 	//caso de uso: agregar producto a venta -- seleccionarProdYCant
 	Producto* encontrarProducto(DtProductoCantidad producto_cantidad);
 
@@ -63,6 +63,10 @@ public:
     void cancelarInformacion();
     DtProducto getProducto();
     int getCantidadProductoTotalVendidos();
+
+	void agregarProductoSimple(ProductoSimple *ps);
+	void agregarMenu(Menu *menu);
+	
 };
 
 

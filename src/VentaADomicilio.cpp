@@ -5,8 +5,9 @@ using namespace std;
 //Archivos
 #include "../include/VentaADomicilio.hpp"
 
-VentaADomicilio::VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa) : Venta (numero, descuento, factura) {
+VentaADomicilio::VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente) : Venta (numero, descuento, factura) {
   this -> etapa = etapa;
+  this -> miCliente = miCliente;
 }
 
 VentaADomicilio::~VentaADomicilio() {
@@ -24,7 +25,7 @@ void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
     	tm* now = localtime(&t);
     	DtFechaYHora fecha_y_hora = DtFechaYHora(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900, now->tm_hour, now->tm_min, now->tm_sec);
 
-    
+
 	}
 }
 

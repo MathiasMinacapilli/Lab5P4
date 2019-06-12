@@ -17,7 +17,7 @@ private:
     IObserverActualizaciones *miObservador;
     Cliente *miCliente;
 public:
-    VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa);
+    VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente);
     ~VentaADomicilio();
     void avanzarEtapaVenta(string nombre_repartidor);
     void cancelarVenta();
