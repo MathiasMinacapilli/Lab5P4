@@ -25,7 +25,7 @@ public:
     DtFechaYHora getFechaYHora() const;
     string getNombre();
     string getTelefono();
-    set<DtProducto> getDatosProducto();
+    map<int, DtProductoCantidad> getDatosProductos();
     string getNombreRepartidor();
     EtapaPedido getEtapaActual();
     bool operator<(const DtActualizacion&) const;
