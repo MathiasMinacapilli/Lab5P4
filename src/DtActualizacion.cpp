@@ -22,15 +22,15 @@ string DtActualizacion::getTelefono() {
     return this->telefono;
 }
 
-set<DtProducto> DtActualizacion::getDatosProducto() {
-    return this->datosProducto;
+map<int, DtProductoCantidad> DtActualizacion::getDatosProductos() {
+    return this->datosProductos;
 }
 
 string DtActualizacion::getNombreRepartidor() {
     return this->nombreRepartidor;
 }
 
-Etapa* DtActualizacion::getEtapaActual() {
+EtapaPedido DtActualizacion::getEtapaActual() {
     return this->etapaActual;
 }
 
