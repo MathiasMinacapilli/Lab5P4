@@ -8,25 +8,25 @@ using namespace std;
 
 //Archivos
 #include "DtFechaYHora.hpp"
-#include "DtProducto.hpp"
-#include "Etapa.hpp"
+#include "DtProductoCantidad.hpp"
+#include "EtapaPedido.hpp"
 
 class DtActualizacion {
 private:
     DtFechaYHora fechaYHora;
     string nombre;
     string telefono;
-    set<DtProducto> datosProducto;
+    map<int, DtProductoCantidad> datosProductos;
     string nombreRepartidor;
-    Etapa* etapaActual;
+    EtapaPedido etapaActual;
 public:
-    DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, set<DtProducto> datosProducto, string nombreRepartidor, Etapa* etapaActual);
+    DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, map<int, DtProductoCantidad> datosProductos, string nombreRepartidor, EtapaPedido etapaActual);
     DtFechaYHora getFechaYHora() const;
     string getNombre();
     string getTelefono();
     set<DtProducto> getDatosProducto();
     string getNombreRepartidor();
-    Etapa* getEtapaActual();
+    EtapaPedido getEtapaActual();
     bool operator<(const DtActualizacion&) const;
     ~DtActualizacion();
 };

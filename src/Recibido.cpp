@@ -8,9 +8,9 @@ Recibido::~Recibido() {
 }
 
 Etapa *Recibido::avanzarEtapa() {
-    return this;
+    return nullptr;
 }
 
 Etapa *Recibido::cancelar() {
-    return this;
+    return nullptr;
 }

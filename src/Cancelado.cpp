@@ -8,9 +8,9 @@ Cancelado::~Cancelado() {
 }
 
 Etapa *Cancelado::avanzarEtapa() {
-    return this;
+    return nullptr;
 }
 
 Etapa *Cancelado::cancelar() {
-    return this;
+    return nullptr;
 }
