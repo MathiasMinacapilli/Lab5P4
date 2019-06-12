@@ -873,6 +873,10 @@ int main() {
                         int num_mesa = conseguirNumeroMesa();
                         iventa -> ingresarNumeroMesa(num_mesa);
                         float porcentaje = conseguirDescuento();
+                        //FALTA HACER CASTEO
+                        //CASTEO
+                        //AA
+                        //AAA
                         DtFactura factura = iventa -> generarFactura();
                         cout << factura;
                     } catch(exception* e) {

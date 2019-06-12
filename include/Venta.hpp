@@ -39,8 +39,8 @@ public:
     bool buscarProducto(Producto* producto);
     bool estaFacturada();
     void eliminarProducto(Producto* producto, int cantidad);
-    DtFactura facturar();
     map<int, DtProducto> obtenerProductos();
+    virtual DtFactura facturar() = 0;
 };
 
 #endif

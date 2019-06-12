@@ -2,6 +2,7 @@
 #define _VENTALOCAL_HPP
 
 //Archivos
+#include "DtFacturaLocal.hpp"
 #include "Venta.hpp"
 #include "Mozo.hpp"
 #include "Producto.hpp"
@@ -13,7 +14,7 @@ public:
     VentaLocal(int numero, float descuento, Factura* factura);
     ~VentaLocal();
     void setMozo(Mozo *mozo);
-
+    DtFactura facturar();
 };
 
 #endif

@@ -137,7 +137,7 @@ void cargarDatosDePrueba() {
     ControladorVenta *cont_venta = iventa -> getInstance();
     ControladorEmpleado *cont_empleado = iempleado -> getInstance();
     //V4
-    venta_domicilio = new VentaADomicilio(4, 0, nullptr, EnCamino, "Martin");
+    venta_domicilio = new VentaADomicilio(4, 0, nullptr, EnCamino, "Martin");// OJO QUE CAMBIO LA FUNCION
     cont_empleado -> seleccionarRepartidor(4);
 
     venta_domicilio -> agregarProductoAVenta()
