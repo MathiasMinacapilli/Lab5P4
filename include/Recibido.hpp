@@ -8,7 +8,7 @@ class Recibido : public Etapa {
 public:
     Recibido();
     ~Recibido();
-    Etapa *avanzarEtapa();
+    Etapa *avanzarEtapa(EtapaPedido &etapa_pedido);
     Etapa *cancelar();
 };
 

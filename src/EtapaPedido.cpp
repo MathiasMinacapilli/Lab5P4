@@ -3,16 +3,16 @@
 
 std::ostream& operator<<(std::ostream & os, EtapaPedido etapa){
   switch (etapa) {
-  case Pedido:
+  case pedido:
       os << "Pedido";
       break;
-  case EnCamino:
+  case enCamino:
       os << "En Camino";
       break;
-  case Recibido:
+  case recibido:
       os << "Recibido";
       break;
-  case Cancelado:
+  case cancelado:
       os<< "Cancelado"
       break;
   }

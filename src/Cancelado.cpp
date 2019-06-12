@@ -7,7 +7,7 @@ Cancelado::Cancelado() : Etapa() {
 Cancelado::~Cancelado() {
 }
 
-Etapa *Cancelado::avanzarEtapa() {
+Etapa *Cancelado::avanzarEtapa(EtapaPedido &etapa_pedido) {
     return nullptr;
 }
 

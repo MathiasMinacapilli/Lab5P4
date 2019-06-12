@@ -8,7 +8,7 @@ class EnCamino : public Etapa {
 public:
     EnCamino();
     ~EnCamino();
-    Etapa *avanzarEtapa();
+    Etapa *avanzarEtapa(EtapaPedido &etapa_pedido);
     Etapa *cancelar();
 };
 

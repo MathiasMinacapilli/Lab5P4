@@ -9,10 +9,13 @@ EnCamino::EnCamino() : Etapa() {
 EnCamino::~EnCamino() {
 }
 
-Etapa *EnCamino::avanzarEtapa() {
-  return new Recibido();
+Etapa *EnCamino::avanzarEtapa(EtapaPedido &etapa_pedido) {
+	etapa_pedido = recibido;
+	Etapa* nueva = new Recibido();
+	return nueva;
 }
 
 Etapa *EnCamino::cancelar() {
-  return new Cancelado();
+	Etapa* nueva = new Cancelado();
+	return nueva;
 }

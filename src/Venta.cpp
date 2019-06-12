@@ -31,10 +31,6 @@ Factura* Venta::getFactura() {
   return this -> factura;
 }
 
-set<DtActualizacion> Venta::getActualizaciones() {
-  return this -> actualizaciones;
-}
-
 void Venta::setDescuento(float descuento) {
   this -> descuento = descuento;
 }

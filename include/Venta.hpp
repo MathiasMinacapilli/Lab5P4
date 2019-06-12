@@ -18,21 +18,19 @@ class Venta {
 private:
     int numero;
     float descuento;
-    map<int, CantidadProducto*> cants_productos;
     Factura* factura;
-    set<DtActualizacion> actualizaciones;
 protected:
     Venta(int numero, float descuento, Factura* factura);
+    map<int, CantidadProducto*> cants_productos;
 public:
-    ~Venta();
+    virtual ~Venta();
 
     // Getters
     int getNumero();
     float getDescuento();
     map<int, CantidadProducto*> getCants_Productos();
     Factura* getFactura();
-    set<DtActualizacion> getActualizaciones();
-
+    
     // Setters
     void setDescuento(float descuento);
     void setFactura(Factura* factura);

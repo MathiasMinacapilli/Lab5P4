@@ -9,10 +9,11 @@ Pedido::Pedido() : Etapa() {
 Pedido::~Pedido() {
 }
 
-Etapa *Pedido::avanzarEtapa() {
-  return new EnCamino;
+Etapa *Pedido::avanzarEtapa(EtapaPedido &etapa_pedido) {
+	etapa_pedido = enCamino;
+	return new EnCamino();
 }
 
 Etapa *Pedido::cancelar() {
-  return new Cancelado;
+  return new Cancelado();
 }
