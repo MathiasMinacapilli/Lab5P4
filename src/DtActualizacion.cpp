@@ -5,7 +5,7 @@ DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string 
     this->fechaYHora = fechaYHora;
     this->nombre = nombre;
     this->telefono = telefono;
-    this->datosProducto = datosProducto;
+    this->datosProductos = datosProductos;
     this->nombreRepartidor = nombreRepartidor;
     this->etapaActual = etapaActual;
 }
