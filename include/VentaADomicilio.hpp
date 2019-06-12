@@ -18,11 +18,13 @@ private:
     Cliente *miCliente;
     set<DtActualizacion> actualizaciones;
 public:
+	VentaADomicilio();
     VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente);
     ~VentaADomicilio();
     void avanzarEtapaVenta(string nombre_repartidor);
     void cancelarVenta(string nombre_repartidor);
     set<DtActualizacion> getActualizaciones() const;
+    Cliente* getCliente();
 };
 
 #endif

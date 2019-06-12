@@ -109,4 +109,45 @@ map<int, DtFactura> ControladorEmpleado::getVentasFacturadas() {
 	return res;
 }
 
+//MODIFICAR ETAPA PEDIDO
+void ControladorEmpleado::ingresarIdRepartidor(int id){
+	map<int, Repartidor *>::iterator it = this->repartidores.find(id);
+	if (it != this->repartidores.end()){
+		this -> id_repartidor_recordado = id;
+	}
+	else throw new invalid_argument("Error. No existe un repartidor con ese id. ");
+}
+
+map<int, DtDireccion> ControladorEmpleado::getVentasRepartidor(){
+	Repartidor *repartidor = this->repartidores[this->id_repartidor_recordado];
+	map<int, DtDireccion> resultado;
+	map<int, VentaADomicilio *> ventas_repartidor = repartidor -> getVentas();
+	map<int, VentaADomicilio *>::iterator it; 
+	for (it = ventas_repartidor.begin(); it != ventas_repartidor.end(); ++it){
+		DtDireccion dir = it->second->getCliente()->getDireccion();
+		int numero = it->second->getNumero();
+		resultado[numero] = dir;
+	}
+	return resultado;
+}
+
+void ControladorEmpleado::ingresarNumeroPedido(int nro){
+	this -> pedido_recordado = nro;
+}
+
+void ControladorEmpleado::avanzarEtapaPedido(){
+	Repartidor *repartidor = this->repartidores[this->id_repartidor_recordado];
+	map<int, VentaADomicilio *> ventas_repartidor = repartidor -> getVentas();
+	VentaADomicilio *venta = ventas_repartidor[this->pedido_recordado];
+	venta->avanzarEtapaVenta(repartidor->getNombre());
+}
+
+void ControladorEmpleado::cancelarPedido(){
+	Repartidor *repartidor = this->repartidores[this->id_repartidor_recordado];
+	map<int, VentaADomicilio *> ventas_repartidor = repartidor -> getVentas();
+	VentaADomicilio *venta = ventas_repartidor[this->pedido_recordado];
+	venta->cancelarVenta(repartidor->getNombre());
+}
+
+//destructor
 ControladorEmpleado::~ControladorEmpleado(){}

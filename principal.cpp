@@ -979,15 +979,59 @@ int main() {
                 switch(opcion_repartidor) {
 
                 /* 1) Modificar estado de un pedido. */
-                #if 0
                 case 1:
                     try {
+                        system("clear");
+                        cout << "--------------------" << "Modificar estado de pedido" << "-------------------- \n \n";
+                        cout << "Ingrese su id de empleado: ";
+                        int id;
+                        cin >> id;
+                        iempleado -> ingresarIdRepartidor(id);
+                        map<int, DtDireccion> pedidos = iempleado -> getVentasRepartidor();
+                        map<int, DtDireccion>::iterator it;
+                        cout << "Sus pedidos son: \n";
+                        for (it = pedidos.begin(); it != pedidos.end(); ++it)
+                            cout << "Venta nro. " << it->first << " ( " << it->second << ") \n"; 
+                        cout << "Ingrese el numero del pedido cuyo estado quiere modificar: ";
+                        int numero; 
+                        cin >> numero; 
+                        while (pedidos.find(numero) == pedidos.end()){
+                            cout << "Error. Ese numero no pertence a ninguno de sus pedidos. \n";
+                            cout << "Por favor, ingrese otro numero: ";
+                            cin >> numero;
+                        }
+                        iempleado -> ingresarNumeroPedido(numero);
+                        system("clear");
+                        cout << "-----------------" << "Modificar estado de pedido nro. " << numero << "----------------- \n \n"
+                            << " - Elija la opción deseada -  \n \n"
+                            << " 1) Avanzar etapa. \n"
+                            << " 2) Cancelar pedido. \n"
+                            << " 0) Volver a pantalla principal. \n \n"
+                            << " Opción: ";
+                        int opcion;
+                        cin >> opcion;
+                        switch(opcion){
+                            case 1:
+                                iempleado -> avanzarEtapaPedido();
+                                msj = "Etapa modificada correctamente ";
+                                break;
+                            case 2:
+                                iempleado -> cancelarPedido();
+                                msj = "Pedido cancelado correctamente ";
+                                break;
+                            case 0: 
+                                msj = "No se realizaron cambios en los pedidos ";
+                                break;
+                            default:
+                                cout << "Numero invalido. Ingrese un numero entre 0 y 2. ";
+                                break;
+                        }
 
                     } catch(exception* e) {
 
                     }
                     break;
-                #endif
+               
                 /* 0) Salir. */
                 case 0:
                     msj = "";

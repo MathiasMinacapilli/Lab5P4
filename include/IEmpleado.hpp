@@ -32,6 +32,13 @@ public:
     virtual set<int> getIds() = 0;
     virtual void seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin) = 0;
     virtual map<int, DtFactura> getVentasFacturadas() = 0;
+    //Caso de uso: Modificar etapa de un pedido
+    virtual void ingresarIdRepartidor(int id) = 0;
+    virtual map<int, DtDireccion> getVentasRepartidor() = 0;
+    virtual void ingresarNumeroPedido(int nro) = 0;
+    virtual void avanzarEtapaPedido() = 0;
+    virtual void cancelarPedido() = 0;
+
     //destructor
     virtual ~IEmpleado(); // virtual y vacío
 };

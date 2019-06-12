@@ -26,6 +26,10 @@ string Cliente::getNombre(){
 	return this->nombre;
 }
 
+DtDireccion Cliente::getDireccion(){
+	return this->direccion;
+}
+
 //patron observer
 void Cliente::suscribirse() {}
 void Cliente::bajaSuscripcion() {}

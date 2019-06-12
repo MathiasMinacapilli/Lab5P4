@@ -29,6 +29,8 @@ private:
 	int id_mozo_recordado;
 	DtFecha fecha_ini_recordada;
 	DtFecha fecha_fin_recordada;
+	int id_repartidor_recordado;
+	int pedido_recordado;
 
 public:
 	//operacion patron Singleton
@@ -48,7 +50,14 @@ public:
     set<int> getIds();
     void seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin);
     map<int, DtFactura> getVentasFacturadas();
+    //Caso de uso: Modificar estado de un pedido
+    void ingresarIdRepartidor(int id);
+    map<int, DtDireccion> getVentasRepartidor();
+    void ingresarNumeroPedido(int nro);
+    void avanzarEtapaPedido();
+    void cancelarPedido();
 
+    //destructor
 	~ControladorEmpleado();
 
 };

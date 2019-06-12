@@ -5,18 +5,29 @@ using namespace std;
 //Archivos
 #include "../include/VentaADomicilio.hpp"
 
+//constructor por defecto
+VentaADomicilio::VentaADomicilio(){}
+
+//constructor por parametros
 VentaADomicilio::VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente) : Venta (numero, descuento, factura) {
   this -> etapa = etapa;
   this -> miCliente = miCliente;
 }
 
+//destructor
 VentaADomicilio::~VentaADomicilio() {
 }
 
+//getters
 set<DtActualizacion> VentaADomicilio::getActualizaciones() const{
   return this -> actualizaciones;
 }
 
+Cliente* VentaADomicilio::getCliente(){
+  return this -> miCliente;
+}
+
+//Operaciones patron State
 void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
 	EtapaPedido etapa_pedido;
 	Etapa *aux = etapa -> avanzarEtapa(etapa_pedido);
