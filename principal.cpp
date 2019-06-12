@@ -51,7 +51,7 @@ static int conseguirCantidad() {
         cin >> cantidad;
         if (cantidad < 0)
             cout << "\nCantidad ingresada no válida.";
-        
+
     } while (cantidad < 0);
     return cantidad;
 }
@@ -65,7 +65,7 @@ static int conseguirNumeroMesa() {
         cin >> numero;
         if (numero < 0)
             cout << "\nNúmero ingresado no válido.";
-        
+
     } while (numero < 0);
     return numero;
 }
@@ -88,7 +88,7 @@ static string conseguirTelefono() {
     while (no_lo_consigo) {
         es_numero = all_of(telefono.begin(), telefono.end(), ::isdigit);
         if (!es_numero) {
-            cout << "Teléfono no válido. Ingrese su número de teléfono. \n" 
+            cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
                 << " Teléfono: ";
             cin >> telefono;
         }
@@ -97,7 +97,7 @@ static string conseguirTelefono() {
     }
     return telefono;
     }
-    
+
 
 
 /* Obtiene el porcentaje de descuento. */
@@ -189,7 +189,7 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
         cout << "Número de puerta: ";
         int nro;
         cin >> nro;
-        getchar(); 
+        getchar();
         cout << "Esquina 1: ";
         string esq1;
         getline(cin, esq1);
@@ -204,7 +204,7 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
             string nombre_edificio;
             getline(cin, nombre_edificio);
             cout<< "Número de apartamento: ";
-            int nro_apto; 
+            int nro_apto;
             cin >> nro_apto;
             apto = DtApto(calle, nro, esq1, esq2, nombre_edificio, nro_apto);
         }
@@ -224,7 +224,7 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
                 cout << "Los datos ingresados son: \n";
                 cout << datos << "\n";
             }
-           
+
             cout << "Desea confirmar el ingreso del cliente? S/N \n";
             bool confirma_cliente = confirmacion();
             if (confirma_cliente){
@@ -783,12 +783,12 @@ int main() {
 
                     }
                     break;
-                    
+
                 /* 0) Volver a pantalla principal. */
                 case 0:
                         msj = "";
                     break;
-                    
+
                 default: {
                     msj = "Número inválido. Ingrese valor entre 0 y 10.";
                 }
@@ -818,7 +818,7 @@ int main() {
                 switch(opcion_mozo) {
 
                 /* 1) Agregar producto a una venta. (Hay Diagrama de Comunicacion) */
-                
+
                 case 1:
                     try {
                         system("clear");
@@ -865,7 +865,7 @@ int main() {
                         break;
                     }
                     break;
-                    
+
                 /* 2) Facturación de una venta. (Hay Diagrama de Comunicacion) */
                 case 2:
                     try {
@@ -883,9 +883,9 @@ int main() {
                         break;
                     }
                     break;
- 
+
                 /* 3) Iniciar venta en mesas */
-               
+
                 case 3:
                     try {
                         system("clear");
@@ -904,7 +904,7 @@ int main() {
 
                     }
                     break;
-                
+
                 /* 4) Quitar producto de una venta. (Hay Diagrama de Comunicacion) */
                 case 4:
                     try {
@@ -950,10 +950,10 @@ int main() {
                         break;
                     }
                     break;
-                    
+
                 /* 0) Salir. */
                 case 0:
-                        msj = "";
+                    msj = "";
                     break;
 
                 default: {
@@ -990,8 +990,8 @@ int main() {
                     break;
                 #endif
                 /* 0) Salir. */
-                case 0:        
-                        msj = "";
+                case 0:
+                    msj = "";
                     break;
 
                 default: {
@@ -1029,6 +1029,7 @@ int main() {
                 #endif
                 /* 0) Salir. */
                 case 0:
+                    msj = "";
                     break;
 
                 default: {
@@ -1044,6 +1045,7 @@ int main() {
         /* 5) Cargar datos de prueba. */
         case 5: {
             try {
+                #if 0
                 //Cargo productos
                 DtProductoSimple producto_simple = DtProductoSimple(1, "Pizza", 100);
                 iproducto->ingresarDatosProducto(producto_simple);
@@ -1057,7 +1059,7 @@ int main() {
                 producto_simple = DtProductoSimple(4, "Papas Cheddar", 120);
                 iproducto->ingresarDatosProducto(producto_simple);
                 iproducto->ingresarProductoSimple();
-                
+
                 iproducto->ingresarDatosMenu(5, "Pizza+2Coca");
                 DtProducto producto = DtProducto(1, "Pizza", 100);
                 DtProductoCantidad producto_cantidad = DtProductoCantidad(producto, 1);
@@ -1088,6 +1090,7 @@ int main() {
                 t = Moto;
                 iempleado->seleccionarTransporte(t);
                 iempleado->ingresarRepartidor();
+                #endif
                 msj = "Datos cargados correctamente.";
             } catch(exception* e) {
                 system("clear");
@@ -1097,7 +1100,7 @@ int main() {
             }
             break;
         }
-        
+
         /* 0) Salir. */
         case 0:
             system("clear");
@@ -1106,7 +1109,7 @@ int main() {
             cout << "-------------------------------------------------------- \n \n";
             salir = true;
             break;
-            
+
         default: {
             msj = "Número inválido. Ingrese valor entre 0 y 5.";
         }
