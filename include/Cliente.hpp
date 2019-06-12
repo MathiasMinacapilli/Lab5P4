@@ -22,6 +22,7 @@ public:
 	Cliente();
 	Cliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
     string getTelefono();
+    string getNombre();
     void suscribirse();
     void bajaSuscripcion();
     void consultarPedidos();

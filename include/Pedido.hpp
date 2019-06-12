@@ -11,7 +11,7 @@ class Pedido : public Etapa {
 public:
     Pedido();
     ~Pedido();
-    Etapa *avanzarEtapa();
+    Etapa *avanzarEtapa(EtapaPedido &etapa_pedido);
     Etapa *cancelar();
 };
 

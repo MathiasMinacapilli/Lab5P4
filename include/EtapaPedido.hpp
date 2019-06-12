@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-enum EtapaPedido {Pedido, EnCamino, Recibido, Cancelado};
+enum EtapaPedido {pedido, enCamino, recibido, cancelado};
 
 std::ostream& operator<<(std::ostream & os, EtapaPedido etapa);
 

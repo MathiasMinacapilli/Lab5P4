@@ -7,7 +7,7 @@ Recibido::Recibido() : Etapa() {
 Recibido::~Recibido() {
 }
 
-Etapa *Recibido::avanzarEtapa() {
+Etapa *Recibido::avanzarEtapa(EtapaPedido &etapa_pedido) {
     return nullptr;
 }
 

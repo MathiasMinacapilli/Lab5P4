@@ -46,7 +46,7 @@ void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
     }
 }
 
-void VentaADomicilio::cancelarVenta() {
+void VentaADomicilio::cancelarVenta(string nombre_repartidor) {
   Etapa *aux = etapa -> cancelar();
   //si cambio etapa
   if (aux != nullptr){
@@ -67,7 +67,7 @@ void VentaADomicilio::cancelarVenta() {
     for (it = this->cants_productos.begin(); it != this->cants_productos.end(); ++it){
       DtProducto datos = it->second->getProducto()->getDatosProducto();
       DtProductoCantidad  prod_cant = DtProductoCantidad(datos, it->second->getCantidad());
-      info_productos[datos->getCodigo()] = prod_cant;
+      info_productos[datos.getCodigo()] = prod_cant;
     }
 
     //construyo actualizacion

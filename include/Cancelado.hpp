@@ -8,7 +8,7 @@ class Cancelado : public Etapa {
 public:
     Cancelado();
     ~Cancelado();
-    Etapa *avanzarEtapa();
+    Etapa *avanzarEtapa(EtapaPedido &etapa_pedido);
     Etapa *cancelar();
 };
 

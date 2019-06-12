@@ -6,11 +6,6 @@ using namespace std;
 //Archivos
 #include "../include/Cliente.hpp"
 
-void Cliente::suscribirse() {}
-void Cliente::bajaSuscripcion() {}
-void Cliente::consultarPedidos() {}
-void Cliente::notificar(DtActualizacion actualizacion) {}
-
 //Constructor por defecto
 Cliente::Cliente(){}
 
@@ -22,6 +17,17 @@ Cliente::Cliente(string telefono, string nombre, DtDireccion direccion, set<DtAc
 	this->etapaPedidos = etapaPedidos;
 }
 
+//getters
 string Cliente::getTelefono(){
 	return this->telefono;
 }
+
+string Cliente::getNombre(){
+	return this->nombre;
+}
+
+//patron observer
+void Cliente::suscribirse() {}
+void Cliente::bajaSuscripcion() {}
+void Cliente::consultarPedidos() {}
+void Cliente::notificar(DtActualizacion actualizacion) {}

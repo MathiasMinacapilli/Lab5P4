@@ -173,7 +173,9 @@ set<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
   pair<set<DtActualizacion>::iterator, bool> ptr;
   map<int, Venta*>::iterator it;
   for(it = ventas.begin(); it != ventas.end(); ++it) {
-    aux = (it -> second) -> getActualizaciones();
+    Venta *v = it->second;
+    const VentaADomicilio* venta_domicilio = dynamic_cast<VentaADomicilio*>(const_cast<Venta*>(v));
+    aux = venta_domicilio -> getActualizaciones();
     for (it_actualizacion = aux.begin(); it_actualizacion != aux.end(); ++it_actualizacion){
           DtActualizacion dt_act = *it_actualizacion;
           ptr = res.insert(dt_act);
