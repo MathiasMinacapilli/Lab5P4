@@ -825,26 +825,44 @@ int main() {
                         cout << "--------------------" << "Agregar producto a una venta" << "-------------------- \n \n";
                         int numero_mesa = conseguirNumeroMesa();
                         iventa -> ingresarNumeroMesa(numero_mesa);
-                        map<int, DtProducto> productos = iventa -> obtenerProductosDisponibles();
-                        map<int, DtProducto>::iterator it;
-                        cout << "Estos son los productos disponibles. \n";
-                        for (it = productos.begin(); it != productos.end(); ++it) {
-                             cout << (it -> second) << "\n";
-                        }
-                        cout << "Ingrese el código del producto a agregar. \n"
-                                << " Código: ";
-                        int codigo;
-                        cin >> codigo;
-                        while (!(iproducto -> ingresarCodigoProductoAConsultar(codigo))) {
-                            cout << "\nEl código no esta asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
+                        bool quiero_agregar = true;
+                        bool quiero_confirmar;
+                        while (quiero_agregar) {
+                            map<int, DtProducto> productos = iventa -> obtenerProductosDisponibles();
+                            map<int, DtProducto>::iterator it;
+                            cout << "Estos son los productos disponibles. \n";
+                            for (it = productos.begin(); it != productos.end(); ++it) {
+                                cout << (it -> second) << "\n";
+                            }
+                            cout << "Ingrese el código del producto a agregar. \n"
+                                    << " Código: ";
+                            int codigo;
                             cin >> codigo;
+                            while (!(iproducto -> ingresarCodigoProductoAConsultar(codigo))) {
+                                cout << "\nEl código no esta asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
+                                cin >> codigo;
+                            }
+                            DtProducto prod = iproducto -> getProducto();
+                            int cantidad = conseguirCantidad();
+                            DtProductoCantidad producto_cantidad = DtProductoCantidad(prod, cantidad);
+                            iventa -> seleccionarProdYCant(producto_cantidad);
+                            cout << "\n¿Desea agregar el producto a la venta? Ingrese S o N.\n";
+                                quiero_confirmar = confirmacion();
+                                if (quiero_confirmar) {
+                                    iventa -> eliminarProductoDeVenta();
+                                    cout << "Se quitó el producto correctamente. \n";
+                                } else {
+                                    iventa -> cancelarEliminarProductoDeVenta();
+                                    cout << "El producto no se eliminó. \n";
+                                }
+                                cout << "\n¿Desea quitar más productos de la venta? Ingrese S o N.\n";
+                                quiero_agregar = confirmacion();
                         }
-                        DtProducto prod = iproducto -> getProducto();
-                        int cantidad = conseguirCantidad();
-                        DtProductoCantidad producto_cantidad = DtProductoCantidad(prod, cantidad);
-                        iventa -> seleccionarProdYCant(producto_cantidad);
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
                     
