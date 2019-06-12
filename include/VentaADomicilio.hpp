@@ -16,11 +16,13 @@ private:
     Etapa *etapa;
     IObserverActualizaciones *miObservador;
     Cliente *miCliente;
+    set<DtActualizacion> actualizaciones;
 public:
     VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa);
     ~VentaADomicilio();
     void avanzarEtapaVenta(string nombre_repartidor);
     void cancelarVenta();
+    set<DtActualizacion> getActualizaciones() const;
 };
 
 #endif
