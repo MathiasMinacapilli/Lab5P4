@@ -26,6 +26,7 @@ using namespace std;
 #include "include/IProducto.hpp"
 #include "include/IVenta.hpp"
 #include "include/Fabrica.hpp"
+#include "src/CargarDatosDePrueba.cpp"
 
 /*
 -------------------------------------
@@ -1110,35 +1111,7 @@ int main() {
         case 5: {
             try {
                 //Cargo productos
-                DtProductoSimple producto_simple = DtProductoSimple(1, "Pizza", 100);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(2, "Hamburguesa", 70);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(3, "Coca", 50);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(4, "Papas Cheddar", 120);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-
-                iproducto->ingresarDatosMenu(5, "Pizza+2Coca");
-                DtProducto producto = DtProducto(1, "Pizza", 100);
-                DtProductoCantidad producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                producto = DtProducto(3, "Coca", 50);
-                producto_cantidad = DtProductoCantidad(producto, 2);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                iproducto->ingresarMenu();
-                iproducto->ingresarDatosMenu(6, "Hamburguesa+Papas Cheddar");
-                producto = DtProducto(2, "Hamburguesa", 70);
-                producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                producto = DtProducto(4, "Papas Cheddar", 120);
-                producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                iproducto->ingresarMenu();
+                cargarDatosDePrueba();
                 #if 0
                 //Cargo productos
                 DtProductoSimple producto_simple = DtProductoSimple(1, "Pizza", 100);

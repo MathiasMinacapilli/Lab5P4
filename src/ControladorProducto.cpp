@@ -220,16 +220,16 @@ int ControladorProducto::getCantidadProductoTotalVendidos() {
 	}
 }
 
-/* void ControladorProducto::agregarProductoSimple(ProductoSimple *ps) {
+void ControladorProducto::agregarProductoSimple(ProductoSimple *ps) {
 	if(this -> encontrarProducto(ps -> getCodigo()) == nullptr)
 		(this -> productosSimples).insert(pair<int, ProductoSimple*>(ps -> getCodigo(), ps));
 	else
 		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
-} */
+}
 
-/* void ControladorProducto::agregarMenu(Menu *menu) {
+void ControladorProducto::agregarMenu(Menu *menu) {
 	if(this -> encontrarProducto(menu -> getCodigo()) == nullptr)
 		(this -> menus).insert(pair<int, Menu*>(menu -> getCodigo(), menu));
 	else
 		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
-} */
+}
