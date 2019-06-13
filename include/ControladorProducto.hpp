@@ -13,6 +13,8 @@ using namespace std;
 #include "Menu.hpp"
 #include "Producto.hpp"
 #include "DtProductoSimple.hpp"
+#include "DtMenu.hpp"
+#include "DtProductoEnMenu.hpp"
 #include "ControladorVenta.hpp"
 
 class ControladorProducto : public IProducto {

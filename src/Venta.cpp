@@ -5,6 +5,8 @@ using namespace std;
 //Archivos
 #include "../include/Venta.hpp"
 
+Venta::Venta() {}
+
 Venta::Venta(int numero, float descuento, Factura* factura) {
     this -> numero = numero;
     this -> descuento = descuento;

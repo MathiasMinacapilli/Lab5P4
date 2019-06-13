@@ -17,6 +17,7 @@
 using namespace std;
 
 //Archivos
+#include "include/DtProducto.hpp"
 #include "include/DtProductoSimple.hpp"
 #include "include/DtMenu.hpp"
 #include "include/ICliente.hpp"
@@ -63,9 +64,10 @@ static int conseguirNumeroMesa() {
         cout << "Ingrese el número de mesa. \n"
             << " Número: ";
         cin >> numero;
-        if (numero < 0)
-            cout << "\nNúmero ingresado no válido.";
-
+        if (!(numero >= 0)) {
+            cout << "\nNúmero ingresado no valido.";
+            system("clear");
+        }
     } while (numero < 0);
     return numero;
 }
@@ -609,11 +611,23 @@ int main() {
                         if(!cancelar) {
                             string waste = "";
                             DtProducto prod = iproducto->getProducto();
+                            DtProducto* prod_ptr = &prod;
+                            DtMenu* dtmenu_ptr = dynamic_cast<DtMenu*>(prod_ptr);
                             cout << "-Codigo: " << prod.getCodigo()
                                 << "\n-Descripcion: " << prod.getDescripcion()
                                 << "\n-Precio: " << prod.getPrecio()
-                                << "\n-Cantidad vendidos: " << iproducto->getCantidadProductoTotalVendidos()
-                                << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                                << "\n-Cantidad vendidos: " << iproducto->getCantidadProductoTotalVendidos();
+                            if(dtmenu_ptr != nullptr) {
+                                //Tengo que mostrar todos los productos simples dentro del menu
+                                DtMenu dtmenu = *dtmenu_ptr;
+                                map<int, DtProductoEnMenu> prods = dtmenu.getProductos();
+                                map<int, DtProductoEnMenu>::iterator it;
+                                for(it = prods.begin(); it != prods.end(); ++it) {
+                                    cout << "-Codigo: " << prod.getCodigo()
+                                        << "\n-Descripcion: " << prod.getDescripcion();
+                                }
+                            }
+                            cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
                             /* FALTA POR HACER -> COMO VER SI ES UN MENU Y RECORRER SUS PRODUCTOS */
                         } else {
                             iproducto->cancelarInformacion();
@@ -888,7 +902,6 @@ int main() {
                     break;
 
                 /* 3) Iniciar venta en mesas */
-
                 case 3:
                     try {
                         system("clear");
@@ -1092,6 +1105,36 @@ int main() {
         /* 5) Cargar datos de prueba. */
         case 5: {
             try {
+                //Cargo productos
+                DtProductoSimple producto_simple = DtProductoSimple(1, "Pizza", 100);
+                iproducto->ingresarDatosProducto(producto_simple);
+                iproducto->ingresarProductoSimple();
+                producto_simple = DtProductoSimple(2, "Hamburguesa", 70);
+                iproducto->ingresarDatosProducto(producto_simple);
+                iproducto->ingresarProductoSimple();
+                producto_simple = DtProductoSimple(3, "Coca", 50);
+                iproducto->ingresarDatosProducto(producto_simple);
+                iproducto->ingresarProductoSimple();
+                producto_simple = DtProductoSimple(4, "Papas Cheddar", 120);
+                iproducto->ingresarDatosProducto(producto_simple);
+                iproducto->ingresarProductoSimple();
+
+                iproducto->ingresarDatosMenu(5, "Pizza+2Coca");
+                DtProducto producto = DtProducto(1, "Pizza", 100);
+                DtProductoCantidad producto_cantidad = DtProductoCantidad(producto, 1);
+                iproducto->seleccionarProductoYCantidad(producto_cantidad);
+                producto = DtProducto(3, "Coca", 50);
+                producto_cantidad = DtProductoCantidad(producto, 2);
+                iproducto->seleccionarProductoYCantidad(producto_cantidad);
+                iproducto->ingresarMenu();
+                iproducto->ingresarDatosMenu(6, "Hamburguesa+Papas Cheddar");
+                producto = DtProducto(2, "Hamburguesa", 70);
+                producto_cantidad = DtProductoCantidad(producto, 1);
+                iproducto->seleccionarProductoYCantidad(producto_cantidad);
+                producto = DtProducto(4, "Papas Cheddar", 120);
+                producto_cantidad = DtProductoCantidad(producto, 1);
+                iproducto->seleccionarProductoYCantidad(producto_cantidad);
+                iproducto->ingresarMenu();
                 #if 0
                 //Cargo productos
                 DtProductoSimple producto_simple = DtProductoSimple(1, "Pizza", 100);

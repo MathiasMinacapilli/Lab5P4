@@ -21,7 +21,7 @@ public:
     string getDescripcion();
     float getPrecio();
     //destructor
-    ~DtProducto();
+    virtual ~DtProducto();
 };
 
 ostream &operator<< (ostream&, DtProducto);

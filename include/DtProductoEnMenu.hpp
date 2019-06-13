@@ -9,6 +9,7 @@ private:
     DtProductoSimple producto;
     int cantidad;
 public:
+    DtProductoEnMenu();
     DtProductoEnMenu(DtProductoSimple producto, int cantidad);
     DtProductoSimple getProducto();
     int getCantidad();

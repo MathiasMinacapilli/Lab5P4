@@ -6,7 +6,7 @@ using namespace std;
 #include "../include/VentaADomicilio.hpp"
 
 //constructor por defecto
-VentaADomicilio::VentaADomicilio(){}
+VentaADomicilio::VentaADomicilio(): Venta(){}
 
 //constructor por parametros
 VentaADomicilio::VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente, Repartidor *miRepartidor) : Venta (numero, descuento, factura) {

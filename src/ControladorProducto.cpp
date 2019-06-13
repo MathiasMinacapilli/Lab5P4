@@ -186,8 +186,29 @@ DtProducto ControladorProducto::getProducto() {
 	DtProducto dt_prod = DtProducto(this->codigoProductoAConsultar, "", 1);
 	DtProductoCantidad datos_producto = DtProductoCantidad(dt_prod, 1);
 	Producto* prod = encontrarProducto(datos_producto);
-	DtProducto datos_prod = prod->getDatosProducto();
-	return datos_prod;
+	DtProducto* dtprod;
+	//Primero casteo al objeto hijo, obtengo el dt y lo que hago es tener un puntero
+	//al dt para poder castearlo al DtProducto que es la clase base
+	if(dynamic_cast<ProductoSimple*>(prod) != nullptr) {
+		ProductoSimple* prod_simple = dynamic_cast<ProductoSimple*>(prod);
+		DtProductoSimple datos_prod_simple = DtProductoSimple(prod_simple->getCodigo(), prod_simple->getDescripcion(), prod_simple->getPrecio());
+		DtProductoSimple* datos_prod_simple_ptr = &datos_prod_simple;
+		dtprod = dynamic_cast<DtProducto*>(datos_prod_simple_ptr);
+	} else { //Es Menu*
+		Menu* datos_menu = dynamic_cast<Menu*>(prod);
+		map<int, ProductoEnMenu*> prods_en_menu = datos_menu->getProductos();
+		map<int, ProductoEnMenu*>::iterator it;
+		map<int, DtProductoEnMenu> dt_prods_en_menu;
+		for(it = prods_en_menu.begin(); it != prods_en_menu.end(); ++it) {
+			DtProducto prod_en_menu = it->second->getProducto()->getDatosProducto();
+			DtProductoSimple dt_prod_simple = DtProductoSimple(prod_en_menu.getCodigo(), prod_en_menu.getDescripcion(), prod_en_menu.getPrecio());
+			dt_prods_en_menu[it->second->getProducto()->getCodigo()] = DtProductoEnMenu(dt_prod_simple, it->second->getCantidad());
+		}
+		DtMenu dt_menu = DtMenu(datos_menu->getCodigo(), datos_menu->getDescripcion(), datos_menu->getPrecio(), dt_prods_en_menu);
+		DtMenu* dt_menu_ptr = &dt_menu;
+		dtprod = dynamic_cast<DtProducto*>(dt_menu_ptr);
+	}
+	return *dtprod;
 }
 /* Devuelve la cantidad  */
 int ControladorProducto::getCantidadProductoTotalVendidos() {
@@ -199,16 +220,16 @@ int ControladorProducto::getCantidadProductoTotalVendidos() {
 	}
 }
 
-void ControladorProducto::agregarProductoSimple(ProductoSimple *ps) {
+/* void ControladorProducto::agregarProductoSimple(ProductoSimple *ps) {
 	if(this -> encontrarProducto(ps -> getCodigo()) == nullptr)
 		(this -> productosSimples).insert(pair<int, ProductoSimple*>(ps -> getCodigo(), ps));
 	else
 		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
-}
+} */
 
-void ControladorProducto::agregarMenu(Menu *menu) {
+/* void ControladorProducto::agregarMenu(Menu *menu) {
 	if(this -> encontrarProducto(menu -> getCodigo()) == nullptr)
 		(this -> menus).insert(pair<int, Menu*>(menu -> getCodigo(), menu));
 	else
 		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
-}
+} */

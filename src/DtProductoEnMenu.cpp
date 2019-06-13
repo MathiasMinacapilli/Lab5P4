@@ -1,6 +1,8 @@
 //Archivos
 #include "../include/DtProductoEnMenu.hpp"
 
+DtProductoEnMenu::DtProductoEnMenu() {}
+
 DtProductoEnMenu::DtProductoEnMenu(DtProductoSimple producto, int cantidad) {
     this->producto = producto;
     this->cantidad = cantidad;

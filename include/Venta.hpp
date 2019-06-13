@@ -20,6 +20,7 @@ private:
     float descuento;
     Factura* factura;
 protected:
+    Venta();
     Venta(int numero, float descuento, Factura* factura);
     map<int, CantidadProducto*> cants_productos;
 public:

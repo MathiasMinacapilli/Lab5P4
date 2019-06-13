@@ -6,7 +6,7 @@
 
 class Etapa {
 protected:
-     Etapa();
+    Etapa();
 public:
     virtual Etapa *avanzarEtapa(EtapaPedido &etapa_pedido) = 0;
     virtual Etapa *cancelar() = 0;
