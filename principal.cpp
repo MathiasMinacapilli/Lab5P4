@@ -717,10 +717,6 @@ int main() {
                         cout << "\nDesea que el pedido sea entregado? Ingrese S o N. \n";
                         bool quiero_recibir = confirmacion();
                         if (quiero_recibir) {
-                            // FALTA CREAR LA VENTA Y TODO ESO NO?
-                            // FIJARSE CASO DE USO Y PENSAAAAAAAAAAAAR
-                            //AAAAAA
-                            //AAAAAAA
                             map<int, Repartidor*> repartidores_disponibles = iempleado -> getRepartidoresDisponibles();
                             map<int, Repartidor*>::iterator it_repartidores;
                             cout << "Estos son los repartidores disponibles. \n";
@@ -749,6 +745,10 @@ int main() {
                         cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
+                            // FALTA CREAR LA VENTA Y TODO ESO NO?
+                            // FIJARSE CASO DE USO Y PENSAAAAAAAAAAAAR
+                            //AAAAAA
+                            //AAAAAAA
                             DtFactura* factura = iventa -> generarFactura();
                             DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
                             if (ptr_factura_domicilio != nullptr) {

@@ -111,7 +111,22 @@ void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
   v -> setDescuento(descuento);
 }
 
+DtFactura* ControladorVenta::generarFactura() {
+  ControladorMesa *cont_mesa;
+  cont_mesa = ControladorMesa::getInstance();
+  Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+  DtFactura* factura = v -> facturar();
+  cont_mesa -> finalizarVenta();
+  return factura;
+}
+
 //VENTA A DOMICILIO
+//FALTAN OP
+//FALTAN OP
+//FALTAN OP
+//FALTAN OP
+//FALTAN OP
+//FALTAN OP
 bool ControladorVenta::ingresarTelefono(string telefono) {
     this -> telefono_recordado = telefono;
     ControladorCliente *cont_cliente;
@@ -129,7 +144,13 @@ void ControladorVenta::cancelarVentaADomicilio() {
 }
 
 
-DtFactura* ControladorVenta::generarFactura() {
+DtFactura* ControladorVenta::generarFacturaDomiclio() {
+  DtFactura* factura = venta_domicilio -> facturar();
+  return factura;
+}
+
+
+DtFactura* ControladorVenta::generarFacturaADomicilio() {
   ControladorMesa *cont_mesa;
   cont_mesa = ControladorMesa::getInstance();
   Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
