@@ -18,3 +18,20 @@ Transporte DtFacturaDomicilio::getTransporte() {
 }
 
 DtFacturaDomicilio::~DtFacturaDomicilio() {}
+
+ostream &operator<< (ostream& o, DtFacturaDomicilio dtf) {
+    o << "Codigo: " << dtf.getCodigo()
+      << "\nFecha y hora: " << dtf.getFechaYHora() 
+      << "\n- Productos -\n";
+      map<int, DtProductoCantidad>::iterator it;
+      for (it = (dtf.getProductos()).begin(); it != (dtf.getProductos()).end(); ++it) {
+          o << (it -> second);
+      }
+    o << "\nIva: " << dtf.getIva()
+      << "\nDescuento: " << dtf.getDescuento()
+      << "\nPrecio Subtotal: " << dtf.getPrecioSubTotal()
+      << "\nPrecio Total: " << dtf.getPrecioTotal()
+      << "\nNombre del Repartidor: " << dtf.getNombreRepartidor()
+      << "\nTransporte: " << dtf.getTransporte(); 
+    return o;
+}

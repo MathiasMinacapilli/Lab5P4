@@ -14,7 +14,7 @@ public:
     VentaLocal(int numero, float descuento, Factura* factura);
     ~VentaLocal();
     void setMozo(Mozo *mozo);
-    DtFactura facturar();
+    DtFactura* facturar();
 };
 
 #endif

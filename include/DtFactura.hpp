@@ -30,7 +30,7 @@ public:
     float getDescuento();
     float getPrecioSubTotal();
     float getPrecioTotal();
-    ~DtFactura();
+    virtual ~DtFactura();
 };
 
 ostream &operator<< (ostream&, DtFactura);

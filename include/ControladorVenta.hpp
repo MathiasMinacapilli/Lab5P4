@@ -53,7 +53,7 @@ public:
   //FACTURACION DE UNA VENTA
   //ingresarNumeroMesa
   void ingresarPorcentajeDescuento(float descuento);
-  DtFactura generarFactura();
+  DtFactura* generarFactura();
 
   //VENTA A DOMICILIO
   bool ingresarTelefono(string telefono);

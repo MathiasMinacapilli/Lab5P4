@@ -24,7 +24,7 @@ public:
     virtual Venta *crearVenta() = 0;
     virtual void eliminarProductoDeVenta() = 0;
     virtual bool estaEnVentaSinFacturar(Producto *p) = 0;
-    virtual DtFactura generarFactura() = 0;
+    virtual DtFactura* generarFactura() = 0;
     virtual map<int, DtFactura> getFacturasYTotalFecha(float &totalfacturado) = 0;
     virtual set<DtActualizacion> getListadoActualizaciones() = 0;
     virtual map<int, DtProducto> getProductosVenta(int numMesa) = 0;

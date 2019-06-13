@@ -18,3 +18,5 @@ public:
     Transporte getTransporte();
     ~DtFacturaDomicilio();
 };
+
+ostream &operator<< (ostream&, DtFacturaDomicilio);

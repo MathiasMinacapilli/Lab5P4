@@ -6,6 +6,7 @@
 using namespace std;
 
 //Archivos
+#include "Empleado.hpp"
 #include "Repartidor.hpp"
 #include "DtFacturaDomicilio.hpp"
 #include "Venta.hpp"
@@ -28,7 +29,7 @@ public:
     void cancelarVenta(string nombre_repartidor);
     set<DtActualizacion> getActualizaciones() const;
     Cliente* getCliente();
-    DtFactura facturar();
+    DtFactura* facturar();
 };
 
 #endif

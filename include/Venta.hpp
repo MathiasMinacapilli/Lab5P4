@@ -41,7 +41,7 @@ public:
     bool estaFacturada();
     void eliminarProducto(Producto* producto, int cantidad);
     map<int, DtProducto> obtenerProductos();
-    virtual DtFactura facturar() = 0;
+    virtual DtFactura* facturar() = 0;
 };
 
 #endif

@@ -3,6 +3,8 @@
 
 DtFactura::DtFactura() {}
 
+DtFactura::~DtFactura() {}
+
 DtFactura::DtFactura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal) {
     this->codigo = codigo;
     this->fechaYHora = fechaYHora;

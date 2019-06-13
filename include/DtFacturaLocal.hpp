@@ -14,3 +14,5 @@ public:
     string getNombreMozo();
     ~DtFacturaLocal();
 };
+
+ostream &operator<< (ostream&, DtFacturaLocal);
