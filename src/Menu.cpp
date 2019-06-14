@@ -19,17 +19,16 @@ map<int, ProductoEnMenu *> Menu::getProductos() {
 }
 
 
-
 void Menu::agregarProducto(ProductoSimple *prod, int cantidad){
 	//busco el producto en el menu
 	map<int, ProductoEnMenu *>::iterator it = productos.find(prod->getCodigo());
 	//si el producto no esta
 	if (it == productos.end()){
-		//se crea el nuevo producto en menu 
+		//se crea el nuevo producto en menu
 		ProductoEnMenu *pm = new ProductoEnMenu(cantidad, prod);
 		productos[prod->getCodigo()] = pm;
 	}
-	else 
+	else
 		it->second->aumentarCantidad(cantidad);
 	this->precio += (prod->getPrecio()*cantidad*0.9);
 

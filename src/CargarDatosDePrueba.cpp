@@ -39,7 +39,8 @@ void cargarDatosDePrueba() {
     //
     //
     //
-    Menu *p6 = new Menu(6, "Combo Pizza")
+    Menu *p6 = new Menu(6, "Combo Pizza");
+
     iproducto -> ingresarDatosMenu(6, "Combo Pizza");
     DtProducto producto = DtProducto(1, "Pizza", 130);
     DtProductoCantidad producto_cantidad = DtProductoCantidad(producto, 1);
@@ -137,8 +138,7 @@ void cargarDatosDePrueba() {
     ControladorVenta *cont_venta = iventa -> getInstance();
     ControladorEmpleado *cont_empleado = iempleado -> getInstance();
     //V4
-    venta_domicilio = new VentaADomicilio(4, 0, nullptr, EnCamino, "Martin");// OJO QUE CAMBIO LA FUNCION
-    cont_empleado -> seleccionarRepartidor(4);
+    venta_domicilio = new VentaADomicilio(4, 0, nullptr, EnCamino, "Martin", 4);// OJO QUE CAMBIO LA FUNCION
 
     venta_domicilio -> agregarProductoAVenta()
 
@@ -147,13 +147,11 @@ void cargarDatosDePrueba() {
 
 
     //V5
-    venta_domicilio = new VentaADomicilio(5, 0, nullptr, Recibido, "Martin");
-    cont_empleado -> seleccionarRepartidor(5);
+    venta_domicilio = new VentaADomicilio(5, 0, nullptr, Recibido, "Martin", 5);
 
 
     //V6
-    venta_domicilio = new VentaADomicilio(6, 0, nullptr, EnCamino, "Vladimir");
-    cont_empleado -> seleccionarRepartidor(4);
+    venta_domicilio = new VentaADomicilio(6, 0, nullptr, EnCamino, "Vladimir", 4);
 
 
 
