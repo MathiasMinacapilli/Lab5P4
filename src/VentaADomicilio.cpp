@@ -47,6 +47,7 @@ DtFactura* VentaADomicilio::facturar() {
     DtFechaYHora fecha_y_hora = DtFechaYHora(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900, now->tm_hour, now->tm_min, now->tm_sec);
     Factura* factura = new Factura(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total);
     this->setFactura(factura);
+    if (miRepartidor != nullptr) {
     DtFacturaDomicilio res_domicilio = DtFacturaDomicilio(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this -> miRepartidor -> getNombre(), this -> miRepartidor -> getTransporte());
     DtFactura* res = &res_domicilio;
     return res;
