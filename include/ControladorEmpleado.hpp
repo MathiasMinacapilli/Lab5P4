@@ -11,6 +11,7 @@ using namespace std;
 //Archivos
 #include "Mozo.hpp"
 #include "Repartidor.hpp"
+#include "DtRepartidor.hpp"
 #include "ControladorMesa.hpp"
 
 
@@ -65,6 +66,8 @@ public:
     map<int, DtMesasMozo> asignarMozosAMesas();
 
 	Repartidor* getRepartidor(int num_repartidor);
+
+	DtRepartidor getDatosIngresados();
 
     //destructor
 	~ControladorEmpleado();

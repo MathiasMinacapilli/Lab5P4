@@ -21,6 +21,7 @@ using namespace std;
 #include "include/DtProducto.hpp"
 #include "include/DtProductoSimple.hpp"
 #include "include/DtMenu.hpp"
+#include "include/DtRepartidor.hpp"
 #include "include/ICliente.hpp"
 #include "include/IEmpleado.hpp"
 #include "include/IMesa.hpp"
@@ -92,7 +93,7 @@ static string conseguirTelefono() {
     while (no_lo_consigo) {
         es_numero = all_of(telefono.begin(), telefono.end(), ::isdigit);
         if (!es_numero) {
-            cout << "Teléfono no válido. Ingrese su número de teléfono. \n"
+            cout << "\nTeléfono ingresado no válido. Ingrese su número de teléfono. \n"
                 << " Teléfono: ";
             cin >> telefono;
         }
@@ -164,6 +165,7 @@ static bool confirmacion () {
     string confirmacion;
     bool error = false;
     bool quiero_confirmar = false;
+    cout << " Opción: ";
     do {
         cin >> confirmacion;
         if (confirmacion == "S") {
@@ -174,7 +176,8 @@ static bool confirmacion () {
                 quiero_confirmar = false;
                 error = false;
             } else {
-                cout << "\nCaracter inválido. Ingrese S o N.\n";
+                cout << "\nOpción ingresada no válida. Ingrese S o N. \n"
+                    << " Opción: ";
                 error = true;
             }
         }
@@ -192,33 +195,35 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
         //consumo el enter que quedo del ingreso del telefono
         getchar();
         //ingresar datos del cliente
-        cout << "Ingrese su nombre: ";
+        cout << "\nIngrese su nombre. \n"
+            << " Nombre: ";
         string nombre;
         getline(cin, nombre);
-        cout << "Ingrese su dirección: \n";
+        cout << "\nIngrese su dirección. \n";
         DtDireccion casa;
         DtApto apto;
         string calle;
-        cout << "Calle: ";
+        cout << " Calle: ";
         getline(cin, calle);
-        cout << "Número de puerta: ";
+        cout << " Número de puerta: ";
         int nro;
         cin >> nro;
         getchar();
-        cout << "Esquina 1: ";
+        cout << " Esquina 1: ";
         string esq1;
         getline(cin, esq1);
-        cout << "Esquina 2: ";
+        cout << " Esquina 2: ";
         string esq2;
         getline(cin, esq2);
-        cout << "Es un apartamento? S/N \n";
+        cout << "\n¿Es un apartamento? Ingrese S o N. \n";
         bool es_apto = confirmacion();
         getchar();
         if (es_apto){
-            cout << "Nombre edificio: ";
+            cout <<"\nIngrese el nombre del edificio y el número de apartamento. \n"
+                << " Nombre edificio: ";
             string nombre_edificio;
             getline(cin, nombre_edificio);
-            cout<< "Número de apartamento: ";
+            cout<< " Número de apartamento: ";
             int nro_apto;
             cin >> nro_apto;
             apto = DtApto(calle, nro, esq1, esq2, nombre_edificio, nro_apto);
@@ -226,12 +231,14 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
         else
             casa = DtDireccion(calle, nro, esq1, esq2);
         try{
+            system("clear");
+            cout << "--------------------" << "Alta Cliente" << "-------------------- \n \n";
             if (es_apto){
                 icliente->ingresarDatosCliente(telefono, nombre, apto);
                 DtCliente datos = icliente->getDatosIngresados();
                 cout << "Los datos ingresados son: \n";
                 cout << datos << "\n";
-                cout << "           Edificio " << apto.getNombreEdificio() << " apto. " << apto.getNumeroApto() <<endl;
+                cout << "            Edificio: " << apto.getNombreEdificio() << " apto. " << apto.getNumeroApto() << "." << endl;
             }
             else{
                 icliente->ingresarDatosCliente(telefono, nombre, casa);
@@ -240,7 +247,7 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
                 cout << datos << "\n";
             }
 
-            cout << "Desea confirmar el ingreso del cliente? S/N \n";
+            cout << "\n¿Desea confirmar el ingreso del cliente? S/N \n";
             bool confirma_cliente = confirmacion();
             if (confirma_cliente){
                 icliente->ingresarCliente();
@@ -337,74 +344,95 @@ int main() {
                             system("clear");
                             cout << "--------------------" << "Alta Empleado" << "-------------------- \n \n";
                             string nombre;
-                            cout << "Ingrese el nombre del empleado a ingresar: ";
+                            cout << "Ingrese el nombre del empleado a ingresar. \n"
+                                << " Nombre: ";
                             cin >> nombre;
                             iempleado->ingresarNombreEmpleado(nombre);
                             string tipo_empleado;
                             bool tipo_incorrecto = false;
                             do{
-                                cout << "Ingrese R para ingresar un repartidor, M para ingresar un mozo: ";
+                                cout << "\nIngrese R para ingresar un repartidor, M para ingresar un mozo. \n"
+                                    << " Opción: ";
                                 cin >> tipo_empleado;
                                 //se ingresa repartidor
                                 if (tipo_empleado == "R"){
                                     tipo_incorrecto = false;
                                     set<Transporte> transportes_disponibles = iempleado->getTransportes();
-                                    cout << "Los transportes disponibles son: \n";
+                                    cout << "\nSeleccione el transporte deseado. \n";
                                     set<Transporte>::iterator it_transportes;
+                                    int cont = 0;
                                     for (it_transportes = transportes_disponibles.begin(); it_transportes != transportes_disponibles.end(); ++it_transportes){
+                                        cont++;
                                         Transporte transporte = *it_transportes;
-                                        cout << transporte << "\n";
+                                        cout << " " << cont << ") " << transporte << "\n";
                                     }
-                                    cout << "Seleccione su transporte: ";
+                                    cout << "\nOpción: ";
                                     string t_seleccionado;
                                     Transporte transporte_elegido;
                                     bool transporte_incorrecto = false;
                                     do{
                                         cin >> t_seleccionado;
-                                        if (t_seleccionado == "Pie"){
+                                        if (t_seleccionado == "1"){
                                             transporte_elegido = Pie;
                                             transporte_incorrecto = false;
                                         }
                                         else
-                                            if (t_seleccionado == "Bici"){
+                                            if (t_seleccionado == "2"){
                                                 transporte_elegido = Bici;
                                                 transporte_incorrecto = false;
                                             }
                                             else
-                                                if (t_seleccionado == "Moto"){
+                                                if (t_seleccionado == "3"){
                                                     transporte_elegido = Moto;
                                                     transporte_incorrecto = false;
                                                 }
                                                 else{
-                                                    cout << "Transporte incorrecto. Por favor seleccione un transporte de los mostrados anteriormente: ";
+                                                    cout << "\nOpción ingreada no válida. \n \n"
+                                                        << "Por favor seleccione una de las opciones mostradas anteriormente. \n"
+                                                        << " Opción: ";
                                                     transporte_incorrecto = true;
                                                 }
 
                                     }while(transporte_incorrecto);
                                     iempleado->seleccionarTransporte(transporte_elegido);
                                     system("clear");
-                                    cout << "Desea confirmar el ingreso del repartidor? S/N \n";
+                                    cout << "--------------------" << "Alta Empleado" << "-------------------- \n \n";
+                                    DtRepartidor datos = iempleado->getDatosIngresados();
+                                    cout << "Los datos ingresados son: \n";
+                                    cout << datos << "\n";
+                                    cout << "¿Desea confirmar el ingreso del repartidor? Ingrese S o N. \n";
                                     bool confirma_repartidor = confirmacion();
                                     if (confirma_repartidor){
                                         iempleado->ingresarRepartidor();
-                                         msj = "Repartidor agregado correctamente";
+                                         cout << "\nRepartidor agregado correctamente. \n";
                                     }
                                     else {
                                         iempleado->cancelarRepartidor();
                                         msj = "Ingreso de repartidor cancelado";
                                     }
-
                                 }
                                 else
                                     //se ingresa mozo
                                     if (tipo_empleado == "M"){
                                         tipo_incorrecto = false;
-                                        cout << "Desea confirmar el ingreso del mozo? S/N \n";
+                                        cout << "--------------------" << "Alta Empleado" << "-------------------- \n \n";
+                                        //DtEmpleado datos = iempleado -> getDatosIngresados();
+                                        //cout << "Los datos ingresados son: \n";
+                                        //cout << datos << "\n";
+                                        //cout << "¿Desea confirmar el ingreso del repartidor? Ingrese S o N. \n";
+
+//
+//
+///
+///
+////
+
+                                        cout << "\n¿Desea confirmar el ingreso del mozo? Ingrese S o N. \n";
                                         bool confirma_mozo = confirmacion();
                                         if (confirma_mozo){
                                             int nro_mozo = iempleado->ingresarMozo();
-                                            cout << "El numero del mozo ingresado es " << nro_mozo << endl;
-                                            msj = "Mozo agregado correctamente";
+                                            cout << "\nEl número del mozo ingresado es: " << nro_mozo << endl;
+                                            cout << "\nMozo agregado correctamente. \n";
                                         }
                                         else {
                                             iempleado->cancelarMozo();
@@ -413,11 +441,11 @@ int main() {
                                     }
                                     //tipo incorrecto
                                     else{
-                                        cout << "Error. Debe ingresar R o M. \n";
+                                        cout << "\nOpción ingresada no válida. \n";
                                         tipo_incorrecto = true;
                                     }
                             }while(tipo_incorrecto);
-                            cout << "\nDesea agregar mas empleados? S/N\n";
+                            cout << "\n¿Desea agregar más empleados? Ingrese S o N. \n";
                             quiere_ingresar_empleado = confirmacion();
                         }while(quiere_ingresar_empleado);
                     } catch(exception *e) {
@@ -582,7 +610,7 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
-                
+                #if 0
                 case 6:
                     try {
                         system("clear");
@@ -599,7 +627,7 @@ int main() {
                         break;
                     }
                     break;
-                
+                #endif
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -894,6 +922,19 @@ int main() {
                         int num_mesa = conseguirNumeroMesa();
                         iventa -> ingresarNumeroMesa(num_mesa);
                         float porcentaje = conseguirDescuento();
+                        //
+                        //hay que aplicar el descuento a la venta en caso de que corresponda
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
                         DtFactura* factura = iventa -> generarFactura();
                         DtFacturaLocal* ptr_factura_local = dynamic_cast<DtFacturaLocal*>(factura);
                         if (ptr_factura_local != nullptr) {
@@ -1095,14 +1136,8 @@ int main() {
                         vector<DtActualizacion> act_cliente = iventa->getActualizacionesCliente(tel_cliente);
                         vector<DtActualizacion>::iterator it_act;
                         cout << "Actualizaciones de sus pedidos: \n";
-                        for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++){
+                        for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++)
                             cout << *it_act << "\n";
-                            cout << "hola";
-                        }
-                        cout << "Presione cuaquier tecla para volver al menu principal...";
-                        string dummy;
-                        getline(cin, dummy);
-                        msj = "------------------------------";
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();

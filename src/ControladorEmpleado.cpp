@@ -160,8 +160,8 @@ void ControladorEmpleado::cancelarPedido(){
 }
 
 //Caso de uso: Asignar automaticamente mozos a mesas
-/* El método consiste en asignar PISO(Me/Mo) mesas a cada mozo (donde Me es la cantidad 
-de mesas y Mo la de mozos) y el resto (de la división entera) de las mesas se 
+/* El método consiste en asignar PISO(Me/Mo) mesas a cada mozo (donde Me es la cantidad
+de mesas y Mo la de mozos) y el resto (de la división entera) de las mesas se
 asignan aleatoriamente a los mozos. */
 map<int, DtMesasMozo> ControladorEmpleado::asignarMozosAMesas() {
 	ControladorMesa* cont_mesa = ControladorMesa::getInstance();
@@ -203,6 +203,11 @@ Repartidor *ControladorEmpleado::getRepartidor(int numero_repartidor){
 	else throw new invalid_argument("Error. No existe un repartidor con ese id. ");
 }
 
+
+DtRepartidor ControladorEmpleado::getDatosIngresados(){
+	DtRepartidor datos = DtRepartidor(this->numero_repartidor, this->nombre_recordado, this->transporte_recordado);
+	return datos;
+}
 
 //destructor
 ControladorEmpleado::~ControladorEmpleado(){}
