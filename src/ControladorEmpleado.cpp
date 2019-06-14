@@ -129,8 +129,7 @@ void ControladorEmpleado::ingresarIdRepartidor(int id){
 }
 
 map<int, DtDireccion> ControladorEmpleado::getVentasRepartidor(){
-	Repartidor *repartidor = this->repartidores[this->id_repartidor_recordado];
-	map<int, DtDireccion> resultado;
+		map<int, DtDireccion> resultado;
 	ControladorVenta *cont_venta = ControladorVenta::getInstance();
 	map<int, VentaADomicilio *> ventas_repartidor = cont_venta->obtenerVentasRepartidor(this->id_repartidor_recordado);
 	map<int, VentaADomicilio *>::iterator it;
@@ -147,7 +146,6 @@ void ControladorEmpleado::ingresarNumeroPedido(int nro){
 }
 
 void ControladorEmpleado::avanzarEtapaPedido(){
-	Repartidor *repartidor = this->repartidores[this->id_repartidor_recordado];
 	ControladorVenta *cont_venta = ControladorVenta::getInstance();
 	map<int, VentaADomicilio *> ventas_repartidor = cont_venta->obtenerVentasRepartidor(this->id_repartidor_recordado);
 	VentaADomicilio *venta = ventas_repartidor[this->pedido_recordado];
@@ -155,7 +153,6 @@ void ControladorEmpleado::avanzarEtapaPedido(){
 }
 
 void ControladorEmpleado::cancelarPedido(){
-	Repartidor *repartidor = this->repartidores[this->id_repartidor_recordado];
 	ControladorVenta *cont_venta = ControladorVenta::getInstance();
 	map<int, VentaADomicilio *> ventas_repartidor = cont_venta->obtenerVentasRepartidor(this->id_repartidor_recordado);
 	VentaADomicilio *venta = ventas_repartidor[this->pedido_recordado];

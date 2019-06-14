@@ -30,8 +30,8 @@ public:
     //Destructores
     ~VentaADomicilio();
     //Patron State
-    void avanzarEtapaVenta(string nombre_repartidor);
-    void cancelarVenta(string nombre_repartidor);
+    void avanzarEtapaVenta();
+    void cancelarVenta();
     //obtiene las actualizaciones de la venta
     vector<DtActualizacion> getActualizaciones() const;
     //obtiene el cliente

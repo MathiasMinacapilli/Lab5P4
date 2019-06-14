@@ -1,5 +1,6 @@
 //Librerias de C
 #include <map>
+#include <algorithm>
 #include <set>
 
 //Archivos
@@ -39,10 +40,11 @@ bool ControladorVenta::estaEnVentaSinFacturar(Producto *p) {
 
 //INICIAR VENTA EN MESAS - iniciarVenta - ControladorMesa
 VentaLocal *ControladorVenta::crearVenta() {
-  bool encontre_lugar = false; 
+  bool encontre_lugar = false;
+  VentaLocal *ve;
   while (!encontre_lugar){
     if (!this->existeVenta(this->numero_venta)){
-      VentaLocal *ve = new VentaLocal((this -> numero_venta), 0, nullptr);
+      ve = new VentaLocal((this -> numero_venta), 0, nullptr);
       encontre_lugar = true;
     }
     else this->numero_venta++;
@@ -262,13 +264,10 @@ vector<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
       aux = (it -> second) -> getActualizaciones();
       res.insert(res.end(), aux.begin(), aux.end() );
   }
+  std::sort(res.begin(), res.end());
   return res;
 }
 
-//cargarDatosDePrueba
-void ControladorVenta::aumentarNumeroVenta() {
-    this -> numero_venta = (this -> numero_venta) + 1;
-}
 
 //funciones auxiliares para implementar patron Observer
 void ControladorVenta::suscribirCliente(string telefono){
