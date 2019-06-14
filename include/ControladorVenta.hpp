@@ -83,6 +83,7 @@ public:
 
     //cargarDatosDePrueba
     void aumentarNumeroVenta();
+    bool existeVenta(int num);
 };
 
 #endif

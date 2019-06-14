@@ -14,7 +14,9 @@
 ControladorVenta *ControladorVenta::instance = nullptr;
 
 //constructor
-ControladorVenta::ControladorVenta(){}
+ControladorVenta::ControladorVenta(){
+  this->numero_venta = 1;
+}
 
 ControladorVenta *ControladorVenta::getInstance() {
   if (instance == nullptr)
@@ -37,9 +39,17 @@ bool ControladorVenta::estaEnVentaSinFacturar(Producto *p) {
 
 //INICIAR VENTA EN MESAS - iniciarVenta - ControladorMesa
 VentaLocal *ControladorVenta::crearVenta() {
-  VentaLocal *ve = new VentaLocal((this -> numero_venta) + 1, 0, nullptr);
-  (this -> numero_venta)++;
+  bool encontre_lugar = false; 
+  while (!encontre_lugar){
+    if (!this->existeVenta(this->numero_venta)){
+      VentaLocal *ve = new VentaLocal((this -> numero_venta), 0, nullptr);
+      encontre_lugar = true;
+    }
+    else this->numero_venta++;
+    
+  }
   ventasLocales.insert(pair<int, VentaLocal *>(ve -> getNumero(), ve));
+  this -> numero_venta++;
   return ve;
 }
 
@@ -249,10 +259,6 @@ vector<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
       res.insert(res.end(), aux.begin(), aux.end() );
   }
   return res;
-
-//cargarDatosDePrueba
-void ControladorVenta::aumentarNumeroVenta() {
-    this -> numero_venta = (this -> numero_venta) + 1;
 }
 
 
@@ -276,9 +282,27 @@ void ControladorVenta::desSuscribirCliente(string telefono){
   }
 }
 
-vector<DtActualizacion> getActualizacionesCliente(string telefono){
+vector<DtActualizacion> ControladorVenta::getActualizacionesCliente(string telefono){
   ControladorCliente *cont_cliente = ControladorCliente::getInstance();
   Cliente *cliente = cont_cliente->getCliente(telefono);
   if (cliente != nullptr)
     return cliente->consultarPedidos();
+}
+
+
+//CARGAR DATOS DE PRUEBA
+bool ControladorVenta::existeVenta(int num){
+  map<int, VentaLocal *>::iterator it_local = this->ventasLocales.find(num);
+  if (it_local == this->ventasLocales.end()){
+    map<int, VentaADomicilio *>::iterator it_domicilio = this->ventasDomicilio.find(num);
+    if (it_domicilio == this->ventasDomicilio.end())
+      return true;
+    else return false;
+  }
+  else return false;
+
+}
+
+void ControladorVenta::aumentarNumeroVenta() {
+    this -> numero_venta = (this -> numero_venta) + 1;
 }
