@@ -31,7 +31,21 @@ DtDireccion Cliente::getDireccion(){
 }
 
 //patron observer
-void Cliente::suscribirse() {}
+void Cliente::subscribirse() {
+	ControladorVenta *cont_venta = ControladorVenta::getInstance();
+	cont_venta -> subscribirCliente(this->telefono);
+}
+
+void Cliente::dessubscribirse() {
+	ControladorVenta *cont_venta = ControladorVenta::getInstance();
+	cont_venta -> desSubscribirCliente(string telefono);
+}
+
+
 void Cliente::bajaSuscripcion() {}
-void Cliente::consultarPedidos() {}
-void Cliente::notificar(DtActualizacion actualizacion) {}
+vector<DtActualizacion> Cliente::consultarPedidos() {
+	return this -> etapaPedidos;
+}
+void Cliente::notificar(DtActualizacion actualizacion) {
+	this -> etapaPedidos.push_back(actualizacion);
+}

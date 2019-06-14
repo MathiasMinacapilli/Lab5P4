@@ -4,7 +4,7 @@
 //Librerias de C
 #include <map>
 #include <set>
-#include <forward_list>
+#include <vector>
 using namespace std;
 
 //Archivos
@@ -27,7 +27,7 @@ public:
     virtual bool estaEnVentaSinFacturar(Producto *p) = 0;
     virtual DtFactura* generarFactura() = 0;
     virtual map<int, DtFactura> getFacturasYTotalFecha(float &totalfacturado) = 0;
-    virtual forward_list<DtActualizacion> getListadoActualizaciones() = 0;
+    virtual vector<DtActualizacion> getListadoActualizaciones() = 0;
     virtual map<int, DtProducto> getProductosVenta(int numMesa) = 0;
     virtual void ingresarFecha(DtFecha fecha) = 0;
     virtual void ingresarNumeroMesa(int numero) = 0;

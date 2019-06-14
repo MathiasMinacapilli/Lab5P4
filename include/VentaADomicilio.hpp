@@ -2,7 +2,7 @@
 #define _VENTAADOMICILIO_HPP
 
 //Librerias de C
-#include <set>
+#include <vector>
 using namespace std;
 
 class Repartidor;
@@ -21,14 +21,14 @@ private:
     IObserverActualizaciones *miObservador;
     Cliente *miCliente;
     Repartidor *miRepartidor;
-    set<DtActualizacion> actualizaciones;
+    vector<DtActualizacion> actualizaciones;
 public:
 	VentaADomicilio();
     VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente, Repartidor *miRepartidor);
     ~VentaADomicilio();
     void avanzarEtapaVenta(string nombre_repartidor);
     void cancelarVenta(string nombre_repartidor);
-    set<DtActualizacion> getActualizaciones() const;
+    vector<DtActualizacion> getActualizaciones() const;
     Cliente* getCliente();
     DtFactura* facturar();
 };

@@ -4,7 +4,7 @@
 //Librerias de C
 #include <map>
 #include <set>
-#include <forward_list>
+#include <vector>
 using namespace std;
 
 //Archivos
@@ -22,7 +22,7 @@ private:
   static ControladorVenta *instance;
   //coleccion de ventas
   map<int, VentaLocal *> ventasLocales;
-  map<int, VentaADomicilio *> ventadDomicilio;
+  map<int, VentaADomicilio *> ventasDomicilio;
   int numero_mesa; //AGREGAR PRODUCTO A UNA VENTA - ingresarNumeroMesa - numero
   Producto* prod; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - prod
   int cantidad; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - producto_cantidad.getCantidad
@@ -61,12 +61,16 @@ public:
   bool ingresarTelefono(string telefono);
   void cancelarVentaADomicilio();
 
+  //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUBSCRIBIR -- DES-SUBSCRIBIR
+  void subscribirCliente(string telefono);
+  void desSubscrirCliente(string telefono);
+
   //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
   void ingresarFecha(DtFecha fecha);
   map<int, DtFactura> getFacturasYTotalFecha(float &totalfacturado);
 
   //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
-  forward_list<DtActualizacion> getListadoActualizaciones();
+  vector<DtActualizacion> getListadoActualizaciones();
 
 };
 

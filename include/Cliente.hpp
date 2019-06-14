@@ -3,6 +3,7 @@
 
 //Librerias de C
 #include <set>
+#include <vector>
 #include <string>
 using namespace std;
 
@@ -17,16 +18,20 @@ private:
     string nombre;
     string telefono;
     DtDireccion direccion;
-    set<DtActualizacion> etapaPedidos;
+    vector<DtActualizacion> etapaPedidos;
 public:
+    //constructor
 	Cliente();
 	Cliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
+    //getters
     string getTelefono();
     string getNombre();
     DtDireccion getDireccion();
+
+    //patron observer
     void suscribirse();
     void bajaSuscripcion();
-    void consultarPedidos();
+    vector<DtActualizacion> consultarPedidos();
     void notificar(DtActualizacion actualizacion);
 };
 

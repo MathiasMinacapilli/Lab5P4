@@ -20,7 +20,7 @@ VentaADomicilio::~VentaADomicilio() {
 }
 
 //getters
-set<DtActualizacion> VentaADomicilio::getActualizaciones() const{
+vector<DtActualizacion> VentaADomicilio::getActualizaciones() const{
   return this -> actualizaciones;
 }
 
@@ -78,8 +78,12 @@ void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
 
     	//construyo actualizacion
     	DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), info_productos, nombre_repartidor, etapa_pedido);
-    	if (this->miObservador != nullptr)
+    	
+      //si tengo observador, lo notifico
+      if (this->miObservador != nullptr)
     		this->miObservador->notificar(actualizacion);
+      //guardo la actualizacion en mi coleccion de actualizaciones
+      this -> actualizaciones.push_back(actualizacion);
     }
 }
 

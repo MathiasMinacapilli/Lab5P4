@@ -190,20 +190,15 @@ map<int, DtFactura> ControladorVenta::getFacturasYTotalFecha(float &totalfactura
 }
 
 //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
-forward_list<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
-  forward_list<DtActualizacion> res;
-  /*set<DtActualizacion> aux;
-  set<DtActualizacion>::iterator it_actualizacion;
-  pair<set<DtActualizacion>::iterator, bool> ptr;
-  map<int, Venta*>::iterator it;
-  for(it = ventas.begin(); it != ventas.end(); ++it) {
-    Venta *v = it->second;
-    const VentaADomicilio* venta_domicilio = dynamic_cast<VentaADomicilio*>(const_cast<Venta*>(v));
-    aux = venta_domicilio -> getActualizaciones();
-    for (it_actualizacion = aux.begin(); it_actualizacion != aux.end(); ++it_actualizacion){
-          DtActualizacion dt_act = *it_actualizacion;
-          ptr = res.insert(dt_act);
-      }
-  }*/
+vector<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
+  vector<DtActualizacion> aux;
+  vector<DtActualizacion> res;
+  res.clear();
+  map<int, VentaADomicilio *>::iterator it;
+  for (it = this->ventasDomicilio.begin(); it != this->ventasDomicilio.end(); ++it){
+      aux = (it -> second) -> getActualizaciones();
+      res.insert(res.end(), aux.begin(), aux.end() );
+  }
   return res;
+
 }
