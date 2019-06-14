@@ -5,12 +5,13 @@ using namespace std;
 
 //Archivos
 #include "../include/Cliente.hpp"
+#include "../include/ControladorVenta.hpp"
 
 //Constructor por defecto
 Cliente::Cliente(){}
 
 //constructor por parametros
-Cliente::Cliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos){
+Cliente::Cliente(string telefono, string nombre, DtDireccion direccion, vector<DtActualizacion> etapaPedidos){
 	this->telefono = telefono;
 	this->nombre = nombre;
 	this->direccion = direccion;
@@ -33,18 +34,17 @@ DtDireccion Cliente::getDireccion(){
 }
 
 //patron observer
-void Cliente::subscribirse() {
+void Cliente::suscribirse() {
 	ControladorVenta *cont_venta = ControladorVenta::getInstance();
-	cont_venta -> subscribirCliente(this->telefono);
+	cont_venta -> suscribirCliente(this->telefono);
 }
 
-void Cliente::dessubscribirse() {
+void Cliente::bajaSuscripcion() {
 	ControladorVenta *cont_venta = ControladorVenta::getInstance();
-	cont_venta -> desSubscribirCliente(string telefono);
+	cont_venta -> desSuscribirCliente(this->telefono);
 }
 
 
-void Cliente::bajaSuscripcion() {}
 vector<DtActualizacion> Cliente::consultarPedidos() {
 	return this -> etapaPedidos;
 }

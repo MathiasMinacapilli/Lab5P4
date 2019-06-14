@@ -42,7 +42,7 @@ void ControladorCliente::ingresarDatosCliente(string telefono, string nombre, Dt
 }
 
 void ControladorCliente::ingresarCliente(){
-	set<DtActualizacion> actualizaciones;
+	vector<DtActualizacion> actualizaciones;
 	actualizaciones.clear();
 	Cliente *nuevo_cliente = new Cliente(this->telefono_recordado, this->nombre_recordado, this->direccion_recordada, actualizaciones);
 	clientes.insert(nuevo_cliente);

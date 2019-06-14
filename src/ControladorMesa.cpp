@@ -50,7 +50,7 @@ void ControladorMesa::finalizarVenta() {
 
 VentaLocal* ControladorMesa::obtenerVenta(int numero) {
     map<int, Mesa*>::iterator it = mesas.find(numero);
-    Venta* ve = nullptr;
+    VentaLocal *ve = nullptr;
     if (it != mesas.end()) {
         ve = (it -> second) -> getVentaActual();
     }

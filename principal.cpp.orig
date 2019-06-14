@@ -176,7 +176,7 @@ static bool confirmacion () {
 }
 
 /*Caso de uso: ALTA CLIENTE*/
-//Implementado como función porque es referenciado desde otro caso de uso
+//implementado como funcion porque es referenciado desde otro caso de uso
 static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
     bool existe_cliente = icliente->existeCliente(telefono);
     if (existe_cliente)
@@ -577,7 +577,6 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
-                #if 0
                 case 6:
                     try {
                         system("clear");
@@ -594,7 +593,6 @@ int main() {
                         break;
                     }
                     break;
-                #endif
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -746,6 +744,10 @@ int main() {
                         cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
+<<<<<<< Updated upstream
+                            iventa -> crearVentaADomicilio(quiero_repartidor);
+                            DtFactura* factura = iventa -> generarFacturaDomicilio();
+=======
                             cout << "\nIngrese el descuento correspondiente a la venta. \n"
                                 << " Descuento: ";
                             int descuento;
@@ -753,6 +755,7 @@ int main() {
                             es_valido_descuento(descuento);
                             iventa -> crearVentaADomicilio(quiere_repartidor, descuento);
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
+>>>>>>> Stashed changes
                             DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
                             if (ptr_factura_domicilio != nullptr) {
                                 DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
@@ -1015,10 +1018,10 @@ int main() {
                         map<int, DtDireccion>::iterator it;
                         cout << "Sus pedidos son: \n";
                         for (it = pedidos.begin(); it != pedidos.end(); ++it)
-                            cout << "Venta nro. " << it->first << " ( " << it->second << ") \n";
+                            cout << "Venta nro. " << it->first << " ( " << it->second << ") \n"; 
                         cout << "Ingrese el numero del pedido cuyo estado quiere modificar: ";
-                        int numero;
-                        cin >> numero;
+                        int numero; 
+                        cin >> numero; 
                         while (pedidos.find(numero) == pedidos.end()){
                             cout << "Error. Ese numero no pertence a ninguno de sus pedidos. \n";
                             cout << "Por favor, ingrese otro numero: ";
@@ -1043,7 +1046,7 @@ int main() {
                                 iempleado -> cancelarPedido();
                                 msj = "Pedido cancelado correctamente ";
                                 break;
-                            case 0:
+                            case 0: 
                                 msj = "No se realizaron cambios en los pedidos ";
                                 break;
                             default:
@@ -1055,7 +1058,7 @@ int main() {
 
                     }
                     break;
-
+               
                 /* 0) Salir. */
                 case 0:
                     msj = "";
@@ -1085,7 +1088,6 @@ int main() {
                 switch(opcion_cliente) {
 
                 /* 1) Consultar actualizaciones de pedidos. */
-                #if 0
                 case 1:
                     try {
                         system("clear");
@@ -1103,7 +1105,7 @@ int main() {
                         break;
                     }
                     break;
-                #endif
+            
                 /* 0) Salir. */
                 case 0:
                     msj = "";

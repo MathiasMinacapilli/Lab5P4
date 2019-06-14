@@ -23,7 +23,7 @@ private:
     //Colección de Ventas
     map<int, VentaLocal *> ventasLocales;
     map<int, VentaADomicilio *> ventasDomicilio;
-
+    
     int numero_mesa; //AGREGAR PRODUCTO A UNA VENTA - ingresarNumeroMesa - numero
     Producto* prod; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - prod
     int cantidad; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - producto_cantidad.getCantidad
@@ -59,6 +59,7 @@ public:
     void ingresarPorcentajeDescuento(float descuento);
     DtFactura* generarFactura();
 
+<<<<<<< Updated upstream
     //VENTA A DOMICILIO
     bool ingresarTelefono(string telefono);
     //obtenerProductosDisponibles
@@ -68,11 +69,21 @@ public:
     void crearVentaADomicilio(bool quiere_repartidor);
     void cancelarVentaADomicilio();
     DtFactura* generarFacturaDomicilio();
+=======
+  //VENTA A DOMICILIO
+  bool ingresarTelefono(string telefono);
+  //obtenerProductosDisponibles
+  void almacenarProducto(DtProductoCantidad prod_y_cant);
+  map<int, Repartidor*> obtenerRepartidores();
+  void elegirRepartidor(int numero_repartidor);
+  void crearVentaADomicilio(bool quiere_repartidor, int descuento);
+  DtFactura* generarFacturaDomicilio();
+  void cancelarVentaADomicilio();
+>>>>>>> Stashed changes
 
-  //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUSCRIBIR -- DES-SUSCRIBIR
-  void suscribirCliente(string telefono);
-  void desSuscribirCliente(string telefono);
-  vector<DtActualizacion> getActualizacionesCliente(string telefono);
+    //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUBSCRIBIR -- DES-SUBSCRIBIR
+    void subscribirCliente(string telefono);
+    void desSubscrirCliente(string telefono);
 
     //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
     void ingresarFecha(DtFecha fecha);
@@ -80,9 +91,6 @@ public:
 
     //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
     vector<DtActualizacion> getListadoActualizaciones();
-
-    //cargarDatosDePrueba
-    void aumentarNumeroVenta();
 };
 
 #endif

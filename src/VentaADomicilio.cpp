@@ -117,3 +117,12 @@ void VentaADomicilio::cancelarVenta(string nombre_repartidor) {
       this->miObservador->notificar(actualizacion);
   }
 }
+
+//PATRON OBSERVER
+void VentaADomicilio::setObservador(IObserverActualizaciones *observador){
+  this->miObservador = observador;
+}
+    
+void VentaADomicilio::borrarObservador(){
+  this->miObservador = nullptr;
+}

@@ -42,6 +42,8 @@ public:
     set<Transporte> getTransportes();
     void seleccionarTransporte(Transporte t);
 	void seleccionarRepartidor(int numero_repartidor);
+    Repartidor* getRepartidorRecordado();
+    void borrarNumero();
     int ingresarRepartidor();
     void cancelarRepartidor();
     int ingresarMozo();

@@ -55,6 +55,17 @@ void ControladorEmpleado::seleccionarRepartidor(int numero_repartidor) {
 	this -> numero_repartidor = numero_repartidor;
 }
 
+Repartidor* ControladorEmpleado::getRepartidorRecordado(){
+	map<int, Repartidor *>::iterator it = this -> repartidores.find(numero_repartidor);
+	if (it != this->repartidores.end())
+		return (it -> second);
+	else
+		throw new invalid_argument("Error. No existe un repartidor con ese id. ");
+}
+
+void ControladorEmpleado::borrarNumero() {
+    this -> numero_repartidor = 0;
+}
 
 int ControladorEmpleado::ingresarRepartidor(){
 	this->ultimo_id++;

@@ -72,7 +72,8 @@ public:
 	void agregarMenu(Menu *menu);
 
     //caso de uso: venta a domicilio
-    map<int, CantidadProducto*> getProductosAlmacenados();
+    map<int, CantidadProducto*> getProductosAlmacenados(bool &tiene_menu);
+    void borrarProductos();
 };
 
 
