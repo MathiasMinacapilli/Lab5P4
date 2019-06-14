@@ -171,7 +171,7 @@ static bool confirmacion () {
 }
 
 /*Caso de uso: ALTA CLIENTE*/
-//implementado como funcion porque es referenciado desde otro caso de uso
+//Implementado como función porque es referenciado desde otro caso de uso
 static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
     bool existe_cliente = icliente->existeCliente(telefono);
     if (existe_cliente)
@@ -996,10 +996,10 @@ int main() {
                         map<int, DtDireccion>::iterator it;
                         cout << "Sus pedidos son: \n";
                         for (it = pedidos.begin(); it != pedidos.end(); ++it)
-                            cout << "Venta nro. " << it->first << " ( " << it->second << ") \n"; 
+                            cout << "Venta nro. " << it->first << " ( " << it->second << ") \n";
                         cout << "Ingrese el numero del pedido cuyo estado quiere modificar: ";
-                        int numero; 
-                        cin >> numero; 
+                        int numero;
+                        cin >> numero;
                         while (pedidos.find(numero) == pedidos.end()){
                             cout << "Error. Ese numero no pertence a ninguno de sus pedidos. \n";
                             cout << "Por favor, ingrese otro numero: ";
@@ -1024,7 +1024,7 @@ int main() {
                                 iempleado -> cancelarPedido();
                                 msj = "Pedido cancelado correctamente ";
                                 break;
-                            case 0: 
+                            case 0:
                                 msj = "No se realizaron cambios en los pedidos ";
                                 break;
                             default:
@@ -1036,7 +1036,7 @@ int main() {
 
                     }
                     break;
-               
+
                 /* 0) Salir. */
                 case 0:
                     msj = "";

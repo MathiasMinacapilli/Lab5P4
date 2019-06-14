@@ -164,7 +164,7 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor) {
         ControladorEmpleado *cont_emp;
         cont_emp = ControladorEmpleado::getInstance();
     } else {
-        
+
     }
 }
 
@@ -234,5 +234,10 @@ vector<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
       res.insert(res.end(), aux.begin(), aux.end() );
   }
   return res;
+
+//cargarDatosDePrueba
+void ControladorVenta::aumentarNumeroVenta() {
+    this -> numero_venta = (this -> numero_venta) + 1;
+}
 
 }

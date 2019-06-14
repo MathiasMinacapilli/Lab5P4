@@ -10,6 +10,7 @@
 #include "../include/ControladorCliente.hpp"
 #include "../include/DtApto.hpp"
 #include "../include/DtDireccion.hpp"
+#include "../include/ControladorVenta.hpp"
 #include "../include/VentaADomicilio.hpp"
 #include "../include/EnCamino.hpp"
 #include "../include/Recibido.hpp"
@@ -129,6 +130,7 @@ void cargarDatosDePrueba() {
 
     //VENTAS A DOMICILIO
 
+    ControladorVenta *cont_venta = ControladorVenta::getInstance();
     VentaADomicilio *venta_domicilio;
     Repartidor *r1 = cont_empleado -> getRepartidor(4);
     Repartidor *r2 = cont_empleado -> getRepartidor(5);
@@ -138,14 +140,17 @@ void cargarDatosDePrueba() {
     EnCamino *enCamino = new EnCamino();
     venta_domicilio = new VentaADomicilio(4, 0, nullptr, enCamino, c2, r1);
     venta_domicilio -> agregarProductoAVenta(p7, 5);
+    cont_venta -> aumentarNumeroVenta();
     //V5
     Recibido *recibido = new Recibido();
     venta_domicilio = new VentaADomicilio(5, 0, nullptr, recibido, c2, r2);
     venta_domicilio -> agregarProductoAVenta(p2, 2);
+    cont_venta -> aumentarNumeroVenta();
     //V6
     EnCamino *enCamino2 = new EnCamino();
     venta_domicilio = new VentaADomicilio(6, 0, nullptr, enCamino2, c1, r1);
     venta_domicilio -> agregarProductoAVenta(p6, 1);
+    cont_venta -> aumentarNumeroVenta();
 
     //NOTIFICACIONES
 

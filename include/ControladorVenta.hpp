@@ -23,7 +23,7 @@ private:
     //Colección de Ventas
     map<int, VentaLocal *> ventasLocales;
     map<int, VentaADomicilio *> ventasDomicilio;
-    
+
     int numero_mesa; //AGREGAR PRODUCTO A UNA VENTA - ingresarNumeroMesa - numero
     Producto* prod; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - prod
     int cantidad; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - producto_cantidad.getCantidad
@@ -79,6 +79,9 @@ public:
 
     //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
     vector<DtActualizacion> getListadoActualizaciones();
+
+    //cargarDatosDePrueba
+    void aumentarNumeroVenta();
 };
 
 #endif
