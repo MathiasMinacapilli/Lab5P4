@@ -30,6 +30,7 @@ private:
   int numero_venta; //INICIAR VENTA EN MESAS - iniciarVenta
   DtFecha fecha_venta; //RESUMEN FACTUACION 1 DIA DADA LA FECHA - ingresarFecha - fecha
   string telefono_recordado; //VENTA A DOMICILIO - ingresarTelefono - telefono
+  VentaADomicilio* venta_domicilio; //VENTA A DOMICILIO - 
 public:
   static ControladorVenta *getInstance();
 
@@ -59,7 +60,13 @@ public:
 
   //VENTA A DOMICILIO
   bool ingresarTelefono(string telefono);
+  //obtenerProductosDisponibles
+  void almacenarProducto(DtProductoCantidad prod_y_cant);
+  map<int, Repartidor*> obtenerRepartidores();
+  void elegirRepartidor(int numero_repartidor);
+  void crearVentaADomicilio(bool quiere_repartidor);
   void cancelarVentaADomicilio();
+  DtFactura* generarFacturaDomicilio();
 
   //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUBSCRIBIR -- DES-SUBSCRIBIR
   void subscribirCliente(string telefono);

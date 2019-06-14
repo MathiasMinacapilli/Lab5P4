@@ -236,3 +236,30 @@ void ControladorProducto::agregarMenu(Menu *menu) {
 	else
 		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
 }
+
+//caso de uso: venta a domicilio
+map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados() {
+    map<int, DtProductoCantidad*>::iterator it_pc;
+    map<int, ProductoSimple *>::iterator it_ps;
+    map<int, Menu *>::iterator it_m;
+    map<int, CantidadProducto*> res;
+    for(it_pc = prod_cants_recordados.begin(); it_pc != prod_cants_recordados.end; ++it_pc) {
+        (it_pc -> first);
+        for(it_ps = productosSimples.begin(); it_ps != productosSimples.end(); ++it_ps) {
+            
+        }
+        for(it_domicilio = ventasDomicilio.begin(); it_domicilio != ventasDomicilio.end(); ++it_domicilio) {
+            ventadomicilio = it_domicilio -> second;
+            if (ventalocal -> estaFacturada()) {
+            factura = ventadomicilio -> getFactura();
+            DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
+                if (fecha_factura == this -> fecha_venta) {
+                    dtfactura = factura -> getDatosFactura();
+                    res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
+                    totalfacturado +=  dtfactura.getPrecioTotal();
+                }
+            }
+        }
+    }
+    return this -> prod_cants_recordados;
+}

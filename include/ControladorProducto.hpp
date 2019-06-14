@@ -69,6 +69,8 @@ public:
 	void agregarProductoSimple(ProductoSimple *ps);
 	void agregarMenu(Menu *menu);
 	
+    //caso de uso: venta a domicilio
+    map<int, CantidadProducto*> getProductosAlmacenados();
 };
 
 

@@ -72,11 +72,9 @@ void ControladorVenta::agregarProductoAVenta() {
   v -> agregarProductoAVenta(this -> prod, this -> cantidad);
 }
 void ControladorVenta::cancelarProductoAVenta() {
-  //QUE ONDA CON ESTO?
-  //QUE ES LIBERAR LA MEMORIA??
-  // AYUDAAA!!
   prod = nullptr;
   cantidad = 0;
+  numero_mesa = 0;
   v = nullptr;
 }
 
@@ -132,6 +130,42 @@ bool ControladorVenta::ingresarTelefono(string telefono) {
     ControladorCliente *cont_cliente;
     cont_cliente = ControladorCliente::getInstance();
     return (cont_cliente -> existeCliente(telefono));
+}
+
+//obtenerProductosDisponibles
+
+void ControladorVenta::almacenarProducto(DtProductoCantidad prod_y_cant) {
+    ControladorProducto *cont_prod;
+    cont_prod = ControladorProducto::getInstance();
+    contr_prod -> seleccionarProductoYCantidad(prod_y_cant);
+}
+
+map<int, Repartidor*> ControladorVenta::obtenerRepartidores() {
+    ControladorEmpleado *cont_emp;
+    cont_emp = ControladorEmpleado::getInstance();
+    map<int, Repartidor*> repartidores = cont_emp -> getRepartidoresDisponibles();
+    return repartidores;
+}
+
+void ControladorVenta::elegirRepartidor(int numero_repartidor) {
+    ControladorEmpleado *cont_emp;
+    cont_emp = ControladorEmpleado::getInstance();
+    cont_emp -> seleccionarRepartidor(numero_repartidor);
+}
+
+void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor) {
+    ControladorProducto *cont_prod;
+    cont_prod = ControladorProducto::getInstance();
+    ControladorCliente *cont_cliente;
+    cont_cliente = ControladorCliente::getInstance();
+    this -> numero_venta++;
+    map<int, CantidadProducto*> cont_prod -> getProductosAlmacenados();
+    if (quiere_repartidor) {
+        ControladorEmpleado *cont_emp;
+        cont_emp = ControladorEmpleado::getInstance();
+    } else {
+        
+    }
 }
 
 void ControladorVenta::cancelarVentaADomicilio() {
