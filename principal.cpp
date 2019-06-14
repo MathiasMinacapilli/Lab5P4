@@ -582,7 +582,7 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
-                #if 0
+                
                 case 6:
                     try {
                         system("clear");
@@ -599,7 +599,7 @@ int main() {
                         break;
                     }
                     break;
-                #endif
+                
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -1095,8 +1095,14 @@ int main() {
                         vector<DtActualizacion> act_cliente = iventa->getActualizacionesCliente(tel_cliente);
                         vector<DtActualizacion>::iterator it_act;
                         cout << "Actualizaciones de sus pedidos: \n";
-                        for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++)
+                        for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++){
                             cout << *it_act << "\n";
+                            cout << "hola";
+                        }
+                        cout << "Presione cuaquier tecla para volver al menu principal...";
+                        string dummy;
+                        getline(cin, dummy);
+                        msj = "------------------------------";
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
