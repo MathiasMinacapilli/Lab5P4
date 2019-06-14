@@ -753,7 +753,7 @@ int main() {
                             cin >> descuento;
                             es_valido_descuento(descuento);
                             iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
-                            DtFactura* factura = iventa -> generarFacturaADomicilio();
+                            DtFactura* factura = iventa -> generarFacturaDomicilio();
                             DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
                             if (ptr_factura_domicilio != nullptr) {
                                 DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
