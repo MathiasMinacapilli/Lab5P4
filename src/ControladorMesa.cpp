@@ -48,7 +48,7 @@ void ControladorMesa::finalizarVenta() {
 
 //Quitar Producto a una Venta - getProductosVenta() - ControladorVenta
 
-Venta* ControladorMesa::obtenerVenta(int numero) {
+VentaLocal* ControladorMesa::obtenerVenta(int numero) {
     map<int, Mesa*>::iterator it = mesas.find(numero);
     Venta* ve = nullptr;
     if (it != mesas.end()) {

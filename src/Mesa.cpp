@@ -33,7 +33,7 @@ void Mesa::setVentaActual(VentaLocal *v) {
   this -> ventaActual = v;
 }
 
-Venta *Mesa::getVentaActual() {
+VentaLocal *Mesa::getVentaActual() {
   return this -> ventaActual;
 }
 

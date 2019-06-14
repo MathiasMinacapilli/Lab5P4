@@ -4,6 +4,7 @@
 //Librerias de C
 #include <map>
 #include <set>
+#include <forward_list>
 using namespace std;
 
 //Archivos
@@ -20,7 +21,8 @@ private:
   //instancia patron Singleton
   static ControladorVenta *instance;
   //coleccion de ventas
-  map<int, Venta*> ventas;
+  map<int, VentaLocal *> ventasLocales;
+  map<int, VentaADomicilio *> ventadDomicilio;
   int numero_mesa; //AGREGAR PRODUCTO A UNA VENTA - ingresarNumeroMesa - numero
   Producto* prod; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - prod
   int cantidad; //AGREGAR PRODUCTO A UNA VENTA - seleccionarProdYCant - producto_cantidad.getCantidad
@@ -64,7 +66,7 @@ public:
   map<int, DtFactura> getFacturasYTotalFecha(float &totalfacturado);
 
   //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
-  set<DtActualizacion> getListadoActualizaciones();
+  forward_list<DtActualizacion> getListadoActualizaciones();
 
 };
 

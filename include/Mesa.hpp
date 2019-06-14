@@ -24,7 +24,7 @@ public:
     void setMozo(Mozo *m);
     Mozo *getMiMozo();
     void setVentaActual(VentaLocal *v);
-    Venta *getVentaActual();
+    VentaLocal *getVentaActual();
     void agregarAVentasPasadas(VentaLocal *v);
     map<int, VentaLocal *> getVentasPasadas();
     //operaciones

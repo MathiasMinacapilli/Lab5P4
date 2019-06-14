@@ -34,7 +34,7 @@ public:
     //Facturación de una venta - generarFactura() - ControladorVenta
     void finalizarVenta();
     //Quitar Producto a una Venta - getProductosVenta() - ControladorVenta
-    Venta* obtenerVenta(int numero);
+    VentaLocal * obtenerVenta(int numero);
     //Iniciar Venta en Mesas
     set<int> getMesasMozoSinVentas(int num_mozo);
     void seleccionarMesasVenta(set<int> numeros);
