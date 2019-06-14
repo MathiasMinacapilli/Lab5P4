@@ -11,7 +11,3 @@ Repartidor::~Repartidor() {
 Transporte Repartidor::getTransporte() {
     return this -> medioTransporte;
 }
-
-map<int, VentaADomicilio*> Repartidor::getVentas(){
-	return this->ventas;
-}

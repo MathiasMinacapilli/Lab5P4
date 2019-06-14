@@ -28,6 +28,10 @@ Cliente* VentaADomicilio::getCliente(){
   return this -> miCliente;
 }
 
+Repartidor *VentaADomicilio::getRepartidor(){
+  return this->miRepartidor;
+}
+
 DtFactura* VentaADomicilio::facturar() {
     map<int, CantidadProducto*>::iterator it;
     map<int, DtProductoCantidad> datos_productos;
@@ -48,11 +52,12 @@ DtFactura* VentaADomicilio::facturar() {
     Factura* factura = new Factura(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total);
     this->setFactura(factura);
     if (miRepartidor != nullptr) {
-    DtFacturaDomicilio res_domicilio = DtFacturaDomicilio(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this -> miRepartidor -> getNombre(), this -> miRepartidor -> getTransporte());
-    DtFactura* res = &res_domicilio;
-    return res;
+      DtFacturaDomicilio res_domicilio = DtFacturaDomicilio(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this -> miRepartidor -> getNombre(), this -> miRepartidor -> getTransporte());
+      DtFactura* res = &res_domicilio;
+      return res;
+    }
+    else 
 }
-
 //Operaciones patron State
 void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
 	EtapaPedido etapa_pedido;

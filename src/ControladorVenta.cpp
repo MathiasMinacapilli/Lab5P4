@@ -168,7 +168,15 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, int descuent
     cont_prod = ControladorProducto::getInstance();
     ControladorCliente *cont_cliente;
     cont_cliente = ControladorCliente::getInstance();
-    this -> numero_venta++;
+    //busco numero de venta sin usar
+    bool encontre_lugar = false;
+    while (!encontre_lugar){
+      if (!this->existeVenta(this->numero_venta)){
+        encontre_lugar = true;
+      }
+      else this->numero_venta++;
+    }
+
     Cliente* mi_cliente = cont_cliente -> getCliente(telefono_recordado);
     bool tiene_menu = false;
     map<int, CantidadProducto*> cant_prods = cont_prod -> getProductosAlmacenados(tiene_menu);
@@ -190,6 +198,7 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, int descuent
         ve -> setProdsDomicilio(cant_prods);
         venta_domicilio = ve;
     }
+    this->numero_venta++;
 }
 
 void ControladorVenta::cancelarVentaADomicilio() {
@@ -289,6 +298,20 @@ vector<DtActualizacion> ControladorVenta::getActualizacionesCliente(string telef
     return cliente->consultarPedidos();
 }
 
+
+//AVANZAR ETAPA DE UN PEDIDO
+map<int, VentaADomicilio *> ControladorVenta::obtenerVentasRepartidor(int num){
+  map<int, VentaADomicilio *>::iterator it;
+  map<int, VentaADomicilio *> res;
+  res.clear();
+  for (it = this->ventasDomicilio.begin(); it != this->ventasDomicilio.end(); ++it){
+    VentaADomicilio *v = it->second;
+    if (v->getRepartidor()->getNumero() == num){
+      res[v->getNumero()] = v;
+    }  
+  }
+  return res;
+}
 
 //CARGAR DATOS DE PRUEBA
 bool ControladorVenta::existeVenta(int num){

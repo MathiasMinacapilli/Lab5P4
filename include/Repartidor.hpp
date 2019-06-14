@@ -14,8 +14,6 @@ using namespace std;
 class Repartidor : public Empleado {
 private:
    Transporte medioTransporte;
-   map<int, VentaADomicilio *> ventas;
-
 public:
     //Constructor
     Repartidor(int numero, string nombre, Transporte medioTransporte);
@@ -24,7 +22,6 @@ public:
     ~Repartidor();
 
     //Getters
-    map<int, VentaADomicilio*> getVentas();
     Transporte getTransporte();
 };
 

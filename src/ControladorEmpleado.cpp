@@ -106,8 +106,7 @@ set<int> ControladorEmpleado::getIds() {
 		ret.insert((it->second)->getNumero());
 	return ret;
 }
-/* Selecciona el id y el rango de fechas para obtener las ventas facturadas
-Chequeo de fechas??????????????????????*/
+/* Selecciona el id y el rango de fechas para obtener las ventas facturadas*/
 void ControladorEmpleado::seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin) {
 	this->id_mozo_recordado = id;
 	this->fecha_ini_recordada = fecha_ini;
@@ -132,7 +131,8 @@ void ControladorEmpleado::ingresarIdRepartidor(int id){
 map<int, DtDireccion> ControladorEmpleado::getVentasRepartidor(){
 	Repartidor *repartidor = this->repartidores[this->id_repartidor_recordado];
 	map<int, DtDireccion> resultado;
-	map<int, VentaADomicilio *> ventas_repartidor = repartidor -> getVentas();
+	ControladorVenta *cont_venta = ControladorVenta::getInstance();
+	map<int, VentaADomicilio *> ventas_repartidor = cont_venta->obtenerVentasRepartidor(this->id_repartidor_recordado);
 	map<int, VentaADomicilio *>::iterator it;
 	for (it = ventas_repartidor.begin(); it != ventas_repartidor.end(); ++it){
 		DtDireccion dir = it->second->getCliente()->getDireccion();

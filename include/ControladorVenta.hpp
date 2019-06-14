@@ -81,6 +81,9 @@ public:
     //CONSULTAR ACTUALIZACIONES DE PEDIDOS A DOMICILIO POR PARTE DEL ADMINISTRADOR
     vector<DtActualizacion> getListadoActualizaciones();
 
+    //avanzar etapa de pedido
+    map<int, VentaADomicilio *> obtenerVentasRepartidor(int num);
+
     //cargarDatosDePrueba
     void aumentarNumeroVenta();
     bool existeVenta(int num);

@@ -1086,7 +1086,6 @@ int main() {
                 switch(opcion_cliente) {
 
                 /* 1) Consultar actualizaciones de pedidos. */
-                #if 0
                 case 1:
                     try {
                         system("clear");
@@ -1104,7 +1103,7 @@ int main() {
                         break;
                     }
                     break;
-                #endif
+                
                 /* 0) Salir. */
                 case 0:
                     msj = "";

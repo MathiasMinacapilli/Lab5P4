@@ -36,6 +36,8 @@ public:
     vector<DtActualizacion> getActualizaciones() const;
     //obtiene el cliente
     Cliente* getCliente();
+    //obtiene el repartidor
+    Repartidor *getRepartidor();
     //facturacion de la venta
     DtFactura* facturar();
     //Patron observer
