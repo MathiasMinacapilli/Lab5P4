@@ -238,7 +238,7 @@ void ControladorProducto::agregarMenu(Menu *menu) {
 }
 
 //caso de uso: venta a domicilio
-map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados() {
+map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados(bool &tiene_menu) {
     map<int, DtProductoCantidad>::iterator it_pc;
     map<int, ProductoSimple *>::iterator it_ps;
     map<int, Menu *>::iterator it_m;
@@ -257,8 +257,14 @@ map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados() {
             if (codigo == (it_m -> first)) {
                 CantidadProducto* cant_prod = CantidadProducto((it -> second), cantidad);
                 res[codigo] =  cant_prod;
+                tiene_menu = true;
             }
         }
     }
     return res;
+}
+
+void ControladorProducto::cancelarMenu(){
+	//libera la "memoria" (cosas recordadas)
+	this->prod_cants_recordados.clear();
 }

@@ -153,28 +153,43 @@ void ControladorVenta::elegirRepartidor(int numero_repartidor) {
     cont_emp -> seleccionarRepartidor(numero_repartidor);
 }
 
-void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor) {
+void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, int descuento) {
     ControladorProducto *cont_prod;
     cont_prod = ControladorProducto::getInstance();
     ControladorCliente *cont_cliente;
     cont_cliente = ControladorCliente::getInstance();
     this -> numero_venta++;
-    map<int, CantidadProducto*> cant_prods = cont_prod -> getProductosAlmacenados();
+    Cliente* mi_cliente = cont_cliente -> getCliente(telefono_recordado);
+    bool tiene_menu = false;
+    map<int, CantidadProducto*> cant_prods = cont_prod -> getProductosAlmacenados(tiene_menu);
+    int el_descuento = descuento;
+    if (tiene_menu) {
+        el_descuento = 0;
+    }
     if (quiere_repartidor) {
         ControladorEmpleado *cont_emp;
         cont_emp = ControladorEmpleado::getInstance();
+        Etapa* etapa = new Pedido();
+        Repartidor* mi_repartidor = cont_emp -> getRepartidorRecordado();
+        VentaADomicilio* ve = (this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, mi_repartidor);
+        ve -> setProdsDomicilio(cant_prods);
+        venta_domicilio = ve;
     } else {
-        
+        Etapa* etapa = new Recibido();
+        VentaADomicilio* ve = (this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, nullptr)
+        ve -> setProdsDomicilio(cant_prods);
+        venta_domicilio = ve;
     }
 }
 
 void ControladorVenta::cancelarVentaADomicilio() {
-    //QUE ONDA CON ESTO?
-    //QUE ES LIBERAR LA MEMORIA??
-    // AYUDAAA!!
-    prod = nullptr;
-    cantidad = 0;
-    v = nullptr;
+    ControladorProducto *cont_prod;
+    cont_prod = ControladorProducto::getInstance();
+    ControladorEmpleado *cont_emp;
+    cont_emp = ControladorEmpleado::getInstance();
+    this -> telefono_recordado = ' ';
+    cont_prod -> borrarProductos;
+    cont_emp -> borrarNumero;
 }
 
 DtFactura* ControladorVenta::generarFacturaDomiclio() {
