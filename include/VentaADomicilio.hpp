@@ -26,7 +26,7 @@ private:
 public:
     //Constructores
 	VentaADomicilio();
-    VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente, Repartidor *miRepartidor);
+    VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, IObserverActualizaciones* miObserver, Cliente *miCliente, Repartidor *miRepartidor);
     //Destructores
     ~VentaADomicilio();
     //Patron State

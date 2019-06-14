@@ -52,11 +52,13 @@ DtFactura* VentaADomicilio::facturar() {
     Factura* factura = new Factura(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total);
     this->setFactura(factura);
     if (miRepartidor != nullptr) {
-      DtFacturaDomicilio res_domicilio = DtFacturaDomicilio(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this -> miRepartidor -> getNombre(), this -> miRepartidor -> getTransporte());
-      DtFactura* res = &res_domicilio;
-      return res;
+        DtFacturaDomicilio res_domicilio = DtFacturaDomicilio(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this -> miRepartidor -> getNombre(), this -> miRepartidor -> getTransporte());
+        DtFactura* res = &res_domicilio;
+    } else {
+        DtFactura res_domicilio_sin_repartidor = DtFactura(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total);
+        DtFactura* res = &res_domicilio_sin_repartidor;
     }
-    else 
+    return res;
 }
 //Operaciones patron State
 void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
@@ -64,7 +66,7 @@ void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
 	Etapa *aux = etapa -> avanzarEtapa(etapa_pedido);
 	//si cambio de etapa
 	if (aux != nullptr){
-		  //avanzo etapa
+		//avanzo etapa
   		delete this->etapa;
   		this->etapa = aux;
 

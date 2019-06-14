@@ -129,12 +129,7 @@ DtFactura* ControladorVenta::generarFactura() {
 }
 
 //VENTA A DOMICILIO
-//FALTAN OP
-//FALTAN OP
-//FALTAN OP
-//FALTAN OP
-//FALTAN OP
-//FALTAN OP
+
 bool ControladorVenta::ingresarTelefono(string telefono) {
     this -> telefono_recordado = telefono;
     ControladorCliente *cont_cliente;
@@ -147,7 +142,7 @@ bool ControladorVenta::ingresarTelefono(string telefono) {
 void ControladorVenta::almacenarProducto(DtProductoCantidad prod_y_cant) {
     ControladorProducto *cont_prod;
     cont_prod = ControladorProducto::getInstance();
-    contr_prod -> seleccionarProductoYCantidad(prod_y_cant);
+    cont_prod -> seleccionarProductoYCantidad(prod_y_cant);
 }
 
 map<int, Repartidor*> ControladorVenta::obtenerRepartidores() {
@@ -189,12 +184,12 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, int descuent
         cont_emp = ControladorEmpleado::getInstance();
         Etapa* etapa = new Pedido();
         Repartidor* mi_repartidor = cont_emp -> getRepartidorRecordado();
-        VentaADomicilio* ve = (this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, mi_repartidor);
+        VentaADomicilio* ve = new VentaADomicilio(this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, mi_repartidor);
         ve -> setProdsDomicilio(cant_prods);
         venta_domicilio = ve;
     } else {
         Etapa* etapa = new Recibido();
-        VentaADomicilio* ve = (this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, nullptr)
+        VentaADomicilio* ve = new VentaADomicilio(this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, nullptr);
         ve -> setProdsDomicilio(cant_prods);
         venta_domicilio = ve;
     }
@@ -207,12 +202,12 @@ void ControladorVenta::cancelarVentaADomicilio() {
     ControladorEmpleado *cont_emp;
     cont_emp = ControladorEmpleado::getInstance();
     this -> telefono_recordado = ' ';
-    cont_prod -> borrarProductos;
-    cont_emp -> borrarNumero;
+    cont_prod -> borrarProductos();
+    cont_emp -> borrarNumero();
 }
 
-DtFactura* ControladorVenta::generarFacturaDomiclio() {
-  DtFactura* factura = venta_domicilio -> facturar();
+DtFactura* ControladorVenta::generarFacturaADomicilio() {
+  DtFactura* factura = this->venta_domicilio->facturar();
   return factura;
 }
 
@@ -270,6 +265,10 @@ vector<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
   return res;
 }
 
+//cargarDatosDePrueba
+void ControladorVenta::aumentarNumeroVenta() {
+    this -> numero_venta = (this -> numero_venta) + 1;
+}
 
 //funciones auxiliares para implementar patron Observer
 void ControladorVenta::suscribirCliente(string telefono){

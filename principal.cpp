@@ -132,12 +132,15 @@ static float conseguirDescuento() {
     return descuento;
 }
 
+/* Chequea que sea valido el codigo del producto buscando el codigo en la coleccion
+de productos disponibles. Si el codigo no existe en esta coleccion tira una excepcion */
 static void es_valido_codigo(int codigo, map<int, DtProducto> productos_disponibles) {
     map<int, DtProducto>::iterator it = productos_disponibles.find(codigo);
     if (it == productos_disponibles.end())
         throw new invalid_argument ("No existe producto con ese código.");
 }
 
+/* Si la cantidad es menor o igual a 0 tira una excepcion invalid_argument */
 static void es_valida_cantidad(int cantidad) {
     if (cantidad <= 0)
         throw new invalid_argument ("Cantidad ingresada no válida.");
@@ -148,12 +151,17 @@ static void es_valido_descuento(int descuento) {
         throw new invalid_argument ("Descuento ingresado no válido.");
 }
 
+/* Chequea que sea valido el codigo del repartidor buscando el codigo en la coleccion
+de repartidores. Si el codigo no existe en esta coleccion tira una excepcion */
 static void es_valido_numero_repartidor(int numero_repartidor, map<int, Repartidor*> repartidores_disponibles) {
     map<int, Repartidor*>::iterator it = repartidores_disponibles.find(numero_repartidor);
     if (it == repartidores_disponibles.end())
         throw new invalid_argument ("No existe producto con ese código.");
 }
 
+/* Procedimiento de E/S con el usuario el cual pide que confirme sus acciones,
+las opciones son S o N, si ingresa algo distinto de S o N pide al usuario que ingrese
+nuevamente una opcion. */
 static bool confirmacion () {
     string confirmacion;
     bool error = false;
@@ -258,7 +266,6 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
 ------------Programa Principal------------
 ------------------------------------------
 */
-
 int main() {
     Fabrica *fabrica = Fabrica::getInstance();
     ICliente *icliente = fabrica -> getICliente();
@@ -533,13 +540,12 @@ int main() {
                 #if 0
                 case 4:
                     try {
-
+                        iemple
                     } catch(exception* e) {
 
                     }
                     break;
                 #endif
-
                 /* 5) Baja de producto. (Hay Diagrama de Comunicacion) */
                 case 5:
                     try {
@@ -626,21 +632,21 @@ int main() {
                         } while(!es_valido_el_codigo);
                         if(!cancelar) {
                             string waste = "";
-                            DtProducto prod = iproducto->getProducto();
-                            DtProducto* prod_ptr = &prod;
-                            DtMenu* dtmenu_ptr = dynamic_cast<DtMenu*>(prod_ptr);
-                            cout << "-Codigo: " << prod.getCodigo()
-                                << "\n-Descripcion: " << prod.getDescripcion()
-                                << "\n-Precio: " << prod.getPrecio()
+                            DtProducto* prod = iproducto->getProducto();
+                            DtMenu* dtmenu_ptr = dynamic_cast<DtMenu*>(prod);
+                            cout << "-Codigo: " << prod->getCodigo()
+                                << "\n-Descripcion: " << prod->getDescripcion()
+                                << "\n-Precio: " << prod->getPrecio()
                                 << "\n-Cantidad vendidos: " << iproducto->getCantidadProductoTotalVendidos();
+                            //Si es un menu debo mostrar todos los productos que tiene dentro
                             if(dtmenu_ptr != nullptr) {
                                 //Tengo que mostrar todos los productos simples dentro del menu
                                 DtMenu dtmenu = *dtmenu_ptr;
                                 map<int, DtProductoEnMenu> prods = dtmenu.getProductos();
                                 map<int, DtProductoEnMenu>::iterator it;
                                 for(it = prods.begin(); it != prods.end(); ++it) {
-                                    cout << "-Codigo: " << prod.getCodigo()
-                                        << "\n-Descripcion: " << prod.getDescripcion();
+                                    cout << "-Codigo: " << it->second.getProducto().getCodigo()
+                                        << "\n-Descripcion: " << it->second.getProducto().getDescripcion();
                                 }
                             }
                             cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
@@ -753,14 +759,19 @@ int main() {
                             cin >> descuento;
                             es_valido_descuento(descuento);
                             iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
-                            DtFactura* factura = iventa -> generarFacturaDomicilio();
-                            DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
-                            if (ptr_factura_domicilio != nullptr) {
-                                DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
-                                cout << factura_domicilio;
+                            DtFactura* factura = iventa -> generarFacturaADomicilio();
+                            if(quiero_repartidor) {
+                                DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
+                                if (ptr_factura_domicilio != nullptr) {
+                                    DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
+                                    cout << factura_domicilio;
+                                } else {
+                                    throw new invalid_argument("La venta es local.");
+                                }
                             } else {
-                                throw new invalid_argument("La venta es local.");
+                                cout << *factura;
                             }
+                            
                         } else {
                             iventa -> cancelarVentaADomicilio();
                         }

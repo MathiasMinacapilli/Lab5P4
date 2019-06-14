@@ -29,8 +29,6 @@ public:
     bool existeMesa(int num_mesa);
     //operacion patron Singleton
     static ControladorMesa *getInstance();
-    //Asignar automáticamente mozos a mesas
-    map<int, DtMesasMozo> asignarMozosAMesas();
     //Facturación de una venta - generarFactura() - ControladorVenta
     void finalizarVenta();
     //Quitar Producto a una Venta - getProductosVenta() - ControladorVenta
@@ -42,6 +40,9 @@ public:
     void agregarMesa(Mesa *m);
     void iniciarVenta();
     void cancelarVenta();
+    //Caso de uso: Asignar automaticamente mozos a mesas
+    map<int, DtMesasMozo> asignarMozosAMesas();
+    map<int, Mesa*> getMesas();
 };
 
 #endif

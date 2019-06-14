@@ -29,7 +29,6 @@ ControladorMesa *ControladorMesa::getInstance(){
 }
 
 //Asignar automáticamente mozos a mesas
-
 map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
     //FALTAA , TENEMOS DUDA
   //
@@ -117,4 +116,9 @@ void ControladorMesa::iniciarVenta() {
 
 void ControladorMesa::cancelarVenta() {
   //Quedó como pregunta que es liberar la memoria
+}
+
+//Caso de uso: Asignar automaticamente mozos a mesas
+map<int, Mesa*> ControladorMesa::getMesas() {
+    return this->mesas;
 }

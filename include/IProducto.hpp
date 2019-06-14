@@ -11,6 +11,7 @@ using namespace std;
 #include "DtProductoCantidad.hpp"
 #include "DtProductoSimple.hpp"
 #include "Producto.hpp"
+#include "CantidadProducto.hpp"
 
 class IProducto { // interfaz
 protected:
@@ -34,7 +35,7 @@ public:
     //Informacion de un producto
     virtual bool ingresarCodigoProductoAConsultar(int codigo) = 0;
     virtual void cancelarInformacion() = 0;
-    virtual DtProducto getProducto() = 0;
+    virtual DtProducto* getProducto() = 0;
     virtual int getCantidadProductoTotalVendidos() = 0;
     //caso de uso: venta a domicilio
     virtual map<int, CantidadProducto*> getProductosAlmacenados(bool &tiene_menu) = 0;

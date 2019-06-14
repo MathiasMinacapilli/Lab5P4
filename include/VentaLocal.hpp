@@ -11,6 +11,7 @@ class VentaLocal : public Venta {
 private:
 	Mozo *miMozo;
 public:
+    VentaLocal();
     VentaLocal(int numero, float descuento, Factura* factura);
     ~VentaLocal();
 

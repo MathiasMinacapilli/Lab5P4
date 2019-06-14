@@ -41,8 +41,8 @@ void Venta::setFactura(Factura* factura) {
   this -> factura = factura;
 }
 
-void setProdsDomicilio(map<int, CantidadProducto*> prods_domiclio) {
-    this -> cants_productos = prods_domicilio;
+void setProdsDomicilio(map<int, CantidadProducto*> prods_domicilio) {
+    this->cants_productos = prods_domicilio;
 }
 
 void Venta::agregarProductoAVenta(Producto* producto, int cantidad) {
