@@ -21,7 +21,7 @@ using namespace std;
 
 
 void cargarDatosDePrueba() {
-    #if 0
+
     //PRODUCTOS SIMPLES
 
     ControladorProducto *cont_producto = ControladorProducto::getInstance();
@@ -150,92 +150,72 @@ void cargarDatosDePrueba() {
 
     //NOTIFICACIONES
 
-    //N4
-    DtFechaYHora f4 = DtFechaYHora(16, 06, 2019, 21, 13, 0);
-    map<int, DtProductoCantidad> datos1;
+    //N4 -- V4 -- PEDIDO
+    DtFechaYHora f_n4 = DtFechaYHora(16, 06, 2019, 21, 13, 0);
+    map<int, DtProductoCantidad> datos_v4;
     datos_v4.clear();
-    map<int, CantidadProducto *> prods_v4 = v4->getCants_Productos();
-    map<int, CantidadProducto *>::iterator it_1;
-    for (it_1 = prods_v4.begin(); it_1 != prods_v4.end(); ++it_1){ 
-        DtProducto dtp = it_1->second->getProducto()->getDatosProducto();
-        DtProductoCantidad dtprod_cant = DtProductoCantidad(dtp, it_1->second->getCantidad());
-        datos_v4[dtp->getCodigo()] = dtprod_cant;
+    map<int, CantidadProducto *> prods_v4 = v4 -> getCants_Productos();
+    map<int, CantidadProducto *>::iterator it_v4;
+    for (it_v4 = prods_v4.begin(); it_v4 != prods_v4.end(); ++it_v4){
+        DtProducto dtp_v4 = it_v4 -> second -> getProducto() -> getDatosProducto();
+        DtProductoCantidad dtprod_cant_v4 = DtProductoCantidad(dtp_v4, it_v4 -> second -> getCantidad());
+        datos_v4[dtp_v4 -> getCodigo()] = dtprod_cant_v4;
     }
-    EtapaPedido etapa1 = enCamino;
-    DtActualizacion act1 = DtActualizacion(f1, "Martin", "091651249", datos1, etapa1);
-    v4->agregarActualizacion(act1);
+    EtapaPedido etapa_n4 = pedido;
+    DtActualizacion act_n4 = DtActualizacion(f_n4, "Martin", "091651249", datos_v4, etapa_n4);
+    v4->agregarActualizacion(act_n4);
 
+    //N1 -- V4 -- EN CAMINO
+    DtFechaYHora f_n1 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
+    EtapaPedido etapa_n1 = enCamino;
+    DtActualizacion act_n1 = DtActualizacion(f_n1, "Martin", "091651249", datos_v4, etapa_n1);
+    v4->agregarActualizacion(act_n1);
 
-
-    //N1
-    DtFechaYHora f1 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
-    map<int, DtProductoCantidad> datos1;
-    datos_v4.clear();
-    map<int, CantidadProducto *> prods_v4 = v4->getCants_Productos();
-    map<int, CantidadProducto *>::iterator it_1;
-    for (it_1 = prods_v4.begin(); it_1 != prods_v4.end(); ++it_1){ 
-        DtProducto dtp = it_1->second->getProducto()->getDatosProducto();
-        DtProductoCantidad dtprod_cant = DtProductoCantidad(dtp, it_1->second->getCantidad());
-        datos_v4[dtp->getCodigo()] = dtprod_cant;
+    //N3 -- V6 -- PEDIDO
+    DtFechaYHora f_n3 = DtFechaYHora(16, 06, 2019, 21, 14, 0);
+    map<int, DtProductoCantidad> datos_v6;
+    datos_v6.clear();
+    map<int, CantidadProducto *> prods_v6 = v6 -> getCants_Productos();
+    map<int, CantidadProducto *>::iterator it_v6;
+    for (it_v6 = prods_v6.begin(); it_v6 != prods_v6.end(); ++it_v6){
+        DtProducto dtp_v6 = it_v6 -> second -> getProducto() -> getDatosProducto();
+        DtProductoCantidad dtprod_cant_v6 = DtProductoCantidad(dtp_v6, it_v6 -> second -> getCantidad());
+        datos_v6[dtp_v6 -> getCodigo()] = dtprod_cant_v6;
     }
-    EtapaPedido etapa1 = enCamino;
-    DtActualizacion act1 = DtActualizacion(f1, "Martin", "091651249", datos1, etapa1);
-    v4->agregarActualizacion(act1);
+    EtapaPedido etapa_n3 = pedido;
+    DtActualizacion act_n3 = DtActualizacion(f_n3, "Vladimir", "098217523", datos_v6, etapa_n3);
+    v6->agregarActualizacion(act_n3);
 
+    //N2 -- V6 -- EN CAMINO
+    DtFechaYHora f_n2 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
+    EtapaPedido etapa_n2 = enCamino;
+    DtActualizacion act_n2 = DtActualizacion(f_n2, "Vladimir", "098217523", datos_v6, etapa_n2);
+    v4->agregarActualizacion(act_n2);
 
-
-
-
-
-
-
-
-
-    //N3
-
-    DtFechaYHora f2 = DtFechaYHora(16, 06, 2019, 21, 14, 0);
-    map<int, DtProductoCantidad> datos3;
-    datos3.clear();
-    map<int, CantidadProducto *> prods2 = v6->getCants_Productos();
-    map<int, CantidadProducto *>::iterator it_2;
-    for (it_2 = prods1.begin(); it_2 != prods1.end(); ++it_2){ 
-        DtProducto dtp = it_2->second->getProducto()->getDatosProducto();
-        DtProductoCantidad dtprod_cant = DtProductoCantidad(dtp, it_2->second->getCantidad());
-        datos2[dtp->getCodigo()] = dtprod_cant;
+    //N7 -- V5 -- PEDIDO
+    DtFechaYHora f_n7 = DtFechaYHora(16, 06, 2019, 15, 02, 0);
+    map<int, DtProductoCantidad> datos_v5;
+    datos_v5.clear();
+    map<int, CantidadProducto *> prods_v5 = v5 -> getCants_Productos();
+    map<int, CantidadProducto *>::iterator it_v5;
+    for (it_v5 = prods_v5.begin(); it_v5 != prods_v5.end(); ++it_v5){
+        DtProducto dtp_v5 = it_v5 -> second -> getProducto() -> getDatosProducto();
+        DtProductoCantidad dtprod_cant_v5 = DtProductoCantidad(dtp_v5, it_v5 -> second -> getCantidad());
+        datos_v5[dtp_v5 -> getCodigo()] = dtprod_cant_v5;
     }
-    EtapaPedido etapa2 = enCamino;
-    DtActualizacion act2 = DtActualizacion(f2, "Vladimir", "098217523", datos2, etapa2);
-    v6->agregarActualizacion(act2);
+    EtapaPedido etapa_n7 = pedido;
+    DtActualizacion act_n7 = DtActualizacion(f_n7, "Martin", "091651249", datos_v5, etapa_n7);
+    v5->agregarActualizacion(act_n7);
 
+    //N6 -- V5 -- EN CAMINO
+    DtFechaYHora f_n6 = DtFechaYHora(16, 06, 2019, 16, 15, 0);
+    EtapaPedido etapa_n6 = enCamino;
+    DtActualizacion act_n6 = DtActualizacion(f_n6, "Martin", "091651249", datos_v4, etapa_n6);
+    v5->agregarActualizacion(act_n6);
 
-
-
-    //N2
-    DtFechaYHora f2 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
-    map<int, DtProductoCantidad> datos2;
-    datos3.clear();
-    map<int, CantidadProducto *> prods2 = v6->getCants_Productos();
-    map<int, CantidadProducto *>::iterator it_2;
-    for (it_2 = prods1.begin(); it_2 != prods1.end(); ++it_2){ 
-        DtProducto dtp = it_2->second->getProducto()->getDatosProducto();
-        DtProductoCantidad dtprod_cant = DtProductoCantidad(dtp, it_2->second->getCantidad());
-        datos2[dtp->getCodigo()] = dtprod_cant;
-    }
-    EtapaPedido etapa2 = enCamino;
-    DtActualizacion act2 = DtActualizacion(f2, "Vladimir", "098217523", datos2, etapa2);
-    v6->agregarActualizacion(act2);
-    
-
-
-
-    //N3
-
-    //N4
-
-    //N5
-
-    //N6
-
-    //N7
-    #endif
+    //N5 -- V5 -- RECIBIO
+    DtFechaYHora f_n6 = DtFechaYHora(16, 06, 2019, 16, 37, 0);
+    EtapaPedido etapa_n6 = recibido;
+    DtActualizacion act_n6 = DtActualizacion(f_n6, "Martin", "091651249", datos_v4, etapa_n6);
+    v5->agregarActualizacion(act_n6);    
 }
