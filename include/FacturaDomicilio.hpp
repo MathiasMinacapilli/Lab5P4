@@ -16,7 +16,10 @@ private:
     string nombreRepartidor;
     Transporte transporte;
 public:
+    //Constructor
     FacturaDomicilio(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productosCantidad, float iva, float descuento, float precioSubTotal, float precioTotal, string nombreRepartidor, Transporte transporte);
+
+    //Destructor
     ~FacturaDomicilio();
 };
 

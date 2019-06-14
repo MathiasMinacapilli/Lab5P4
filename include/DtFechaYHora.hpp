@@ -14,12 +14,19 @@ private:
     int minutos;
     int segundos;
 public:
+    //Constructor
     DtFechaYHora();
     DtFechaYHora(int dia, int mes, int anio, int hora, int minutos, int segundos);
+
+    //Destructor
+    ~DtFechaYHora();
+
+    //Getters
     int getHora() const;
     int getMinutos() const;
     int getSegundos() const;
-    ~DtFechaYHora();
+
+    //Sobrecarga de operador de comparación
     bool operator<=(const DtFechaYHora&);
 };
 

@@ -14,9 +14,14 @@ class DtMenu : public DtProducto {
 private:
     map<int, DtProductoEnMenu> productos;
 public:
+    //Constructor
     DtMenu(int codigo, string descripcion, float precio, map<int, DtProductoEnMenu> productos);
-    map<int, DtProductoEnMenu> getProductos();
+
+    //Destructor
     ~DtMenu();
+
+    //Getters
+    map<int, DtProductoEnMenu> getProductos();
 };
 
 #endif

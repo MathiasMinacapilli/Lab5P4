@@ -20,20 +20,22 @@ private:
     float descuento;
     Factura* factura;
 protected:
+    //Constructor protected porque es abstracta
     Venta();
     Venta(int numero, float descuento, Factura* factura);
     map<int, CantidadProducto*> cants_productos;
     void setProdsDomicilio(map<int, CantidadProducto*> prods_domiclio);
 public:
+    //Destructor
     virtual ~Venta();
 
-    // Getters
+    //Getters
     int getNumero();
     float getDescuento();
     map<int, CantidadProducto*> getCants_Productos();
     Factura* getFactura();
-    
-    // Setters
+
+    //Setters
     void setDescuento(float descuento);
     void setFactura(Factura* factura);
 

@@ -17,6 +17,8 @@ Cliente::Cliente(string telefono, string nombre, DtDireccion direccion, set<DtAc
 	this->etapaPedidos = etapaPedidos;
 }
 
+Cliente::~Cliente() {}
+
 //getters
 string Cliente::getTelefono(){
 	return this->telefono;

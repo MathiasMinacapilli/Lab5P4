@@ -9,12 +9,17 @@ private:
     int cantidad;
     Producto* producto;
 public:
-    // Constructor y Destructor
+    //Constructor
     CantidadProducto(int cantidad, Producto* producto);
+
+    //Destructor
     ~CantidadProducto();
-    // Getters y Setters
+
+    //Getters
     int getCantidad();
     Producto* getProducto();
+
+    //Setters
     void setCantidad(int cantidad);
 
     void aumentarCantidad(int cantidad);

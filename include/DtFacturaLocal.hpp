@@ -10,9 +10,14 @@ class DtFacturaLocal: public DtFactura {
 private:
     string nombreMozo;
 public:
+    //Constructor
     DtFacturaLocal(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal, string nombreMozo);
-    string getNombreMozo();
+
+    //Destructor
     ~DtFacturaLocal();
+
+    //Getters
+    string getNombreMozo();
 };
 
 ostream &operator<< (ostream&, DtFacturaLocal);

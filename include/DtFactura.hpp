@@ -21,8 +21,14 @@ private:
     float precioSubTotal;
     float precioTotal;
 public:
-    DtFactura();    
+    //Constructor
+    DtFactura();
     DtFactura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productos, float iva, float descuento, float precioSubTotal, float precioTotal);
+
+    //Destructor virtual porque tiene clases derivadas
+    virtual ~DtFactura();
+
+    //Getters
     int getCodigo();
     DtFechaYHora getFechaYHora();
     map<int, DtProductoCantidad> getProductos();
@@ -30,7 +36,6 @@ public:
     float getDescuento();
     float getPrecioSubTotal();
     float getPrecioTotal();
-    virtual ~DtFactura();
 };
 
 ostream &operator<< (ostream&, DtFactura);

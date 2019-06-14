@@ -10,9 +10,11 @@ using namespace std;
 
 class DtProductoSimple : public DtProducto {
 public:
-    //constructor y destructor
+    //Constructor
     DtProductoSimple();
     DtProductoSimple(int codigo, string descripcion, float precio);
+
+    //Destructor
     ~DtProductoSimple();
 };
 

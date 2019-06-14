@@ -13,22 +13,27 @@ using namespace std;
 
 class DtCliente {
 private:
-  string telefono;
-  string nombre;
-  DtDireccion direccion;
-  string mail;
-  string clave;
-  set<DtActualizacion> etapaPedidos;
+    string telefono;
+    string nombre;
+    DtDireccion direccion;
+    string mail;
+    string clave;
+    set<DtActualizacion> etapaPedidos;
 public:
-  DtCliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
-  string getTelefono();
-  string getNombre();
-  DtDireccion getDireccion();
-  set<DtActualizacion> getEtapaPedidos();
-  ~DtCliente();
+    //Constructor
+    DtCliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
+
+    //Destructor
+    ~DtCliente();
+
+    //Getters
+    string getTelefono();
+    string getNombre();
+    DtDireccion getDireccion();
+    set<DtActualizacion> getEtapaPedidos();
 };
 
-//sobrecarga operador cout
-  ostream& operator<<(ostream &, DtCliente);
+//Sobrecarga operador cout
+ostream& operator<<(ostream &, DtCliente);
 
 #endif

@@ -10,8 +10,10 @@ using namespace std;
 
 class ProductoSimple : public Producto {
 public:
-    //constructor y destructor
+    //Constructor
     ProductoSimple(int codigo, string descripcion, float precio);
+
+    //Destructor
     ~ProductoSimple();
 
     void eliminar();

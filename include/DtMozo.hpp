@@ -12,8 +12,11 @@ class DtMozo: public DtEmpleado {
 private:
 
 public:
+	//Constructor
 	DtMozo();
     DtMozo(int numero, string nombre);
+
+	//Destructor
     ~DtMozo();
 };
 

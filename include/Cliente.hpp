@@ -20,15 +20,19 @@ private:
     DtDireccion direccion;
     vector<DtActualizacion> etapaPedidos;
 public:
-    //constructor
+    //Constructor
 	Cliente();
 	Cliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
-    //getters
-    string getTelefono();
+
+    //Destructor
+    ~Cliente();
+
+    //Getters
     string getNombre();
+    string getTelefono();
     DtDireccion getDireccion();
 
-    //patron observer
+    //Patron Observer
     void suscribirse();
     void bajaSuscripcion();
     vector<DtActualizacion> consultarPedidos();

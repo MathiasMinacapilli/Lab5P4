@@ -7,16 +7,19 @@ private:
     int mes;
     int anio;
 public:
-	//constructor
+	//Constructor
     DtFecha();
     DtFecha(int dia, int mes, int anio);
-    //getters
+
+    //Destructor
+    ~DtFecha();
+
+    //Getters
     int getDia() const;
     int getMes() const;
     int getAnio() const;
-    //destructor
-    ~DtFecha();
-    //sobrecarga de operador de comparacion
+
+    //Sobrecarga de operador de comparación
     bool operator==(const DtFecha&);
 };
 

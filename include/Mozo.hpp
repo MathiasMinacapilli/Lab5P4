@@ -11,8 +11,11 @@ using namespace std;
 class Mozo : public Empleado {
 private:
 public:
-  Mozo(int numero, string nombre);
-  ~Mozo();
+    //Constructor
+    Mozo(int numero, string nombre);
+
+    //Destructor
+    ~Mozo();
 };
 
 #endif

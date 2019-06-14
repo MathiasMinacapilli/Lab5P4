@@ -19,8 +19,10 @@ using namespace std;
 
 class ControladorProducto : public IProducto {
 private:
-	//instancia del singleton y constructor privado
+	//Instancia del patrón Singleton
 	static ControladorProducto *instance;
+
+	//Constructor
 	ControladorProducto();
 	//pseudoatributos que representan colecciones de productos simples y menus
 	map<int, ProductoSimple *> productosSimples;
@@ -68,7 +70,7 @@ public:
 
 	void agregarProductoSimple(ProductoSimple *ps);
 	void agregarMenu(Menu *menu);
-	
+
     //caso de uso: venta a domicilio
     map<int, CantidadProducto*> getProductosAlmacenados();
 };

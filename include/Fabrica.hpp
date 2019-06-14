@@ -13,21 +13,20 @@ using namespace std;
 
 class Fabrica{
 private:
-	//instancia del patron Singleton
+	//Instancia del patrón Singleton
 	static Fabrica *instance;
-	//constructor
+	//Constructor
 	Fabrica();
 public:
-	//funcion patron Singleton
+	//Función patrón Singleton
 	static Fabrica *getInstance();
 
-	//obtener las interfaces
+	//Funciones de obtención de interfaces
 	ICliente *getICliente();
 	IEmpleado *getIEmpleado();
 	IMesa *getIMesa();
 	IProducto *getIProducto();
 	IVenta *getIVenta();
-
 };
 
 #endif

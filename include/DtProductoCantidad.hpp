@@ -12,11 +12,16 @@ private:
     DtProducto producto;
     int cantidad;
 public:
+    //Constructor
 	DtProductoCantidad();
     DtProductoCantidad(DtProducto producto, int cantidad);
+
+    //Destructor
+    ~DtProductoCantidad();
+
+    //Getters
     DtProducto getProducto();
     int getCantidad();
-    ~DtProductoCantidad();
 };
 
 ostream &operator<< (ostream&, DtProductoCantidad);

@@ -10,11 +10,16 @@ private:
     int numero;
     string nombre;
 public:
+    //Constructor
 	DtEmpleado();
     DtEmpleado(int numero, string nombre);
+
+    //Destructor
+    ~DtEmpleado();
+
+    //Getters
     int getNumero();
     string getNombre();
-    ~DtEmpleado();
 };
 
 #endif

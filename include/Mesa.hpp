@@ -16,18 +16,23 @@ private:
     VentaLocal *ventaActual;
     map<int, VentaLocal *> ventasPasadas;
 public:
-    //constructor y destructor
+    //Constructor
     Mesa(int numero, Mozo *miMozo, VentaLocal *ventaActual);
+
+    //Destructor
     ~Mesa();
-    //getters y setters
+
+    //Getters
     int getNum();
-    void setMozo(Mozo *m);
     Mozo *getMiMozo();
-    void setVentaActual(VentaLocal *v);
     VentaLocal *getVentaActual();
-    void agregarAVentasPasadas(VentaLocal *v);
     map<int, VentaLocal *> getVentasPasadas();
-    //operaciones
+
+    //Setters
+    void setMozo(Mozo *m);
+    void setVentaActual(VentaLocal *v);
+
+    void agregarAVentasPasadas(VentaLocal *v);
     bool noTieneVentas();
     bool esDelMozo(int numMozo);
     void terminarVenta();

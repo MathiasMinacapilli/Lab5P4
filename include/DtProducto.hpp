@@ -6,22 +6,23 @@
 #include <ostream>
 using namespace std;
 
-//Archivos
-
 class DtProducto {
 private:
     int codigo;
     string descripcion;
     float precio;
 public:
+    //Constructor
     DtProducto();
-    DtProducto(int codigo, string descripcion, float precio); //
-    //getters
+    DtProducto(int codigo, string descripcion, float precio);
+
+    //Destructor virtual porque tiene clases derivadas
+    virtual ~DtProducto();
+
+    //Getters
     int getCodigo();
     string getDescripcion();
     float getPrecio();
-    //destructor
-    virtual ~DtProducto();
 };
 
 ostream &operator<< (ostream&, DtProducto);

@@ -13,25 +13,25 @@ using namespace std;
 
 class ControladorCliente : public ICliente {
 private:
-	//instancia patron Singleton
+	//Instancia patrón Singleton
 	static ControladorCliente *instance;
 	//Constructor
 	ControladorCliente();
-	//coleccion de clientes -- pseudoatributo
+	//Colección de Clientes -- Pseudoatributo
 	set<Cliente *> clientes;
-	//atributos recordados
+	//Atributos recordados
 	string telefono_recordado;
 	string nombre_recordado;
 	DtDireccion direccion_recordada;
 
 public:
-	//operacion patron singleton
+	//Operación patrón stingleton
 	static ControladorCliente *getInstance();
 
 	set<Cliente *> getClientes();
 	bool existeCliente(string telefono);
 
-	//caso de uso Alta Cliente
+	//ALTA CLIENTE
 	void ingresarDatosCliente(string telefono, string nombre, DtDireccion direccion);
 	DtCliente getDatosIngresados();
 	void ingresarCliente();

@@ -10,9 +10,13 @@ private:
     int numero;
     string nombre;
 protected:
+    //Constructor protected porque es abstracta
     Empleado(int numero, string nombre);
 public:
+    //Destructor
     ~Empleado();
+
+    //Getters
     int getNumero();
     string getNombre();
 };

@@ -8,7 +8,10 @@ class DtRepartidor {
 private:
     Transporte medioTransporte;
 public:
+    //Constructor
     DtRepartidor(Transporte medioTransporte);
+
+    //Destructor
     ~DtRepartidor();
 };
 

@@ -9,11 +9,16 @@ private:
     DtProductoSimple producto;
     int cantidad;
 public:
+    //Constructor
     DtProductoEnMenu();
     DtProductoEnMenu(DtProductoSimple producto, int cantidad);
+
+    //Destructor
+    ~DtProductoEnMenu();
+
+    //Getters
     DtProductoSimple getProducto();
     int getCantidad();
-    ~DtProductoEnMenu();
 };
 
 #endif

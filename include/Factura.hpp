@@ -23,10 +23,13 @@ private:
     float precioSubTotal;
     float precioTotal;
 public:
-	//constructor y destructor
+	//Constructor
     Factura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productosCantidad, float iva, float descuento, float precioSubTotal, float precioTotal);
+
+    //Destructor
     ~Factura();
-    //getters
+
+    //Getters
     int getCodigo();
     DtFechaYHora getFechaYHora();
     float getPrecioSubtotal();

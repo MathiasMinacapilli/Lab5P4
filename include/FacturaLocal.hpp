@@ -12,7 +12,10 @@ class FacturaLocal : public Factura {
 private:
     string nombreMozo;
 public:
+    //Constructor
     FacturaLocal(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productosCantidad, float iva, float descuento, float precioSubTotal, float precioTotal, string nombreMozo);
+
+    //Destructor
     ~FacturaLocal();
 };
 

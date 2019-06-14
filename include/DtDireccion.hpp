@@ -7,7 +7,6 @@
 #include <iostream>
 using namespace std;
 
-
 class DtDireccion {
 private:
    string calle;
@@ -15,16 +14,21 @@ private:
    string esquina1;
    string esquina2;
 public:
+    //Constructor
     DtDireccion();
     DtDireccion(string calle, int numeroPuerta, string esquina1, string esquina2);
+
+    //Destructor virtual porque tiene clases derivadas
+    virtual ~DtDireccion();
+
+    //Getters
     string getCalle();
     int getNumeroPuerta();
     string getEsquina1();
     string getEsquina2();
-    virtual ~DtDireccion();
 };
 
-//sobrecarga operador cout
+//Sobrecarga operador cout
 ostream &operator<< (ostream&, DtDireccion);
 
 #endif

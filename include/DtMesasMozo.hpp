@@ -9,10 +9,15 @@ private:
     int codigoMozo;
     set<int> mesas;
 public:
+    //Constructor
     DtMesasMozo(int codigoMozo, set<int> mesas);
+
+    //Destructor
+    ~DtMesasMozo();
+
+    //Getters
     int getCodigoMozo();
     set<int> getMesas();
-    ~DtMesasMozo();
 };
 
 #endif

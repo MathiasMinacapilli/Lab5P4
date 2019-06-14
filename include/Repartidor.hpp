@@ -17,8 +17,13 @@ private:
    map<int, VentaADomicilio *> ventas;
 
 public:
+    //Constructor
     Repartidor(int numero, string nombre, Transporte medioTransporte);
+
+    //Destructor
     ~Repartidor();
+
+    //Getters
     map<int, VentaADomicilio*> getVentas();
     Transporte getTransporte();
 };

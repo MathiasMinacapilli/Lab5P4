@@ -16,12 +16,14 @@ public:
     bool estaProducto(int cod);
     void aumentarCantidad(int cant);
 
-    //getters
+    //Getters
     int getCantidad();
     ProductoSimple* getProducto();
 
-    //constructor y destructor
+    //Constructor
     ProductoEnMenu(int cantidad, ProductoSimple *producto);
+
+    //Destructor
     ~ProductoEnMenu();
 };
 
