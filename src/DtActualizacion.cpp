@@ -3,12 +3,11 @@
 
 
 //constructor
-DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, map<int, DtProductoCantidad> datosProductos, string nombreRepartidor, EtapaPedido etapaActual) {
+DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, map<int, DtProductoCantidad> datosProductos, EtapaPedido etapaActual) {
     this->fechaYHora = fechaYHora;
     this->nombre = nombre;
     this->telefono = telefono;
     this->datosProductos = datosProductos;
-    this->nombreRepartidor = nombreRepartidor;
     this->etapaActual = etapaActual;
 }
     
@@ -27,10 +26,6 @@ string DtActualizacion::getTelefono() {
 
 map<int, DtProductoCantidad> DtActualizacion::getDatosProductos() const{
     return this->datosProductos;
-}
-
-string DtActualizacion::getNombreRepartidor() {
-    return this->nombreRepartidor;
 }
 
 EtapaPedido DtActualizacion::getEtapaActual() {

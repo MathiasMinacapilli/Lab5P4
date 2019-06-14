@@ -132,3 +132,8 @@ void VentaADomicilio::setObservador(IObserverActualizaciones *observador){
 void VentaADomicilio::borrarObservador(){
   this->miObservador = nullptr;
 }
+
+//FUNCION USADA UNICAMENTE PARA CARGAR DATOS DE PRUEBA
+void VentaADomicilio::agregarActualizacion(DtActualizacion dt_Act){
+  this->actualizaciones.push_back(dt_Act);
+}

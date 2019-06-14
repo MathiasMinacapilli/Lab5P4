@@ -13,6 +13,8 @@
 #include "../include/VentaADomicilio.hpp"
 #include "../include/EnCamino.hpp"
 #include "../include/Recibido.hpp"
+#include "../include/EtapaPedido.hpp"
+#include "../include/DtActualizacion.hpp"
 
 //Librerias de C
 using namespace std;
@@ -148,9 +150,83 @@ void cargarDatosDePrueba() {
 
     //NOTIFICACIONES
 
+    //N4
+    DtFechaYHora f4 = DtFechaYHora(16, 06, 2019, 21, 13, 0);
+    map<int, DtProductoCantidad> datos1;
+    datos_v4.clear();
+    map<int, CantidadProducto *> prods_v4 = v4->getCants_Productos();
+    map<int, CantidadProducto *>::iterator it_1;
+    for (it_1 = prods_v4.begin(); it_1 != prods_v4.end(); ++it_1){ 
+        DtProducto dtp = it_1->second->getProducto()->getDatosProducto();
+        DtProductoCantidad dtprod_cant = DtProductoCantidad(dtp, it_1->second->getCantidad());
+        datos_v4[dtp->getCodigo()] = dtprod_cant;
+    }
+    EtapaPedido etapa1 = enCamino;
+    DtActualizacion act1 = DtActualizacion(f1, "Martin", "091651249", datos1, etapa1);
+    v4->agregarActualizacion(act1);
+
+
+
     //N1
-    
+    DtFechaYHora f1 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
+    map<int, DtProductoCantidad> datos1;
+    datos_v4.clear();
+    map<int, CantidadProducto *> prods_v4 = v4->getCants_Productos();
+    map<int, CantidadProducto *>::iterator it_1;
+    for (it_1 = prods_v4.begin(); it_1 != prods_v4.end(); ++it_1){ 
+        DtProducto dtp = it_1->second->getProducto()->getDatosProducto();
+        DtProductoCantidad dtprod_cant = DtProductoCantidad(dtp, it_1->second->getCantidad());
+        datos_v4[dtp->getCodigo()] = dtprod_cant;
+    }
+    EtapaPedido etapa1 = enCamino;
+    DtActualizacion act1 = DtActualizacion(f1, "Martin", "091651249", datos1, etapa1);
+    v4->agregarActualizacion(act1);
+
+
+
+
+
+
+
+
+
+
+    //N3
+
+    DtFechaYHora f2 = DtFechaYHora(16, 06, 2019, 21, 14, 0);
+    map<int, DtProductoCantidad> datos3;
+    datos3.clear();
+    map<int, CantidadProducto *> prods2 = v6->getCants_Productos();
+    map<int, CantidadProducto *>::iterator it_2;
+    for (it_2 = prods1.begin(); it_2 != prods1.end(); ++it_2){ 
+        DtProducto dtp = it_2->second->getProducto()->getDatosProducto();
+        DtProductoCantidad dtprod_cant = DtProductoCantidad(dtp, it_2->second->getCantidad());
+        datos2[dtp->getCodigo()] = dtprod_cant;
+    }
+    EtapaPedido etapa2 = enCamino;
+    DtActualizacion act2 = DtActualizacion(f2, "Vladimir", "098217523", datos2, etapa2);
+    v6->agregarActualizacion(act2);
+
+
+
+
     //N2
+    DtFechaYHora f2 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
+    map<int, DtProductoCantidad> datos2;
+    datos3.clear();
+    map<int, CantidadProducto *> prods2 = v6->getCants_Productos();
+    map<int, CantidadProducto *>::iterator it_2;
+    for (it_2 = prods1.begin(); it_2 != prods1.end(); ++it_2){ 
+        DtProducto dtp = it_2->second->getProducto()->getDatosProducto();
+        DtProductoCantidad dtprod_cant = DtProductoCantidad(dtp, it_2->second->getCantidad());
+        datos2[dtp->getCodigo()] = dtprod_cant;
+    }
+    EtapaPedido etapa2 = enCamino;
+    DtActualizacion act2 = DtActualizacion(f2, "Vladimir", "098217523", datos2, etapa2);
+    v6->agregarActualizacion(act2);
+    
+
+
 
     //N3
 

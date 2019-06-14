@@ -18,11 +18,10 @@ private:
     string nombre;
     string telefono;
     map<int, DtProductoCantidad> datosProductos;
-    string nombreRepartidor;
     EtapaPedido etapaActual;
 public:
     //Constructor
-    DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, map<int, DtProductoCantidad> datosProductos, string nombreRepartidor, EtapaPedido etapaActual);
+    DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, map<int, DtProductoCantidad> datosProductos, EtapaPedido etapaActual);
 
     //Destructor
     ~DtActualizacion();
@@ -32,7 +31,6 @@ public:
     string getNombre();
     string getTelefono();
     map<int, DtProductoCantidad> getDatosProductos() const;
-    string getNombreRepartidor();
     EtapaPedido getEtapaActual();
 
     //Sobrecarga de operador de comparación
