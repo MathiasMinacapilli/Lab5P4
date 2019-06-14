@@ -239,27 +239,26 @@ void ControladorProducto::agregarMenu(Menu *menu) {
 
 //caso de uso: venta a domicilio
 map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados() {
-    map<int, DtProductoCantidad*>::iterator it_pc;
+    map<int, DtProductoCantidad>::iterator it_pc;
     map<int, ProductoSimple *>::iterator it_ps;
     map<int, Menu *>::iterator it_m;
     map<int, CantidadProducto*> res;
+    res.clear();
     for(it_pc = prod_cants_recordados.begin(); it_pc != prod_cants_recordados.end; ++it_pc) {
-        (it_pc -> first);
+        int codigo = (it_pc -> first);
+        int cantidad = (it_pc -> second).getCantidad();
         for(it_ps = productosSimples.begin(); it_ps != productosSimples.end(); ++it_ps) {
-            
+            if (codigo == (it_ps -> first)) {
+                CantidadProducto* cant_prod = CantidadProducto((it -> second), cantidad);
+                res[codigo] =  cant_prod;
+            }
         }
-        for(it_domicilio = ventasDomicilio.begin(); it_domicilio != ventasDomicilio.end(); ++it_domicilio) {
-            ventadomicilio = it_domicilio -> second;
-            if (ventalocal -> estaFacturada()) {
-            factura = ventadomicilio -> getFactura();
-            DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
-                if (fecha_factura == this -> fecha_venta) {
-                    dtfactura = factura -> getDatosFactura();
-                    res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
-                    totalfacturado +=  dtfactura.getPrecioTotal();
-                }
+        for(it_m = menus.begin(); it_m != menus.end(); ++it_m) {
+            if (codigo == (it_m -> first)) {
+                CantidadProducto* cant_prod = CantidadProducto((it -> second), cantidad);
+                res[codigo] =  cant_prod;
             }
         }
     }
-    return this -> prod_cants_recordados;
+    return res;
 }

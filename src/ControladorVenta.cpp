@@ -159,7 +159,7 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor) {
     ControladorCliente *cont_cliente;
     cont_cliente = ControladorCliente::getInstance();
     this -> numero_venta++;
-    map<int, CantidadProducto*> cont_prod -> getProductosAlmacenados();
+    map<int, CantidadProducto*> cant_prods = cont_prod -> getProductosAlmacenados();
     if (quiere_repartidor) {
         ControladorEmpleado *cont_emp;
         cont_emp = ControladorEmpleado::getInstance();

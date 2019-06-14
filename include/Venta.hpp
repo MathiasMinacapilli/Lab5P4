@@ -23,6 +23,7 @@ protected:
     Venta();
     Venta(int numero, float descuento, Factura* factura);
     map<int, CantidadProducto*> cants_productos;
+    void setProdsDomicilio(map<int, CantidadProducto*> prods_domiclio);
 public:
     virtual ~Venta();
 
