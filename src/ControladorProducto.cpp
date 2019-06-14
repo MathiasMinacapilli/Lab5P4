@@ -214,21 +214,24 @@ DtProducto ControladorProducto::getProducto() {
 int ControladorProducto::getCantidadProductoTotalVendidos() {
 	DtProductoCantidad datos_producto = DtProductoCantidad(DtProducto(this->codigoProductoAConsultar, "", 0), 1);
 	Producto* prod = encontrarProducto(datos_producto);
-	if(prod != nullptr) {
+	if (prod != nullptr) {
 		int cantidad_vendidos = prod->getCantidadVendidos();
 		return cantidad_vendidos;
-	}
+	} else
+		return 0;
 }
 
 void ControladorProducto::agregarProductoSimple(ProductoSimple *ps) {
-	if(this -> encontrarProducto(ps -> getCodigo()) == nullptr)
+	map<int, ProductoSimple*>::iterator it = this -> productosSimples.find(ps -> getCodigo());
+	if (it == this -> productosSimples.end())
 		(this -> productosSimples).insert(pair<int, ProductoSimple*>(ps -> getCodigo(), ps));
 	else
 		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
 }
 
 void ControladorProducto::agregarMenu(Menu *menu) {
-	if(this -> encontrarProducto(menu -> getCodigo()) == nullptr)
+	map<int, Menu*>::iterator it = this -> menus.find(menu -> getCodigo());
+	if (it == this -> menus.end())
 		(this -> menus).insert(pair<int, Menu*>(menu -> getCodigo(), menu));
 	else
 		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
