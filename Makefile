@@ -15,7 +15,7 @@ HDIR    = include
 CPPDIR  = src
 ODIR    = obj
 
-MODULOS = Cancelado CantidadProducto Cliente ControladorCliente ControladorEmpleado ControladorMesa ControladorProducto ControladorVenta DtActualizacion DtApto DtCliente DtDireccion DtEmpleado DtFactura DtFacturaDomicilio DtFacturaLocal DtFecha DtFechaYHora DtMenu DtMesasMozo DtMozo DtProducto DtProductoCantidad DtProductoEnMenu DtProductoSimple DtRepartidor Empleado EnCamino Etapa Fabrica Factura FacturaDomicilio FacturaLocal ICliente IEmpleado IMesa IProducto IObserverActualizaciones IVenta Menu Mesa Mozo Pedido Producto ProductoEnMenu ProductoSimple Recibido Repartidor Transporte Venta VentaADomicilio VentaLocal
+MODULOS = Cancelado CantidadProducto Cliente ControladorCliente ControladorEmpleado ControladorMesa ControladorProducto ControladorVenta DtActualizacion DtApto DtCliente DtDireccion DtEmpleado DtFactura DtFacturaDomicilio DtFacturaLocal DtFecha DtFechaYHora DtMenu DtMesasMozo DtMozo DtProducto DtProductoCantidad DtProductoEnMenu DtProductoSimple DtRepartidor Empleado EnCamino Etapa EtapaPedido Fabrica Factura FacturaDomicilio FacturaLocal ICliente IEmpleado IMesa IProducto IObserverActualizaciones IVenta Menu Mesa Mozo Pedido Producto ProductoEnMenu ProductoSimple Recibido Repartidor Transporte Venta VentaADomicilio VentaLocal
 
 # variables que contienen la cadena de archivos para los .h, .cpp y .o
 HS   = $(MODULOS:%=$(HDIR)/%.hpp)

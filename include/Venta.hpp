@@ -19,8 +19,8 @@ private:
     int numero;
     float descuento;
     Factura* factura;
-    map<int, CantidadProducto*> cants_productos;
 protected:
+     map<int, CantidadProducto*> cants_productos;
     //Constructor protected porque es abstracta
     Venta();
     Venta(int numero, float descuento, Factura* factura);

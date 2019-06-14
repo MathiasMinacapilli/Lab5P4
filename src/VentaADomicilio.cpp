@@ -9,10 +9,11 @@ using namespace std;
 VentaADomicilio::VentaADomicilio(): Venta(){}
 
 //constructor por parametros
-VentaADomicilio::VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente, Repartidor *miRepartidor) : Venta (numero, descuento, factura) {
+VentaADomicilio::VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, IObserverActualizaciones *obs, Cliente *miCliente, Repartidor *miRepartidor) : Venta (numero, descuento, factura) {
   this -> etapa = etapa;
   this -> miCliente = miCliente;
   this -> miRepartidor = miRepartidor;
+  this -> miObservador = obs;
 }
 
 //destructor
@@ -54,14 +55,15 @@ DtFactura* VentaADomicilio::facturar() {
     if (miRepartidor != nullptr) {
         DtFacturaDomicilio res_domicilio = DtFacturaDomicilio(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this -> miRepartidor -> getNombre(), this -> miRepartidor -> getTransporte());
         DtFactura* res = &res_domicilio;
+        return res;
     } else {
         DtFactura res_domicilio_sin_repartidor = DtFactura(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total);
         DtFactura* res = &res_domicilio_sin_repartidor;
+        return res;
     }
-    return res;
 }
 //Operaciones patron State
-void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
+void VentaADomicilio::avanzarEtapaVenta() {
 	EtapaPedido etapa_pedido;
 	Etapa *aux = etapa -> avanzarEtapa(etapa_pedido);
 	//si cambio de etapa
@@ -85,7 +87,7 @@ void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
     	}
 
     	//construyo actualizacion
-    	DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), info_productos, nombre_repartidor, etapa_pedido);
+    	DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), info_productos, etapa_pedido);
     	
       //si tengo observador, lo notifico
       if (this->miObservador != nullptr)
@@ -95,7 +97,7 @@ void VentaADomicilio::avanzarEtapaVenta(string nombre_repartidor) {
     }
 }
 
-void VentaADomicilio::cancelarVenta(string nombre_repartidor) {
+void VentaADomicilio::cancelarVenta() {
   Etapa *aux = etapa -> cancelar();
   //si cambio etapa
   if (aux != nullptr){
@@ -120,7 +122,7 @@ void VentaADomicilio::cancelarVenta(string nombre_repartidor) {
     }
 
     //construyo actualizacion
-    DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), info_productos, nombre_repartidor, etapa_pedido);
+    DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), info_productos, etapa_pedido);
     if (this->miObservador != nullptr)
       this->miObservador->notificar(actualizacion);
   }

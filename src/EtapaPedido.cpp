@@ -13,7 +13,7 @@ std::ostream& operator<<(std::ostream & os, EtapaPedido etapa){
       os << "Recibido";
       break;
   case cancelado:
-      os<< "Cancelado"
+      os<< "Cancelado";
       break;
   }
   return os;

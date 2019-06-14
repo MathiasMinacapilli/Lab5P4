@@ -293,3 +293,7 @@ map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados(bool &t
     }
     return res;
 }
+
+void ControladorProducto::borrarProductos(){
+	this->prod_cants_recordados.clear();
+}

@@ -3,7 +3,6 @@
 
 Repartidor::Repartidor(int numero, string nombre, Transporte medioTransporte) : Empleado(numero, nombre) {
   this -> medioTransporte = medioTransporte;
-  this -> ventas.clear();
 }
 
 Repartidor::~Repartidor() {

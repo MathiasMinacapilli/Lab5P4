@@ -195,6 +195,14 @@ map<int, DtMesasMozo> ControladorEmpleado::asignarMozosAMesas() {
 		}
 	}
 }
+//cargar datos de prueba
+Repartidor *ControladorEmpleado::getRepartidor(int numero_repartidor){
+	map<int, Repartidor *>::iterator it = this->repartidores.find(numero_repartidor);
+	if (it != this->repartidores.end())
+		return it->second;
+	else throw new invalid_argument("Error. No existe un repartidor con ese id. ");
+}
+
 
 //destructor
 ControladorEmpleado::~ControladorEmpleado(){}
