@@ -752,7 +752,7 @@ int main() {
                             int descuento;
                             cin >> descuento;
                             es_valido_descuento(descuento);
-                            iventa -> crearVentaADomicilio(quiere_repartidor, descuento);
+                            iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
                             DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
                             if (ptr_factura_domicilio != nullptr) {
@@ -1092,7 +1092,7 @@ int main() {
                         system("clear");
                         cout << "--------------------" << "Consultar actualizaciones de pedidos" << "-------------------- \n \n";
                         string tel_cliente = conseguirTelefono();
-                        vector<DtActualizacion> act_cliente = iventa->getActualizacionesCliente(tel_cliente); 
+                        vector<DtActualizacion> act_cliente = iventa->getActualizacionesCliente(tel_cliente);
                         vector<DtActualizacion>::iterator it_act;
                         cout << "Actualizaciones de sus pedidos: \n";
                         for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++)
