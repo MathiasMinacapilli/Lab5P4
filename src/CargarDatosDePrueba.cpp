@@ -1,13 +1,27 @@
 //Archivos
-#include "../include/.hpp"
+#include "../include/ControladorProducto.hpp"
+#include "../include/ProductoSimple.hpp"
+#include "../include/Menu.hpp"
+#include "../include/ProductoEnMenu.hpp"
+#include "../include/ControladorEmpleado.hpp"
+#include "../include/Transporte.hpp"
+#include "../include/Mesa.hpp"
+#include "../include/ControladorMesa.hpp"
+#include "../include/ControladorCliente.hpp"
+#include "../include/DtApto.hpp"
+#include "../include/DtDireccion.hpp"
+#include "../include/VentaADomicilio.hpp"
+#include "../include/EnCamino.hpp"
+#include "../include/Recibido.hpp"
 
-
-
+//Librerias de C
+using namespace std;
 
 
 void cargarDatosDePrueba() {
 
     //PRODUCTOS SIMPLES
+
     ControladorProducto *cont_producto = ControladorProducto::getInstance();
     //P1
     ProductoSimple *p1 = new ProductoSimple(1, "Pizza con muzzarella", 130);
@@ -26,97 +40,78 @@ void cargarDatosDePrueba() {
     cont_producto -> agregarProductoSimple(p5);
 
     //MENÚES
+
     //P6
-
-    ///
-    //
-    ///
-    //
-    //
-    //SEGUIR ACA, TENER CUIDADO CON EL MENU, CAMBIAR DE DTPRODCUTO A MENU OO A PRODUCTO
-    //
-    //
-    //
-    //
-    //
     Menu *p6 = new Menu(6, "Combo Pizza");
-
-    iproducto -> ingresarDatosMenu(6, "Combo Pizza");
-    DtProducto producto = DtProducto(1, "Pizza", 130);
-    DtProductoCantidad producto_cantidad = DtProductoCantidad(producto, 1);
-    iproducto -> seleccionarProductoYCantidad(producto_cantidad);
-    producto = DtProducto(3, "Coca Cola 1.25L", 95);
-    producto_cantidad = DtProductoCantidad(producto, 1);
-    iproducto -> seleccionarProductoYCantidad(producto_cantidad);
-    iproducto -> ingresarMenu();
+    p6 -> agregarProducto(p1, 1);
+    p6 -> agregarProducto(p3, 1);
+    cont_producto -> agregarMenu(p6);
     //P7
-    iproducto->ingresarDatosMenu(7, "Combo Empanadas");
-    producto = DtProducto(3, "Coca Cola 1.25L", 95);
-    producto_cantidad = DtProductoCantidad(producto, 1);
-    iproducto->seleccionarProductoYCantidad(producto_cantidad);
-    producto = DtProducto(4, "Empanada Capresse", 72);
-    producto_cantidad = DtProductoCantidad(producto, 3);
-    iproducto->seleccionarProductoYCantidad(producto_cantidad);
-    iproducto->ingresarMenu();
+    Menu *p7 = new Menu(7, "Combo Empanadas");
+    p7 -> agregarProducto(p3, 1);
+    p7 -> agregarProducto(p4, 3);
+    cont_producto -> agregarMenu(p7);
 
     //MOZOS
 
+    ControladorEmpleado *cont_empleado = ControladorEmpleado::getInstance();
     //M1
-    iempleado->ingresarNombreEmpleado("Juan Pedro");
-    iempleado->ingresarMozo();
+    cont_empleado -> ingresarNombreEmpleado("Juan Pedro");
+    cont_empleado -> ingresarMozo();
     //M2
-    iempleado->ingresarNombreEmpleado("Johnny");
-    iempleado->ingresarMozo();
+    cont_empleado -> ingresarNombreEmpleado("Johnny");
+    cont_empleado -> ingresarMozo();
     //M3
-    iempleado->ingresarNombreEmpleado("José");
-    iempleado->ingresarMozo();
+    cont_empleado -> ingresarNombreEmpleado("José");
+    cont_empleado -> ingresarMozo();
 
     //REPARTIDORES
 
     //R1
-    iempleado->ingresarNombreEmpleado("Tito");
+    cont_empleado -> ingresarNombreEmpleado("Tito");
     Transporte t = Bici;
-    iempleado->seleccionarTransporte(t);
-    iempleado->ingresarRepartidor();
+    cont_empleado -> seleccionarTransporte(t);
+    cont_empleado -> ingresarRepartidor();
     //R2
-    iempleado->ingresarNombreEmpleado("Raúl");
+    cont_empleado -> ingresarNombreEmpleado("Raúl");
     t = Moto;
-    iempleado->seleccionarTransporte(t);
-    iempleado->ingresarRepartidor();
+    cont_empleado -> seleccionarTransporte(t);
+    cont_empleado -> ingresarRepartidor();
     //R3
-    iempleado->ingresarNombreEmpleado("Tiki Gelana");
+    cont_empleado -> ingresarNombreEmpleado("Tiki Gelana");
     t = Pie;
-    iempleado->seleccionarTransporte(t);
-    iempleado->ingresarRepartidor();
+    cont_empleado -> seleccionarTransporte(t);
+    cont_empleado -> ingresarRepartidor();
 
     //MESAS
+
     Mesa *mesa;
-    ControladorMesa *cont_mesa = imesa -> getInstance();
+    ControladorMesa *cont_mesa = ControladorMesa::getInstance();
     //MM1
-    mesa = Mesa(1, nullptr, nullptr);
+    mesa = new Mesa(1, nullptr, nullptr);
     cont_mesa -> agregarMesa(mesa);
     //MM2
-    mesa = Mesa(2, nullptr, nullptr);
+    mesa = new Mesa(2, nullptr, nullptr);
     cont_mesa -> agregarMesa(mesa);
     //MM3
-    mesa = Mesa(3, nullptr, nullptr);
+    mesa = new Mesa(3, nullptr, nullptr);
     cont_mesa -> agregarMesa(mesa);
     //MM4
-    mesa = Mesa(4, nullptr, nullptr);
+    mesa = new Mesa(4, nullptr, nullptr);
     cont_mesa -> agregarMesa(mesa);
     //MM5
-    mesa = Mesa(5, nullptr, nullptr);
+    mesa = new Mesa(5, nullptr, nullptr);
     cont_mesa -> agregarMesa(mesa);
     //MM6
-    mesa = Mesa(6, nullptr, nullptr);
+    mesa = new Mesa(6, nullptr, nullptr);
     cont_mesa -> agregarMesa(mesa);
     //MM7
-    mesa = Mesa(7, nullptr, nullptr);
+    mesa = new Mesa(7, nullptr, nullptr);
     cont_mesa -> agregarMesa(mesa);
 
     //CLIENTES
 
-    ControladorCliente *cont_cliente = icliente -> getInstance();
+    ControladorCliente *cont_cliente = ControladorCliente::getInstance();
     DtApto apto;
     DtDireccion direccion;
     //C1
@@ -135,35 +130,37 @@ void cargarDatosDePrueba() {
     //VENTAS A DOMICILIO
 
     VentaADomicilio *venta_domicilio;
-    ControladorVenta *cont_venta = iventa -> getInstance();
-    ControladorEmpleado *cont_empleado = iempleado -> getInstance();
     //V4
-    venta_domicilio = new VentaADomicilio(4, 0, nullptr, EnCamino, "Martin", 4);// OJO QUE CAMBIO LA FUNCION
-
-    venta_domicilio -> agregarProductoAVenta()
-
+    EnCamino *enCamino = new EnCamino();
+    venta_domicilio = new VentaADomicilio(4, 0, nullptr, enCamino, "Martin", 4);
 
 
+    //GET REPARTIDOR O ALGO?? ASI SI LE DOY EL NUMERO DEL REPARTIDOR ME BUSCA Y ME DEVUELVE EL REPARTIDOR?
 
-
+    venta_domicilio -> agregarProductoAVenta(p7, 5);
     //V5
-    venta_domicilio = new VentaADomicilio(5, 0, nullptr, Recibido, "Martin", 5);
-
-
+    Recibido *recibido = new Recibido();
+    venta_domicilio = new VentaADomicilio(5, 0, nullptr, recibido, "Martin", 5);
+    venta_domicilio -> agregarProductoAVenta(p2, 2);
     //V6
-    venta_domicilio = new VentaADomicilio(6, 0, nullptr, EnCamino, "Vladimir", 4);
+    enCamino = new EnCamino();
+    venta_domicilio = new VentaADomicilio(6, 0, nullptr, enCamino, "Vladimir", 4);
+    venta_domicilio -> agregarProductoAVenta(p6, 1);
 
+    //NOTIFICACIONES
 
+    //N1
 
+    //N2
 
+    //N3
 
+    //N4
 
+    //N5
 
+    //N6
 
-
-
-
-
-
+    //N7
 
 }
