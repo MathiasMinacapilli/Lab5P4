@@ -65,7 +65,7 @@ public:
     void almacenarProducto(DtProductoCantidad prod_y_cant);
     map<int, Repartidor*> obtenerRepartidores();
     void elegirRepartidor(int numero_repartidor);
-    void crearVentaADomicilio(bool quiere_repartidor);
+    void crearVentaADomicilio(bool quiere_repartidor, int descuento);
     void cancelarVentaADomicilio();
     DtFactura* generarFacturaDomicilio();
 

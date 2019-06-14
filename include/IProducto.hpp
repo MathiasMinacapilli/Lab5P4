@@ -36,6 +36,9 @@ public:
     virtual void cancelarInformacion() = 0;
     virtual DtProducto getProducto() = 0;
     virtual int getCantidadProductoTotalVendidos() = 0;
+    //caso de uso: venta a domicilio
+    virtual map<int, CantidadProducto*> getProductosAlmacenados(bool &tiene_menu) = 0;
+    virtual void borrarProductos() = 0;
     //Destructor
     virtual ~IProducto(){}; // virtual y vacío
 };

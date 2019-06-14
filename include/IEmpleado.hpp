@@ -24,6 +24,8 @@ public:
     virtual map<int, Repartidor*> getRepartidoresDisponibles() = 0;
     virtual void seleccionarTransporte(Transporte t) = 0;
     virtual void seleccionarRepartidor(int numero_repartidor) = 0;
+    virtual Repartidor* getRepartidorRecordado() = 0;
+    virtual void borrarNumero() = 0;
     virtual int ingresarRepartidor() = 0;
     virtual void cancelarRepartidor() = 0;
     virtual int ingresarMozo() = 0;

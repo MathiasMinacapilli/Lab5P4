@@ -38,7 +38,7 @@ public:
     virtual bool ingresarTelefono(string telefono) = 0;
     virtual void almacenarProducto(DtProductoCantidad prod_y_cant) = 0;
     virtual void elegirRepartidor(int numero_repartidor) = 0;
-    virtual void crearVentaADomicilio(bool quiere_repartidor) = 0;
+    virtual void crearVentaADomicilio(bool quiere_repartidor, int descuento) = 0;
     virtual void cancelarVentaADomicilio() = 0;
     virtual map<int, DtProducto> obtenerProductosDisponibles() = 0;
     virtual map<int, Repartidor*> obtenerRepartidores() = 0;
