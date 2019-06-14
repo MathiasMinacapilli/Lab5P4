@@ -102,8 +102,6 @@ static string conseguirTelefono() {
     return telefono;
     }
 
-
-
 /* Obtiene el porcentaje de descuento. */
 static float conseguirDescuento() {
     cout << "\nIngrese el porcentaje de descuento que desea aplicar. \n"
@@ -753,11 +751,7 @@ int main() {
                         cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
-                            cout << "\nIngrese el descuento correspondiente a la venta. \n"
-                                << " Descuento: ";
-                            int descuento;
-                            cin >> descuento;
-                            es_valido_descuento(descuento);
+                            float descuento = conseguirDescuento();
                             iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
                             if(quiero_repartidor) {
@@ -765,16 +759,12 @@ int main() {
                                 if (ptr_factura_domicilio != nullptr) {
                                     DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
                                     cout << factura_domicilio;
-                                } else {
+                                } else
                                     throw new invalid_argument("La venta es local.");
-                                }
-                            } else {
+                            } else
                                 cout << *factura;
-                            }
-                            
-                        } else {
+                        } else
                             iventa -> cancelarVentaADomicilio();
-                        }
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -1114,7 +1104,7 @@ int main() {
                         break;
                     }
                     break;
-                
+
                 /* 0) Salir. */
                 case 0:
                     msj = "";

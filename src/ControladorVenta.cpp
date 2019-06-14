@@ -48,7 +48,7 @@ VentaLocal *ControladorVenta::crearVenta() {
       encontre_lugar = true;
     }
     else this->numero_venta++;
-    
+
   }
   ventasLocales.insert(pair<int, VentaLocal *>(ve -> getNumero(), ve));
   this -> numero_venta++;
@@ -160,7 +160,7 @@ void ControladorVenta::elegirRepartidor(int numero_repartidor) {
     cont_emp -> seleccionarRepartidor(numero_repartidor);
 }
 
-void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, int descuento) {
+void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, float descuento) {
     ControladorProducto *cont_prod;
     cont_prod = ControladorProducto::getInstance();
     ControladorCliente *cont_cliente;
@@ -306,7 +306,7 @@ map<int, VentaADomicilio *> ControladorVenta::obtenerVentasRepartidor(int num){
     VentaADomicilio *v = it->second;
     if (v->getRepartidor()->getNumero() == num){
       res[v->getNumero()] = v;
-    }  
+    }
   }
   return res;
 }
