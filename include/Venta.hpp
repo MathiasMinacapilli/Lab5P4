@@ -19,12 +19,11 @@ private:
     int numero;
     float descuento;
     Factura* factura;
+    map<int, CantidadProducto*> cants_productos;
 protected:
     //Constructor protected porque es abstracta
     Venta();
     Venta(int numero, float descuento, Factura* factura);
-    map<int, CantidadProducto*> cants_productos;
-    void setProdsDomicilio(map<int, CantidadProducto*> prods_domiclio);
 public:
     //Destructor
     virtual ~Venta();
@@ -45,6 +44,7 @@ public:
     void eliminarProducto(Producto* producto, int cantidad);
     map<int, DtProducto> obtenerProductos();
     virtual DtFactura* facturar() = 0;
+    void setProdsDomicilio(map<int, CantidadProducto*> prods_domiclio);
 };
 
 #endif

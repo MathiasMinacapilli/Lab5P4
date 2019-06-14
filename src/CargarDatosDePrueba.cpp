@@ -19,7 +19,7 @@ using namespace std;
 
 
 void cargarDatosDePrueba() {
-
+    #if 0
     //PRODUCTOS SIMPLES
 
     ControladorProducto *cont_producto = ControladorProducto::getInstance();
@@ -161,5 +161,5 @@ void cargarDatosDePrueba() {
     //N6
 
     //N7
-
+    #endif
 }

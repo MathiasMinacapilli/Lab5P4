@@ -12,6 +12,8 @@ using namespace std;
 #include "VentaLocal.hpp"
 #include "VentaADomicilio.hpp"
 #include "DtFecha.hpp"
+#include "Pedido.hpp"
+#include "Recibido.hpp"
 //#include "DtFactura.hpp"
 
 class ControladorVenta : public IVenta {
@@ -67,7 +69,7 @@ public:
     void elegirRepartidor(int numero_repartidor);
     void crearVentaADomicilio(bool quiere_repartidor, int descuento);
     void cancelarVentaADomicilio();
-    DtFactura* generarFacturaDomicilio();
+    DtFactura* generarFacturaADomicilio();
 
   //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUSCRIBIR -- DES-SUSCRIBIR
   void suscribirCliente(string telefono);

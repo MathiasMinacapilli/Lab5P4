@@ -43,8 +43,6 @@ float DtFactura::getPrecioTotal() {
     return this->precioTotal;
 }
 
-DtFactura::~DtFactura() {}
-
 ostream &operator<< (ostream& o, DtFactura dtf) {
     o << "Codigo: " << dtf.getCodigo()
       << "\nFecha y hora: " << dtf.getFechaYHora() 

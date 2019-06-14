@@ -5,9 +5,9 @@
 #include <map>
 using namespace std;
 
-//Archivos
-#include "Mozo.hpp"
-#include "VentaLocal.hpp"
+class Mozo;
+class VentaLocal;
+
 
 class Mesa{
 private:
@@ -37,5 +37,9 @@ public:
     bool esDelMozo(int numMozo);
     void terminarVenta();
 };
+
+//Archivos
+#include "VentaLocal.hpp"
+#include "Mozo.hpp"
 
 #endif

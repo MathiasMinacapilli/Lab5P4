@@ -11,6 +11,7 @@ private:
     string nombre;
 protected:
     //Constructor protected porque es abstracta
+    Empleado();
     Empleado(int numero, string nombre);
 public:
     //Destructor

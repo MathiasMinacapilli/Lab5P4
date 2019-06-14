@@ -10,6 +10,8 @@ ControladorProducto *ControladorProducto::instance = nullptr;
 ControladorProducto::ControladorProducto(){}
 
 //PATRON SINGLETON
+/* Retorna la instancia del controlador la cual es unica por la aplicacion del
+patron de diseño Singleton. */
 ControladorProducto *ControladorProducto::getInstance(){
 	if (instance == nullptr)
 		instance = new ControladorProducto();
@@ -17,6 +19,8 @@ ControladorProducto *ControladorProducto::getInstance(){
 }
 
 //ALTA PRODUCTO
+/* Retorna true si existe al menos un producto simple en la coleccion de productos
+simples del controlador. */
 bool ControladorProducto::existeProductoSimple(){
 	return !productosSimples.empty();
 }
@@ -32,19 +36,25 @@ void ControladorProducto::ingresarDatosProducto(DtProductoSimple datos){
 	}
 }
 
+/* Agrega el producto simple recordado por el controlador a la coleccion
+de productos simples almacenada en el controlador. */
 void ControladorProducto::ingresarProductoSimple(){
 	ProductoSimple *nuevo_prod_simple = new ProductoSimple((this->datos_prod_simple).getCodigo(), (this->datos_prod_simple).getDescripcion(), (this->datos_prod_simple).getPrecio());
 	this->productosSimples[nuevo_prod_simple->getCodigo()] = nuevo_prod_simple;
 }
 
+/* Cancela el alta de un producto simple */
 void ControladorProducto::cancelarProductoSimple(){
+	//Ver que "olvidar"
 }
 
+/* Ingresa los datos del menu al controlador para que este los recuerde */
 void ControladorProducto::ingresarDatosMenu(int codigo, string desc){
 	this->codigo_menu = codigo;
 	this->desc_menu = desc;
 }
 
+/* Devuelve la coleccion de productos simples almacenada en el controlador */
 map<int, DtProducto> ControladorProducto::getProductosSimples(){
 	map<int, DtProducto> resultado;
 	map<int, ProductoSimple *>::iterator it;
@@ -55,10 +65,14 @@ map<int, DtProducto> ControladorProducto::getProductosSimples(){
 	return resultado;
 }
 
+/* Agrega a la coleccion de ProductoCantidad recordada por el controlador el
+producto_cantidad ingresado. */
 void ControladorProducto::seleccionarProductoYCantidad(DtProductoCantidad producto_cantidad){
 		this->prod_cants_recordados[producto_cantidad.getProducto().getCodigo()] = producto_cantidad;
 }
 
+/* Ingresa el menu a la coleccion de menus almacenada en el controlador con
+los datos recordados por el mismo. */
 void ControladorProducto::ingresarMenu(){
 	//creo el nuevo menu con los parametros que el usuario ingreso anteriormente
 	Menu *nuevo_menu = new Menu(this->codigo_menu, this->desc_menu);
@@ -77,6 +91,7 @@ void ControladorProducto::ingresarMenu(){
 	this->prod_cants_recordados.clear();
 }
 
+/* Cancela el alta del menu */
 void ControladorProducto::cancelarMenu(){
 	//libera la "memoria" (cosas recordadas)
 	this->prod_cants_recordados.clear();
@@ -86,6 +101,8 @@ void ControladorProducto::cancelarMenu(){
 
 
 //BAJA PRODUCTO
+/* Retorna una coleccion de productos que representa a los productos
+disponibles del sistema */
 map<int, DtProducto> ControladorProducto::getProductosDisponibles(){
 	map<int, DtProducto> resultado;
 	map<int, ProductoSimple *>::iterator it_prod_simp;
@@ -97,6 +114,8 @@ map<int, DtProducto> ControladorProducto::getProductosDisponibles(){
 	return resultado;
 }
 
+/* Ingresa el codigo del producto a recordar por el controlador. Si el codigo
+no es un codigo valido la operacion lanza una excepcion de invalid_argument */
 void ControladorProducto::seleccionarProducto(int codigo_producto){
 	map<int, ProductoSimple *>::iterator it_ps = this->productosSimples.find(codigo_producto);
 	//si es un producto simple
@@ -115,6 +134,7 @@ void ControladorProducto::seleccionarProducto(int codigo_producto){
 	}
 }
 
+/* Elimina el producto recordado por el controlador del sistema */
 bool ControladorProducto::eliminarProducto(){
 	ControladorVenta *controlador_venta = ControladorVenta::getInstance();
 	bool esta_activo = controlador_venta->estaEnVentaSinFacturar(this->producto_recordado);
@@ -128,22 +148,24 @@ bool ControladorProducto::eliminarProducto(){
 	return !esta_activo;
 }
 
+/* Cancela la baja de un producto */
 void ControladorProducto::cancelarBajaProducto(){
 	this->producto_recordado = nullptr;
 }
 
+/* Elimina el producto con codigo cod de todos los menus del sistema */
 void ControladorProducto::eliminarProductoDeMenu(int cod){
 	map<int, Menu *>::iterator it;
-  map<int, ProductoEnMenu*> prods_menu;
+  	map<int, ProductoEnMenu*> prods_menu;
 	for (it = this->menus.begin(); it != this->menus.end(); ++it) {
         prods_menu = ((it -> second) -> getProductos());
-				map<int, ProductoEnMenu*>::iterator it_p = (prods_menu.find(cod));
+		map<int, ProductoEnMenu*>::iterator it_p = (prods_menu.find(cod));
         if ( it_p != prods_menu.end()) {
             bool vacio_menu = (it->second) -> eliminarProducto(cod);
             if(vacio_menu) {
                 Menu* menu = it -> second;
                 menus.erase(menu -> getCodigo());
-								menu -> eliminar();
+				menu -> eliminar();
             }
         }
     }
@@ -151,6 +173,8 @@ void ControladorProducto::eliminarProductoDeMenu(int cod){
 
 
 //AGREGAR PRODUCTO A VENTA
+/* Si existe un producto con codigo producto_cantidad.producto.codigo en el sistema,
+se retorna el objeto Producto*. En caso contrario se retorna null */
 Producto * ControladorProducto::encontrarProducto(DtProductoCantidad producto_cantidad){
 	int codigo = producto_cantidad.getProducto().getCodigo();
 	map<int, ProductoSimple *>::iterator it_ps = this->productosSimples.find(codigo);
@@ -167,7 +191,7 @@ Producto * ControladorProducto::encontrarProducto(DtProductoCantidad producto_ca
 }
 
 //Caso de uso: informacion de un producto
-/* Devuelve true sii el codigo no esta siendo usado por otro producto */
+/* Devuelve true sii existe un producto en el sistema con codigo codigo */
 bool ControladorProducto::ingresarCodigoProductoAConsultar(int codigo) {
 	DtProductoCantidad datos_producto = DtProductoCantidad(DtProducto(codigo, "", 0), 1);
 	if(encontrarProducto(datos_producto) != nullptr) {
@@ -182,7 +206,7 @@ void ControladorProducto::cancelarInformacion() {
 	this->codigoProductoAConsultar = 0;
 }
 /* Devuelve los datos del producto con codigo recordado por el controlador */
-DtProducto ControladorProducto::getProducto() {
+DtProducto* ControladorProducto::getProducto() {
 	DtProducto dt_prod = DtProducto(this->codigoProductoAConsultar, "", 1);
 	DtProductoCantidad datos_producto = DtProductoCantidad(dt_prod, 1);
 	Producto* prod = encontrarProducto(datos_producto);
@@ -208,9 +232,10 @@ DtProducto ControladorProducto::getProducto() {
 		DtMenu* dt_menu_ptr = &dt_menu;
 		dtprod = dynamic_cast<DtProducto*>(dt_menu_ptr);
 	}
-	return *dtprod;
+	return dtprod;
 }
-/* Devuelve la cantidad  */
+
+/* Devuelve la cantidad de vendidos del producto */
 int ControladorProducto::getCantidadProductoTotalVendidos() {
 	DtProductoCantidad datos_producto = DtProductoCantidad(DtProducto(this->codigoProductoAConsultar, "", 0), 1);
 	Producto* prod = encontrarProducto(datos_producto);
@@ -221,6 +246,7 @@ int ControladorProducto::getCantidadProductoTotalVendidos() {
 		return 0;
 }
 
+/* Agrega el producto simple ps a la coleccion ??? */
 void ControladorProducto::agregarProductoSimple(ProductoSimple *ps) {
 	map<int, ProductoSimple*>::iterator it = this -> productosSimples.find(ps -> getCodigo());
 	if (it == this -> productosSimples.end())
@@ -229,6 +255,8 @@ void ControladorProducto::agregarProductoSimple(ProductoSimple *ps) {
 		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
 }
 
+/* Agrega el menu a la coleccion de menus si no existe menu con codigo
+igual al menu recibido por parametro */
 void ControladorProducto::agregarMenu(Menu *menu) {
 	map<int, Menu*>::iterator it = this -> menus.find(menu -> getCodigo());
 	if (it == this -> menus.end())
@@ -238,6 +266,8 @@ void ControladorProducto::agregarMenu(Menu *menu) {
 }
 
 //caso de uso: venta a domicilio
+/* Retorna una coleccion de CantidadProducto la cual representa a los objetos
+CantidadProducto recordados por el sistema */
 map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados(bool &tiene_menu) {
     map<int, DtProductoCantidad>::iterator it_pc;
     map<int, ProductoSimple *>::iterator it_ps;
@@ -249,22 +279,17 @@ map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados(bool &t
         int cantidad = (it_pc -> second).getCantidad();
         for(it_ps = productosSimples.begin(); it_ps != productosSimples.end(); ++it_ps) {
             if (codigo == (it_ps -> first)) {
-                CantidadProducto* cant_prod = CantidadProducto((it -> second), cantidad);
+                CantidadProducto* cant_prod = new CantidadProducto(cantidad, (it_ps -> second));
                 res[codigo] =  cant_prod;
             }
         }
         for(it_m = menus.begin(); it_m != menus.end(); ++it_m) {
             if (codigo == (it_m -> first)) {
-                CantidadProducto* cant_prod = CantidadProducto((it -> second), cantidad);
+                CantidadProducto* cant_prod = new CantidadProducto(cantidad, (it_m -> second));
                 res[codigo] =  cant_prod;
                 tiene_menu = true;
             }
         }
     }
     return res;
-}
-
-void ControladorProducto::cancelarMenu(){
-	//libera la "memoria" (cosas recordadas)
-	this->prod_cants_recordados.clear();
 }

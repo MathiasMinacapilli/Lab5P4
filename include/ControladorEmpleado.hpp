@@ -3,12 +3,15 @@
 
 //Librerias de C
 #include <map>
+#include <math.h> /* floor */
 using namespace std;
+
+#include "IEmpleado.hpp"
 
 //Archivos
 #include "Mozo.hpp"
 #include "Repartidor.hpp"
-#include "IEmpleado.hpp"
+#include "ControladorMesa.hpp"
 
 
 class ControladorEmpleado : public IEmpleado{
@@ -58,6 +61,8 @@ public:
     void ingresarNumeroPedido(int nro);
     void avanzarEtapaPedido();
     void cancelarPedido();
+    //Caso de uso: Asignar automaticamente mozos a mesas
+    map<int, DtMesasMozo> asignarMozosAMesas();
 
 	Repartidor* getRepartidor(int num_repartidor);
 

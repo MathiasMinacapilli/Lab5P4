@@ -12,6 +12,7 @@ using namespace std;
 #include "Repartidor.hpp"
 #include "Transporte.hpp"
 #include "DtFactura.hpp"
+#include "DtMesasMozo.hpp"
 
 class IEmpleado {
 protected:
@@ -40,6 +41,8 @@ public:
     virtual void ingresarNumeroPedido(int nro) = 0;
     virtual void avanzarEtapaPedido() = 0;
     virtual void cancelarPedido() = 0;
+    //Caso de uso: Asignar automaticamente mozos a mesas
+    virtual map<int, DtMesasMozo> asignarMozosAMesas() = 0;
 
     //destructor
     virtual ~IEmpleado(); // virtual y vacío

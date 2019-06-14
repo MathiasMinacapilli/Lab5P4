@@ -27,7 +27,7 @@ public:
     virtual void eliminarProductoDeVenta() = 0;
     virtual bool estaEnVentaSinFacturar(Producto *p) = 0;
     virtual DtFactura* generarFactura() = 0;
-    virtual DtFactura* generarFacturaDomicilio() = 0;
+    virtual DtFactura* generarFacturaADomicilio() = 0;
     virtual map<int, DtFactura> getFacturasYTotalFecha(float &totalfacturado) = 0;
     virtual vector<DtActualizacion> getListadoActualizaciones() = 0;
     virtual vector<DtActualizacion> getActualizacionesCliente(string telefono) = 0;

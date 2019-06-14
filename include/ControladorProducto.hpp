@@ -65,7 +65,7 @@ public:
 	//caso de uso: informacion de un producto
 	bool ingresarCodigoProductoAConsultar(int codigo);
     void cancelarInformacion();
-    DtProducto getProducto();
+    DtProducto* getProducto();
     int getCantidadProductoTotalVendidos();
 
 	void agregarProductoSimple(ProductoSimple *ps);

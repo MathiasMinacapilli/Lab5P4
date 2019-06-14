@@ -1,6 +1,8 @@
 //Archivos
 #include "../include/VentaLocal.hpp"
 
+VentaLocal::VentaLocal(): Venta() {}
+
 VentaLocal::VentaLocal(int numero, float descuento, Factura* factura) : Venta(numero, descuento, factura) {
 }
 
