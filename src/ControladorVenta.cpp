@@ -236,3 +236,31 @@ vector<DtActualizacion> ControladorVenta::getListadoActualizaciones() {
   return res;
 
 }
+
+
+//funciones auxiliares para implementar patron Observer
+void ControladorVenta::suscribirCliente(string telefono){
+  map<int, VentaADomicilio *>::iterator it;
+  for (it = this->ventasDomicilio.begin(); it != this->ventasDomicilio.end(); ++it){
+    Cliente *cliente = it->second->getCliente();
+    if (cliente->getTelefono() == telefono)
+      it->second->setObservador(cliente);
+  }
+}
+
+
+void ControladorVenta::desSuscribirCliente(string telefono){
+  map<int, VentaADomicilio *>::iterator it;
+  for (it = this->ventasDomicilio.begin(); it != this->ventasDomicilio.end(); ++it){
+    Cliente *cliente = it->second->getCliente();
+    if (cliente->getTelefono() == telefono)
+      it->second->borrarObservador();
+  }
+}
+
+vector<DtActualizacion> getActualizacionesCliente(string telefono){
+  ControladorCliente *cont_cliente = ControladorCliente::getInstance();
+  Cliente *cliente = cont_cliente->getCliente(telefono);
+  if (cliente != nullptr)
+    return cliente->consultarPedidos();
+}

@@ -572,15 +572,22 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
-                #if 0
                 case 6:
                     try {
-
+                        system("clear");
+                        cout << "-----------------" << "Actualizaciones de pedidos a domicilio" << "----------------- \n \n";
+                        vector<DtActualizacion> actualizaciones = iventa -> getListadoActualizaciones();
+                        vector<DtActualizacion>::iterator it_actualizacion;
+                        cout<< "Las actualizaciones de todos los pedidos a domicilio son: ";
+                        for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion)
+                            cout << it->second << "\n";
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
-                #endif
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -727,13 +734,13 @@ int main() {
                             cin >> numero_repartidor;
                             es_valido_numero_repartidor(numero_repartidor, repartidores_disponibles);
                             iventa -> elegirRepartidor(numero_repartidor);
-                            quiere_repartidor = true;
+                            quiero_repartidor = true;
                         }
                         cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
-                            iventa -> crearVentaADomicilio(quiere_repartidor);
-                            DtFactura* factura = iventa -> generarFacturaADomicilio();
+                            iventa -> crearVentaADomicilio(quiero_repartidor);
+                            DtFactura* factura = iventa -> generarFacturaDomicilio();
                             DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
                             if (ptr_factura_domicilio != nullptr) {
                                 DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
@@ -1066,15 +1073,24 @@ int main() {
                 switch(opcion_cliente) {
 
                 /* 1) Consultar actualizaciones de pedidos. */
-                #if 0
                 case 1:
                     try {
-
+                        system("clear");
+                        cout << "--------------------" << "Consultar actualizaciones de pedidos" << "-------------------- \n \n";
+                        string tel_cliente = conseguirTelefono();
+                        vector<DtActualizacion> act_cliente = iventa->getActualizacionesCliente(tel_cliente); 
+                        vector<DtActualizacion>::iterator it_act;
+                        cout << "Actualizaciones de sus pedidos: \n";
+                        for (it_act = act_cliente.begin(); it_act != act_cliente.end(); ++it)
+                            cout << it->second << "\n";
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
-                #endif
+            
                 /* 0) Salir. */
                 case 0:
                     msj = "";

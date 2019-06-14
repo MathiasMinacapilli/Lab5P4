@@ -24,21 +24,23 @@ private:
     Repartidor *miRepartidor;
     vector<DtActualizacion> actualizaciones;
 public:
-    //Constructor
+    //Constructores
 	VentaADomicilio();
     VentaADomicilio(int numero, float descuento, Factura* factura, Etapa* etapa, Cliente *miCliente, Repartidor *miRepartidor);
-
-    //Destructor
+    //Destructores
     ~VentaADomicilio();
-    
+    //Patron State
     void avanzarEtapaVenta(string nombre_repartidor);
     void cancelarVenta(string nombre_repartidor);
-
-    //Getters
-    Cliente* getCliente();
+    //obtiene las actualizaciones de la venta
     vector<DtActualizacion> getActualizaciones() const;
-
+    //obtiene el cliente
+    Cliente* getCliente();
+    //facturacion de la venta
     DtFactura* facturar();
+    //Patron observer
+    void setObservador(IObserverActualizaciones *observador);
+    void borrarObservador();
 };
 
 //Forward Declaration

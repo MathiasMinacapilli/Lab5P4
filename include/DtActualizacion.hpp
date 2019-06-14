@@ -31,12 +31,14 @@ public:
     DtFechaYHora getFechaYHora() const;
     string getNombre();
     string getTelefono();
-    map<int, DtProductoCantidad> getDatosProductos();
+    map<int, DtProductoCantidad> getDatosProductos() const;
     string getNombreRepartidor();
     EtapaPedido getEtapaActual();
 
     //Sobrecarga de operador de comparación
     bool operator<(const DtActualizacion&) const;
 };
+
+ostream &operator<< (ostream&, DtActualizacion);
 
 #endif

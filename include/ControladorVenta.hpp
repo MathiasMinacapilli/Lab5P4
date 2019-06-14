@@ -69,9 +69,10 @@ public:
     void cancelarVentaADomicilio();
     DtFactura* generarFacturaDomicilio();
 
-    //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUBSCRIBIR -- DES-SUBSCRIBIR
-    void subscribirCliente(string telefono);
-    void desSubscrirCliente(string telefono);
+  //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUSCRIBIR -- DES-SUSCRIBIR
+  void suscribirCliente(string telefono);
+  void desSuscribirCliente(string telefono);
+  vector<DtActualizacion> getActualizacionesCliente(string telefono);
 
     //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
     void ingresarFecha(DtFecha fecha);
