@@ -70,5 +70,5 @@ Cliente* ControladorCliente::getCliente(string telefono) {
 	if (encontre)
 		return *it;
 	else
-		throw new invalid_argument ("No existe un cliente con ese número. ")
+		throw new invalid_argument ("No existe un cliente con ese número. ");
 }

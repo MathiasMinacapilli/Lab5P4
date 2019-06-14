@@ -143,8 +143,8 @@ void cargarDatosDePrueba() {
     venta_domicilio = new VentaADomicilio(5, 0, nullptr, recibido, c2, r2);
     venta_domicilio -> agregarProductoAVenta(p2, 2);
     //V6
-    enCamino = new EnCamino();
-    venta_domicilio = new VentaADomicilio(6, 0, nullptr, enCamino, c1, r1);
+    EnCamino *enCamino2 = new EnCamino();
+    venta_domicilio = new VentaADomicilio(6, 0, nullptr, enCamino2, c1, r1);
     venta_domicilio -> agregarProductoAVenta(p6, 1);
 
     //NOTIFICACIONES

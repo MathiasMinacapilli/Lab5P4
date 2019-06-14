@@ -143,19 +143,8 @@ void ControladorVenta::cancelarVentaADomicilio() {
     v = nullptr;
 }
 
-
 DtFactura* ControladorVenta::generarFacturaDomiclio() {
   DtFactura* factura = venta_domicilio -> facturar();
-  return factura;
-}
-
-
-DtFactura* ControladorVenta::generarFacturaADomicilio() {
-  ControladorMesa *cont_mesa;
-  cont_mesa = ControladorMesa::getInstance();
-  Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-  DtFactura* factura = v -> facturar();
-  cont_mesa -> finalizarVenta();
   return factura;
 }
 

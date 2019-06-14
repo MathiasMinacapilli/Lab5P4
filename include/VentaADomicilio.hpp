@@ -5,9 +5,10 @@
 #include <set>
 using namespace std;
 
+class Repartidor;
+
 //Archivos
 #include "Empleado.hpp"
-#include "Repartidor.hpp"
 #include "DtFacturaDomicilio.hpp"
 #include "Venta.hpp"
 #include "Etapa.hpp"
@@ -31,5 +32,7 @@ public:
     Cliente* getCliente();
     DtFactura* facturar();
 };
+
+#include "Repartidor.hpp"
 
 #endif
