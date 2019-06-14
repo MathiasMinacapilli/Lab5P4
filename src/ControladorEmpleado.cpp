@@ -95,7 +95,7 @@ set<int> ControladorEmpleado::getIds() {
 		ret.insert((it->second)->getNumero());
 	return ret;
 }
-/* Selecciona el id y el rango de fechas para obtener las ventas facturadas 
+/* Selecciona el id y el rango de fechas para obtener las ventas facturadas
 Chequeo de fechas??????????????????????*/
 void ControladorEmpleado::seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin) {
 	this->id_mozo_recordado = id;
@@ -122,7 +122,7 @@ map<int, DtDireccion> ControladorEmpleado::getVentasRepartidor(){
 	Repartidor *repartidor = this->repartidores[this->id_repartidor_recordado];
 	map<int, DtDireccion> resultado;
 	map<int, VentaADomicilio *> ventas_repartidor = repartidor -> getVentas();
-	map<int, VentaADomicilio *>::iterator it; 
+	map<int, VentaADomicilio *>::iterator it;
 	for (it = ventas_repartidor.begin(); it != ventas_repartidor.end(); ++it){
 		DtDireccion dir = it->second->getCliente()->getDireccion();
 		int numero = it->second->getNumero();
@@ -147,6 +147,14 @@ void ControladorEmpleado::cancelarPedido(){
 	map<int, VentaADomicilio *> ventas_repartidor = repartidor -> getVentas();
 	VentaADomicilio *venta = ventas_repartidor[this->pedido_recordado];
 	venta->cancelarVenta(repartidor->getNombre());
+}
+
+Repartidor* ControladorEmpleado::getRepartidor(int num_repartidor){
+	map<int, Repartidor *>::iterator it = this -> repartidores.find(num_repartidor);
+	if (it != this->repartidores.end())
+		return (it -> second);
+	else
+		throw new invalid_argument("Error. No existe un repartidor con ese id. ");
 }
 
 //destructor

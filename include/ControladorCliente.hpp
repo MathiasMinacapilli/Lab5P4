@@ -37,6 +37,8 @@ public:
 	void ingresarCliente();
 	void cancelarCliente();
 
+	Cliente* getCliente(string telefono);
+
 };
 
 #endif

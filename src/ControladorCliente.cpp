@@ -60,3 +60,15 @@ DtCliente ControladorCliente::getDatosIngresados(){
 	return datos;
 }
 
+Cliente* ControladorCliente::getCliente(string telefono) {
+	set<Cliente *>::iterator it;
+	bool encontre = false;
+	for (it = this -> clientes.begin(); it != this -> clientes.end() && !encontre; ++it){
+		Cliente *cliente = *it;
+		encontre = (cliente -> getTelefono() == telefono);
+	}
+	if (encontre)
+		return *it;
+	else
+		throw new invalid_argument ("No existe un cliente con ese número. ")
+}

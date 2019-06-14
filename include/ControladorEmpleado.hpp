@@ -57,6 +57,8 @@ public:
     void avanzarEtapaPedido();
     void cancelarPedido();
 
+	Repartidor* getRepartidor(int num_repartidor);
+
     //destructor
 	~ControladorEmpleado();
 

@@ -130,21 +130,21 @@ void cargarDatosDePrueba() {
     //VENTAS A DOMICILIO
 
     VentaADomicilio *venta_domicilio;
+    Repartidor *r1 = cont_empleado -> getRepartidor(4);
+    Repartidor *r2 = cont_empleado -> getRepartidor(5);
+    Cliente *c1 = cont_cliente -> getCliente("098217523");
+    Cliente *c2 = cont_cliente -> getCliente("091651249");
     //V4
     EnCamino *enCamino = new EnCamino();
-    venta_domicilio = new VentaADomicilio(4, 0, nullptr, enCamino, "Martin", 4);
-
-
-    //GET REPARTIDOR O ALGO?? ASI SI LE DOY EL NUMERO DEL REPARTIDOR ME BUSCA Y ME DEVUELVE EL REPARTIDOR?
-
+    venta_domicilio = new VentaADomicilio(4, 0, nullptr, enCamino, c2, r1);
     venta_domicilio -> agregarProductoAVenta(p7, 5);
     //V5
     Recibido *recibido = new Recibido();
-    venta_domicilio = new VentaADomicilio(5, 0, nullptr, recibido, "Martin", 5);
+    venta_domicilio = new VentaADomicilio(5, 0, nullptr, recibido, c2, r2);
     venta_domicilio -> agregarProductoAVenta(p2, 2);
     //V6
     enCamino = new EnCamino();
-    venta_domicilio = new VentaADomicilio(6, 0, nullptr, enCamino, "Vladimir", 4);
+    venta_domicilio = new VentaADomicilio(6, 0, nullptr, enCamino, c1, r1);
     venta_domicilio -> agregarProductoAVenta(p6, 1);
 
     //NOTIFICACIONES
