@@ -22,7 +22,7 @@ private:
 public:
     //Constructor
 	Cliente();
-	Cliente(string telefono, string nombre, DtDireccion direccion, set<DtActualizacion> etapaPedidos);
+	Cliente(string telefono, string nombre, DtDireccion direccion, vector<DtActualizacion> etapaPedidos);
 
     //Destructor
     ~Cliente();

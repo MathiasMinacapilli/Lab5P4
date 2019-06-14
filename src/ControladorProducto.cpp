@@ -244,7 +244,7 @@ map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados(bool &t
     map<int, Menu *>::iterator it_m;
     map<int, CantidadProducto*> res;
     res.clear();
-    for(it_pc = prod_cants_recordados.begin(); it_pc != prod_cants_recordados.end; ++it_pc) {
+    for(it_pc = prod_cants_recordados.begin(); it_pc != prod_cants_recordados.end(); ++it_pc) {
         int codigo = (it_pc -> first);
         int cantidad = (it_pc -> second).getCantidad();
         for(it_ps = productosSimples.begin(); it_ps != productosSimples.end(); ++it_ps) {

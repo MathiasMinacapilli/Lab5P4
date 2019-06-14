@@ -14,6 +14,7 @@
 #include <stdlib.h> //system("");
 #include <set>
 #include <map>
+#include <vector>
 using namespace std;
 
 //Archivos
@@ -586,7 +587,7 @@ int main() {
                         vector<DtActualizacion>::iterator it_actualizacion;
                         cout<< "Las actualizaciones de todos los pedidos a domicilio son: ";
                         for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion)
-                            cout << it->second << "\n";
+                            cout << *it_actualizacion << "\n";
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -1094,8 +1095,8 @@ int main() {
                         vector<DtActualizacion> act_cliente = iventa->getActualizacionesCliente(tel_cliente); 
                         vector<DtActualizacion>::iterator it_act;
                         cout << "Actualizaciones de sus pedidos: \n";
-                        for (it_act = act_cliente.begin(); it_act != act_cliente.end(); ++it)
-                            cout << it->second << "\n";
+                        for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++)
+                            cout << *it_act << "\n";
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
