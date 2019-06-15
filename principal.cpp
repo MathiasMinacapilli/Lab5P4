@@ -762,10 +762,16 @@ int main() {
                         float total_facturado = 0;
                         map<int, DtFactura> facturas_fecha;
                         facturas_fecha = iventa -> getFacturasYTotalFecha(total_facturado);
+                        system("clear");
+                        cout << "--------------------" << "Resumen facturación de 1 día dada la fecha" << "-------------------- \n \n";
                         map<int, DtFactura>::iterator itf;
+                        cout << "                    Facturas \n";
                         for (itf = facturas_fecha.begin(); itf != facturas_fecha.end(); ++itf) {
-                            cout << (itf -> second) << "\n\n";
+                            cout << "--------------------------------------------"
+                                <<(itf -> second)
+                                << "\n";
                         }
+                        cout << "--------------------------------------------\n";
                         cout<< "\nPresione <enter> para continuar...";
                         getchar();
                         string cont;
@@ -1315,7 +1321,7 @@ int main() {
                         for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++)
                             cout << *it_act << "\n";
 
-                        string dummy; 
+                        string dummy;
                         getline(cin, dummy);
                         cout << "Presione <enter> para continuar...";
                         getline(cin, dummy);
