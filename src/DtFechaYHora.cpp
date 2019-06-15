@@ -29,13 +29,13 @@ bool DtFechaYHora::operator<=(const DtFechaYHora &f2){
 	else if (this->getAnio() < f2.getAnio())
 		return true;
 	//son el mismo anio
-	else 
+	else
 		if(this->getMes() > f2.getMes())
 			return false;
 		else if (this->getMes() < f2.getMes())
 			return true;
 		//son el mismo mes
-		else 
+		else
 			if (this->getDia() > f2.getDia())
 				return false;
 			else if (this->getDia() < f2.getDia())
@@ -64,12 +64,11 @@ bool DtFechaYHora::operator<=(const DtFechaYHora &f2){
 }
 
 ostream &operator<< (ostream& o, DtFechaYHora dtfh) {
-    o << "Día: " << dtfh.getDia()
-			<< "\nMes: " << dtfh.getMes()
-			<< "\nAnio: " << dtfh.getAnio()
-			<< "\nHora: " << dtfh.getHora()
-			<< "\nMinutos: " << dtfh.getMinutos()
-			<< "\nSegundos: " << dtfh.getSegundos();
+    o << dtfh.getDia()
+			<< "/" << dtfh.getMes()
+			<< "/" << dtfh.getAnio()
+			<< " - " << dtfh.getHora()
+			<< ":" << dtfh.getMinutos();
 		return o;
 }
 

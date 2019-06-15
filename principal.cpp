@@ -38,13 +38,13 @@ using namespace std;
 
 /* Obtiene la fecha de la entrada estandar */
 static void obtenerFecha(int &dia, int &mes, int &anio) {
-    cout << "Ingrese el día de la fecha: ";
+    cout << "Ingrese la fecha deseada. \n"
+        << " Día: ";
     cin >> dia;
-    cout << "\nIngrese el mes de la fecha: ";
+    cout << " Mes: ";
     cin >> mes;
-    cout << "\nIngrese el año de la fecha: ";
+    cout << " Año: ";
     cin >> anio;
-    system("clear");
 }
 
 static int conseguirCantidad() {
@@ -180,11 +180,11 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
         //consumo el enter que quedo del ingreso del telefono
         getchar();
         //ingresar datos del cliente
-        cout << "\nIngrese su nombre. \n"
+        cout << "\nIngrese el nombre del cliente. \n"
             << " Nombre: ";
         string nombre;
         getline(cin, nombre);
-        cout << "\nIngrese su dirección. \n";
+        cout << "\nIngrese la dirección del cliente. \n";
         DtDireccion casa;
         DtApto apto;
         string calle;
@@ -200,7 +200,7 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
         cout << " Esquina 2: ";
         string esq2;
         getline(cin, esq2);
-        cout << "\n¿Es un apartamento? Ingrese S o N. \n";
+        cout << "\n¿Vive en un apartamento? Ingrese S o N. \n";
         bool es_apto = confirmacion();
         getchar();
         if (es_apto){
@@ -717,6 +717,7 @@ int main() {
 
                 case 8:
                     try {
+                        msj = "";
                         system("clear");
                         cout << "--------------------" << "Resumen facturación de 1 día dada la fecha" << "-------------------- \n \n";
                         int dia = 0;
@@ -724,7 +725,7 @@ int main() {
                         int anio = 0;
                         obtenerFecha(dia, mes, anio);
                         while (!esValidaFecha(dia, mes, anio)) {
-                            cout << "Fecha ingresada no valida. \n\n";
+                            cout << "\nFecha ingresada no válida. \n\n";
                             obtenerFecha(dia, mes, anio);
                         }
                         DtFecha fecha = DtFecha(dia, mes, anio);
@@ -736,7 +737,13 @@ int main() {
                         for (itf = facturas_fecha.begin(); itf != facturas_fecha.end(); ++itf) {
                             cout << (itf -> second) << "\n\n";
                         }
-                        cout << "Total facturado: " << total_facturado;
+                        system("clear");
+                        cout << "--------------------" << "Resumen facturación de 1 día dada la fecha" << "-------------------- \n \n";
+                        cout << "Total facturado en la fecha " << fecha << " : $ " << total_facturado << "\n";
+                        cout << "\nPresione <enter> para continuar...";
+                        getchar();
+                        string continuar;
+                        getline(cin, continuar);
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -753,7 +760,9 @@ int main() {
                         cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
                         string telefono = conseguirTelefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
-                        if (!esta_cliente)
+                        if (!esta_cliente) {
+                            cout << "No existe un cliente asociado a este teléfono.
+                                << "Ingrese los datos correspondientes. \n"
                             altaCliente(telefono, icliente, msj);
                         cout << "\n---" << "Productos disponibles" << "---\n";
                         map<int, DtProducto> productos_disponibles = iventa -> obtenerProductosDisponibles();

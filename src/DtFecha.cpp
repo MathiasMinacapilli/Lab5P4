@@ -24,7 +24,14 @@ int DtFecha::getAnio() const{
 DtFecha::~DtFecha() {}
 
 bool DtFecha::operator==(const DtFecha &f2) {
-    return ((this->getAnio() == f2.getAnio()) && 
-        (this->getMes() == f2.getMes()) && 
+    return ((this->getAnio() == f2.getAnio()) &&
+        (this->getMes() == f2.getMes()) &&
         (this->getDia() == f2.getDia()));
+}
+
+ostream &operator<< (ostream& o, DtFecha dtf) {
+    o << dtf.getDia()
+		<< "/" << dtf.getMes()
+		<< "/" << dtf.getAnio();
+		return o;
 }
