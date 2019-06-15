@@ -1321,7 +1321,7 @@ int main() {
                         vector<DtActualizacion>::iterator it_act;
                         cout << "Actualizaciones de sus pedidos: \n";
                         for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++)
-                            cout << *it_act << "\n";
+                            cout << *it_act << "\n\n";
 
                         string dummy;
                         getline(cin, dummy);
