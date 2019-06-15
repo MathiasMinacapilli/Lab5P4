@@ -368,7 +368,8 @@ map<int, DtFactura> ControladorVenta::getVentasLocalesDelMozoFacturadas(int num_
     ControladorEmpleado* cont_empleado = ControladorEmpleado::getInstance();
     DtFechaYHora fechayhora_ini = DtFechaYHora(fecha_ini.getDia(), fecha_ini.getMes(), fecha_ini.getAnio(), 0, 0, 0);
     DtFechaYHora fechayhora_fin  = DtFechaYHora(fecha_fin.getDia(), fecha_fin.getMes(), fecha_fin.getAnio(), 23, 59, 59); 
-    for(it = this->ventasLocales.begin(); it != this->ventasLocales.end(); ++it) {
+    map<int, VentaLocal*> ventas_locales = this->ventasLocales;
+    for(it = ventas_locales.begin(); it != ventas_locales.end(); ++it) {
         //Si la venta esta facturada chequeo que el nombre del mozo de la venta
         //es igual al nombre del mozo que tiene codigo num_mozo
         if(it->second->estaFacturada()) {
