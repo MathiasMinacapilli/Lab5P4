@@ -999,8 +999,16 @@ int main() {
                 /* 2) Facturación de una venta. (Hay Diagrama de Comunicacion) */
                 case 2:
                     try {
+                        msj = "";
                         system ("clear");
                         cout << "--------------------" << "Facturación de una venta" << "-------------------- \n \n";
+                        set<int> mesas = imesa -> getNumeroMesas();
+                        cout << "Estas son las mesas disponibles. \n";
+                        set<int>::iterator it_quitar;
+                        cout << " ";
+                        for (it_quitar = mesas.begin(); it_quitar != mesas.end(); ++it_quitar)
+                            cout << *it_quitar << " ";
+                        cout << "\n\n";
                         int num_mesa = conseguirNumeroMesa();
                         iventa -> ingresarNumeroMesa(num_mesa);
                         float porcentaje = conseguirDescuento();
@@ -1017,7 +1025,6 @@ int main() {
                             msj = "Venta facturada correctamente.";
                         } else {
                             throw new invalid_argument("La venta es a domicilio.");
-                        }
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -1031,48 +1038,59 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Iniciar venta en mesas" << "-------------------- \n \n";
-                        cout << "Ingrese su numero de mozo: ";
-                        int nro;
+                        set<int> ids = iempleado->getIds();
+                        set<int>::iterator it_ini;
+                        cout << "Estos son los mozos disponibles. \n";
+                        for(it_ini = ids.begin(); it_ini != ids.end(); ++it_ini)
+                            cout << " " << (*it_ini) << ") " << (iempleado -> getNombreMozo(*it_ini)) << "\n";
+                        int nro = 0;
+                        cout << "\nSeleccione su ID de mozo. \n"
+                            << " ID: ";
                         cin >> nro;
+
                         set<int> mesas_mozo = imesa->getMesasMozoSinVentas(nro);
-                        cout << "Sus mesas sin ventas son: \n";
+                        cout << "\nSus mesas sin ventas son: ";
                         set<int>::iterator it;
                         for (it = mesas_mozo.begin(); it != mesas_mozo.end(); ++it){
                             cout << *it << " ";
                         }
-                        cout << "\nIngrese los numeros de las mesas en las que desea iniciar la venta: ";
+                        cout << "\n\n";
+                        cout << "Ingrese los números de las mesas en las que desea iniciar la venta. \n";
                         bool quiere_agregar_mas_mesas = true;
                         int num_mesa = 0;
                         set<int> mesas_seleccionadas;
                         do {
-                            cout << "\nNumero de mesa: "; cin >> num_mesa;
+                            cout << " Número de mesa: ";
+                            cin >> num_mesa;
                             if(mesas_mozo.find(num_mesa) != mesas_mozo.end()) {
                                 mesas_seleccionadas.insert(num_mesa);
-                                cout << "\n¿Desea seguir agregando mesas? Ingrese S o N.";
+                                cout << "\n¿Desea seguir agregando mesas? Ingrese S o N. \n";
                                 if(confirmacion()) {
                                     quiere_agregar_mas_mesas = true;
                                 } else {
                                     quiere_agregar_mas_mesas = false;
                                 }
                             } else {
-                                cout << "\nIngrese un numero de mesa válido.";
+                                cout << "\nIngrese un número de mesa válido.";
                                 quiere_agregar_mas_mesas = true;
                             }
                         }while(quiere_agregar_mas_mesas);
                         imesa->seleccionarMesasVenta(mesas_seleccionadas);
                         set<int> mesas_seleccionadas_en_cont = imesa->getMesasSeleccionadas();
                         set<int>::iterator it_mesas_seleccionadas_en_cont;
-                        cout << "\nEstas son las mesas seleccionadas: \n";
-                        for(it_mesas_seleccionadas_en_cont = mesas_seleccionadas_en_cont.begin(); it_mesas_seleccionadas_en_cont != mesas_seleccionadas_en_cont.end(); ++it_mesas_seleccionadas_en_cont) {
+                        system("clear");
+                        cout << "--------------------" << "Iniciar venta en mesas" << "-------------------- \n \n";
+                        cout << "Estas son las mesas seleccionadas: ";
+                        for(it_mesas_seleccionadas_en_cont = mesas_seleccionadas_en_cont.begin(); it_mesas_seleccionadas_en_cont != mesas_seleccionadas_en_cont.end(); ++it_mesas_seleccionadas_en_cont)
                             cout << *it_mesas_seleccionadas_en_cont << " ";
-                        }
-                        cout << "\n¿Desea confirmar la creacion de la venta? Ingrese S o N.";
+                        cout << "\n";
+                        cout << "\n¿Desea confirmar la creación de la venta? Ingrese S o N. \n";
                         if(confirmacion()) {
                             imesa->iniciarVenta();
-                            msj = "Venta iniciada correctamente.";
+                            msj = "Venta iniciada correctamente";
                         } else {
                             imesa->cancelarVenta();
-                            msj = "Creacion de venta cancelada correctamente.";
+                            msj = "Venta cancelada";
                         }
                     } catch(exception* e) {
                         system("clear");
@@ -1085,8 +1103,16 @@ int main() {
                 /* 4) Quitar producto de una venta. (Hay Diagrama de Comunicacion) */
                 case 4:
                     try {
+                        msj = "";
                         system("clear");
                         cout << "--------------------" << "Quitar producto de una venta" << "-------------------- \n \n";
+                        set<int> mesas = imesa -> getNumeroMesas();
+                        cout << "Estas son las mesas disponibles. \n";
+                        set<int>::iterator it_quitar;
+                        cout << " ";
+                        for (it_quitar = mesas.begin(); it_quitar != mesas.end(); ++it_quitar)
+                            cout << *it_quitar << " ";
+                        cout << "\n\n";
                         int num_mesa = conseguirNumeroMesa();
                         map<int, DtProducto> productos_disponibles = iventa -> getProductosVenta(num_mesa);
                         bool quiero_quitar = true;

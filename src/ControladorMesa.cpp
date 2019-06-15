@@ -122,6 +122,15 @@ map<int, Mesa*> ControladorMesa::getMesas() {
     return this->mesas;
 }
 
+set<int> ControladorMesa::getNumeroMesas() {
+    map<int, Mesa*>::iterator it;
+    set<int> res;
+    res.clear();
+    for (it = this -> mesas.begin(); it != this -> mesas.end(); ++it)
+        res.insert(it -> first);
+    return res;
+}
+
 //Caso de uso: Asignar automaticamente mozos a mesas
 /* Se retorna una coleccion de DtMesasMozo el cual contiene el codigo de un mozo
 y el conjunto de mesas (los numeros) asignados a el.

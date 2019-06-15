@@ -23,6 +23,9 @@ public:
     virtual void iniciarVenta() = 0;
     virtual Venta *obtenerVenta(int numero) = 0;
     virtual void seleccionarMesasVenta(set<int> numeros) = 0;
+
+    virtual set<int> getNumeroMesas() = 0;
+
     ~IMesa() {};
 };
 
