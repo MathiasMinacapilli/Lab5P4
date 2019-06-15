@@ -1045,6 +1045,10 @@ int main() {
                         iventa -> ingresarPorcentajeDescuento(porcentaje);
                         DtFactura* factura = iventa -> generarFactura();
                         DtFacturaLocal* ptr_factura_local = dynamic_cast<DtFacturaLocal*>(factura);
+                        cout << "\nPresione <enter> para continuar...";
+                        string continuar;
+                        getline(cin, continuar);
+
                         system("clear");
                         cout << "--------------------" << "Facturación de una venta" << "-------------------- \n \n";
                         cout << "           Factura de la venta \n"
@@ -1054,7 +1058,6 @@ int main() {
                             cout << factura_local
                                 << "\n--------------------------------------------\n";
                             cout << "\nPresione <enter> para continuar...";
-                            getchar();
                             string continuar;
                             getline(cin, continuar);
                             msj = "Venta facturada correctamente.";
