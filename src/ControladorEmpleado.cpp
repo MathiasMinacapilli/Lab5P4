@@ -74,6 +74,9 @@ void ControladorEmpleado::borrarNumero() {
 
 int ControladorEmpleado::ingresarRepartidor(){
 	this->ultimo_id++;
+	while (this->existeEmpleado(this->ultimo_id)){
+		this->ultimo_id++;
+	}
 	Repartidor *nuevo_repartidor = new Repartidor(this->ultimo_id, this->nombre_recordado, this->transporte_recordado);
 	//agrego repartidor a la coleccion de repartidores
 	this->repartidores[nuevo_repartidor->getNumero()] = nuevo_repartidor;
@@ -89,6 +92,9 @@ void ControladorEmpleado::cancelarRepartidor(){
 
 void ControladorEmpleado::ingresarMozo(){
 	this->ultimo_id++;
+	while (this->existeEmpleado(this->ultimo_id)){
+		this->ultimo_id++;
+	}
 	Mozo *nuevo_mozo = new Mozo(this->ultimo_id, this->nombre_recordado);
 	//agrego mozo a la coleccion de mozo
 	this->mozos[nuevo_mozo->getNumero()] = nuevo_mozo;
@@ -168,6 +174,17 @@ Repartidor *ControladorEmpleado::getRepartidor(int numero_repartidor){
 	if (it != this->repartidores.end())
 		return it->second;
 	else throw new invalid_argument("Error. No existe un repartidor con ese id. ");
+}
+bool ControladorEmpleado::existeEmpleado(int num){
+	map<int, Mozo*>::iterator it_mozos = this->mozos.find(num);
+	map<int, Repartidor *>::iterator it_rep = this->repartidores.find(num);
+	if (it_mozos == this->mozos.end())
+		if (it_rep == this->repartidores.end())
+			return false;
+		else return true;
+
+	else 
+		return true;
 }
 
 

@@ -126,13 +126,13 @@ de productos disponibles. Si el codigo no existe en esta coleccion tira una exce
 static void es_valido_codigo(int codigo, map<int, DtProducto> productos_disponibles) {
     map<int, DtProducto>::iterator it = productos_disponibles.find(codigo);
     if (it == productos_disponibles.end())
-        throw new invalid_argument ("No existe producto con ese código.");
+        throw new invalid_argument ("No existe producto con ese código");
 }
 
 /* Si la cantidad es menor o igual a 0 tira una excepcion invalid_argument */
 static void es_valida_cantidad(int cantidad) {
     if (cantidad <= 0)
-        throw new invalid_argument ("Cantidad ingresada no válida.");
+        throw new invalid_argument ("Cantidad ingresada no válida");
 }
 
 /* Chequea que sea valido el codigo del repartidor buscando el codigo en la coleccion
@@ -175,7 +175,7 @@ static bool confirmacion () {
 static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
     bool existe_cliente = icliente->existeCliente(telefono);
     if (existe_cliente)
-        throw new invalid_argument("Error. Ya existe un cliente con ese telefono ingresado en el sistema. ");
+        throw new invalid_argument("Error. Ya existe un cliente con ese teléfono ingresado en el sistema. ");
     else{
         //consumo el enter que quedo del ingreso del telefono
         getchar();
@@ -446,12 +446,13 @@ int main() {
                         if(iproducto->existeProductoSimple()) { //Muestro la opcion de crear un menu sii existe al menos un producto simple
                             cout << " 2) Menú. \n";
                         }
-                        cout << "\nOpción: "; cin >> tipo_producto;
+                        cout << "\nOpción: ";
                         bool existe_opcion = false;
                         do {
                             int codigo = 0;
                             float precio = 0;
                             string descripcion = "";
+                            cin >> tipo_producto;
                             switch(tipo_producto) {
                             case 1: {
                                 //Agregar producto simple
@@ -480,26 +481,32 @@ int main() {
                                 system("clear");
                                 cout << "--------------------" << "Agregar menú" << "-------------------- \n \n";
                                 cout << "Ingrese los datos del menú a ingresar. \n"
-                                    << " Código: "; cin >> codigo;
-                                cout << " Descripción: "; cin >> descripcion;
+                                    << " Código: ";
+                                cin >> codigo;
+                                cout << " Descripción: ";
+                                getchar();
+                                getline(cin, descripcion);
                                 iproducto->ingresarDatosMenu(codigo, descripcion);
                                 map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
                                 map<int, DtProducto>::iterator it;
-                                system("clear");
-                                cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
-                                cout << "Estos son los productos disponibles. \n";
-                                //Muestro los productos simples para que se seleccione cuales integran el menu
-                                for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
-                                    cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
-                                }
                                 //Selecciona Productos Simples
                                 bool desea_seleccionar_mas = true;
                                 do {
+                                    system("clear");
+                                    cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
+                                    cout << "Estos son los productos disponibles. \n";
+                                    //Muestro los productos simples para que se seleccione cuales integran el menu
+                                    for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
+                                        cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
+                                    }
                                     int codigo_producto_simple = 0;
                                     int cantidad = 0;
-                                    cout << "\nIngrese el código y la cantidad del producto que desea agregar al menú. \n";
-                                    cout << " Código: "; cin >> codigo_producto_simple;
-                                    cout << " Cantidad: "; cin >> cantidad;
+                                    cout << "\nIngrese el código del producto que desea agregar al menú. \n"
+                                        << " Código: ";
+                                    cin >> codigo_producto_simple;
+                                    cout << "\nIngrese la cantidad del producto que desea agregar al menú. \n"
+                                        << " Cantidad: ";
+                                    cin >> cantidad;
                                     it = productos_simples.find(codigo_producto_simple);
                                     if(it == productos_simples.end())
                                         throw new invalid_argument("Se ingresó un código incorrecto.");
@@ -513,18 +520,34 @@ int main() {
                                         desea_seleccionar_mas = false;
                                     }
                                 }while(desea_seleccionar_mas);
-                                cout << "¿Desea confirmar el ingreso del menú? Ingrese S o N. \n";
+
+                                system("clear");
+                                cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
+                                cout << "Estos son los productos a agregar al menú. \n";
+                                map<int, DtProductoCantidad> productos_en_menu = iproducto -> getDatosIngresadosMenu();
+                                map<int, DtProductoCantidad>::iterator it_menu;
+                                for (it_menu = productos_en_menu.begin(); it_menu != productos_en_menu.end(); ++it_menu){
+                                    cout << (it_menu->second).getProducto() << " - Cantidad: " << (it_menu->second).getCantidad() << "\n";
+                                }
+                                cout << "\n¿Desea confirmar el ingreso del menú? Ingrese S o N. \n";
                                 if(confirmacion()) {
                                     iproducto->ingresarMenu();
+                                    cout << "\nMenú ingresado correctamente. \n";
                                 } else {
                                     iproducto->cancelarMenu();
+                                    cout << "\nIngreso de menú cancelado. \n";
                                 }
                                 existe_opcion = true;
                                 break;
                             }
-                            default:
+
+                            default: {
                                 existe_opcion = false;
-                                msj = "Por favor ingrese una opción correcta.\n";
+                                cout << "\nOpción ingreada no válida. \n \n"
+                                    << "Por favor seleccione una de las opciones mostradas anteriormente. \n"
+                                    << " Opción: ";
+                            }
+                            break;
                             }
                         } while(!existe_opcion);
                         cout << "\n¿Desea seguir dando de alta productos? Ingrese S o N. \n";
@@ -604,15 +627,22 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
+                
                 case 6:
                     try {
                         system("clear");
                         cout << "-----------------" << "Actualizaciones de pedidos a domicilio" << "----------------- \n \n";
                         vector<DtActualizacion> actualizaciones = iventa -> getListadoActualizaciones();
                         vector<DtActualizacion>::iterator it_actualizacion;
-                        cout<< "Las actualizaciones de todos los pedidos a domicilio son: ";
-                        for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion)
+                        cout<< "Las actualizaciones de todos los pedidos a domicilio son:\n ";
+                        for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion){
+                            cout << "entre al for! ";
                             cout << *it_actualizacion << "\n";
+                        }
+                        cout<< "Presione <enter> para continuar...";
+                        getchar();
+                        string continuar;
+                        getline(cin, continuar);
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -620,6 +650,7 @@ int main() {
                         break;
                     }
                     break;
+               
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -715,6 +746,7 @@ int main() {
                 case 9:
                     try {
                         system("clear");
+                        string waste = "";
                         cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
                         string telefono = conseguirTelefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
@@ -771,28 +803,20 @@ int main() {
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
                             float descuento = conseguirDescuento();
-                            cout << "llego aca45\n";
                             iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
-                            cout << "llego aca36\n";
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
-                            cout << "llego aca67\n";
                             if(quiero_repartidor) {
-                                cout << "llego aca1\n";
-                                fflush(stdout);
                                 DtFacturaDomicilio* ptr_factura_domicilio = nullptr;
                                 ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(const_cast<DtFactura*>(factura));
-                                cout << "llego aca2\n";
-                                fflush(stdout);
                                 if (ptr_factura_domicilio != nullptr) {
-                                    cout << "entre al if null";
-                                    fflush(stdout);
                                     DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
                                     cout << factura_domicilio;
+                                    cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
                                 } else
                                     throw new invalid_argument("La venta es local.");
                             } else {
                                 cout << *factura;
-                                cout << "llego aca2";
+                                cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
                             }
                         } else
                             iventa -> cancelarVentaADomicilio();
@@ -1153,56 +1177,10 @@ int main() {
             break;
 
         /* 5) Cargar datos de prueba. */
-        case 5: {
+        case 5: 
             try {
                 //Cargo productos
                 cargarDatosDePrueba();
-                #if 0
-                //Cargo productos
-                DtProductoSimple producto_simple = DtProductoSimple(1, "Pizza", 100);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(2, "Hamburguesa", 70);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(3, "Coca", 50);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(4, "Papas Cheddar", 120);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-
-                iproducto->ingresarDatosMenu(5, "Pizza+2Coca");
-                DtProducto producto = DtProducto(1, "Pizza", 100);
-                DtProductoCantidad producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                producto = DtProducto(3, "Coca", 50);
-                producto_cantidad = DtProductoCantidad(producto, 2);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                iproducto->ingresarMenu();
-                iproducto->ingresarDatosMenu(6, "Hamburguesa+Papas Cheddar");
-                producto = DtProducto(2, "Hamburguesa", 70);
-                producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                producto = DtProducto(4, "Papas Cheddar", 120);
-                producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                iproducto->ingresarMenu();
-
-                //Cargo empleados
-                iempleado->ingresarNombreEmpleado("Mathi");
-                iempleado->ingresarMozo();
-                iempleado->ingresarNombreEmpleado("Seba");
-                iempleado->ingresarMozo();
-                iempleado->ingresarNombreEmpleado("Eli");
-                Transporte t = Bici;
-                iempleado->seleccionarTransporte(t);
-                iempleado->ingresarRepartidor();
-                iempleado->ingresarNombreEmpleado("Santi");
-                t = Moto;
-                iempleado->seleccionarTransporte(t);
-                iempleado->ingresarRepartidor();
-                #endif
                 msj = "Datos cargados correctamente.";
             } catch(exception* e) {
                 system("clear");
@@ -1211,7 +1189,7 @@ int main() {
                 break;
             }
             break;
-        }
+        
 
         /* 0) Salir. */
         case 0:

@@ -32,7 +32,7 @@ void ControladorProducto::ingresarDatosProducto(DtProductoSimple datos){
 	if(this->encontrarProducto(datos_producto) == nullptr) {
 		this->datos_prod_simple = datos;
 	} else {
-		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
+		throw new invalid_argument("Ya existe un producto con el codigo ingresado");
 	}
 }
 
@@ -296,4 +296,8 @@ map<int, CantidadProducto*> ControladorProducto::getProductosAlmacenados(bool &t
 
 void ControladorProducto::borrarProductos(){
 	this->prod_cants_recordados.clear();
+}
+
+map<int, DtProductoCantidad> ControladorProducto::getDatosIngresadosMenu() {
+	return this -> prod_cants_recordados;
 }

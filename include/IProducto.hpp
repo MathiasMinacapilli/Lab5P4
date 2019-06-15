@@ -40,6 +40,9 @@ public:
     //caso de uso: venta a domicilio
     virtual map<int, CantidadProducto*> getProductosAlmacenados(bool &tiene_menu) = 0;
     virtual void borrarProductos() = 0;
+
+    virtual map<int, DtProductoCantidad> getDatosIngresadosMenu() = 0;
+
     //Destructor
     virtual ~IProducto(){}; // virtual y vacío
 };

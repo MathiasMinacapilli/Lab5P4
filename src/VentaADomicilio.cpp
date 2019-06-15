@@ -54,7 +54,6 @@ DtFactura* VentaADomicilio::facturar() {
     this->setFactura(factura);
     if (miRepartidor != nullptr) {
         DtFactura* res = new DtFacturaDomicilio(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this -> miRepartidor -> getNombre(), this -> miRepartidor -> getTransporte());
-        cout << "\nse creo el dtfactura";
         fflush(stdout);
         return res;
     } else {
@@ -140,4 +139,7 @@ void VentaADomicilio::borrarObservador(){
 //FUNCION USADA UNICAMENTE PARA CARGAR DATOS DE PRUEBA
 void VentaADomicilio::agregarActualizacion(DtActualizacion dt_Act){
   this->actualizaciones.push_back(dt_Act);
+  if (this->miObservador != nullptr){
+    this->miObservador->notificar(dt_Act);
+  }
 }

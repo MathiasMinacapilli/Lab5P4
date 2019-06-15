@@ -74,6 +74,8 @@ public:
     //caso de uso: venta a domicilio
     map<int, CantidadProducto*> getProductosAlmacenados(bool &tiene_menu);
     void borrarProductos();
+
+	map<int, DtProductoCantidad> getDatosIngresadosMenu();
 };
 
 
