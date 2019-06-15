@@ -761,9 +761,10 @@ int main() {
                         string telefono = conseguirTelefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
                         if (!esta_cliente) {
-                            cout << "No existe un cliente asociado a este teléfono.
-                                << "Ingrese los datos correspondientes. \n"
+                            cout << "No existe un cliente asociado a este teléfono."
+                                << "Ingrese los datos correspondientes. \n";
                             altaCliente(telefono, icliente, msj);
+                        }
                         cout << "\n---" << "Productos disponibles" << "---\n";
                         map<int, DtProducto> productos_disponibles = iventa -> obtenerProductosDisponibles();
                         map<int, DtProducto>::iterator it;
