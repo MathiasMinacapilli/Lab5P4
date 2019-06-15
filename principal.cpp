@@ -814,12 +814,16 @@ int main() {
                                 if (ptr_factura_domicilio != nullptr) {
                                     DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
                                     cout << factura_domicilio;
-                                    cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                                    cout<< "Presione <enter> para continuar...";
+                                    string continuar;
+                                    getline(cin, continuar);
                                 } else
                                     throw new invalid_argument("La venta es local.");
                             } else {
                                 cout << *factura;
-                                cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                                cout<< "Presione <enter> para continuar...";
+                                string continuar;
+                                getline(cin, continuar);
                             }
                         } else
                             iventa -> cancelarVentaADomicilio();
