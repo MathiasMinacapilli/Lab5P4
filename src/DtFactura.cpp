@@ -44,16 +44,15 @@ float DtFactura::getPrecioTotal() {
 }
 
 ostream &operator<< (ostream& o, DtFactura dtf) {
-    o << "Codigo: " << dtf.getCodigo()
-      << "\nFecha y hora: " << dtf.getFechaYHora() 
-      << "\n- Productos -\n";
-      map<int, DtProductoCantidad>::iterator it;
-      for (it = (dtf.getProductos()).begin(); it != (dtf.getProductos()).end(); ++it) {
-          o << (it -> second);
-      }
-    o << "\nIva: " << dtf.getIva()
-      << "\nDescuento: " << dtf.getDescuento()
-      << "\nPrecio Subtotal: " << dtf.getPrecioSubTotal()
-      << "\nPrecio Total: " << dtf.getPrecioTotal(); 
+    o << "\n Código: " << dtf.getCodigo() << "\n"
+      << "\n Fecha y hora: " << dtf.getFechaYHora() << "\n"
+      << "\n Productos de la venta. \n";
+    map<int, DtProductoCantidad>::iterator it;
+    for (it = (dtf.getProductos()).begin(); it != (dtf.getProductos()).end(); ++it)
+        o << "    " << (it -> second);
+    o << "\n" << "\n Iva: " << dtf.getIva() << "\n"
+      << "\n Descuento: " << dtf.getDescuento() << "\n"
+      << "\n Precio subtotal: " << dtf.getPrecioSubTotal() << "\n"
+      << "\n Precio total: " << dtf.getPrecioTotal();
     return o;
 }

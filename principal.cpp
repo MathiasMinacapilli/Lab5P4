@@ -435,6 +435,7 @@ int main() {
                 /* 3) Alta producto. (Hay Diagrama de Comunicacion) */
                 case 3:
                     try {
+                    msj = "";
                     bool quiero_agregar_mas = true;
                     int tipo_producto = 0;
                     do {
@@ -762,16 +763,15 @@ int main() {
                 case 9:
                     try {
                         system("clear");
-                        string waste = "";
                         cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
                         string telefono = conseguirTelefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
                         if (!esta_cliente) {
-                            cout << "No existe un cliente asociado a este teléfono."
+                            cout << "\nNo existe un cliente asociado a este teléfono. "
                                 << "Ingrese los datos correspondientes. \n";
                             altaCliente(telefono, icliente, msj);
                         }
-                        cout << "\n---" << "Productos disponibles" << "---\n";
+                        cout << "\nEstos son los productos disponibles. \n";
                         map<int, DtProducto> productos_disponibles = iventa -> obtenerProductosDisponibles();
                         map<int, DtProducto>::iterator it;
                         for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
@@ -795,10 +795,10 @@ int main() {
                             it = productos_disponibles.find(codigo);
                             DtProductoCantidad prod_y_cant = DtProductoCantidad((it -> second), cantidad);
                             iventa -> almacenarProducto(prod_y_cant);
-                            cout << "\nDesea agregar más productos? Ingrese S o N. \n";
+                            cout << "\n¿Desea agregar más productos? Ingrese S o N. \n";
                             quiero_agregar = confirmacion();
                         }
-                        cout << "\nDesea que el pedido sea entregado? Ingrese S o N. \n";
+                        cout << "\n¿Desea que el pedido sea entregado? Ingrese S o N. \n";
                         bool quiero_recibir = confirmacion();
                         bool quiero_repartidor = false;
                         if (quiero_recibir) {
@@ -806,8 +806,8 @@ int main() {
                             map<int, Repartidor*>::iterator it_repartidores;
                             cout << "\nRepartidores disponibles.\n";
                             for (it_repartidores = repartidores_disponibles.begin(); it_repartidores != repartidores_disponibles.end(); ++it_repartidores){
-                                cout << (it_repartidores -> second) -> getNumero()
-                                    << " - "
+                                cout << " " << (it_repartidores -> second) -> getNumero()
+                                    << ") "
                                     << (it_repartidores -> second) -> getNombre()
                                     << " - "
                                     << (it_repartidores -> second) -> getTransporte()
@@ -821,35 +821,42 @@ int main() {
                             iventa -> elegirRepartidor(numero_repartidor);
                             quiero_repartidor = true;
                         }
-                        cout << "\nDesea confirmar su pedido? Ingrese S o N. \n";
+                        cout << "\n¿Desea confirmar su pedido? Ingrese S o N. \n";
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
                             float descuento = conseguirDescuento();
                             iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
+                            system("clear");
+                            cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
+                            cout << "           Factura de la venta \n"
+                                << "--------------------------------------------";
                             if(quiero_repartidor) {
                                 DtFacturaDomicilio* ptr_factura_domicilio = nullptr;
                                 ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(const_cast<DtFactura*>(factura));
                                 if (ptr_factura_domicilio != nullptr) {
                                     DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
-                                    cout << "\n---" << "Factura de la venta" << "---\n";
-                                    cout << factura_domicilio;
-                                    cout<< "\nPresione <enter> para continuar...";
+                                    cout << factura_domicilio
+                                        << "\n--------------------------------------------";
+                                    cout<< "\n\nPresione <enter> para continuar...";
                                     getchar();
                                     string continuar;
                                     getline(cin, continuar);
                                 } else
                                     throw new invalid_argument("La venta es local.");
                             } else {
-                                cout << "\n---" << "Factura de la venta." << "---\n";
-                                cout << *factura;
+                                cout << *factura
+                                    << "\n--------------------------------------------";
                                 cout<< "\n\nPresione <enter> para continuar...";
                                 getchar();
                                 string continuar;
                                 getline(cin, continuar);
                             }
-                        } else
+                            msj = "Venta realizada con éxito";
+                        } else {
                             iventa -> cancelarVentaADomicilio();
+                            msj = "Venta cancelada";
+                        }
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -864,25 +871,30 @@ int main() {
                         cout << "--------------------" << "Ventas de un mozo" << "-------------------- \n \n";
                         set<int> ids = iempleado->getIds();
                         set<int>::iterator it;
-                        for(it = ids.begin(); it != ids.end(); ++it) {
-                            cout << "-" << (*it) << "\n";
-                        }
+                        cout << "Estos son los mozos disponibles. \n";
+                        for(it = ids.begin(); it != ids.end(); ++it)
+                            cout << " " << (*it) << ") " << (iempleado -> getNombreMozo(*it)) << "\n";
                         int id_mozo, dia_ini, mes_ini, anio_ini, dia_fin, mes_fin, anio_fin;
-                        cout << "Seleccione el id del mozo: "; cin >> id_mozo;
-                        cout << "Ingrese la fecha desde la cual ver las ventas (dd/mm/aaaa): "; cin >> dia_ini; cin.get(); cin >> mes_ini; cin.get(); cin >> anio_ini;
-                        cout << "Ingrese la fecha hasta la cual ver las ventas (dd/mm/aaaa): "; cin >> dia_fin; cin.get(); cin >> mes_fin; cin.get(); cin >> anio_fin;
+                        cout << "\nSeleccione el ID del mozo. \n"
+                            << " ID: ";
+                        cin >> id_mozo;
+                        cout << "\nIngrese la fecha desde la cual ver las ventas (dd/mm/aaaa): "; cin >> dia_ini; cin.get(); cin >> mes_ini; cin.get(); cin >> anio_ini;
+                        cout << "\nIngrese la fecha hasta la cual ver las ventas (dd/mm/aaaa): "; cin >> dia_fin; cin.get(); cin >> mes_fin; cin.get(); cin >> anio_fin;
                         DtFecha fecha_ini = DtFecha(dia_ini, mes_ini, anio_ini);
                         DtFecha fecha_fin = DtFecha(dia_fin, mes_fin, anio_fin);
                         iempleado->seleccionarIdyFechas(id_mozo, fecha_ini, fecha_fin);
                         map<int, DtFactura> ventas_facturadas = iempleado->getVentasFacturadas();
                         map<int, DtFactura>::iterator map_it;
+                        if (ventas_facturadas.empty())
+                            cout << "\nNo hay ventas facturadas en ese rango de fechas. \n";
                         for(map_it = ventas_facturadas.begin(); map_it != ventas_facturadas.end(); ++map_it) {
                             //Ver que imprimir
                             cout << (map_it->second).getCodigo();
                         }
-
-                        string waste;
-                        cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                        cout<< "\nPresione <enter> para continuar...";
+                        getchar();
+                        string continuar;
+                        getline(cin, continuar);
                         msj = "";
                     } catch(exception* e) {
 

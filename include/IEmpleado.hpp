@@ -47,6 +47,9 @@ public:
     virtual DtRepartidor getDatosIngresadosRepartidor() = 0;
     virtual DtMozo getDatosIngresadosMozo() = 0;
 
+    virtual string getNombreMozo(int num_mozo) = 0;
+
+
     //destructor
     virtual ~IEmpleado(); // virtual y vacío
 };

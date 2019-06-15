@@ -183,7 +183,7 @@ bool ControladorEmpleado::existeEmpleado(int num){
 			return false;
 		else return true;
 
-	else 
+	else
 		return true;
 }
 
@@ -196,6 +196,11 @@ DtRepartidor ControladorEmpleado::getDatosIngresadosRepartidor(){
 DtMozo ControladorEmpleado::getDatosIngresadosMozo(){
 	DtMozo datos = DtMozo(this->ultimo_id, this->nombre_recordado);
 	return datos;
+}
+
+string ControladorEmpleado::getNombreMozo(int num_mozo) {
+	Mozo *mozo = getMozo(num_mozo);
+	return mozo -> getNombre();
 }
 
 //destructor
