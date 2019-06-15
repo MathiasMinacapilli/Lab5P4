@@ -68,7 +68,14 @@ map<int, DtProducto> ControladorProducto::getProductosSimples(){
 /* Agrega a la coleccion de ProductoCantidad recordada por el controlador el
 producto_cantidad ingresado. */
 void ControladorProducto::seleccionarProductoYCantidad(DtProductoCantidad producto_cantidad){
-		this->prod_cants_recordados[producto_cantidad.getProducto().getCodigo()] = producto_cantidad;
+        map<int, DtProductoCantidad>::iterator it = this->prod_cants_recordados.find(producto_cantidad.getProducto().getCodigo());
+        if (it == this->prod_cants_recordados.end())
+            this->prod_cants_recordados[producto_cantidad.getProducto().getCodigo()] = producto_cantidad;
+        else {
+            int cantidad_nueva = (it -> second).getCantidad() + producto_cantidad.getCantidad();
+            DtProductoCantidad prod_cant_nuevo = DtProductoCantidad(producto_cantidad.getProducto(), cantidad_nueva);
+            this->prod_cants_recordados[producto_cantidad.getProducto().getCodigo()] = prod_cant_nuevo;
+        }
 }
 
 /* Ingresa el menu a la coleccion de menus almacenada en el controlador con
