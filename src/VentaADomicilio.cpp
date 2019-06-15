@@ -91,8 +91,8 @@ void VentaADomicilio::avanzarEtapaVenta() {
     	}
 
     	//construyo actualizacion
-    	DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), info_productos, etapa_pedido);
-    	
+      DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), this->miRepartidor->getNombre(), info_productos, etapa_pedido);
+      
       //si tengo observador, lo notifico
       if (this->miObservador != nullptr)
     		this->miObservador->notificar(actualizacion);
@@ -126,7 +126,7 @@ void VentaADomicilio::cancelarVenta() {
     }
 
     //construyo actualizacion
-    DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), info_productos, etapa_pedido);
+    DtActualizacion actualizacion = DtActualizacion(fecha_y_hora, this->miCliente->getNombre(), this->miCliente->getTelefono(), this->miRepartidor->getNombre(), info_productos, etapa_pedido);
     if (this->miObservador != nullptr)
       this->miObservador->notificar(actualizacion);
   }

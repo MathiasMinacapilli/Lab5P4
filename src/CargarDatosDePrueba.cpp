@@ -15,9 +15,36 @@
 #include "../include/Recibido.hpp"
 #include "../include/EtapaPedido.hpp"
 #include "../include/DtActualizacion.hpp"
+#include "../include/FacturaDomicilio.hpp"
 
 //Librerias de C
 using namespace std;
+#include <map>
+
+static void facturar_domicilio(VentaADomicilio *venta, DtFechaYHora fecha_hora){
+    map<int, CantidadProducto *> cant_prods = venta->getCants_Productos();
+    map<int, CantidadProducto *>::iterator it; 
+    int precio_sub_total = 0;
+    int precio_total;
+    map<int, DtProductoCantidad> dtpc;
+    for (it = cant_prods.begin(); it != cant_prods.end(); ++it){
+        DtProducto datos = (it->second)->getProducto()->getDatosProducto();
+        int cant = (it -> second)->getCantidad();
+        DtProductoCantidad prod_cant = DtProductoCantidad(datos, cant);
+        dtpc.insert(pair<int, DtProductoCantidad>(datos.getCodigo(), prod_cant));
+        precio_sub_total = precio_sub_total + (((it->second)->getProducto())->getPrecio());
+        //Aumentar la cantidad de vendidos en el producto. Lo aumento la cantidad del producto_cantidad
+        (it->second)->getProducto()->aumentarCantidadVendidos(it->second->getCantidad());
+    }
+    if (venta -> getDescuento() != 0) { 
+        precio_total = precio_sub_total * (venta->getDescuento() / 100) * (1 + valor_iva / 100);
+    } else {
+        precio_total = precio_sub_total * (1 + valor_iva / 100);
+    }
+    FacturaDomicilio *f = new FacturaDomicilio(venta->getNumero(), fecha_hora, dtpc, valor_iva, venta->getDescuento(), precio_sub_total, precio_total, venta->getRepartidor()->getNombre(), venta->getRepartidor()->getTransporte());
+    venta -> setFactura(f);
+
+}
 
 
 void cargarDatosDePrueba() {
@@ -137,35 +164,37 @@ void cargarDatosDePrueba() {
     Repartidor *r2 = cont_empleado -> getRepartidor(5);
     Cliente *c1 = cont_cliente -> getCliente("098217523");
     Cliente *c2 = cont_cliente -> getCliente("091651249");
-    
-    DtFactura *f4, *f5, *f6;
 
     //V4
+    DtFechaYHora f_n4 = DtFechaYHora(16, 06, 2019, 21, 13, 0);
+
     EnCamino *enCamino_v4 = new EnCamino();
     VentaADomicilio *v4 = new VentaADomicilio(4, 0, nullptr, enCamino_v4, c2, c2, r1);
     v4 -> agregarProductoAVenta(p7, 5);
     cont_venta -> agregarVentaDomicilio(v4);
-    f4 = v4 -> facturar();
-    delete f4;
+    facturar_domicilio(v4, f_n4);
+
     //V5
+    DtFechaYHora f_n7 = DtFechaYHora(16, 06, 2019, 15, 02, 0);
+
     Recibido *recibido_v5 = new Recibido();
     VentaADomicilio* v5 = new VentaADomicilio(5, 0, nullptr, recibido_v5, c2, c2, r2);
     v5 -> agregarProductoAVenta(p2, 2);
     cont_venta -> agregarVentaDomicilio(v5);
-    f5 = v5 -> facturar();
-    delete f5;
+    facturar_domicilio(v5, f_n7);
+
     //V6
+    DtFechaYHora f_n3 = DtFechaYHora(16, 06, 2019, 21, 14, 0);
+
     EnCamino *enCamino_v6 = new EnCamino();
     VentaADomicilio *v6 = new VentaADomicilio(6, 0, nullptr, enCamino_v6, c1, c1, r1);
     v6 -> agregarProductoAVenta(p6, 1);
     cont_venta -> agregarVentaDomicilio(v6);
-    f6 = v6 -> facturar();
-    delete f6;
+    facturar_domicilio(v6, f_n3);
 
     //NOTIFICACIONES
 
     //N4 -- V4 -- PEDIDO
-    DtFechaYHora f_n4 = DtFechaYHora(16, 06, 2019, 21, 13, 0);
     map<int, DtProductoCantidad> datos_v4;
     datos_v4.clear();
     map<int, CantidadProducto *> prods_v4 = v4 -> getCants_Productos();
@@ -176,18 +205,17 @@ void cargarDatosDePrueba() {
         datos_v4[dtp_v4.getCodigo()] = dtprod_cant_v4;
     }
     EtapaPedido etapa_n4 = pedido;
-    DtActualizacion act_n4 = DtActualizacion(f_n4, "Martin", "091651249", datos_v4, etapa_n4);
+    DtActualizacion act_n4 = DtActualizacion(f_n4, "Martin", "091651249", "Tito", datos_v4, etapa_n4);
     v4->agregarActualizacion(act_n4);
 
     //N1 -- V4 -- EN CAMINO
     DtFechaYHora f_n1 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
     EtapaPedido etapa_n1;
     etapa_n1 = enCamino;
-    DtActualizacion act_n1 = DtActualizacion(f_n1, "Martin", "091651249", datos_v4, etapa_n1);
+    DtActualizacion act_n1 = DtActualizacion(f_n1, "Martin", "091651249", "Tito", datos_v4, etapa_n1);
     v4->agregarActualizacion(act_n1);
 
     //N3 -- V6 -- PEDIDO
-    DtFechaYHora f_n3 = DtFechaYHora(16, 06, 2019, 21, 14, 0);
     map<int, DtProductoCantidad> datos_v6;
     datos_v6.clear();
     map<int, CantidadProducto *> prods_v6 = v6 -> getCants_Productos();
@@ -198,17 +226,16 @@ void cargarDatosDePrueba() {
         datos_v6[dtp_v6.getCodigo()] = dtprod_cant_v6;
     }
     EtapaPedido etapa_n3 = pedido;
-    DtActualizacion act_n3 = DtActualizacion(f_n3, "Vladimir", "098217523", datos_v6, etapa_n3);
+    DtActualizacion act_n3 = DtActualizacion(f_n3, "Vladimir", "098217523", "Tito", datos_v6, etapa_n3);
     v6->agregarActualizacion(act_n3);
 
     //N2 -- V6 -- EN CAMINO
     DtFechaYHora f_n2 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
     EtapaPedido etapa_n2 = enCamino;
-    DtActualizacion act_n2 = DtActualizacion(f_n2, "Vladimir", "098217523", datos_v6, etapa_n2);
+    DtActualizacion act_n2 = DtActualizacion(f_n2, "Vladimir", "098217523", "Tito", datos_v6, etapa_n2);
     v4->agregarActualizacion(act_n2);
 
     //N7 -- V5 -- PEDIDO
-    DtFechaYHora f_n7 = DtFechaYHora(16, 06, 2019, 15, 02, 0);
     map<int, DtProductoCantidad> datos_v5;
     datos_v5.clear();
     map<int, CantidadProducto *> prods_v5 = v5 -> getCants_Productos();
@@ -219,19 +246,19 @@ void cargarDatosDePrueba() {
         datos_v5[dtp_v5.getCodigo()] = dtprod_cant_v5;
     }
     EtapaPedido etapa_n7 = pedido;
-    DtActualizacion act_n7 = DtActualizacion(f_n7, "Martin", "091651249", datos_v5, etapa_n7);
+    DtActualizacion act_n7 = DtActualizacion(f_n7, "Martin", "091651249", "Raul", datos_v5, etapa_n7);
     v5->agregarActualizacion(act_n7);
 
     //N6 -- V5 -- EN CAMINO
     DtFechaYHora f_n6 = DtFechaYHora(16, 06, 2019, 16, 15, 0);
     EtapaPedido etapa_n6 = enCamino;
-    DtActualizacion act_n6 = DtActualizacion(f_n6, "Martin", "091651249", datos_v5, etapa_n6);
+    DtActualizacion act_n6 = DtActualizacion(f_n6, "Martin", "091651249", "Raul", datos_v5, etapa_n6);
     v5->agregarActualizacion(act_n6);
 
     //N5 -- V5 -- RECIBIDO
     DtFechaYHora f_n5 = DtFechaYHora(16, 06, 2019, 16, 37, 0);
     EtapaPedido etapa_n5 = recibido;
-    DtActualizacion act_n5 = DtActualizacion(f_n5, "Martin", "091651249", datos_v5, etapa_n5);
+    DtActualizacion act_n5 = DtActualizacion(f_n5, "Martin", "091651249", "Raul", datos_v5, etapa_n5);
     v5->agregarActualizacion(act_n5);    
 
 }
