@@ -23,7 +23,7 @@ DtProductoCantidad::~DtProductoCantidad() {
 }
 
 ostream &operator<< (ostream& o, DtProductoCantidad dtpc) {
-    o << "- Producto -\n" << dtpc.getProducto()
-      << "\nCantidades del producto: " << dtpc.getCantidad();
+    o << dtpc.getProducto()
+      << "\nCantidad: "<< dtpc.getCantidad();
     return o;
 }

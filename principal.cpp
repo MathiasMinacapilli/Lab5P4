@@ -755,6 +755,7 @@ int main() {
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
                         if (!esta_cliente)
                             altaCliente(telefono, icliente, msj);
+                        cout << "\n---" << "Productos disponibles" << "---\n";
                         map<int, DtProducto> productos_disponibles = iventa -> obtenerProductosDisponibles();
                         map<int, DtProducto>::iterator it;
                         for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
@@ -765,12 +766,13 @@ int main() {
                         }
                         bool quiero_agregar = true;
                         while (quiero_agregar) {
-                            cout << "\nIngrese el código del producto y la cantidad que desea comprar. \n"
+                            cout << "\nIngrese el código del producto.\n"
                                 << " Código: ";
                             int codigo;
                             cin >> codigo;
                             es_valido_codigo(codigo, productos_disponibles);
-                            cout << "\n Cantidad: ";
+                            cout << "\nIngrese la cantidad que quiere de dicho producto.\n"
+                                << " Cantidad: ";
                             int cantidad;
                             cin >> cantidad;
                             es_valida_cantidad(cantidad);
@@ -786,13 +788,14 @@ int main() {
                         if (quiero_recibir) {
                             map<int, Repartidor*> repartidores_disponibles = iventa -> obtenerRepartidores();
                             map<int, Repartidor*>::iterator it_repartidores;
-                            cout << "Estos son los repartidores disponibles. \n";
+                            cout << "\nRepartidores disponibles.\n";
                             for (it_repartidores = repartidores_disponibles.begin(); it_repartidores != repartidores_disponibles.end(); ++it_repartidores){
                                 cout << (it_repartidores -> second) -> getNumero()
                                     << " - "
                                     << (it_repartidores -> second) -> getNombre()
                                     << " - "
-                                    << (it_repartidores -> second) -> getTransporte();
+                                    << (it_repartidores -> second) -> getTransporte()
+                                    << "\n";
                             }
                             cout << "\nIngrese el número del repartidor que desea. \n"
                                 << " Número: ";
@@ -813,15 +816,19 @@ int main() {
                                 ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(const_cast<DtFactura*>(factura));
                                 if (ptr_factura_domicilio != nullptr) {
                                     DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
+                                    cout << "\n---" << "Factura de la venta" << "---\n";
                                     cout << factura_domicilio;
-                                    cout<< "Presione <enter> para continuar...";
+                                    cout<< "\nPresione <enter> para continuar...";
+                                    getchar();
                                     string continuar;
                                     getline(cin, continuar);
                                 } else
                                     throw new invalid_argument("La venta es local.");
                             } else {
+                                cout << "\n---" << "Factura de la venta." << "---\n";
                                 cout << *factura;
-                                cout<< "Presione <enter> para continuar...";
+                                cout<< "\n\nPresione <enter> para continuar...";
+                                getchar();
                                 string continuar;
                                 getline(cin, continuar);
                             }
