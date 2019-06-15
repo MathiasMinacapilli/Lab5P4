@@ -764,9 +764,12 @@ int main() {
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
                             cout << "llego aca67\n";
                             if(quiero_repartidor) {
-                                cout << "llego aca1";
+                                cout << "llego aca1\n";
                                 fflush(stdout);
-                                DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
+                                DtFacturaDomicilio* ptr_factura_domicilio = nullptr;
+                                ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(const_cast<DtFactura*>(factura));
+                                cout << "llego aca2\n";
+                                fflush(stdout);
                                 if (ptr_factura_domicilio != nullptr) {
                                     cout << "entre al if null";
                                     fflush(stdout);
