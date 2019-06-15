@@ -685,20 +685,26 @@ int main() {
                         if(!cancelar) {
                             string waste = "";
                             DtProducto* prod = iproducto->getProducto();
+                            DtProductoSimple* dtprodsimple_ptr = dynamic_cast<DtProductoSimple*>(prod);
                             DtMenu* dtmenu_ptr = dynamic_cast<DtMenu*>(prod);
+                            if(dtprodsimple_ptr != nullptr) {
+                                DtProductoSimple* prod = dtprodsimple_ptr;
+                            } else {
+                                DtMenu* prod = dtmenu_ptr;
+                            }
                             cout << "-Codigo: " << prod->getCodigo()
                                 << "\n-Descripcion: " << prod->getDescripcion()
                                 << "\n-Precio: " << prod->getPrecio()
-                                << "\n-Cantidad vendidos: " << iproducto->getCantidadProductoTotalVendidos();
+                                << "\n-Cantidad vendidos: " << prod->getCantidadVendidos() << "\n";
                             //Si es un menu debo mostrar todos los productos que tiene dentro
                             if(dtmenu_ptr != nullptr) {
                                 //Tengo que mostrar todos los productos simples dentro del menu
                                 DtMenu dtmenu = *dtmenu_ptr;
                                 map<int, DtProductoEnMenu> prods = dtmenu.getProductos();
                                 map<int, DtProductoEnMenu>::iterator it;
+                                cout << "Productos dentro del menu: (codigo - descripcion)\n";
                                 for(it = prods.begin(); it != prods.end(); ++it) {
-                                    cout << "-Codigo: " << it->second.getProducto().getCodigo()
-                                        << "\n-Descripcion: " << it->second.getProducto().getDescripcion();
+                                    cout << "   " << it->second.getProducto().getCodigo() << " - " << it->second.getProducto().getDescripcion() << "\n";
                                 }
                             }
                             cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;

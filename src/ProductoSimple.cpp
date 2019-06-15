@@ -7,8 +7,8 @@ using namespace std;
 #include "../include/ControladorProducto.hpp"
 
 ProductoSimple::ProductoSimple(int codigo, string descripcion, float precio)
- : Producto(codigo, descripcion, precio) {
-  }
+:Producto(codigo, descripcion, precio) {
+}
 
 ProductoSimple::~ProductoSimple(){}
 
