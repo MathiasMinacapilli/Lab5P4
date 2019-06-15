@@ -980,10 +980,10 @@ int main() {
                                 quiero_confirmar = confirmacion();
                                 if (quiero_confirmar) {
                                     iventa -> agregarProductoAVenta();
-                                    cout << "Se agregó el producto correctamente. \n";
+                                    msj = "Se agregó el producto correctamente. \n";
                                 } else {
                                     iventa -> cancelarProductoAVenta();
-                                    cout << "El producto no se agregó. \n";
+                                    msj = "El producto no se agregó. \n";
                                 }
                                 cout << "\n¿Desea agregar más productos a la venta? Ingrese S o N.\n";
                                 quiero_agregar = confirmacion();

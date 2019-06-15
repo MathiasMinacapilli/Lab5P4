@@ -78,10 +78,13 @@ void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad
   this -> cantidad = producto_cantidad.getCantidad();
 }
 void ControladorVenta::agregarProductoAVenta() {
-  ControladorMesa *cont_mesa;
-  cont_mesa = ControladorMesa::getInstance();
-  Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-  v -> agregarProductoAVenta(this -> prod, this -> cantidad);
+    ControladorMesa *cont_mesa;
+    cont_mesa = ControladorMesa::getInstance();
+    Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+    if(v != nullptr)
+        v -> agregarProductoAVenta(this -> prod, this -> cantidad);
+    else
+        throw new invalid_argument("La mesa seleccionada no tiene una venta iniciada.");
 }
 void ControladorVenta::cancelarProductoAVenta() {
   prod = nullptr;

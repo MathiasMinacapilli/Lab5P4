@@ -48,20 +48,27 @@ VentaLocal* ControladorMesa::obtenerVenta(int numero) {
 //Iniciar Venta en Mesas
 
 set<int> ControladorMesa::getMesasMozoSinVentas(int num_mozo) {
-  map<int, Mesa*>::iterator it;
-  set<int> mesas_sin_venta;
-  mesas_sin_venta.clear();
-  for (it = mesas.begin(); it != mesas.end(); ++it) {
-    bool sin_venta = (it -> second) -> noTieneVentas();
-    if (sin_venta) {
-      bool es_del_mozo = (it -> second) -> esDelMozo(num_mozo);
-      if (es_del_mozo) {
-        mesas_sin_venta.insert((it -> second) -> getNum());
-      }
+    ControladorEmpleado* cont_empleado = ControladorEmpleado::getInstance();
+    map<int, Mozo*> mozos = cont_empleado->getMozos();
+    map<int, Mozo*>::iterator it = mozos.find(num_mozo);
+    if(it != mozos.end()) {
+        map<int, Mesa*>::iterator it;
+        set<int> mesas_sin_venta;
+        mesas_sin_venta.clear();
+        for (it = mesas.begin(); it != mesas.end(); ++it) {
+        bool sin_venta = (it -> second) -> noTieneVentas();
+        if (sin_venta) {
+            bool es_del_mozo = (it -> second) -> esDelMozo(num_mozo);
+            if (es_del_mozo) {
+            mesas_sin_venta.insert((it -> second) -> getNum());
+            }
+        }
+        }
+        num_mozo_recordado = num_mozo;
+        return mesas_sin_venta;
+    } else {
+        throw new invalid_argument("El codigo del mozo que ingreso no es correcto.");
     }
-  }
-  num_mozo_recordado = num_mozo;
-  return mesas_sin_venta;
 }
 
 void ControladorMesa::seleccionarMesasVenta(set<int> posibles_mesas) {
