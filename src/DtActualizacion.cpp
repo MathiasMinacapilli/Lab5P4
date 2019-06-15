@@ -3,10 +3,11 @@
 
 
 //constructor
-DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, map<int, DtProductoCantidad> datosProductos, EtapaPedido etapaActual) {
+DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, string nombre_repartidor, map<int, DtProductoCantidad> datosProductos, EtapaPedido etapaActual) {
     this->fechaYHora = fechaYHora;
     this->nombre = nombre;
     this->telefono = telefono;
+    this->nombre_repartidor = nombre_repartidor;
     this->datosProductos = datosProductos;
     this->etapaActual = etapaActual;
 }
@@ -22,6 +23,10 @@ string DtActualizacion::getNombre() {
 
 string DtActualizacion::getTelefono() {
     return this->telefono;
+}
+
+string DtActualizacion::getNombreRepartidor(){
+    return this->nombre_repartidor;
 }
 
 map<int, DtProductoCantidad> DtActualizacion::getDatosProductos() const{
@@ -43,7 +48,8 @@ bool DtActualizacion::operator<(const DtActualizacion &act2) const{
 ostream &operator<< (ostream& os, DtActualizacion dt_act){
     os<< " Fecha: " <<dt_act.getFechaYHora() << "\n"
         << " Cliente: " << dt_act.getNombre() << "\n"
-        << " Teléfono: " << dt_act.getTelefono() << "\n";
+        << " Teléfono: " << dt_act.getTelefono() << "\n"
+        << " Repartidor: " << dt_act.getNombreRepartidor() << "\n";
     map<int, DtProductoCantidad>::iterator it;
     map<int, DtProductoCantidad> datos_prods = dt_act.getDatosProductos();
     for (it = datos_prods.begin(); it != datos_prods.end(); ++it)

@@ -18,11 +18,12 @@ private:
     DtFechaYHora fechaYHora;
     string nombre;
     string telefono;
+    string nombre_repartidor;
     map<int, DtProductoCantidad> datosProductos;
     EtapaPedido etapaActual;
 public:
     //Constructor
-    DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, map<int, DtProductoCantidad> datosProductos, EtapaPedido etapaActual);
+    DtActualizacion(DtFechaYHora fechaYHora, string nombre, string telefono, string nombre_repartidor, map<int, DtProductoCantidad> datosProductos, EtapaPedido etapaActual);
 
     //Destructor
     ~DtActualizacion();
@@ -31,6 +32,7 @@ public:
     DtFechaYHora getFechaYHora() const;
     string getNombre();
     string getTelefono();
+    string getNombreRepartidor();
     map<int, DtProductoCantidad> getDatosProductos() const;
     EtapaPedido getEtapaActual();
 
