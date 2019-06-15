@@ -40,6 +40,7 @@ public:
 	//operacion patron Singleton
 	static ControladorEmpleado *getInstance();
 	Mozo* getMozo(int num_mozo);
+	set<int> getNumeroRepartidores();
 	map<int, Repartidor*> getRepartidoresDisponibles();
 
 	//Getters

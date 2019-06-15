@@ -21,11 +21,22 @@ Mozo *ControladorEmpleado::getMozo(int num_mozo){
 		throw new invalid_argument("Error. No existe mozo con ese numero");
 }
 
+
 map<int, Repartidor*> ControladorEmpleado::getRepartidoresDisponibles() {
 	map<int, Repartidor*> res;
-	map<int, Repartidor *>::iterator it;
+	map<int, Repartidor*>::iterator it;
 	for(it = repartidores.begin(); it != repartidores.end(); ++it)
-		res[(it->second) -> getNumero()] = (it -> second);
+		res[it -> second -> getNumero()] = it -> second;
+	return res;
+}
+
+
+set<int> ControladorEmpleado::getNumeroRepartidores() {
+	map<int, Repartidor*>::iterator it;
+	set<int> res;
+	res.clear();
+	for(it = this -> repartidores.begin(); it != this -> repartidores.end(); ++it)
+		res.insert(it -> first);
 	return res;
 }
 

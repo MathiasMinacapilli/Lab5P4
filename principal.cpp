@@ -137,17 +137,6 @@ static void es_valida_cantidad(int cantidad) {
 
 /* Chequea que sea valido el codigo del repartidor buscando el codigo en la coleccion
 de repartidores. Si el codigo no existe en esta coleccion tira una excepcion */
-
-
-
-/* CAMBIAR ESTO
-AHHHH
-AHHH
-AHH
-AHHH
-AHHHHH
-HAHHAHAH
-*/
 static void es_valido_numero_repartidor(int numero_repartidor, map<int, Repartidor*> repartidores_disponibles) {
     map<int, Repartidor*>::iterator it = repartidores_disponibles.find(numero_repartidor);
     if (it == repartidores_disponibles.end())
@@ -1234,11 +1223,18 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Modificar estado de pedido" << "-------------------- \n \n";
+                        set<int> repartidores = iempleado -> getNumeroRepartidores();
+                        cout << "Estos son los repartidores disponibles. \n";
+                        set<int>::iterator it_repartidor;
+                        cout << " ";
+                        for (it_repartidor = repartidores.begin(); it_repartidor != repartidores.end(); ++it_repartidor)
+                            cout << *it_repartidor << " ";
+                        cout << "\n\n";
+
                         cout << "Ingrese su id de empleado: ";
                         int id;
                         cin >> id;
                         iempleado -> ingresarIdRepartidor(id);
-
                         map<int, DtDireccion> pedidos = iempleado -> getVentasRepartidor();
                         map<int, DtDireccion>::iterator it;
                         if (pedidos.empty())
