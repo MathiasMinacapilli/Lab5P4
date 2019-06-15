@@ -115,28 +115,28 @@ void ControladorVenta::cancelarEliminarProductoDeVenta() {
 //FACTURACION DE UNA VENTA
 //ingresarNumeroMesa
 void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
-  ControladorMesa *cont_mesa;
-  cont_mesa = ControladorMesa::getInstance();
-  VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-  map<int, CantidadProducto*>::iterator it;
-  float el_descuento = descuento;
-  for (it = (v -> getCants_Productos()).begin(); (it != (v -> getCants_Productos()).end()); ++it) {
-      Producto* prod = (it -> second) -> getProducto();
-      ProductoSimple* prod_simple = dynamic_cast<ProductoSimple* >(prod);
-      if (prod_simple == nullptr) {
-          el_descuento = 0;
+    ControladorMesa *cont_mesa;
+    cont_mesa = ControladorMesa::getInstance();
+    VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+    map<int, CantidadProducto*>::iterator it;
+    float el_descuento = descuento;
+    for (it = (v -> getCants_Productos()).begin(); (it != (v -> getCants_Productos()).end()); ++it) {
+        Producto* prod = (it -> second) -> getProducto();
+        ProductoSimple* prod_simple = dynamic_cast<ProductoSimple* >(prod);
+        if (prod_simple == nullptr) {
+            el_descuento = 0;
+        }
     }
-  }
-  v -> setDescuento(el_descuento);
+    v -> setDescuento(el_descuento);
 }
 
 DtFactura* ControladorVenta::generarFactura() {
-  ControladorMesa *cont_mesa;
-  cont_mesa = ControladorMesa::getInstance();
-  VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-  DtFactura* factura = v -> facturar();
-  cont_mesa -> finalizarVenta();
-  return factura;
+    ControladorMesa *cont_mesa;
+    cont_mesa = ControladorMesa::getInstance();
+    VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+    DtFactura* factura = v -> facturar();
+    cont_mesa -> finalizarVenta();
+    return factura;
 }
 
 //VENTA A DOMICILIO

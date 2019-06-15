@@ -584,7 +584,7 @@ int main() {
                             }
                             cout << "\n\n";
                         }
-                        cout<< "Presione <enter> para continuar...";
+                        cout << "Presione <enter> para continuar...";
                         getchar();
                         string continuar;
                         getline(cin, continuar);
@@ -980,10 +980,10 @@ int main() {
                                 quiero_confirmar = confirmacion();
                                 if (quiero_confirmar) {
                                     iventa -> agregarProductoAVenta();
-                                    msj = "Se agregó el producto correctamente. \n";
+                                    msj = "Se agregó/agregaron el/los producto/s correctamente.";
                                 } else {
                                     iventa -> cancelarProductoAVenta();
-                                    msj = "El producto no se agregó. \n";
+                                    msj = "El/los producto/s no se agregó/agregaron.";
                                 }
                                 cout << "\n¿Desea agregar más productos a la venta? Ingrese S o N.\n";
                                 quiero_agregar = confirmacion();
@@ -1010,6 +1010,11 @@ int main() {
                         if (ptr_factura_local != nullptr) {
                             DtFacturaLocal factura_local = *ptr_factura_local;
                             cout << factura_local;
+                            cout << "\nPresione <enter> para continuar...";
+                            getchar();
+                            string continuar;
+                            getline(cin, continuar);
+                            msj = "Venta facturada correctamente.";
                         } else {
                             throw new invalid_argument("La venta es a domicilio.");
                         }
