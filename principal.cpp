@@ -966,13 +966,13 @@ int main() {
                             cout << "\n¿Desea agregar el producto a la venta? Ingrese S o N.\n";
                                 quiero_confirmar = confirmacion();
                                 if (quiero_confirmar) {
-                                    iventa -> eliminarProductoDeVenta();
-                                    cout << "Se quitó el producto correctamente. \n";
+                                    iventa -> agregarProductoAVenta();
+                                    cout << "Se agregó el producto correctamente. \n";
                                 } else {
-                                    iventa -> cancelarEliminarProductoDeVenta();
-                                    cout << "El producto no se eliminó. \n";
+                                    iventa -> cancelarProductoAVenta();
+                                    cout << "El producto no se agregó. \n";
                                 }
-                                cout << "\n¿Desea quitar más productos de la venta? Ingrese S o N.\n";
+                                cout << "\n¿Desea agregar más productos a la venta? Ingrese S o N.\n";
                                 quiero_agregar = confirmacion();
                         }
                     } catch(exception* e) {
@@ -1022,7 +1022,40 @@ int main() {
                         for (it = mesas_mozo.begin(); it != mesas_mozo.end(); ++it){
                             cout << *it << " ";
                         }
-
+                        cout << "\nIngrese los numeros de las mesas en las que desea iniciar la venta: ";
+                        bool quiere_agregar_mas_mesas = true;
+                        int num_mesa = 0;
+                        set<int> mesas_seleccionadas;
+                        do {
+                            cout << "\nNumero de mesa: "; cin >> num_mesa;
+                            if(mesas_mozo.find(num_mesa) != mesas_mozo.end()) {
+                                mesas_seleccionadas.insert(num_mesa);
+                                cout << "\n¿Desea seguir agregando mesas? Ingrese S o N.";
+                                if(confirmacion()) {
+                                    quiere_agregar_mas_mesas = true;
+                                } else {
+                                    quiere_agregar_mas_mesas = false;
+                                }
+                            } else {
+                                cout << "\nIngrese un numero de mesa válido.";
+                                quiere_agregar_mas_mesas = true;
+                            }
+                        }while(quiere_agregar_mas_mesas);
+                        imesa->seleccionarMesasVenta(mesas_seleccionadas);
+                        set<int> mesas_seleccionadas_en_cont = imesa->getMesasSeleccionadas();
+                        set<int>::iterator it_mesas_seleccionadas_en_cont;
+                        cout << "\nEstas son las mesas seleccionadas: \n";
+                        for(it_mesas_seleccionadas_en_cont = mesas_seleccionadas_en_cont.begin(); it_mesas_seleccionadas_en_cont != mesas_seleccionadas_en_cont.end(); ++it_mesas_seleccionadas_en_cont) {
+                            cout << *it_mesas_seleccionadas_en_cont << " ";
+                        }
+                        cout << "\n¿Desea confirmar la creacion de la venta? Ingrese S o N.";
+                        if(confirmacion()) {
+                            imesa->iniciarVenta();
+                            msj = "Venta iniciada correctamente.";
+                        } else {
+                            imesa->cancelarVenta();
+                            msj = "Creacion de venta cancelada correctamente.";
+                        }
                     } catch(exception* e) {
 
                     }

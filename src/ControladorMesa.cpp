@@ -92,9 +92,9 @@ void ControladorMesa::iniciarVenta() {
   ControladorVenta* cont_venta = ControladorVenta::getInstance();
   VentaLocal* ve = cont_venta -> crearVenta();
   set<int>::iterator it_selecc;
-  for (it_selecc = mesas_seleccionadas.begin(); it_selecc != mesas_seleccionadas.end(); ++it_selecc) {
+  for (it_selecc = this->mesas_seleccionadas.begin(); it_selecc != this->mesas_seleccionadas.end(); ++it_selecc) {
     map<int, Mesa*>::iterator it_mesas = mesas.find(*it_selecc);
-    if (it_mesas != mesas.begin()) {
+    if (it_mesas != mesas.end()) {
       (it_mesas -> second) -> setVentaActual(ve);
     }
   }
@@ -138,7 +138,7 @@ map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
         set<int> mesas_mozo;
 		double i = 0;
 		while(i<cant_mesas_a_asignar) {
-			it_mozos->second->agregarMesaAColeccion(it_mesas->second);
+			it_mesas->second->setMozo(it_mozos->second);
             mesas_mozo.insert(it_mesas->second->getNum());
 			++it_mesas;
 			i++;
@@ -151,7 +151,7 @@ map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
 	if(it_mesas != this->mesas.end()) {
 		it_mozos = mozos.begin();
 		while(it_mesas != this->mesas.end()) {
-			it_mozos->second->agregarMesaAColeccion(it_mesas->second);
+			it_mesas->second->setMozo(it_mozos->second);
             //Agrego el numero de la mesa al datatype (accedo con getMesas()) que contiene
             //el conjunto de las mesas del mozo
             set<int> mesas_mozo = col_ret[it_mozos->second->getNumero()].getMesas();
