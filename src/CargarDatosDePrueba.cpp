@@ -223,5 +223,5 @@ void cargarDatosDePrueba() {
     DtFechaYHora f_n5 = DtFechaYHora(16, 06, 2019, 16, 37, 0);
     EtapaPedido etapa_n5 = recibido;
     DtActualizacion act_n5 = DtActualizacion(f_n5, "Martin", "091651249", datos_v5, etapa_n5);
-    v5->agregarActualizacion(act_n5);    
+    v5->agregarActualizacion(act_n5);
 }

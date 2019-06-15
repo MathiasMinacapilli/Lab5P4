@@ -435,152 +435,157 @@ int main() {
                 /* 3) Alta producto. (Hay Diagrama de Comunicacion) */
                 case 3:
                     try {
-                    msj = "";
-                    bool quiero_agregar_mas = true;
-                    int tipo_producto = 0;
-                    do {
-                        system("clear");
-                        cout << "--------------------" << "Alta producto" << "-------------------- \n \n";
-                        cout << "Seleccione el tipo de producto que desea crear. \n"
-                            << " 1) Producto simple. \n";
-                        if(iproducto->existeProductoSimple()) { //Muestro la opcion de crear un menu sii existe al menos un producto simple
-                            cout << " 2) Menú. \n";
-                        }
-                        cout << "\nOpción: ";
-                        bool existe_opcion = false;
+                        msj = "";
+                        bool quiero_agregar_mas = true;
+                        int tipo_producto = 0;
                         do {
-                            int codigo = 0;
-                            float precio = 0;
-                            string descripcion = "";
-                            cin >> tipo_producto;
-                            switch(tipo_producto) {
-                            case 1: {
-                                //Agregar producto simple
-                                system("clear");
-                                cout << "--------------------" << "Agregar producto simple" << "-------------------- \n \n";
-                                cout << "Ingrese los datos del producto simple a ingresar. \n"
-                                    << " Código: "; cin >> codigo;
-                                cout << " Descripción: "; cin >> descripcion;
-                                cout << " Precio: "; cin >> precio;
-                                DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
-                                iproducto->ingresarDatosProducto(datos_producto_simple);
-                                cout << "\n¿Desea confirmar el ingreso del producto? Ingrese S o N. \n";
-                                if(confirmacion()) {
-                                    iproducto->ingresarProductoSimple();
-                                    cout << "\nProducto ingresado correctamente. \n";
-
-                                } else {
-                                    iproducto->cancelarProductoSimple();
-                                    cout << "\nIngreso de producto cancelado. \n";
-                                }
-                                existe_opcion = true;
-                                break;
+                            system("clear");
+                            cout << "--------------------" << "Alta producto" << "-------------------- \n \n";
+                            cout << "Seleccione el tipo de producto que desea crear. \n"
+                                << " 1) Producto simple. \n";
+                            if(iproducto->existeProductoSimple()) { //Muestro la opcion de crear un menu sii existe al menos un producto simple
+                                cout << " 2) Menú. \n";
                             }
-                            case 2: {
-                                //Agregar menu
-                                system("clear");
-                                cout << "--------------------" << "Agregar menú" << "-------------------- \n \n";
-                                cout << "Ingrese los datos del menú a ingresar. \n"
-                                    << " Código: ";
-                                cin >> codigo;
-                                cout << " Descripción: ";
-                                getchar();
-                                getline(cin, descripcion);
-                                iproducto->ingresarDatosMenu(codigo, descripcion);
-                                map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
-                                map<int, DtProducto>::iterator it;
-                                //Selecciona Productos Simples
-                                bool desea_seleccionar_mas = true;
-                                do {
+                            cout << "\nOpción: ";
+                            bool existe_opcion = false;
+                            do {
+                                int codigo = 0;
+                                float precio = 0;
+                                string descripcion = "";
+                                cin >> tipo_producto;
+                                switch(tipo_producto) {
+                                case 1: {
+                                    //Agregar producto simple
+                                    system("clear");
+                                    cout << "--------------------" << "Agregar producto simple" << "-------------------- \n \n";
+                                    cout << "Ingrese los datos del producto simple a ingresar. \n"
+                                        << " Código: "; cin >> codigo;
+                                    cout << " Descripción: "; cin >> descripcion;
+                                    cout << " Precio: "; cin >> precio;
+                                    DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
+                                    iproducto->ingresarDatosProducto(datos_producto_simple);
+                                    cout << "\n¿Desea confirmar el ingreso del producto? Ingrese S o N. \n";
+                                    if(confirmacion()) {
+                                        iproducto->ingresarProductoSimple();
+                                        cout << "\nProducto ingresado correctamente. \n";
+
+                                    } else {
+                                        iproducto->cancelarProductoSimple();
+                                        cout << "\nIngreso de producto cancelado. \n";
+                                    }
+                                    existe_opcion = true;
+                                    break;
+                                }
+                                case 2: {
+                                    //Agregar menu
+                                    system("clear");
+                                    cout << "--------------------" << "Agregar menú" << "-------------------- \n \n";
+                                    cout << "Ingrese los datos del menú a ingresar. \n"
+                                        << " Código: ";
+                                    cin >> codigo;
+                                    cout << " Descripción: ";
+                                    getchar();
+                                    getline(cin, descripcion);
+                                    iproducto->ingresarDatosMenu(codigo, descripcion);
+                                    map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
+                                    map<int, DtProducto>::iterator it;
+                                    //Selecciona Productos Simples
+                                    bool desea_seleccionar_mas = true;
+                                    do {
+                                        system("clear");
+                                        cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
+                                        cout << "Estos son los productos disponibles. \n";
+                                        //Muestro los productos simples para que se seleccione cuales integran el menu
+                                        for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
+                                            cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
+                                        }
+                                        int codigo_producto_simple = 0;
+                                        int cantidad = 0;
+                                        cout << "\nIngrese el código del producto que desea agregar al menú. \n"
+                                            << " Código: ";
+                                        cin >> codigo_producto_simple;
+                                        cout << "\nIngrese la cantidad del producto que desea agregar al menú. \n"
+                                            << " Cantidad: ";
+                                        cin >> cantidad;
+                                        it = productos_simples.find(codigo_producto_simple);
+                                        if(it == productos_simples.end())
+                                            throw new invalid_argument("Se ingresó un código incorrecto.");
+                                        DtProductoCantidad datos_producto_cantidad = DtProductoCantidad(productos_simples[codigo_producto_simple], cantidad);
+                                        iproducto->seleccionarProductoYCantidad(datos_producto_cantidad);
+                                        string agregar_mas = "";
+                                        cout << "\n¿Desea seguir agregando productos? Ingrese S o N. \n";
+                                        if(confirmacion()) {
+                                            desea_seleccionar_mas = true;
+                                        } else {
+                                            desea_seleccionar_mas = false;
+                                        }
+                                    }while(desea_seleccionar_mas);
+
                                     system("clear");
                                     cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
-                                    cout << "Estos son los productos disponibles. \n";
-                                    //Muestro los productos simples para que se seleccione cuales integran el menu
-                                    for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
-                                        cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
+                                    cout << "Estos son los productos a agregar al menú. \n";
+                                    map<int, DtProductoCantidad> productos_en_menu = iproducto -> getDatosIngresadosMenu();
+                                    map<int, DtProductoCantidad>::iterator it_menu;
+                                    for (it_menu = productos_en_menu.begin(); it_menu != productos_en_menu.end(); ++it_menu){
+                                        cout << (it_menu->second).getProducto() << " - Cantidad: " << (it_menu->second).getCantidad() << "\n";
                                     }
-                                    int codigo_producto_simple = 0;
-                                    int cantidad = 0;
-                                    cout << "\nIngrese el código del producto que desea agregar al menú. \n"
-                                        << " Código: ";
-                                    cin >> codigo_producto_simple;
-                                    cout << "\nIngrese la cantidad del producto que desea agregar al menú. \n"
-                                        << " Cantidad: ";
-                                    cin >> cantidad;
-                                    it = productos_simples.find(codigo_producto_simple);
-                                    if(it == productos_simples.end())
-                                        throw new invalid_argument("Se ingresó un código incorrecto.");
-                                    DtProductoCantidad datos_producto_cantidad = DtProductoCantidad(productos_simples[codigo_producto_simple], cantidad);
-                                    iproducto->seleccionarProductoYCantidad(datos_producto_cantidad);
-                                    string agregar_mas = "";
-                                    cout << "\n¿Desea seguir agregando productos? Ingrese S o N. \n";
+                                    cout << "\n¿Desea confirmar el ingreso del menú? Ingrese S o N. \n";
                                     if(confirmacion()) {
-                                        desea_seleccionar_mas = true;
+                                        iproducto->ingresarMenu();
+                                        cout << "\nMenú ingresado correctamente. \n";
                                     } else {
-                                        desea_seleccionar_mas = false;
+                                        iproducto->cancelarMenu();
+                                        cout << "\nIngreso de menú cancelado. \n";
                                     }
-                                }while(desea_seleccionar_mas);
+                                    existe_opcion = true;
+                                    break;
+                                }
 
-                                system("clear");
-                                cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
-                                cout << "Estos son los productos a agregar al menú. \n";
-                                map<int, DtProductoCantidad> productos_en_menu = iproducto -> getDatosIngresadosMenu();
-                                map<int, DtProductoCantidad>::iterator it_menu;
-                                for (it_menu = productos_en_menu.begin(); it_menu != productos_en_menu.end(); ++it_menu){
-                                    cout << (it_menu->second).getProducto() << " - Cantidad: " << (it_menu->second).getCantidad() << "\n";
+                                default: {
+                                    existe_opcion = false;
+                                    cout << "\nOpción ingreada no válida. \n \n"
+                                        << "Por favor seleccione una de las opciones mostradas anteriormente. \n"
+                                        << " Opción: ";
                                 }
-                                cout << "\n¿Desea confirmar el ingreso del menú? Ingrese S o N. \n";
-                                if(confirmacion()) {
-                                    iproducto->ingresarMenu();
-                                    cout << "\nMenú ingresado correctamente. \n";
-                                } else {
-                                    iproducto->cancelarMenu();
-                                    cout << "\nIngreso de menú cancelado. \n";
-                                }
-                                existe_opcion = true;
                                 break;
+                                }
+                            } while(!existe_opcion);
+                            cout << "\n¿Desea seguir dando de alta productos? Ingrese S o N. \n";
+                            if(confirmacion()) {
+                                quiero_agregar_mas = true;
+                            } else {
+                                quiero_agregar_mas = false;
                             }
-
-                            default: {
-                                existe_opcion = false;
-                                cout << "\nOpción ingreada no válida. \n \n"
-                                    << "Por favor seleccione una de las opciones mostradas anteriormente. \n"
-                                    << " Opción: ";
-                            }
-                            break;
-                            }
-                        } while(!existe_opcion);
-                        cout << "\n¿Desea seguir dando de alta productos? Ingrese S o N. \n";
-                        if(confirmacion()) {
-                            quiero_agregar_mas = true;
-                        } else {
-                            quiero_agregar_mas = false;
-                        }
-                    } while(quiero_agregar_mas);
-                } catch(exception* e) {
-                    system("clear");
-                    msj = e -> what();
-                    delete e;
-                    break;
-                }
+                        } while(quiero_agregar_mas);
+                    } catch(exception* e) {
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
+                    }
                 break;
 
                 /* 4) Asignar automáticamente mozos a mesas. */
                 case 4:
                     try {
+                        system("clear");
+                        cout << "--------------------" << "Asignar automáticamente mozos a mesas" << "-------------------- \n \n";
                         map<int, DtMesasMozo> mesas_mozo = imesa->asignarMozosAMesas();
                         map<int, DtMesasMozo>::iterator it_mesas_mozo;
                         for(it_mesas_mozo = mesas_mozo.begin(); it_mesas_mozo != mesas_mozo.end(); ++it_mesas_mozo) {
-                            cout << "Mozo: " << it_mesas_mozo->second.getCodigoMozo() << "\nMesas: ";
+                            cout << " Al mozo con ID " << it_mesas_mozo->second.getCodigoMozo() << " se le asignó/asignaron la/s mesa/s ";
                             set<int> mesas = it_mesas_mozo->second.getMesas();
                             set<int>::iterator it_mesas;
                             for (it_mesas = mesas.begin(); it_mesas != mesas.end(); ++it_mesas) {
                                 cout << *it_mesas << " ";
                             }
-                            cout << "\n";
+                            cout << "\n\n";
                         }
-                        string waste = "";
-                        cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                        cout<< "Presione <enter> para continuar...";
+                        getchar();
+                        string continuar;
+                        getline(cin, continuar);
+                        msj = "Mesas asignadas correctamente";
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -630,14 +635,14 @@ int main() {
 
                 case 6:
                     try {
-                        system("clear");
+                        msj = "";
                         system("clear");
                         cout << "-----------------" << "Actualizaciones de pedidos a domicilio" << "----------------- \n \n";
                         vector<DtActualizacion> actualizaciones = iventa -> getListadoActualizaciones();
                         vector<DtActualizacion>::iterator it_actualizacion;
-                        cout<< "Las actualizaciones de todos los pedidos a domicilio son:\n ";
+                        cout<< "Se listan las actualizaciones de todos los pedidos a domicilio. \n\n";
                         for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion){
-                           cout << *it_actualizacion << "\n\n\n";
+                           cout << *it_actualizacion << "\n\n";
                         }
                         cout<< "Presione <enter> para continuar...";
                         getchar();
@@ -654,6 +659,7 @@ int main() {
                 /* 7) Información de un producto. */
                 case 7:
                     try {
+                        msj = "";
                         system("clear");
                         cout << "--------------------" << "Información de un producto" << "-------------------- \n \n";
                         map<int, DtProducto> productos_disponibles = iproducto->getProductosDisponibles();
@@ -684,7 +690,6 @@ int main() {
                             }
                         } while(!es_valido_el_codigo);
                         if(!cancelar) {
-                            string waste = "";
                             DtProducto* prod = iproducto->getProducto();
                             DtProductoSimple* dtprodsimple_ptr = dynamic_cast<DtProductoSimple*>(prod);
                             DtMenu* dtmenu_ptr = dynamic_cast<DtMenu*>(prod);
@@ -693,22 +698,27 @@ int main() {
                             } else {
                                 DtMenu* prod = dtmenu_ptr;
                             }
-                            cout << "-Codigo: " << prod->getCodigo()
-                                << "\n-Descripcion: " << prod->getDescripcion()
-                                << "\n-Precio: " << prod->getPrecio()
-                                << "\n-Cantidad vendidos: " << prod->getCantidadVendidos() << "\n";
+                            system("clear");
+                            cout << "--------------------" << "Información de un producto" << "-------------------- \n \n";
+                            cout << "Información del producto. \n";
+                            cout << " Código: " << prod->getCodigo() << "\n"
+                                << " Descripción: " << prod->getDescripcion() << "\n"
+                                << " Precio: $" << prod->getPrecio() << "\n"
+                                << " Cantidad vendidos: " << prod->getCantidadVendidos() << "\n";
                             //Si es un menu debo mostrar todos los productos que tiene dentro
                             if(dtmenu_ptr != nullptr) {
                                 //Tengo que mostrar todos los productos simples dentro del menu
                                 DtMenu dtmenu = *dtmenu_ptr;
                                 map<int, DtProductoEnMenu> prods = dtmenu.getProductos();
                                 map<int, DtProductoEnMenu>::iterator it;
-                                cout << "Productos dentro del menu: (codigo - descripcion)\n";
                                 for(it = prods.begin(); it != prods.end(); ++it) {
-                                    cout << "   " << it->second.getProducto().getCodigo() << " - " << it->second.getProducto().getDescripcion() << "\n";
+                                    cout << "   " << it->second.getProducto().getCodigo() << " - " << it->second.getProducto().getDescripcion() << " - Cantidad: " << it->second.getCantidad() << "\n";
                                 }
                             }
-                            cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                            cout<< "\nPresione <enter> para continuar...";
+                            getchar();
+                            string continuar;
+                            getline(cin, continuar);
                         } else {
                             iproducto->cancelarInformacion();
                         }
