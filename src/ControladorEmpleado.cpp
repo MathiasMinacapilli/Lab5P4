@@ -120,7 +120,7 @@ asociadas al mozo que tiene el id que se selecciono */
 map<int, DtFactura> ControladorEmpleado::getVentasFacturadas() {
 	map<int, DtFactura> res;
 	ControladorVenta* cont_venta = ControladorVenta::getInstance();
-	res = cont_venta->getVentasLocalesDelMozoFacturadas(this->id_mozo_recordado);
+	res = cont_venta->getVentasLocalesDelMozoFacturadas(this->id_mozo_recordado, this->fecha_ini_recordada, this->fecha_fin_recordada);
 	return res;
 }
 

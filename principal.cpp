@@ -916,7 +916,9 @@ int main() {
                             cout << "\nNo hay ventas facturadas en ese rango de fechas. \n";
                         for(map_it = ventas_facturadas.begin(); map_it != ventas_facturadas.end(); ++map_it) {
                             //Ver que imprimir
-                            cout << map_it->second;
+                            cout << "\n--------------------------------------------------------------"
+                                << map_it->second
+                                << "\n--------------------------------------------------------------";
                         }
                         cout<< "\nPresione <enter> para continuar...";
                         getchar();

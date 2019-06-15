@@ -97,7 +97,7 @@ public:
     void agregarVentaDomicilio(VentaADomicilio *v);
 
     //Caso de uso: ventas de un mozo
-    map<int, DtFactura> getVentasLocalesDelMozoFacturadas(int num_mozo);
+    map<int, DtFactura> getVentasLocalesDelMozoFacturadas(int num_mozo, DtFecha fecha_ini, DtFecha fecha_fin);
 };
 
 #endif

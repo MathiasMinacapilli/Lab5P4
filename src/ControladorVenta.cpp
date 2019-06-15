@@ -360,11 +360,13 @@ void ControladorVenta::agregarVentaDomicilio(VentaADomicilio *v){
 }
 
 //Caso de uso: ventas de un mozo
-map<int, DtFactura> ControladorVenta::getVentasLocalesDelMozoFacturadas(int num_mozo) {
+map<int, DtFactura> ControladorVenta::getVentasLocalesDelMozoFacturadas(int num_mozo, DtFecha fecha_ini, DtFecha fecha_fin) {
     map<int, Factura*> ret_objeto;
     map<int, DtFactura> ret;
     map<int, VentaLocal *>::iterator it;
     ControladorEmpleado* cont_empleado = ControladorEmpleado::getInstance();
+    DtFechaYHora fechayhora_ini = DtFechaYHora(fecha_ini.getDia(), fecha_ini.getMes(), fecha_ini.getAnio(), 0, 0, 0);
+    DtFechaYHora fechayhora_fin  = DtFechaYHora(fecha_fin.getDia(), fecha_fin.getMes(), fecha_fin.getAnio(), 23, 59, 59); 
     for(it = this->ventasLocales.begin(); it != this->ventasLocales.end(); ++it) {
         //Si la venta esta facturada chequeo que el nombre del mozo de la venta
         //es igual al nombre del mozo que tiene codigo num_mozo
@@ -372,7 +374,7 @@ map<int, DtFactura> ControladorVenta::getVentasLocalesDelMozoFacturadas(int num_
             Factura* factura = it->second->getFactura();
             FacturaLocal* factura_local = dynamic_cast<FacturaLocal*>(factura);
             if(factura_local != nullptr)
-                if(factura_local->getNombreMozo() == cont_empleado->getNombreMozo(num_mozo))
+                if(factura_local->getNombreMozo() == cont_empleado->getNombreMozo(num_mozo) && fechayhora_ini <= factura->getFechaYHora() && factura->getFechaYHora() <= fechayhora_fin)
                     ret_objeto[factura_local->getCodigo()] = factura;
         }
     }
