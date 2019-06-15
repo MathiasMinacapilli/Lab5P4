@@ -71,20 +71,23 @@ bool Venta::estaFacturada() {
 }
 
 void Venta::eliminarProducto(Producto* producto, int cantidad) {
-    map<int, CantidadProducto*>::iterator it;
+    map<int, CantidadProducto*>::iterator it  = cants_productos.begin();
     bool encontre_prod = false;
-    for(it = cants_productos.begin(); ((it != cants_productos.end()) && (!encontre_prod)); ++it) {
-        encontre_prod = (it->second)->estaProducto(producto->getCodigo());
+    while ((it != cants_productos.end()) && (!encontre_prod)) {
+        if (!(encontre_prod = (it->second)->estaProducto(producto->getCodigo())))
+            ++it;
     }
     if (encontre_prod == true) {
         bool es_cero = (it->second)->disminuir(cantidad);
         if (es_cero) {
-            (it->second)->quitarProducto();
             CantidadProducto* cant_producto = it->second;
-            cants_productos.erase(it);
+            (it->second)->quitarProducto();
+            it = cants_productos.erase(it);
             delete cant_producto;
         }
     }
+    else
+        throw new invalid_argument ("No existe el código del producto a quitar");
 }
 
 map<int, DtProducto> Venta::obtenerProductos() {

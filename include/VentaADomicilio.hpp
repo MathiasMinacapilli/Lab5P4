@@ -44,8 +44,9 @@ public:
     void setObservador(IObserverActualizaciones *observador);
     void borrarObservador();
 
-    //funcion usada unicamente para cargar datos de prueba
+    //funciones usadas unicamente para cargar datos de prueba
     void agregarActualizacion(DtActualizacion dt_Act);
+    
 };
 
 //Forward Declaration

@@ -70,6 +70,7 @@ map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles() {
   map<int, DtProducto> dtprods = cont_prod -> getProductosDisponibles();
   return dtprods;
 }
+
 void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad) {
   ControladorProducto *cont_prod;
   cont_prod = ControladorProducto::getInstance();
@@ -77,6 +78,7 @@ void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad
   this -> prod = prod;
   this -> cantidad = producto_cantidad.getCantidad();
 }
+
 void ControladorVenta::agregarProductoAVenta() {
     ControladorMesa *cont_mesa;
     cont_mesa = ControladorMesa::getInstance();
@@ -86,6 +88,7 @@ void ControladorVenta::agregarProductoAVenta() {
     else
         throw new invalid_argument("La mesa seleccionada no tiene una venta iniciada.");
 }
+
 void ControladorVenta::cancelarProductoAVenta() {
   prod = nullptr;
   cantidad = 0;
@@ -102,10 +105,13 @@ map<int, DtProducto> ControladorVenta::getProductosVenta (int numMesa) {
   this -> v = v;
   return productos_venta;
 }
+
 //seleccionarProdYCant
+
 void ControladorVenta::eliminarProductoDeVenta() {
   (this -> v) -> eliminarProducto(this -> prod, this -> cantidad);
 }
+
 void ControladorVenta::cancelarEliminarProductoDeVenta() {
     prod = nullptr;
   cantidad = 0;
