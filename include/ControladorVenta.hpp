@@ -11,9 +11,12 @@ using namespace std;
 #include "IVenta.hpp"
 #include "VentaLocal.hpp"
 #include "VentaADomicilio.hpp"
+#include "Factura.hpp"
+#include "FacturaLocal.hpp"
 #include "DtFecha.hpp"
 #include "Pedido.hpp"
 #include "Recibido.hpp"
+#include "ControladorEmpleado.hpp"
 //#include "DtFactura.hpp"
 
 class ControladorVenta : public IVenta {
@@ -36,6 +39,8 @@ private:
     VentaADomicilio* venta_domicilio; //VENTA A DOMICILIO -
 public:
     static ControladorVenta *getInstance();
+
+    map<int, VentaLocal *> getVentasLocales();
 
     //BAJA PRODUCTO - eliminarProducto - ControladorProducto
     bool estaEnVentaSinFacturar(Producto *p);
@@ -71,10 +76,10 @@ public:
     void cancelarVentaADomicilio();
     DtFactura* generarFacturaADomicilio();
 
-  //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUSCRIBIR -- DES-SUSCRIBIR
-  void suscribirCliente(string telefono);
-  void desSuscribirCliente(string telefono);
-  vector<DtActualizacion> getActualizacionesCliente(string telefono);
+    //CONSULTAR ACTUALIZACIONES PEDIDOS A DOMICILIO -- SUSCRIBIR -- DES-SUSCRIBIR
+    void suscribirCliente(string telefono);
+    void desSuscribirCliente(string telefono);
+    vector<DtActualizacion> getActualizacionesCliente(string telefono);
 
     //RESUMEN FACTURACION DE 1 DIA DADA LA FECHA
     void ingresarFecha(DtFecha fecha);
@@ -90,6 +95,9 @@ public:
     void aumentarNumeroVenta();
     bool existeVenta(int num);
     void agregarVentaDomicilio(VentaADomicilio *v);
+
+    //Caso de uso: ventas de un mozo
+    map<int, DtFactura> getVentasLocalesDelMozoFacturadas(int num_mozo, DtFecha fecha_ini, DtFecha fecha_fin);
 };
 
 #endif

@@ -15,7 +15,6 @@ using namespace std;
 #include "DtRepartidor.hpp"
 #include "ControladorMesa.hpp"
 
-
 class ControladorEmpleado : public IEmpleado{
 private:
 	//instancia patron Singleton

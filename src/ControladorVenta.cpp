@@ -242,35 +242,37 @@ void ControladorVenta::ingresarFecha(DtFecha fecha) {
 }
 
 map<int, DtFactura> ControladorVenta::getFacturasYTotalFecha(float &totalfacturado) {
-  map<int, VentaLocal *>::iterator it_local;
-  map<int, VentaADomicilio *>::iterator it_domicilio;
-  map<int, DtFactura> res;
-  VentaLocal* ventalocal;
-  VentaADomicilio *ventadomicilio;
-  Factura* factura;
-  DtFactura dtfactura;
-  totalfacturado = 0;
-  for(it_local = ventasLocales.begin(); it_local != ventasLocales.end(); ++it_local) {
-    ventalocal = it_local -> second;
-    if (ventalocal -> estaFacturada()) {
-      factura = ventalocal -> getFactura();
-      DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
-      if (fecha_factura == this -> fecha_venta) {
-        dtfactura = factura -> getDatosFactura();
-        res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
-        totalfacturado +=  dtfactura.getPrecioTotal();
-      }
+    map<int, VentaLocal *>::iterator it_local;
+    map<int, VentaADomicilio *>::iterator it_domicilio;
+    map<int, DtFactura> res;
+    VentaLocal* ventalocal;
+    VentaADomicilio *ventadomicilio;
+    Factura* factura;
+    DtFactura dtfactura;
+    totalfacturado = 0;
+    for(it_local = ventasLocales.begin(); it_local != ventasLocales.end(); ++it_local) {
+        ventalocal = it_local -> second;
+        if (ventalocal -> estaFacturada()) {
+            factura = ventalocal -> getFactura();
+            DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
+            if (fecha_factura == this -> fecha_venta) {
+                dtfactura = factura -> getDatosFactura();
+                res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
+                totalfacturado +=  dtfactura.getPrecioTotal();
+            }
+        }
     }
-  }
-  for(it_domicilio = ventasDomicilio.begin(); it_domicilio != ventasDomicilio.end(); ++it_domicilio) {
-    ventadomicilio = it_domicilio -> second;
-    factura = ventadomicilio -> getFactura();
-    DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
-    if (fecha_factura == this -> fecha_venta) {
-      dtfactura = factura -> getDatosFactura();
-      res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
-      totalfacturado +=  dtfactura.getPrecioTotal();
-    }
+    for(it_domicilio = ventasDomicilio.begin(); it_domicilio != ventasDomicilio.end(); ++it_domicilio) {
+        ventadomicilio = it_domicilio -> second;
+        if (ventadomicilio -> estaFacturada()) {
+            factura = ventadomicilio -> getFactura();
+            DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
+            if (fecha_factura == this -> fecha_venta) {
+                dtfactura = factura -> getDatosFactura();
+                res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
+                totalfacturado +=  dtfactura.getPrecioTotal();
+            }
+        }
     }
   return res;
 }
@@ -355,4 +357,34 @@ void ControladorVenta::agregarVentaDomicilio(VentaADomicilio *v){
   if (this->ventasDomicilio.find(v->getNumero()) == this->ventasDomicilio.end())
     this->ventasDomicilio[v->getNumero()] = v;
   else throw new invalid_argument("Error. Ya existe una venta con ese codigo");
+}
+
+//Caso de uso: ventas de un mozo
+map<int, DtFactura> ControladorVenta::getVentasLocalesDelMozoFacturadas(int num_mozo, DtFecha fecha_ini, DtFecha fecha_fin) {
+    map<int, Factura*> ret_objeto;
+    map<int, DtFactura> ret;
+    map<int, VentaLocal *>::iterator it;
+    ControladorEmpleado* cont_empleado = ControladorEmpleado::getInstance();
+    DtFechaYHora fechayhora_ini = DtFechaYHora(fecha_ini.getDia(), fecha_ini.getMes(), fecha_ini.getAnio(), 0, 0, 0);
+    DtFechaYHora fechayhora_fin  = DtFechaYHora(fecha_fin.getDia(), fecha_fin.getMes(), fecha_fin.getAnio(), 23, 59, 59); 
+    for(it = this->ventasLocales.begin(); it != this->ventasLocales.end(); ++it) {
+        //Si la venta esta facturada chequeo que el nombre del mozo de la venta
+        //es igual al nombre del mozo que tiene codigo num_mozo
+        if(it->second->estaFacturada()) {
+            Factura* factura = it->second->getFactura();
+            FacturaLocal* factura_local = dynamic_cast<FacturaLocal*>(factura);
+            if(factura_local != nullptr)
+                if(factura_local->getNombreMozo() == cont_empleado->getNombreMozo(num_mozo) && fechayhora_ini <= factura->getFechaYHora() && factura->getFechaYHora() <= fechayhora_fin)
+                    ret_objeto[factura_local->getCodigo()] = factura;
+        }
+    }
+    map<int, Factura*>::iterator it_factura;
+    //Recorro mi conjunto de objetos y creo los data values para agregarlos
+    //a la coleccion a retornar
+    for(it_factura = ret_objeto.begin(); it_factura != ret_objeto.end(); ++it_factura) {
+        Factura* factura = it_factura->second;
+        DtFactura dtfactura = factura->getDatosFactura();
+        ret[dtfactura.getCodigo()] = dtfactura;
+    }
+    return ret;
 }

@@ -39,7 +39,8 @@ DtFactura* VentaLocal::facturar() {
     time_t t = time(0);
     tm* now = localtime(&t);
     DtFechaYHora fecha_y_hora = DtFechaYHora(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900, now->tm_hour, now->tm_min, now->tm_sec);
-    Factura* factura = new Factura(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total);
+    FacturaLocal* factura_local = new FacturaLocal(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this->miMozo->getNombre());
+    Factura* factura = factura_local;
     this->setFactura(factura);
     DtFacturaLocal* res_local = new DtFacturaLocal(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, miMozo -> getNombre());
     DtFactura* res = dynamic_cast<DtFactura*>(res_local);

@@ -119,6 +119,8 @@ void ControladorEmpleado::seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFech
 asociadas al mozo que tiene el id que se selecciono */
 map<int, DtFactura> ControladorEmpleado::getVentasFacturadas() {
 	map<int, DtFactura> res;
+	ControladorVenta* cont_venta = ControladorVenta::getInstance();
+	res = cont_venta->getVentasLocalesDelMozoFacturadas(this->id_mozo_recordado, this->fecha_ini_recordada, this->fecha_fin_recordada);
 	return res;
 }
 
@@ -193,8 +195,13 @@ DtMozo ControladorEmpleado::getDatosIngresadosMozo(){
 }
 
 string ControladorEmpleado::getNombreMozo(int num_mozo) {
-	Mozo *mozo = getMozo(num_mozo);
-	return mozo -> getNombre();
+	map<int, Mozo*>::iterator it = this->mozos.find(num_mozo);
+	if(it != this->mozos.end()) {
+		Mozo *mozo = getMozo(num_mozo);
+		return mozo -> getNombre();
+	} else {
+		throw new invalid_argument("No existe mozo con el numero ingresado");
+	}
 }
 
 //destructor

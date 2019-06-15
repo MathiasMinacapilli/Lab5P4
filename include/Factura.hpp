@@ -27,7 +27,7 @@ public:
     Factura(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productosCantidad, float iva, float descuento, float precioSubTotal, float precioTotal);
 
     //Destructor
-    ~Factura();
+    virtual ~Factura();
 
     //Getters
     int getCodigo();
