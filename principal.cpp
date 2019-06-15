@@ -716,12 +716,13 @@ int main() {
                                     cout << "   " << it->second.getProducto().getCodigo() << " - " << it->second.getProducto().getDescripcion() << " - Cantidad: " << it->second.getCantidad() << "\n";
                                 }
                             }
+                            delete prod;
                             cout<< "\nPresione <enter> para continuar...";
                             getchar();
                             string continuar;
                             getline(cin, continuar);
-                            delete prod;
-                            delete dtmenu_ptr;
+                            
+
                         } else {
                             iproducto->cancelarInformacion();
                         }
