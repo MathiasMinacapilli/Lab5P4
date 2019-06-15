@@ -55,8 +55,10 @@ bool Menu::eliminarProducto(int cod){
 
 void Menu::eliminar(){
 	map<int, ProductoEnMenu *>::iterator it;
-	for (it=productos.begin(); it!=productos.end(); ++it)
-		delete (it->second);
+	if (!(this->esVacio()))
+		for (it=productos.begin(); it!=productos.end(); ++it)
+			delete (it->second);
 	productos.clear();
+	cout << "voy a eliminar el menu!!!";
 	delete this;
 }

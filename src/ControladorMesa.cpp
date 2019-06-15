@@ -43,7 +43,7 @@ VentaLocal* ControladorMesa::obtenerVenta(int numero) {
         ve = (it -> second) -> getVentaActual();
         this->mesa_recordada = it->second;
     } else {
-      throw new invalid_argument("No existe una mesa con el numero ingresado.");
+      throw new invalid_argument("No existe una mesa con el numero ingresado");
     }
     return ve;
 }

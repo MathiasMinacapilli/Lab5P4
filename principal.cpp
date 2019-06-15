@@ -432,7 +432,7 @@ int main() {
                     }
                     break;
 
-                /* 3) Alta producto. (Hay Diagrama de Comunicacion) */
+                /* 3) Alta producto */
                 case 3:
                     try {
                         msj = "";
@@ -597,7 +597,7 @@ int main() {
                     }
                     break;
 
-                /* 5) Baja de producto. (Hay Diagrama de Comunicacion) */
+                /* 5) Baja de producto */
                 case 5:
                     try {
                         system("clear");
@@ -622,6 +622,10 @@ int main() {
                             iproducto -> cancelarBajaProducto();
                             se_elimino = false;
                         }
+                        string waste = "";
+                        getline(cin, waste);
+                        cout << "\nPresione <enter> para continuar.";
+                        getline(cin, waste);
                         if (se_elimino)
                             msj = "Se eliminó el producto correctamente.";
                         else
@@ -855,6 +859,7 @@ int main() {
                                     getchar();
                                     string continuar;
                                     getline(cin, continuar);
+                                    delete ptr_factura_domicilio;
                                 } else
                                     throw new invalid_argument("La venta es local.");
                             } else {
@@ -863,6 +868,7 @@ int main() {
                                 cout<< "\n\nPresione <enter> para continuar...";
                                 getchar();
                                 string continuar;
+                                delete factura;
                                 getline(cin, continuar);
                             }
                             msj = "Venta realizada con éxito";
@@ -951,8 +957,16 @@ int main() {
 
                 case 1:
                     try {
+                        msj = "";
                         system("clear");
                         cout << "--------------------" << "Agregar producto a una venta" << "-------------------- \n \n";
+                        set<int> mesas = imesa -> getNumeroMesas();
+                        cout << "Estas son las mesas disponibles. \n";
+                        set<int>::iterator it_quitar;
+                        cout << " ";
+                        for (it_quitar = mesas.begin(); it_quitar != mesas.end(); ++it_quitar)
+                            cout << *it_quitar << " ";
+                        cout << "\n\n";
                         int numero_mesa = conseguirNumeroMesa();
                         iventa -> ingresarNumeroMesa(numero_mesa);
                         bool quiero_agregar = true;
@@ -980,10 +994,10 @@ int main() {
                                 quiero_confirmar = confirmacion();
                                 if (quiero_confirmar) {
                                     iventa -> agregarProductoAVenta();
-                                    msj = "Se agregó/agregaron el/los producto/s correctamente.";
+                                    cout << "\nSe agregó/agregaron el/los producto/s correctamente. \n";
                                 } else {
                                     iventa -> cancelarProductoAVenta();
-                                    msj = "El/los producto/s no se agregó/agregaron.";
+                                    cout << "\nEl/los producto/s no se agregó/agregaron. \n";
                                 }
                                 cout << "\n¿Desea agregar más productos a la venta? Ingrese S o N.\n";
                                 quiero_agregar = confirmacion();
@@ -1015,9 +1029,14 @@ int main() {
                         iventa -> ingresarPorcentajeDescuento(porcentaje);
                         DtFactura* factura = iventa -> generarFactura();
                         DtFacturaLocal* ptr_factura_local = dynamic_cast<DtFacturaLocal*>(factura);
+                        system("clear");
+                        cout << "--------------------" << "Facturación de una venta" << "-------------------- \n \n";
+                        cout << "           Factura de la venta \n"
+                            << "--------------------------------------------";
                         if (ptr_factura_local != nullptr) {
                             DtFacturaLocal factura_local = *ptr_factura_local;
-                            cout << factura_local;
+                            cout << factura_local
+                                << "\n--------------------------------------------\n";
                             cout << "\nPresione <enter> para continuar...";
                             getchar();
                             string continuar;
@@ -1067,9 +1086,9 @@ int main() {
                                 cout << "\n¿Desea seguir agregando mesas? Ingrese S o N. \n";
                                 if(confirmacion()) {
                                     quiere_agregar_mas_mesas = true;
-                                } else {
+                                    cout << "\n";
+                                } else
                                     quiere_agregar_mas_mesas = false;
-                                }
                             } else {
                                 cout << "\nIngrese un número de mesa válido.";
                                 quiere_agregar_mas_mesas = true;
