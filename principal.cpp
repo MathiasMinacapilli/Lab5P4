@@ -432,7 +432,7 @@ int main() {
                     }
                     break;
 
-                /* 3) Alta producto. (Hay Diagrama de Comunicacion) */
+                /* 3) Alta producto */
                 case 3:
                     try {
                     bool quiero_agregar_mas = true;
@@ -483,7 +483,8 @@ int main() {
                                     << " Código: ";
                                 cin >> codigo;
                                 cout << " Descripción: ";
-                                getchar();
+                                string nada;
+                                getline(cin, nada);
                                 getline(cin, descripcion);
                                 iproducto->ingresarDatosMenu(codigo, descripcion);
                                 map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
@@ -579,7 +580,9 @@ int main() {
                             cout << "\n";
                         }
                         string waste = "";
-                        cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
+                        getline(cin, waste);
+                        cout << "\nPresione <enter> para continuar.";
+                        getline(cin, waste);
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -588,7 +591,7 @@ int main() {
                     }
                     break;
 
-                /* 5) Baja de producto. (Hay Diagrama de Comunicacion) */
+                /* 5) Baja de producto */
                 case 5:
                     try {
                         system("clear");
@@ -613,6 +616,10 @@ int main() {
                             iproducto -> cancelarBajaProducto();
                             se_elimino = false;
                         }
+                        string waste = "";
+                        getline(cin, waste);
+                        cout << "\nPresione <enter> para continuar.";
+                        getline(cin, waste);
                         if (se_elimino)
                             msj = "Se eliminó el producto correctamente.";
                         else
@@ -832,6 +839,7 @@ int main() {
                                     getchar();
                                     string continuar;
                                     getline(cin, continuar);
+                                    delete ptr_factura_domicilio;
                                 } else
                                     throw new invalid_argument("La venta es local.");
                             } else {
@@ -840,6 +848,7 @@ int main() {
                                 cout<< "\n\nPresione <enter> para continuar...";
                                 getchar();
                                 string continuar;
+                                delete factura;
                                 getline(cin, continuar);
                             }
                         } else

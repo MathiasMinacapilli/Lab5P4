@@ -25,8 +25,17 @@ DtFactura* VentaLocal::facturar() {
         precio_sub_total = precio_sub_total + (((it->second)->getProducto())->getPrecio());
         //Aumentar la cantidad de vendidos en el producto. Lo aumento la cantidad del producto_cantidad
         (it->second)->getProducto()->aumentarCantidadVendidos(it->second->getCantidad());
+        /*CantidadProducto *a_borrar = it->second;
+        this->cants_productos.erase(it->second->getProducto()->getCodigo());
+        delete a_borrar;*/
+
     }
-    int precio_total = precio_sub_total * (1 - this->getDescuento()) * (1 + valor_iva);
+    int precio_total = 0;
+    if (this -> getDescuento() != 0) { 
+        precio_total = precio_sub_total * (this->getDescuento() / 100) * (1 + valor_iva / 100);
+    } else {
+        precio_total = precio_sub_total * (1 + valor_iva / 100);
+    }
     time_t t = time(0);
     tm* now = localtime(&t);
     DtFechaYHora fecha_y_hora = DtFechaYHora(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900, now->tm_hour, now->tm_min, now->tm_sec);

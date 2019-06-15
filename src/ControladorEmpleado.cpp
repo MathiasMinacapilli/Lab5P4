@@ -74,9 +74,6 @@ void ControladorEmpleado::borrarNumero() {
 
 int ControladorEmpleado::ingresarRepartidor(){
 	this->ultimo_id++;
-	while (this->existeEmpleado(this->ultimo_id)){
-		this->ultimo_id++;
-	}
 	Repartidor *nuevo_repartidor = new Repartidor(this->ultimo_id, this->nombre_recordado, this->transporte_recordado);
 	//agrego repartidor a la coleccion de repartidores
 	this->repartidores[nuevo_repartidor->getNumero()] = nuevo_repartidor;
@@ -92,9 +89,6 @@ void ControladorEmpleado::cancelarRepartidor(){
 
 void ControladorEmpleado::ingresarMozo(){
 	this->ultimo_id++;
-	while (this->existeEmpleado(this->ultimo_id)){
-		this->ultimo_id++;
-	}
 	Mozo *nuevo_mozo = new Mozo(this->ultimo_id, this->nombre_recordado);
 	//agrego mozo a la coleccion de mozo
 	this->mozos[nuevo_mozo->getNumero()] = nuevo_mozo;
@@ -189,7 +183,7 @@ bool ControladorEmpleado::existeEmpleado(int num){
 
 
 DtRepartidor ControladorEmpleado::getDatosIngresadosRepartidor(){
-	DtRepartidor datos = DtRepartidor(this->numero_repartidor, this->nombre_recordado, this->transporte_recordado);
+	DtRepartidor datos = DtRepartidor(this->ultimo_id, this->nombre_recordado, this->transporte_recordado);
 	return datos;
 }
 
