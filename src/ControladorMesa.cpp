@@ -124,8 +124,8 @@ map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
 	map<int, Mozo*> mozos = cont_empleado->getMozos();
 	map<int, Mozo*>::iterator it_mozos = mozos.begin();
 	map<int, Mesa*>::iterator it_mesas = this->mesas.begin();
-	int cant_mesas = mozos.size();
-	int cant_mozos = this->mesas.size();
+	int cant_mesas = this->mesas.size();
+	int cant_mozos = mozos.size();
     double cant_mesas_a_asignar = 0;
     if(cant_mozos != 0) {
 	    cant_mesas_a_asignar = floor(cant_mesas/cant_mozos);

@@ -552,7 +552,7 @@ int main() {
                             set<int> mesas = it_mesas_mozo->second.getMesas();
                             set<int>::iterator it_mesas;
                             for (it_mesas = mesas.begin(); it_mesas != mesas.end(); ++it_mesas) {
-                                cout << *it_mesas;
+                                cout << *it_mesas << " ";
                             }
                             cout << "\n";
                         }
