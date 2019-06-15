@@ -44,6 +44,6 @@ DtProducto::~DtProducto(){
 ostream &operator<< (ostream& o, DtProducto dtp) {
      o << " " << dtp.getCodigo()
         << " - $" << dtp.getPrecio()
-        << "    " << dtp.getDescripcion();
+        << " - " << dtp.getDescripcion();
     return o;
 }

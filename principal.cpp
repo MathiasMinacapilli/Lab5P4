@@ -50,7 +50,7 @@ static void obtenerFecha(int &dia, int &mes, int &anio) {
 static int conseguirCantidad() {
     int cantidad;
     do {
-        cout << "Ingrese la cantidad del producto a ingresar. \n"
+        cout << "\nIngrese la cantidad del producto a ingresar. \n"
             << " Cantidad: ";
         cin >> cantidad;
         if (cantidad < 0)
@@ -460,8 +460,11 @@ int main() {
                                     cout << "--------------------" << "Agregar producto simple" << "-------------------- \n \n";
                                     cout << "Ingrese los datos del producto simple a ingresar. \n"
                                         << " Código: "; cin >> codigo;
-                                    cout << " Descripción: "; cin >> descripcion;
-                                    cout << " Precio: "; cin >> precio;
+                                    cout << " Descripción: ";
+                                    getchar();
+                                    getline(cin, descripcion);
+                                    cout << " Precio: $";
+                                    cin >> precio;
                                     DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
                                     iproducto->ingresarDatosProducto(datos_producto_simple);
                                     cout << "\n¿Desea confirmar el ingreso del producto? Ingrese S o N. \n";
@@ -957,16 +960,16 @@ int main() {
                         while (quiero_agregar) {
                             map<int, DtProducto> productos = iventa -> obtenerProductosDisponibles();
                             map<int, DtProducto>::iterator it;
-                            cout << "Estos son los productos disponibles. \n";
+                            cout << "\nEstos son los productos disponibles. \n";
                             for (it = productos.begin(); it != productos.end(); ++it) {
                                 cout << (it -> second) << "\n";
                             }
-                            cout << "Ingrese el código del producto a agregar. \n"
+                            cout << "\nIngrese el código del producto a agregar. \n"
                                     << " Código: ";
                             int codigo;
                             cin >> codigo;
                             while (!(iproducto -> ingresarCodigoProductoAConsultar(codigo))) {
-                                cout << "\nEl código no esta asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
+                                cout << "\nEl código no está asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
                                 cin >> codigo;
                             }
                             DtProducto prod = productos[codigo];

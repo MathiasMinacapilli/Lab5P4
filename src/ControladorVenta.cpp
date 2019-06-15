@@ -61,7 +61,7 @@ void ControladorVenta::ingresarNumeroMesa(int numero) {
     if (cont_mesa -> existeMesa(numero)){
         this -> numero_mesa = numero;
     } else {
-        throw new invalid_argument("\nNo existe mesa asociada al número ingresado.");
+        throw new invalid_argument("No existe mesa asociada al número ingresado");
     }
 }
 map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles() {
@@ -314,8 +314,8 @@ map<int, VentaADomicilio *> ControladorVenta::obtenerVentasRepartidor(int num){
       if (v->getRepartidor() != nullptr)
         if (v->getRepartidor()->getNumero() == num)
           res[v->getNumero()] = v;
-          
-      
+
+
   }
   return res;
 }
