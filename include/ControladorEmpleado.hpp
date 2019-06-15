@@ -73,6 +73,9 @@ public:
 	DtRepartidor getDatosIngresadosRepartidor();
 	DtMozo getDatosIngresadosMozo();
 
+	//cargar datos de prueba
+	bool existeEmpleado(int num);
+
     //destructor
 	~ControladorEmpleado();
 

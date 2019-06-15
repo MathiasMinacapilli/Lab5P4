@@ -140,4 +140,7 @@ void VentaADomicilio::borrarObservador(){
 //FUNCION USADA UNICAMENTE PARA CARGAR DATOS DE PRUEBA
 void VentaADomicilio::agregarActualizacion(DtActualizacion dt_Act){
   this->actualizaciones.push_back(dt_Act);
+  if (this->miObservador != nullptr){
+    this->miObservador->notificar(dt_Act);
+  }
 }

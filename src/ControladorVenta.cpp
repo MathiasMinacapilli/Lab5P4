@@ -104,10 +104,7 @@ void ControladorVenta::eliminarProductoDeVenta() {
   (this -> v) -> eliminarProducto(this -> prod, this -> cantidad);
 }
 void ControladorVenta::cancelarEliminarProductoDeVenta() {
-  //QUE ONDA CON ESTO?
-  //QUE ES LIBERAR LA MEMORIA??
-  // AYUDAAA!!
-  prod = nullptr;
+    prod = nullptr;
   cantidad = 0;
   v = nullptr;
 }
@@ -305,8 +302,7 @@ void ControladorVenta::desSuscribirCliente(string telefono){
 vector<DtActualizacion> ControladorVenta::getActualizacionesCliente(string telefono){
   ControladorCliente *cont_cliente = ControladorCliente::getInstance();
   Cliente *cliente = cont_cliente->getCliente(telefono);
-  if (cliente != nullptr)
-    return cliente->consultarPedidos();
+  return cliente->consultarPedidos();
 }
 
 

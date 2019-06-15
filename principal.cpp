@@ -604,15 +604,22 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
+                
                 case 6:
                     try {
                         system("clear");
                         cout << "-----------------" << "Actualizaciones de pedidos a domicilio" << "----------------- \n \n";
                         vector<DtActualizacion> actualizaciones = iventa -> getListadoActualizaciones();
                         vector<DtActualizacion>::iterator it_actualizacion;
-                        cout<< "Las actualizaciones de todos los pedidos a domicilio son: ";
-                        for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion)
+                        cout<< "Las actualizaciones de todos los pedidos a domicilio son:\n ";
+                        for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion){
+                            cout << "entre al for! ";
                             cout << *it_actualizacion << "\n";
+                        }
+                        cout<< "Presione <enter> para continuar...";
+                        getchar();
+                        string continuar;
+                        getline(cin, continuar);
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -620,6 +627,7 @@ int main() {
                         break;
                     }
                     break;
+               
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -1153,56 +1161,10 @@ int main() {
             break;
 
         /* 5) Cargar datos de prueba. */
-        case 5: {
+        case 5: 
             try {
                 //Cargo productos
                 cargarDatosDePrueba();
-                #if 0
-                //Cargo productos
-                DtProductoSimple producto_simple = DtProductoSimple(1, "Pizza", 100);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(2, "Hamburguesa", 70);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(3, "Coca", 50);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-                producto_simple = DtProductoSimple(4, "Papas Cheddar", 120);
-                iproducto->ingresarDatosProducto(producto_simple);
-                iproducto->ingresarProductoSimple();
-
-                iproducto->ingresarDatosMenu(5, "Pizza+2Coca");
-                DtProducto producto = DtProducto(1, "Pizza", 100);
-                DtProductoCantidad producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                producto = DtProducto(3, "Coca", 50);
-                producto_cantidad = DtProductoCantidad(producto, 2);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                iproducto->ingresarMenu();
-                iproducto->ingresarDatosMenu(6, "Hamburguesa+Papas Cheddar");
-                producto = DtProducto(2, "Hamburguesa", 70);
-                producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                producto = DtProducto(4, "Papas Cheddar", 120);
-                producto_cantidad = DtProductoCantidad(producto, 1);
-                iproducto->seleccionarProductoYCantidad(producto_cantidad);
-                iproducto->ingresarMenu();
-
-                //Cargo empleados
-                iempleado->ingresarNombreEmpleado("Mathi");
-                iempleado->ingresarMozo();
-                iempleado->ingresarNombreEmpleado("Seba");
-                iempleado->ingresarMozo();
-                iempleado->ingresarNombreEmpleado("Eli");
-                Transporte t = Bici;
-                iempleado->seleccionarTransporte(t);
-                iempleado->ingresarRepartidor();
-                iempleado->ingresarNombreEmpleado("Santi");
-                t = Moto;
-                iempleado->seleccionarTransporte(t);
-                iempleado->ingresarRepartidor();
-                #endif
                 msj = "Datos cargados correctamente.";
             } catch(exception* e) {
                 system("clear");
@@ -1211,7 +1173,7 @@ int main() {
                 break;
             }
             break;
-        }
+        
 
         /* 0) Salir. */
         case 0:
