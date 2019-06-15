@@ -140,7 +140,15 @@ de repartidores. Si el codigo no existe en esta coleccion tira una excepcion */
 static void es_valido_numero_repartidor(int numero_repartidor, map<int, Repartidor*> repartidores_disponibles) {
     map<int, Repartidor*>::iterator it = repartidores_disponibles.find(numero_repartidor);
     if (it == repartidores_disponibles.end())
-        throw new invalid_argument ("No existe producto con ese código.");
+        throw new invalid_argument ("No existe producto con ese código");
+}
+
+/* Chequea que sea valido el codigo de la mesa buscando el codigo en la coleccion
+de mesas. Si el codigo no existe en esta coleccion tira una excepcion */
+static void es_valida_numero_mesa(int num_mesa, set<int> mesas) {
+    set<int>::iterator it = mesas.find(num_mesa);
+    if (it == mesas.end())
+        throw new invalid_argument ("No existe una mesa con ese código");
 }
 
 /* Procedimiento de E/S con el usuario el cual pide que confirme sus acciones,
@@ -721,7 +729,7 @@ int main() {
                             getchar();
                             string continuar;
                             getline(cin, continuar);
-                            
+
 
                         } else {
                             iproducto->cancelarInformacion();
@@ -1066,7 +1074,6 @@ int main() {
                         cout << "\nSeleccione su ID de mozo. \n"
                             << " ID: ";
                         cin >> nro;
-
                         set<int> mesas_mozo = imesa->getMesasMozoSinVentas(nro);
                         cout << "\nSus mesas sin ventas son: ";
                         set<int>::iterator it;
@@ -1133,6 +1140,7 @@ int main() {
                             cout << *it_quitar << " ";
                         cout << "\n\n";
                         int num_mesa = conseguirNumeroMesa();
+                        es_valida_numero_mesa(num_mesa, mesas);
                         map<int, DtProducto> productos_disponibles = iventa -> getProductosVenta(num_mesa);
                         bool quiero_quitar = true;
                         bool quiero_confirmar;
@@ -1141,12 +1149,12 @@ int main() {
                             cout << "\nEstos son los productos disponibles. \n";
                             for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
                                 cout << (it -> second) << "\n";
-                            cout << "Ingrese el código del producto a quitar. \n"
+                            cout << "\nIngrese el código del producto a quitar. \n"
                                 << " Código: ";
                             int codigo;
                             cin >> codigo;
                             while (!(iproducto -> ingresarCodigoProductoAConsultar(codigo))) {
-                                cout << "\nEl código no esta asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
+                                cout << "\nEl código no está asociado a ningún producto disponible. Ingrese otro código. \n Código: ";
                                 cin >> codigo;
                             }
                             DtProducto prod = productos_disponibles[codigo];
@@ -1157,10 +1165,10 @@ int main() {
                             quiero_confirmar = confirmacion();
                             if (quiero_confirmar) {
                                 iventa -> eliminarProductoDeVenta();
-                                cout << "Se quitó el producto correctamente. \n";
+                                cout << "\nSe quitó el producto correctamente. \n";
                             } else {
                                 iventa -> cancelarEliminarProductoDeVenta();
-                                cout << "El producto no se eliminó. \n";
+                                cout << "\nEl producto no se eliminó. \n";
                             }
                             cout << "\n¿Desea quitar más productos de la venta? Ingrese S o N.\n";
                             quiero_quitar = confirmacion();

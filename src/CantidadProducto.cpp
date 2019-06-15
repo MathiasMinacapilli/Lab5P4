@@ -1,5 +1,8 @@
 #include "../include/CantidadProducto.hpp"
 
+using namespace std;
+#include <iostream>
+
 CantidadProducto::CantidadProducto(int cantidad, Producto *producto){
 	this->cantidad = cantidad;
 	this->producto = producto;
@@ -18,17 +21,17 @@ void CantidadProducto::setCantidad(int cantidad){
 }
 
 void CantidadProducto::aumentarCantidad(int cantidad){
-	this->cantidad += cantidad;
+	this -> cantidad = this -> cantidad + cantidad;
 }
 
 //devuelve true si la cantidad llega a cero
-bool CantidadProducto::disminuir(int cant){
-	if(cant >= this->cantidad){
+bool CantidadProducto::disminuir(int cant) {
+	if(cant >= this->cantidad) {
 		this->cantidad = 0;
 		return true;
 	}
 	else{
-		this->cantidad -= cant;
+		this->cantidad = this->cantidad - cant;
 		return false;
 	}
 
