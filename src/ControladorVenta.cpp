@@ -258,16 +258,14 @@ map<int, DtFactura> ControladorVenta::getFacturasYTotalFecha(float &totalfactura
   }
   for(it_domicilio = ventasDomicilio.begin(); it_domicilio != ventasDomicilio.end(); ++it_domicilio) {
     ventadomicilio = it_domicilio -> second;
-    if (ventalocal -> estaFacturada()) {
-      factura = ventadomicilio -> getFactura();
-      DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
-      if (fecha_factura == this -> fecha_venta) {
-        dtfactura = factura -> getDatosFactura();
-        res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
-        totalfacturado +=  dtfactura.getPrecioTotal();
-      }
+    factura = ventadomicilio -> getFactura();
+    DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
+    if (fecha_factura == this -> fecha_venta) {
+      dtfactura = factura -> getDatosFactura();
+      res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
+      totalfacturado +=  dtfactura.getPrecioTotal();
     }
-  }
+    }
   return res;
 }
 

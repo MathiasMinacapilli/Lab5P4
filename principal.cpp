@@ -758,11 +758,14 @@ int main() {
                         for (itf = facturas_fecha.begin(); itf != facturas_fecha.end(); ++itf) {
                             cout << (itf -> second) << "\n\n";
                         }
+                        cout<< "\nPresione <enter> para continuar...";
+                        getchar();
+                        string cont;
+                        getline(cin, cont);
                         system("clear");
                         cout << "--------------------" << "Resumen facturación de 1 día dada la fecha" << "-------------------- \n \n";
                         cout << "Total facturado en la fecha " << fecha << " : $ " << total_facturado << "\n";
                         cout << "\nPresione <enter> para continuar...";
-                        getchar();
                         string continuar;
                         getline(cin, continuar);
                     } catch(exception* e) {
