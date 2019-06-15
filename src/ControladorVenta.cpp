@@ -61,7 +61,7 @@ void ControladorVenta::ingresarNumeroMesa(int numero) {
     if (cont_mesa -> existeMesa(numero)){
         this -> numero_mesa = numero;
     } else {
-        throw new invalid_argument("\nNo existe mesa asociada al número ingresado.");
+        throw new invalid_argument("No existe mesa asociada al número ingresado");
     }
 }
 map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles() {
@@ -78,10 +78,13 @@ void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad
   this -> cantidad = producto_cantidad.getCantidad();
 }
 void ControladorVenta::agregarProductoAVenta() {
-  ControladorMesa *cont_mesa;
-  cont_mesa = ControladorMesa::getInstance();
-  Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-  v -> agregarProductoAVenta(this -> prod, this -> cantidad);
+    ControladorMesa *cont_mesa;
+    cont_mesa = ControladorMesa::getInstance();
+    Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+    if(v != nullptr)
+        v -> agregarProductoAVenta(this -> prod, this -> cantidad);
+    else
+        throw new invalid_argument("La mesa seleccionada no tiene una venta iniciada.");
 }
 void ControladorVenta::cancelarProductoAVenta() {
   prod = nullptr;
@@ -112,28 +115,28 @@ void ControladorVenta::cancelarEliminarProductoDeVenta() {
 //FACTURACION DE UNA VENTA
 //ingresarNumeroMesa
 void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
-  ControladorMesa *cont_mesa;
-  cont_mesa = ControladorMesa::getInstance();
-  VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-  map<int, CantidadProducto*>::iterator it;
-  float el_descuento = descuento;
-  for (it = (v -> getCants_Productos()).begin(); (it != (v -> getCants_Productos()).end()); ++it) {
-      Producto* prod = (it -> second) -> getProducto();
-      ProductoSimple* prod_simple = dynamic_cast<ProductoSimple* >(prod);
-      if (prod_simple == nullptr) {
-          el_descuento = 0;
+    ControladorMesa *cont_mesa;
+    cont_mesa = ControladorMesa::getInstance();
+    VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+    map<int, CantidadProducto*>::iterator it;
+    float el_descuento = descuento;
+    for (it = (v -> getCants_Productos()).begin(); (it != (v -> getCants_Productos()).end()); ++it) {
+        Producto* prod = (it -> second) -> getProducto();
+        ProductoSimple* prod_simple = dynamic_cast<ProductoSimple* >(prod);
+        if (prod_simple == nullptr) {
+            el_descuento = 0;
+        }
     }
-  }
-  v -> setDescuento(el_descuento);
+    v -> setDescuento(el_descuento);
 }
 
 DtFactura* ControladorVenta::generarFactura() {
-  ControladorMesa *cont_mesa;
-  cont_mesa = ControladorMesa::getInstance();
-  VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-  DtFactura* factura = v -> facturar();
-  cont_mesa -> finalizarVenta();
-  return factura;
+    ControladorMesa *cont_mesa;
+    cont_mesa = ControladorMesa::getInstance();
+    VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+    DtFactura* factura = v -> facturar();
+    cont_mesa -> finalizarVenta();
+    return factura;
 }
 
 //VENTA A DOMICILIO
@@ -314,8 +317,8 @@ map<int, VentaADomicilio *> ControladorVenta::obtenerVentasRepartidor(int num){
       if (v->getRepartidor() != nullptr)
         if (v->getRepartidor()->getNumero() == num)
           res[v->getNumero()] = v;
-          
-      
+
+
   }
   return res;
 }

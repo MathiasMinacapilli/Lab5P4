@@ -218,9 +218,8 @@ DtProducto* ControladorProducto::getProducto() {
 	//al dt para poder castearlo al DtProducto que es la clase base
 	if(dynamic_cast<ProductoSimple*>(prod) != nullptr) {
 		ProductoSimple* prod_simple = dynamic_cast<ProductoSimple*>(prod);
-		DtProductoSimple datos_prod_simple = DtProductoSimple(prod_simple->getCodigo(), prod_simple->getDescripcion(), prod_simple->getPrecio());
-		DtProductoSimple* datos_prod_simple_ptr = &datos_prod_simple;
-		dtprod = datos_prod_simple_ptr;
+		DtProductoSimple* datos_prod_simple = new DtProductoSimple(prod_simple->getCodigo(), prod_simple->getDescripcion(), prod_simple->getPrecio(), prod_simple->getCantidadVendidos());
+		dtprod = dynamic_cast<DtProducto*>(datos_prod_simple);
 	} else { //Es Menu*
 		Menu* datos_menu = dynamic_cast<Menu*>(prod);
 		map<int, ProductoEnMenu*> prods_en_menu = datos_menu->getProductos();
@@ -231,9 +230,8 @@ DtProducto* ControladorProducto::getProducto() {
 			DtProductoSimple dt_prod_simple = DtProductoSimple(prod_en_menu.getCodigo(), prod_en_menu.getDescripcion(), prod_en_menu.getPrecio());
 			dt_prods_en_menu[it->second->getProducto()->getCodigo()] = DtProductoEnMenu(dt_prod_simple, it->second->getCantidad());
 		}
-		DtMenu dt_menu = DtMenu(datos_menu->getCodigo(), datos_menu->getDescripcion(), datos_menu->getPrecio(), dt_prods_en_menu);
-		DtMenu* dt_menu_ptr = &dt_menu;
-		dtprod = dt_menu_ptr;
+		DtMenu* dt_menu = new DtMenu(datos_menu->getCodigo(), datos_menu->getDescripcion(), datos_menu->getPrecio(), dt_prods_en_menu);
+		dtprod = dynamic_cast<DtProducto*>(dt_menu);
 	}
 	return dtprod;
 }

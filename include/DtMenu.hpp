@@ -16,6 +16,7 @@ private:
 public:
     //Constructor
     DtMenu(int codigo, string descripcion, float precio, map<int, DtProductoEnMenu> productos);
+    DtMenu(int codigo, string descripcion, float precio, int cantidadVendidos, map<int, DtProductoEnMenu> productos);
 
     //Destructor
     ~DtMenu();

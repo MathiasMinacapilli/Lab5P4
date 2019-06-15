@@ -10,7 +10,7 @@ DtActualizacion::DtActualizacion(DtFechaYHora fechaYHora, string nombre, string 
     this->datosProductos = datosProductos;
     this->etapaActual = etapaActual;
 }
-    
+
 //getters
 DtFechaYHora DtActualizacion::getFechaYHora() const{
     return this->fechaYHora;
@@ -41,13 +41,13 @@ bool DtActualizacion::operator<(const DtActualizacion &act2) const{
 
 //sobrecarga de operador cout<<
 ostream &operator<< (ostream& os, DtActualizacion dt_act){
-    os<< "Fecha: \n" <<dt_act.getFechaYHora()
-    << "\nCliente: " << dt_act.getNombre()
-    << "\n Telefono: " << dt_act.getTelefono(); 
+    os<< " Fecha: " <<dt_act.getFechaYHora() << "\n"
+        << " Cliente: " << dt_act.getNombre() << "\n"
+        << " Teléfono: " << dt_act.getTelefono() << "\n";
     map<int, DtProductoCantidad>::iterator it;
     for (it = dt_act.getDatosProductos().begin(); it != dt_act.getDatosProductos().end(); ++it)
-        os<< it->second << "\n";
-    os << "Etapa del pedido: " << dt_act.getEtapaActual();
+        os << "    " << it->second << "\n";
+    os << " Etapa del pedido: " << dt_act.getEtapaActual();
     return os;
 
 }

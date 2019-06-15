@@ -24,6 +24,6 @@ DtProductoCantidad::~DtProductoCantidad() {
 
 ostream &operator<< (ostream& o, DtProductoCantidad dtpc) {
     o << dtpc.getProducto()
-      << "\nCantidad: "<< dtpc.getCantidad();
+      << " - Cantidad: "<< dtpc.getCantidad();
     return o;
 }

@@ -73,6 +73,9 @@ public:
 	DtRepartidor getDatosIngresadosRepartidor();
 	DtMozo getDatosIngresadosMozo();
 
+	string getNombreMozo(int num_mozo);
+
+
 	//cargar datos de prueba
 	bool existeEmpleado(int num);
 

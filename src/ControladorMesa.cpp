@@ -41,6 +41,9 @@ VentaLocal* ControladorMesa::obtenerVenta(int numero) {
     VentaLocal *ve = nullptr;
     if (it != mesas.end()) {
         ve = (it -> second) -> getVentaActual();
+        this->mesa_recordada = it->second;
+    } else {
+      throw new invalid_argument("No existe una mesa con el numero ingresado.");
     }
     return ve;
 }
@@ -48,20 +51,27 @@ VentaLocal* ControladorMesa::obtenerVenta(int numero) {
 //Iniciar Venta en Mesas
 
 set<int> ControladorMesa::getMesasMozoSinVentas(int num_mozo) {
-  map<int, Mesa*>::iterator it;
-  set<int> mesas_sin_venta;
-  mesas_sin_venta.clear();
-  for (it = mesas.begin(); it != mesas.end(); ++it) {
-    bool sin_venta = (it -> second) -> noTieneVentas();
-    if (sin_venta) {
-      bool es_del_mozo = (it -> second) -> esDelMozo(num_mozo);
-      if (es_del_mozo) {
-        mesas_sin_venta.insert((it -> second) -> getNum());
-      }
+    ControladorEmpleado* cont_empleado = ControladorEmpleado::getInstance();
+    map<int, Mozo*> mozos = cont_empleado->getMozos();
+    map<int, Mozo*>::iterator it = mozos.find(num_mozo);
+    if(it != mozos.end()) {
+        map<int, Mesa*>::iterator it;
+        set<int> mesas_sin_venta;
+        mesas_sin_venta.clear();
+        for (it = mesas.begin(); it != mesas.end(); ++it) {
+            bool sin_venta = (it -> second) -> noTieneVentas();
+            if (sin_venta) {
+                bool es_del_mozo = (it -> second) -> esDelMozo(num_mozo);
+                if (es_del_mozo) {
+                mesas_sin_venta.insert((it -> second) -> getNum());
+                }
+            }
+        }
+        num_mozo_recordado = num_mozo;
+        return mesas_sin_venta;
+    } else {
+        throw new invalid_argument("El codigo del mozo que ingreso no es correcto.");
     }
-  }
-  num_mozo_recordado = num_mozo;
-  return mesas_sin_venta;
 }
 
 void ControladorMesa::seleccionarMesasVenta(set<int> posibles_mesas) {
@@ -92,9 +102,9 @@ void ControladorMesa::iniciarVenta() {
   ControladorVenta* cont_venta = ControladorVenta::getInstance();
   VentaLocal* ve = cont_venta -> crearVenta();
   set<int>::iterator it_selecc;
-  for (it_selecc = mesas_seleccionadas.begin(); it_selecc != mesas_seleccionadas.end(); ++it_selecc) {
+  for (it_selecc = this->mesas_seleccionadas.begin(); it_selecc != this->mesas_seleccionadas.end(); ++it_selecc) {
     map<int, Mesa*>::iterator it_mesas = mesas.find(*it_selecc);
-    if (it_mesas != mesas.begin()) {
+    if (it_mesas != mesas.end()) {
       (it_mesas -> second) -> setVentaActual(ve);
     }
   }
@@ -110,6 +120,15 @@ void ControladorMesa::cancelarVenta() {
 //Caso de uso: Asignar automaticamente mozos a mesas
 map<int, Mesa*> ControladorMesa::getMesas() {
     return this->mesas;
+}
+
+set<int> ControladorMesa::getNumeroMesas() {
+    map<int, Mesa*>::iterator it;
+    set<int> res;
+    res.clear();
+    for (it = this -> mesas.begin(); it != this -> mesas.end(); ++it)
+        res.insert(it -> first);
+    return res;
 }
 
 //Caso de uso: Asignar automaticamente mozos a mesas
@@ -138,7 +157,7 @@ map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
         set<int> mesas_mozo;
 		double i = 0;
 		while(i<cant_mesas_a_asignar) {
-			it_mozos->second->agregarMesaAColeccion(it_mesas->second);
+			it_mesas->second->setMozo(it_mozos->second);
             mesas_mozo.insert(it_mesas->second->getNum());
 			++it_mesas;
 			i++;
@@ -151,7 +170,7 @@ map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
 	if(it_mesas != this->mesas.end()) {
 		it_mozos = mozos.begin();
 		while(it_mesas != this->mesas.end()) {
-			it_mozos->second->agregarMesaAColeccion(it_mesas->second);
+			it_mesas->second->setMozo(it_mozos->second);
             //Agrego el numero de la mesa al datatype (accedo con getMesas()) que contiene
             //el conjunto de las mesas del mozo
             set<int> mesas_mozo = col_ret[it_mozos->second->getNumero()].getMesas();

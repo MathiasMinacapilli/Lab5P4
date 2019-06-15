@@ -43,6 +43,9 @@ public:
     //Caso de uso: Asignar automaticamente mozos a mesas
     map<int, DtMesasMozo> asignarMozosAMesas();
     map<int, Mesa*> getMesas();
+
+    set<int> getNumeroMesas();
+
 };
 
 #endif

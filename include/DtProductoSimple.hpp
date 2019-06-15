@@ -13,6 +13,7 @@ public:
     //Constructor
     DtProductoSimple();
     DtProductoSimple(int codigo, string descripcion, float precio);
+    DtProductoSimple(int codigo, string descripcion, float precio, int cantidadVendidos);
 
     //Destructor
     ~DtProductoSimple();

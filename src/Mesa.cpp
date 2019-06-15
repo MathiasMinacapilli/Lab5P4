@@ -51,7 +51,10 @@ bool Mesa::noTieneVentas() {
 }
 
 bool Mesa::esDelMozo(int numMozo) {
-  return ((this -> miMozo) -> getNumero() == numMozo);
+    if(this->miMozo != nullptr)
+        return ((this -> miMozo) -> getNumero() == numMozo);
+    else
+        throw new invalid_argument("No existen mozos asignados a mesas.");
 }
 
 void Mesa::terminarVenta() {
