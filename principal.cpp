@@ -723,6 +723,7 @@ int main() {
                 case 9:
                     try {
                         system("clear");
+                        string waste = "";
                         cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
                         string telefono = conseguirTelefono();
                         bool esta_cliente = iventa -> ingresarTelefono(telefono);
@@ -779,28 +780,20 @@ int main() {
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
                             float descuento = conseguirDescuento();
-                            cout << "llego aca45\n";
                             iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
-                            cout << "llego aca36\n";
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
-                            cout << "llego aca67\n";
                             if(quiero_repartidor) {
-                                cout << "llego aca1\n";
-                                fflush(stdout);
                                 DtFacturaDomicilio* ptr_factura_domicilio = nullptr;
                                 ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(const_cast<DtFactura*>(factura));
-                                cout << "llego aca2\n";
-                                fflush(stdout);
                                 if (ptr_factura_domicilio != nullptr) {
-                                    cout << "entre al if null";
-                                    fflush(stdout);
                                     DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
                                     cout << factura_domicilio;
+                                    cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
                                 } else
                                     throw new invalid_argument("La venta es local.");
                             } else {
                                 cout << *factura;
-                                cout << "llego aca2";
+                                cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
                             }
                         } else
                             iventa -> cancelarVentaADomicilio();

@@ -174,23 +174,19 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, float descue
     //busco numero de venta sin usar
     bool encontre_lugar = false;
     while (!encontre_lugar){
-      cout << "llego aca45\n";
       if (!this->existeVenta(this->numero_venta)){
         encontre_lugar = true;
       }
       else this->numero_venta++;
     }
-    cout << "llego aca45\n";
     Cliente* mi_cliente = cont_cliente -> getCliente(telefono_recordado);
     bool tiene_menu = false;
     map<int, CantidadProducto*> cant_prods = cont_prod -> getProductosAlmacenados(tiene_menu);
     int el_descuento = descuento;
-    cout << "llego aca45\n";
     if (tiene_menu) {
         el_descuento = 0;
     }
     if (quiere_repartidor) {
-        cout << "llego aca45\n";
         ControladorEmpleado *cont_emp;
         cont_emp = ControladorEmpleado::getInstance();
         Etapa* etapa = new Pedido();
@@ -199,7 +195,6 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, float descue
         ve -> setProdsDomicilio(cant_prods);
         venta_domicilio = ve;
     } else {
-        cout << "llego aca45\n";
         Etapa* etapa = new Recibido();
         VentaADomicilio* ve = new VentaADomicilio(this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, nullptr);
         ve -> setProdsDomicilio(cant_prods);
