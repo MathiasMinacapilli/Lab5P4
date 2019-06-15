@@ -630,13 +630,13 @@ int main() {
                 case 6:
                     try {
                         system("clear");
+                        system("clear");
                         cout << "-----------------" << "Actualizaciones de pedidos a domicilio" << "----------------- \n \n";
                         vector<DtActualizacion> actualizaciones = iventa -> getListadoActualizaciones();
                         vector<DtActualizacion>::iterator it_actualizacion;
                         cout<< "Las actualizaciones de todos los pedidos a domicilio son:\n ";
                         for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion){
-                            cout << "entre al for! ";
-                            cout << *it_actualizacion << "\n";
+                           cout << *it_actualizacion << "\n\n\n";
                         }
                         cout<< "Presione <enter> para continuar...";
                         getchar();
@@ -1093,54 +1093,62 @@ int main() {
                         int id;
                         cin >> id;
                         iempleado -> ingresarIdRepartidor(id);
+
                         map<int, DtDireccion> pedidos = iempleado -> getVentasRepartidor();
                         map<int, DtDireccion>::iterator it;
-                        cout << "Sus pedidos son: \n";
-                        for (it = pedidos.begin(); it != pedidos.end(); ++it)
-                            cout << "Venta nro. " << it->first << " ( " << it->second << ") \n";
-                        cout << "Ingrese el numero del pedido cuyo estado quiere modificar: ";
-                        int numero;
-                        cin >> numero;
-                        while (pedidos.find(numero) == pedidos.end()){
-                            cout << "Error. Ese numero no pertence a ninguno de sus pedidos. \n";
-                            cout << "Por favor, ingrese otro numero: ";
+                        if (pedidos.empty())
+                            msj = "No hay pedidos para este repartidor";
+                        else {
+                            cout << "Sus pedidos son: \n";
+                            for (it = pedidos.begin(); it != pedidos.end(); ++it){
+                                cout << "Venta nro. " << it->first << " ( " << it->second << ") \n";
+                            }
+                            cout << "Ingrese el numero del pedido cuyo estado quiere modificar: ";
+                            int numero;
                             cin >> numero;
+                            while (pedidos.find(numero) == pedidos.end()){
+                                cout << "Error. Ese numero no pertence a ninguno de sus pedidos. \n";
+                                cout << "Por favor, ingrese otro numero: ";
+                                cin >> numero;
+                            }
+                            iempleado -> ingresarNumeroPedido(numero);
+                            system("clear");
+                            cout << "-----------------" << "Modificar estado de pedido nro. " << numero << "----------------- \n \n"
+                                << " - Elija la opción deseada -  \n \n"
+                                << " 1) Avanzar etapa. \n"
+                                << " 2) Cancelar pedido. \n"
+                                << " 0) Volver a pantalla principal. \n \n"
+                                << " Opción: ";
+                            int opcion;
+                            cin >> opcion;
+                            switch(opcion){
+                                case 1:
+                                    iempleado -> avanzarEtapaPedido();
+                                    msj = "Etapa modificada correctamente ";
+                                    break;
+                                case 2:
+                                    iempleado -> cancelarPedido();
+                                    msj = "Pedido cancelado correctamente ";
+                                    break;
+                                case 0:
+                                    msj = "No se realizaron cambios en los pedidos ";
+                                    break;
+                                default:
+                                    cout << "Numero invalido. Ingrese un numero entre 0 y 2. ";
+                                    break;
+                            }
                         }
-                        iempleado -> ingresarNumeroPedido(numero);
-                        system("clear");
-                        cout << "-----------------" << "Modificar estado de pedido nro. " << numero << "----------------- \n \n"
-                            << " - Elija la opción deseada -  \n \n"
-                            << " 1) Avanzar etapa. \n"
-                            << " 2) Cancelar pedido. \n"
-                            << " 0) Volver a pantalla principal. \n \n"
-                            << " Opción: ";
-                        int opcion;
-                        cin >> opcion;
-                        switch(opcion){
-                            case 1:
-                                iempleado -> avanzarEtapaPedido();
-                                msj = "Etapa modificada correctamente ";
-                                break;
-                            case 2:
-                                iempleado -> cancelarPedido();
-                                msj = "Pedido cancelado correctamente ";
-                                break;
-                            case 0:
-                                msj = "No se realizaron cambios en los pedidos ";
-                                break;
-                            default:
-                                cout << "Numero invalido. Ingrese un numero entre 0 y 2. ";
-                                break;
-                        }
-
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
 
                 /* 0) Salir. */
                 case 0:
-                    msj = "";
+                    msj = "No se realizaron cambios en los pedidos";
                     break;
 
                 default: {
@@ -1149,7 +1157,10 @@ int main() {
                 break;
                 }//fin switch
             } catch(exception* e) {
-
+                system("clear");
+                msj = e -> what();
+                delete e;
+                break;
             }
             break;
 

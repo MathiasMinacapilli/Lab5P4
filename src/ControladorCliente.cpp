@@ -46,6 +46,7 @@ void ControladorCliente::ingresarCliente(){
 	actualizaciones.clear();
 	Cliente *nuevo_cliente = new Cliente(this->telefono_recordado, this->nombre_recordado, this->direccion_recordada, actualizaciones);
 	clientes.insert(nuevo_cliente);
+	this->telefono_recordado = ' ';
 }
 
 void ControladorCliente::cancelarCliente(){
@@ -62,13 +63,14 @@ DtCliente ControladorCliente::getDatosIngresados(){
 
 Cliente* ControladorCliente::getCliente(string telefono) {
 	set<Cliente *>::iterator it;
+	Cliente *cliente;
 	bool encontre = false;
 	for (it = this -> clientes.begin(); it != this -> clientes.end() && !encontre; ++it){
-		Cliente *cliente = *it;
+		cliente = *it;
 		encontre = (cliente -> getTelefono() == telefono);
 	}
 	if (encontre)
-		return *it;
+		return cliente;
 	else
 		throw new invalid_argument ("No existe un cliente con ese número. ");
 }

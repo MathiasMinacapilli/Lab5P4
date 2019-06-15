@@ -138,7 +138,7 @@ void ControladorEmpleado::ingresarIdRepartidor(int id){
 }
 
 map<int, DtDireccion> ControladorEmpleado::getVentasRepartidor(){
-		map<int, DtDireccion> resultado;
+	map<int, DtDireccion> resultado;
 	ControladorVenta *cont_venta = ControladorVenta::getInstance();
 	map<int, VentaADomicilio *> ventas_repartidor = cont_venta->obtenerVentasRepartidor(this->id_repartidor_recordado);
 	map<int, VentaADomicilio *>::iterator it;

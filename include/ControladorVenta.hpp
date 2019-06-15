@@ -89,6 +89,7 @@ public:
     //cargarDatosDePrueba
     void aumentarNumeroVenta();
     bool existeVenta(int num);
+    void agregarVentaDomicilio(VentaADomicilio *v);
 };
 
 #endif

@@ -194,11 +194,14 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, float descue
         VentaADomicilio* ve = new VentaADomicilio(this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, mi_repartidor);
         ve -> setProdsDomicilio(cant_prods);
         venta_domicilio = ve;
+        this->ventasDomicilio[ve->getNumero()] = ve;
+
     } else {
         Etapa* etapa = new Recibido();
         VentaADomicilio* ve = new VentaADomicilio(this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, nullptr);
         ve -> setProdsDomicilio(cant_prods);
         venta_domicilio = ve;
+        this->ventasDomicilio[ve->getNumero()] = ve;
     }
     this->numero_venta++;
 }
@@ -308,9 +311,11 @@ map<int, VentaADomicilio *> ControladorVenta::obtenerVentasRepartidor(int num){
   res.clear();
   for (it = this->ventasDomicilio.begin(); it != this->ventasDomicilio.end(); ++it){
     VentaADomicilio *v = it->second;
-    if (v->getRepartidor()->getNumero() == num){
-      res[v->getNumero()] = v;
-    }
+      if (v->getRepartidor() != nullptr)
+        if (v->getRepartidor()->getNumero() == num)
+          res[v->getNumero()] = v;
+          
+      
   }
   return res;
 }
@@ -331,4 +336,10 @@ bool ControladorVenta::existeVenta(int num){
 
 void ControladorVenta::aumentarNumeroVenta() {
     this -> numero_venta = (this -> numero_venta) + 1;
+}
+
+void ControladorVenta::agregarVentaDomicilio(VentaADomicilio *v){
+  if (this->ventasDomicilio.find(v->getNumero()) == this->ventasDomicilio.end())
+    this->ventasDomicilio[v->getNumero()] = v;
+  else throw new invalid_argument("Error. Ya existe una venta con ese codigo");
 }
