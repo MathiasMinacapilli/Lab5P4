@@ -56,13 +56,13 @@ set<int> ControladorMesa::getMesasMozoSinVentas(int num_mozo) {
         set<int> mesas_sin_venta;
         mesas_sin_venta.clear();
         for (it = mesas.begin(); it != mesas.end(); ++it) {
-        bool sin_venta = (it -> second) -> noTieneVentas();
-        if (sin_venta) {
-            bool es_del_mozo = (it -> second) -> esDelMozo(num_mozo);
-            if (es_del_mozo) {
-            mesas_sin_venta.insert((it -> second) -> getNum());
+            bool sin_venta = (it -> second) -> noTieneVentas();
+            if (sin_venta) {
+                bool es_del_mozo = (it -> second) -> esDelMozo(num_mozo);
+                if (es_del_mozo) {
+                mesas_sin_venta.insert((it -> second) -> getNum());
+                }
             }
-        }
         }
         num_mozo_recordado = num_mozo;
         return mesas_sin_venta;

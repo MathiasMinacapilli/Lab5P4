@@ -1070,7 +1070,10 @@ int main() {
                             msj = "Creacion de venta cancelada correctamente.";
                         }
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
 
