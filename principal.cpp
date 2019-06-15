@@ -397,7 +397,7 @@ int main() {
                                     iempleado->seleccionarTransporte(transporte_elegido);
                                     system("clear");
                                     cout << "--------------------" << "Alta Empleado" << "-------------------- \n \n";
-                                    DtRepartidor datos = iempleado->getDatosIngresados();
+                                    DtRepartidor datos = iempleado->getDatosIngresadosRepartidor();
                                     cout << "Los datos ingresados son: \n";
                                     cout << datos << "\n";
                                     cout << "¿Desea confirmar el ingreso del repartidor? Ingrese S o N. \n";
@@ -415,27 +415,19 @@ int main() {
                                     //se ingresa mozo
                                     if (tipo_empleado == "M"){
                                         tipo_incorrecto = false;
+                                        system("clear");
                                         cout << "--------------------" << "Alta Empleado" << "-------------------- \n \n";
-                                        //DtEmpleado datos = iempleado -> getDatosIngresados();
-                                        //cout << "Los datos ingresados son: \n";
-                                        //cout << datos << "\n";
-                                        //cout << "¿Desea confirmar el ingreso del repartidor? Ingrese S o N. \n";
-
-//
-//
-///
-///
-////
-
-                                        cout << "\n¿Desea confirmar el ingreso del mozo? Ingrese S o N. \n";
+                                        DtMozo datos = iempleado -> getDatosIngresadosMozo();
+                                        cout << "Los datos ingresados son: \n";
+                                        cout << datos << "\n";
+                                        cout << "¿Desea confirmar el ingreso del mozo? Ingrese S o N. \n";
                                         bool confirma_mozo = confirmacion();
                                         if (confirma_mozo){
-                                            int nro_mozo = iempleado->ingresarMozo();
-                                            cout << "\nEl número del mozo ingresado es: " << nro_mozo << endl;
+                                            iempleado -> ingresarMozo();
                                             cout << "\nMozo agregado correctamente. \n";
                                         }
                                         else {
-                                            iempleado->cancelarMozo();
+                                            iempleado -> cancelarMozo();
                                             msj = "Ingreso de mozo cancelado";
                                         }
                                     }
@@ -486,11 +478,14 @@ int main() {
                                 cout << " Precio: "; cin >> precio;
                                 DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
                                 iproducto->ingresarDatosProducto(datos_producto_simple);
-                                cout << "¿Desea confirmar el ingreso del producto? Ingrese S o N. \n";
+                                cout << "\n¿Desea confirmar el ingreso del producto? Ingrese S o N. \n";
                                 if(confirmacion()) {
                                     iproducto->ingresarProductoSimple();
+                                    cout << "\nProducto ingresado correctamente. \n";
+
                                 } else {
                                     iproducto->cancelarProductoSimple();
+                                    cout << "\nIngreso de producto cancelado. \n";
                                 }
                                 existe_opcion = true;
                                 break;
@@ -510,14 +505,14 @@ int main() {
                                 cout << "Estos son los productos disponibles. \n";
                                 //Muestro los productos simples para que se seleccione cuales integran el menu
                                 for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
-                                    cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n \n";
+                                    cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
                                 }
                                 //Selecciona Productos Simples
                                 bool desea_seleccionar_mas = true;
                                 do {
                                     int codigo_producto_simple = 0;
                                     int cantidad = 0;
-                                    cout << "Ingrese el código y la cantidad del producto que desea agregar al menú. \n";
+                                    cout << "\nIngrese el código y la cantidad del producto que desea agregar al menú. \n";
                                     cout << " Código: "; cin >> codigo_producto_simple;
                                     cout << " Cantidad: "; cin >> cantidad;
                                     it = productos_simples.find(codigo_producto_simple);
@@ -547,7 +542,7 @@ int main() {
                                 msj = "Por favor ingrese una opción correcta.\n";
                             }
                         } while(!existe_opcion);
-                        cout << "¿Desea seguir dando de alta productos? Ingrese S o N. \n";
+                        cout << "\n¿Desea seguir dando de alta productos? Ingrese S o N. \n";
                         if(confirmacion()) {
                             quiero_agregar_mas = true;
                         } else {

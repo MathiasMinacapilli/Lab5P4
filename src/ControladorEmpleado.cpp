@@ -82,15 +82,13 @@ void ControladorEmpleado::cancelarRepartidor(){
 	this->nombre_recordado = ' ';
 }
 
-int ControladorEmpleado::ingresarMozo(){
+void ControladorEmpleado::ingresarMozo(){
 	this->ultimo_id++;
 	Mozo *nuevo_mozo = new Mozo(this->ultimo_id, this->nombre_recordado);
 	//agrego mozo a la coleccion de mozo
 	this->mozos[nuevo_mozo->getNumero()] = nuevo_mozo;
 	//"se olvida" del nombre recordado
 	this->nombre_recordado = ' ';
-	return nuevo_mozo->getNumero();
-
 }
 void ControladorEmpleado::cancelarMozo(){
 	//"se olvida" del nombre recordado
@@ -204,8 +202,13 @@ Repartidor *ControladorEmpleado::getRepartidor(int numero_repartidor){
 }
 
 
-DtRepartidor ControladorEmpleado::getDatosIngresados(){
+DtRepartidor ControladorEmpleado::getDatosIngresadosRepartidor(){
 	DtRepartidor datos = DtRepartidor(this->numero_repartidor, this->nombre_recordado, this->transporte_recordado);
+	return datos;
+}
+
+DtMozo ControladorEmpleado::getDatosIngresadosMozo(){
+	DtMozo datos = DtMozo(this->ultimo_id, this->nombre_recordado);
 	return datos;
 }
 

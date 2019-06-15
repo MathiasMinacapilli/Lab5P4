@@ -3,6 +3,7 @@
 
 //Librerias de C
 #include <string>
+#include <iostream>
 using namespace std;
 
 //Archivos
@@ -18,6 +19,9 @@ public:
 
 	//Destructor
     ~DtMozo();
-};
+};\
+
+//Sobrecarga operador cout
+ostream& operator<<(ostream &, DtMozo);
 
 #endif

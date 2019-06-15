@@ -11,3 +11,8 @@ DtMozo::DtMozo(int numero, string nombre)
 }
 //destructor
 DtMozo::~DtMozo() {}
+
+ostream& operator<<(ostream & os, DtMozo datos){
+    os << " Nombre: " << datos.getNombre() << "\n" << " ID de empleado: " << datos.getNumero() + 1 << "\n";
+    return os;
+}
