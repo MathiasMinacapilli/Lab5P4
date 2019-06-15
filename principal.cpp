@@ -1023,7 +1023,7 @@ int main() {
                             string continuar;
                             getline(cin, continuar);
                             msj = "Venta facturada correctamente.";
-                        } else {
+                        } else
                             throw new invalid_argument("La venta es a domicilio.");
                     } catch(exception* e) {
                         system("clear");
