@@ -233,7 +233,7 @@ void cargarDatosDePrueba() {
     DtFechaYHora f_n2 = DtFechaYHora(16, 06, 2019, 21, 27, 0);
     EtapaPedido etapa_n2 = enCamino;
     DtActualizacion act_n2 = DtActualizacion(f_n2, "Vladimir", "098217523", "Tito", datos_v6, etapa_n2);
-    v4->agregarActualizacion(act_n2);
+    v6->agregarActualizacion(act_n2);
 
     //N7 -- V5 -- PEDIDO
     map<int, DtProductoCantidad> datos_v5;

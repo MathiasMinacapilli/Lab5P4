@@ -1,6 +1,7 @@
 //Librerias de C
 #include <set>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 //Archivos
@@ -46,7 +47,9 @@ void Cliente::bajaSuscripcion() {
 
 
 vector<DtActualizacion> Cliente::consultarPedidos() {
-	return this -> etapaPedidos;
+	vector<DtActualizacion> res = this -> etapaPedidos;
+	std::sort(res.begin(), res.end());
+	return res;
 }
 void Cliente::notificar(DtActualizacion actualizacion) {
 	this -> etapaPedidos.push_back(actualizacion);

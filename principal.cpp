@@ -1054,6 +1054,7 @@ int main() {
                             msj = "Venta facturada correctamente.";
                         } else
                             throw new invalid_argument("La venta es a domicilio.");
+                        delete factura;
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
@@ -1315,6 +1316,11 @@ int main() {
                         cout << "Actualizaciones de sus pedidos: \n";
                         for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++)
                             cout << *it_act << "\n";
+
+                        string dummy; 
+                        getline(cin, dummy);
+                        cout << "Presione <enter> para continuar...";
+                        getline(cin, dummy);
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
