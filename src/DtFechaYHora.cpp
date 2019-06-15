@@ -1,3 +1,8 @@
+//Librerias de C
+#include <stdlib.h>
+#include <string>
+using namespace std;
+
 //Archivos
 #include "../include/DtFechaYHora.hpp"
 
@@ -64,11 +69,15 @@ bool DtFechaYHora::operator<=(const DtFechaYHora &f2){
 }
 
 ostream &operator<< (ostream& o, DtFechaYHora dtfh) {
+    int minutos = dtfh.getMinutos();
+    string min = to_string(minutos);
+    if (minutos < 10)
+        min = "0" + min;
     o << dtfh.getDia()
 			<< "/" << dtfh.getMes()
 			<< "/" << dtfh.getAnio()
 			<< " - " << dtfh.getHora()
-			<< ":" << dtfh.getMinutos();
+			<< ":" << min;
 		return o;
 }
 

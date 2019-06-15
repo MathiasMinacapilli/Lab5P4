@@ -1138,7 +1138,7 @@ int main() {
                         bool quiero_confirmar;
                         while (quiero_quitar) {
                             map<int, DtProducto>::iterator it;
-                            cout << "Estos son los productos disponibles. \n";
+                            cout << "\nEstos son los productos disponibles. \n";
                             for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
                                 cout << (it -> second) << "\n";
                             cout << "Ingrese el código del producto a quitar. \n"
