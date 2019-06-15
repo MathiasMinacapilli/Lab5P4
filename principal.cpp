@@ -126,13 +126,13 @@ de productos disponibles. Si el codigo no existe en esta coleccion tira una exce
 static void es_valido_codigo(int codigo, map<int, DtProducto> productos_disponibles) {
     map<int, DtProducto>::iterator it = productos_disponibles.find(codigo);
     if (it == productos_disponibles.end())
-        throw new invalid_argument ("No existe producto con ese código.");
+        throw new invalid_argument ("No existe producto con ese código");
 }
 
 /* Si la cantidad es menor o igual a 0 tira una excepcion invalid_argument */
 static void es_valida_cantidad(int cantidad) {
     if (cantidad <= 0)
-        throw new invalid_argument ("Cantidad ingresada no válida.");
+        throw new invalid_argument ("Cantidad ingresada no válida");
 }
 
 /* Chequea que sea valido el codigo del repartidor buscando el codigo en la coleccion
@@ -175,7 +175,7 @@ static bool confirmacion () {
 static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
     bool existe_cliente = icliente->existeCliente(telefono);
     if (existe_cliente)
-        throw new invalid_argument("Error. Ya existe un cliente con ese telefono ingresado en el sistema. ");
+        throw new invalid_argument("Error. Ya existe un cliente con ese teléfono ingresado en el sistema. ");
     else{
         //consumo el enter que quedo del ingreso del telefono
         getchar();
@@ -446,12 +446,13 @@ int main() {
                         if(iproducto->existeProductoSimple()) { //Muestro la opcion de crear un menu sii existe al menos un producto simple
                             cout << " 2) Menú. \n";
                         }
-                        cout << "\nOpción: "; cin >> tipo_producto;
+                        cout << "\nOpción: ";
                         bool existe_opcion = false;
                         do {
                             int codigo = 0;
                             float precio = 0;
                             string descripcion = "";
+                            cin >> tipo_producto;
                             switch(tipo_producto) {
                             case 1: {
                                 //Agregar producto simple
@@ -480,26 +481,32 @@ int main() {
                                 system("clear");
                                 cout << "--------------------" << "Agregar menú" << "-------------------- \n \n";
                                 cout << "Ingrese los datos del menú a ingresar. \n"
-                                    << " Código: "; cin >> codigo;
-                                cout << " Descripción: "; cin >> descripcion;
+                                    << " Código: ";
+                                cin >> codigo;
+                                cout << " Descripción: ";
+                                getchar();
+                                getline(cin, descripcion);
                                 iproducto->ingresarDatosMenu(codigo, descripcion);
                                 map<int, DtProducto> productos_simples = iproducto->getProductosSimples();
                                 map<int, DtProducto>::iterator it;
-                                system("clear");
-                                cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
-                                cout << "Estos son los productos disponibles. \n";
-                                //Muestro los productos simples para que se seleccione cuales integran el menu
-                                for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
-                                    cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
-                                }
                                 //Selecciona Productos Simples
                                 bool desea_seleccionar_mas = true;
                                 do {
+                                    system("clear");
+                                    cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
+                                    cout << "Estos son los productos disponibles. \n";
+                                    //Muestro los productos simples para que se seleccione cuales integran el menu
+                                    for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
+                                        cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
+                                    }
                                     int codigo_producto_simple = 0;
                                     int cantidad = 0;
-                                    cout << "\nIngrese el código y la cantidad del producto que desea agregar al menú. \n";
-                                    cout << " Código: "; cin >> codigo_producto_simple;
-                                    cout << " Cantidad: "; cin >> cantidad;
+                                    cout << "\nIngrese el código del producto que desea agregar al menú. \n"
+                                        << " Código: ";
+                                    cin >> codigo_producto_simple;
+                                    cout << "\nIngrese la cantidad del producto que desea agregar al menú. \n"
+                                        << " Cantidad: ";
+                                    cin >> cantidad;
                                     it = productos_simples.find(codigo_producto_simple);
                                     if(it == productos_simples.end())
                                         throw new invalid_argument("Se ingresó un código incorrecto.");
@@ -513,18 +520,34 @@ int main() {
                                         desea_seleccionar_mas = false;
                                     }
                                 }while(desea_seleccionar_mas);
-                                cout << "¿Desea confirmar el ingreso del menú? Ingrese S o N. \n";
+
+                                system("clear");
+                                cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
+                                cout << "Estos son los productos a agregar al menú. \n";
+                                map<int, DtProductoCantidad> productos_en_menu = iproducto -> getDatosIngresadosMenu();
+                                map<int, DtProductoCantidad>::iterator it_menu;
+                                for (it_menu = productos_en_menu.begin(); it_menu != productos_en_menu.end(); ++it_menu){
+                                    cout << (it_menu->second).getProducto() << " - Cantidad: " << (it_menu->second).getCantidad() << "\n";
+                                }
+                                cout << "\n¿Desea confirmar el ingreso del menú? Ingrese S o N. \n";
                                 if(confirmacion()) {
                                     iproducto->ingresarMenu();
+                                    cout << "\nMenú ingresado correctamente. \n";
                                 } else {
                                     iproducto->cancelarMenu();
+                                    cout << "\nIngreso de menú cancelado. \n";
                                 }
                                 existe_opcion = true;
                                 break;
                             }
-                            default:
+
+                            default: {
                                 existe_opcion = false;
-                                msj = "Por favor ingrese una opción correcta.\n";
+                                cout << "\nOpción ingreada no válida. \n \n"
+                                    << "Por favor seleccione una de las opciones mostradas anteriormente. \n"
+                                    << " Opción: ";
+                            }
+                            break;
                             }
                         } while(!existe_opcion);
                         cout << "\n¿Desea seguir dando de alta productos? Ingrese S o N. \n";
