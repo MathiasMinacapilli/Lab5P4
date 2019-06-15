@@ -21,7 +21,6 @@ public:
     ~DtRepartidor();
 
     //Getters
-    string getNombreRepartidor();
     Transporte getTransporteRepartidor();
 };
 

@@ -11,6 +11,7 @@ using namespace std;
 //Archivos
 #include "Mozo.hpp"
 #include "Repartidor.hpp"
+#include "DtMozo.hpp"
 #include "DtRepartidor.hpp"
 #include "ControladorMesa.hpp"
 
@@ -54,7 +55,7 @@ public:
     void borrarNumero();
     int ingresarRepartidor();
     void cancelarRepartidor();
-    int ingresarMozo();
+    void ingresarMozo();
     void cancelarMozo();
     //Caso de uso: Ventas de un Mozo
     set<int> getIds();
@@ -69,7 +70,8 @@ public:
 
 	Repartidor* getRepartidor(int num_repartidor);
 
-	DtRepartidor getDatosIngresados();
+	DtRepartidor getDatosIngresadosRepartidor();
+	DtMozo getDatosIngresadosMozo();
 
     //destructor
 	~ControladorEmpleado();

@@ -105,28 +105,18 @@ static string conseguirTelefono() {
 
 /* Obtiene el porcentaje de descuento. */
 static float conseguirDescuento() {
-    cout << "\nIngrese el porcentaje de descuento que desea aplicar. \n"
-        << " Porcentaje: ";
-    string porcentaje;
-    cin >> porcentaje;
-    float descuento = 0;
+    cout << "\nIngrese el descuento que desea aplicar. \n"
+        << " Descuento: ";
+    float descuento;
+    cin >> descuento;
     bool no_lo_consigo = true;
-    bool es_numero = false;
     while (no_lo_consigo) {
-        es_numero = all_of(porcentaje.begin(), porcentaje.end(), ::isdigit);
-        if (es_numero) {
-            descuento = ::atof(porcentaje.c_str());
-            if ((descuento < 0) || (descuento >= 101)) {
-                cout << "Porcentaje no válido. Ingrese un porcentaje entre 0 y 100. \n"
-                    << " Porcentaje: ";
-                cin >> porcentaje;
-            } else
-                no_lo_consigo = false;
-        } else {
-            cout << "Porcentaje no válido. Ingrese un porcentaje entre 0 y 100. \n"
-                    << " Porcentaje: ";
-            cin >> porcentaje;
-        }
+        if ((descuento < 0) || (descuento >= 101)) {
+            cout << "Descuento no válido. Ingrese un descuento entre 0 y 100. \n"
+                << " Descuento: ";
+            cin >> descuento;
+        } else
+            no_lo_consigo = false;
     }
     return descuento;
 }
@@ -143,11 +133,6 @@ static void es_valido_codigo(int codigo, map<int, DtProducto> productos_disponib
 static void es_valida_cantidad(int cantidad) {
     if (cantidad <= 0)
         throw new invalid_argument ("Cantidad ingresada no válida.");
-}
-
-static void es_valido_descuento(int descuento) {
-    if (!((0  <= descuento) && (descuento <= 100)))
-        throw new invalid_argument ("Descuento ingresado no válido.");
 }
 
 /* Chequea que sea valido el codigo del repartidor buscando el codigo en la coleccion
@@ -397,7 +382,7 @@ int main() {
                                     iempleado->seleccionarTransporte(transporte_elegido);
                                     system("clear");
                                     cout << "--------------------" << "Alta Empleado" << "-------------------- \n \n";
-                                    DtRepartidor datos = iempleado->getDatosIngresados();
+                                    DtRepartidor datos = iempleado->getDatosIngresadosRepartidor();
                                     cout << "Los datos ingresados son: \n";
                                     cout << datos << "\n";
                                     cout << "¿Desea confirmar el ingreso del repartidor? Ingrese S o N. \n";
@@ -415,27 +400,19 @@ int main() {
                                     //se ingresa mozo
                                     if (tipo_empleado == "M"){
                                         tipo_incorrecto = false;
+                                        system("clear");
                                         cout << "--------------------" << "Alta Empleado" << "-------------------- \n \n";
-                                        //DtEmpleado datos = iempleado -> getDatosIngresados();
-                                        //cout << "Los datos ingresados son: \n";
-                                        //cout << datos << "\n";
-                                        //cout << "¿Desea confirmar el ingreso del repartidor? Ingrese S o N. \n";
-
-//
-//
-///
-///
-////
-
-                                        cout << "\n¿Desea confirmar el ingreso del mozo? Ingrese S o N. \n";
+                                        DtMozo datos = iempleado -> getDatosIngresadosMozo();
+                                        cout << "Los datos ingresados son: \n";
+                                        cout << datos << "\n";
+                                        cout << "¿Desea confirmar el ingreso del mozo? Ingrese S o N. \n";
                                         bool confirma_mozo = confirmacion();
                                         if (confirma_mozo){
-                                            int nro_mozo = iempleado->ingresarMozo();
-                                            cout << "\nEl número del mozo ingresado es: " << nro_mozo << endl;
+                                            iempleado -> ingresarMozo();
                                             cout << "\nMozo agregado correctamente. \n";
                                         }
                                         else {
-                                            iempleado->cancelarMozo();
+                                            iempleado -> cancelarMozo();
                                             msj = "Ingreso de mozo cancelado";
                                         }
                                     }
@@ -486,11 +463,14 @@ int main() {
                                 cout << " Precio: "; cin >> precio;
                                 DtProductoSimple datos_producto_simple = DtProductoSimple(codigo, descripcion, precio);
                                 iproducto->ingresarDatosProducto(datos_producto_simple);
-                                cout << "¿Desea confirmar el ingreso del producto? Ingrese S o N. \n";
+                                cout << "\n¿Desea confirmar el ingreso del producto? Ingrese S o N. \n";
                                 if(confirmacion()) {
                                     iproducto->ingresarProductoSimple();
+                                    cout << "\nProducto ingresado correctamente. \n";
+
                                 } else {
                                     iproducto->cancelarProductoSimple();
+                                    cout << "\nIngreso de producto cancelado. \n";
                                 }
                                 existe_opcion = true;
                                 break;
@@ -510,18 +490,16 @@ int main() {
                                 cout << "Estos son los productos disponibles. \n";
                                 //Muestro los productos simples para que se seleccione cuales integran el menu
                                 for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
-                                    cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n \n";
+                                    cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
                                 }
                                 //Selecciona Productos Simples
                                 bool desea_seleccionar_mas = true;
                                 do {
                                     int codigo_producto_simple = 0;
                                     int cantidad = 0;
-                                    cout << "Ingrese el código y la cantidad del producto que desea agregar al menú. \n";
-                                    cout << " Código: "; 
-                                    cin >> codigo_producto_simple;
-                                    cout << " Cantidad: ";
-                                    cin >> cantidad;
+                                    cout << "\nIngrese el código y la cantidad del producto que desea agregar al menú. \n";
+                                    cout << " Código: "; cin >> codigo_producto_simple;
+                                    cout << " Cantidad: "; cin >> cantidad;
                                     it = productos_simples.find(codigo_producto_simple);
                                     if(it == productos_simples.end())
                                         throw new invalid_argument("Se ingresó un código incorrecto.");
@@ -549,7 +527,7 @@ int main() {
                                 msj = "Por favor ingrese una opción correcta.\n";
                             }
                         } while(!existe_opcion);
-                        cout << "¿Desea seguir dando de alta productos? Ingrese S o N. \n";
+                        cout << "\n¿Desea seguir dando de alta productos? Ingrese S o N. \n";
                         if(confirmacion()) {
                             quiero_agregar_mas = true;
                         } else {
@@ -626,7 +604,6 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
-                #if 0
                 case 6:
                     try {
                         system("clear");
@@ -643,7 +620,6 @@ int main() {
                         break;
                     }
                     break;
-                #endif
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -795,17 +771,29 @@ int main() {
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
                             float descuento = conseguirDescuento();
+                            cout << "llego aca45\n";
                             iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
+                            cout << "llego aca36\n";
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
+                            cout << "llego aca67\n";
                             if(quiero_repartidor) {
-                                DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
+                                cout << "llego aca1\n";
+                                fflush(stdout);
+                                DtFacturaDomicilio* ptr_factura_domicilio = nullptr;
+                                ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(const_cast<DtFactura*>(factura));
+                                cout << "llego aca2\n";
+                                fflush(stdout);
                                 if (ptr_factura_domicilio != nullptr) {
+                                    cout << "entre al if null";
+                                    fflush(stdout);
                                     DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
                                     cout << factura_domicilio;
                                 } else
                                     throw new invalid_argument("La venta es local.");
-                            } else
+                            } else {
                                 cout << *factura;
+                                cout << "llego aca2";
+                            }
                         } else
                             iventa -> cancelarVentaADomicilio();
                     } catch(exception* e) {
@@ -937,19 +925,7 @@ int main() {
                         int num_mesa = conseguirNumeroMesa();
                         iventa -> ingresarNumeroMesa(num_mesa);
                         float porcentaje = conseguirDescuento();
-                        //
-                        //hay que aplicar el descuento a la venta en caso de que corresponda
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
+                        iventa -> ingresarPorcentajeDescuento(porcentaje);
                         DtFactura* factura = iventa -> generarFactura();
                         DtFacturaLocal* ptr_factura_local = dynamic_cast<DtFacturaLocal*>(factura);
                         if (ptr_factura_local != nullptr) {

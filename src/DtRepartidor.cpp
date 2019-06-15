@@ -7,10 +7,6 @@ DtRepartidor::DtRepartidor(int numero, string nombre, Transporte medioTransporte
     this->medioTransporte = medioTransporte;
 }
 
-string DtRepartidor::getNombreRepartidor() {
-    return getNombre();
-}
-
 Transporte DtRepartidor::getTransporteRepartidor() {
     return this -> medioTransporte;
 }
@@ -18,6 +14,6 @@ Transporte DtRepartidor::getTransporteRepartidor() {
 DtRepartidor::~DtRepartidor() {}
 
 ostream& operator<<(ostream & os, DtRepartidor datos){
-    os << " Nombre: " << datos.getNombreRepartidor() << "\n" << " Transporte: " << datos.getTransporteRepartidor() << "\n";
+    os << " Nombre: " << datos.getNombre() << "\n" << " Transporte: " << datos.getTransporteRepartidor() << "\n" << " ID de empleado: " << datos.getNumero() + 1 << "\n";
     return os;
 }

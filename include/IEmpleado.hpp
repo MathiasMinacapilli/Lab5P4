@@ -13,6 +13,7 @@ using namespace std;
 #include "Transporte.hpp"
 #include "DtFactura.hpp"
 #include "DtMesasMozo.hpp"
+#include "DtMozo.hpp"
 #include "DtRepartidor.hpp"
 
 class IEmpleado {
@@ -30,7 +31,7 @@ public:
     virtual void borrarNumero() = 0;
     virtual int ingresarRepartidor() = 0;
     virtual void cancelarRepartidor() = 0;
-    virtual int ingresarMozo() = 0;
+    virtual void ingresarMozo() = 0;
     virtual void cancelarMozo() = 0;
     //Caso de uso: Ventas de un Mozo
     virtual set<int> getIds() = 0;
@@ -43,7 +44,8 @@ public:
     virtual void avanzarEtapaPedido() = 0;
     virtual void cancelarPedido() = 0;
 
-    virtual DtRepartidor getDatosIngresados() = 0;
+    virtual DtRepartidor getDatosIngresadosRepartidor() = 0;
+    virtual DtMozo getDatosIngresadosMozo() = 0;
 
     //destructor
     virtual ~IEmpleado(); // virtual y vacío
