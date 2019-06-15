@@ -219,7 +219,7 @@ DtProducto* ControladorProducto::getProducto() {
 	if(dynamic_cast<ProductoSimple*>(prod) != nullptr) {
 		ProductoSimple* prod_simple = dynamic_cast<ProductoSimple*>(prod);
 		DtProductoSimple* datos_prod_simple = new DtProductoSimple(prod_simple->getCodigo(), prod_simple->getDescripcion(), prod_simple->getPrecio(), prod_simple->getCantidadVendidos());
-		dtprod = dynamic_cast<DtProducto*>(datos_prod_simple);
+		dtprod = datos_prod_simple;
 	} else { //Es Menu*
 		Menu* datos_menu = dynamic_cast<Menu*>(prod);
 		map<int, ProductoEnMenu*> prods_en_menu = datos_menu->getProductos();

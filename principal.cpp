@@ -720,6 +720,8 @@ int main() {
                             getchar();
                             string continuar;
                             getline(cin, continuar);
+                            delete prod;
+                            delete dtmenu_ptr;
                         } else {
                             iproducto->cancelarInformacion();
                         }
