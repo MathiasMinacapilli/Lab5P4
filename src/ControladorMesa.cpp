@@ -154,7 +154,10 @@ map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
 			it_mozos->second->agregarMesaAColeccion(it_mesas->second);
             //Agrego el numero de la mesa al datatype (accedo con getMesas()) que contiene
             //el conjunto de las mesas del mozo
-            col_ret[it_mozos->second->getNumero()].getMesas().insert(it_mesas->second->getNum());
+            set<int> mesas_mozo = col_ret[it_mozos->second->getNumero()].getMesas();
+            mesas_mozo.insert(it_mesas->second->getNum());
+            DtMesasMozo dt_mesas_mozo = DtMesasMozo(col_ret[it_mozos->second->getNumero()].getCodigoMozo(), mesas_mozo);
+            col_ret[it_mozos->second->getNumero()] = dt_mesas_mozo;
 			++it_mesas;
 			++it_mozos;
 			if(it_mozos == mozos.end()) { //Para hacerlo circular
