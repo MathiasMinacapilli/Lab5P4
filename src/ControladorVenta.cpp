@@ -230,38 +230,38 @@ void ControladorVenta::ingresarFecha(DtFecha fecha) {
 }
 
 map<int, DtFactura> ControladorVenta::getFacturasYTotalFecha(float &totalfacturado) {
-  map<int, VentaLocal *>::iterator it_local;
-  map<int, VentaADomicilio *>::iterator it_domicilio;
-  map<int, DtFactura> res;
-  VentaLocal* ventalocal;
-  VentaADomicilio *ventadomicilio;
-  Factura* factura;
-  DtFactura dtfactura;
-  totalfacturado = 0;
-  for(it_local = ventasLocales.begin(); it_local != ventasLocales.end(); ++it_local) {
-    ventalocal = it_local -> second;
-    if (ventalocal -> estaFacturada()) {
-      factura = ventalocal -> getFactura();
-      DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
-      if (fecha_factura == this -> fecha_venta) {
-        dtfactura = factura -> getDatosFactura();
-        res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
-        totalfacturado +=  dtfactura.getPrecioTotal();
-      }
+    map<int, VentaLocal *>::iterator it_local;
+    map<int, VentaADomicilio *>::iterator it_domicilio;
+    map<int, DtFactura> res;
+    VentaLocal* ventalocal;
+    VentaADomicilio *ventadomicilio;
+    Factura* factura;
+    DtFactura dtfactura;
+    totalfacturado = 0;
+    for(it_local = ventasLocales.begin(); it_local != ventasLocales.end(); ++it_local) {
+        ventalocal = it_local -> second;
+        if (ventalocal -> estaFacturada()) {
+            factura = ventalocal -> getFactura();
+            DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
+            if (fecha_factura == this -> fecha_venta) {
+                dtfactura = factura -> getDatosFactura();
+                res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
+                totalfacturado +=  dtfactura.getPrecioTotal();
+            }
+        }
     }
-  }
-  for(it_domicilio = ventasDomicilio.begin(); it_domicilio != ventasDomicilio.end(); ++it_domicilio) {
-    ventadomicilio = it_domicilio -> second;
-    if (ventalocal -> estaFacturada()) {
-      factura = ventadomicilio -> getFactura();
-      DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
-      if (fecha_factura == this -> fecha_venta) {
-        dtfactura = factura -> getDatosFactura();
-        res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
-        totalfacturado +=  dtfactura.getPrecioTotal();
-      }
+    for(it_domicilio = ventasDomicilio.begin(); it_domicilio != ventasDomicilio.end(); ++it_domicilio) {
+        ventadomicilio = it_domicilio -> second;
+        if (ventadomicilio -> estaFacturada()) {
+            factura = ventadomicilio -> getFactura();
+            DtFecha fecha_factura = DtFecha((factura -> getFechaYHora()).getDia(), (factura -> getFechaYHora()).getMes(), (factura -> getFechaYHora()).getAnio());
+            if (fecha_factura == this -> fecha_venta) {
+                dtfactura = factura -> getDatosFactura();
+                res.insert(pair<int, DtFactura>(dtfactura.getCodigo(), dtfactura));
+                totalfacturado +=  dtfactura.getPrecioTotal();
+            }
+        }
     }
-  }
   return res;
 }
 
