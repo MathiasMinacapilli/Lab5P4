@@ -32,7 +32,7 @@ DtFactura* VentaLocal::facturar() {
     }
     int precio_total = 0;
     if (this -> getDescuento() != 0) { 
-        precio_total = precio_sub_total * (this->getDescuento() / 100) * (1 + valor_iva / 100);
+        precio_total = precio_sub_total * (1 - this->getDescuento() / 100) * (1 + valor_iva / 100);
     } else {
         precio_total = precio_sub_total * (1 + valor_iva / 100);
     }

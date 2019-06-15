@@ -119,7 +119,7 @@ void ControladorVenta::cancelarEliminarProductoDeVenta() {
 }
 
 //FACTURACION DE UNA VENTA
-//ingresarNumeroMesa
+
 void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
     ControladorMesa *cont_mesa;
     cont_mesa = ControladorMesa::getInstance();
@@ -127,7 +127,8 @@ void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
     if (v != nullptr) {
         map<int, CantidadProducto*>::iterator it;
         float el_descuento = descuento;
-        for (it = (v -> getCants_Productos()).begin(); (it != (v -> getCants_Productos()).end()); ++it) {
+        map<int, CantidadProducto *> prods = v->getCants_Productos();
+        for (it = prods.begin(); it != prods.end(); ++it) {
             Producto* prod = (it -> second) -> getProducto();
             ProductoSimple* prod_simple = dynamic_cast<ProductoSimple* >(prod);
             if (prod_simple == nullptr)
