@@ -118,7 +118,16 @@ void ControladorVenta::ingresarPorcentajeDescuento(float descuento) {
   ControladorMesa *cont_mesa;
   cont_mesa = ControladorMesa::getInstance();
   VentaLocal *v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-  v -> setDescuento(descuento);
+  map<int, CantidadProducto*>::iterator it;
+  float el_descuento = descuento;
+  for (it = (v -> getCants_Productos()).begin(); (it != (v -> getCants_Productos()).end()); ++it) {
+      Producto* prod = (it -> second) -> getProducto();
+      ProductoSimple* prod_simple = dynamic_cast<ProductoSimple* >(prod);
+      if (prod_simple == nullptr) {
+          el_descuento = 0;
+    }
+  }
+  v -> setDescuento(el_descuento);
 }
 
 DtFactura* ControladorVenta::generarFactura() {
@@ -168,20 +177,23 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, float descue
     //busco numero de venta sin usar
     bool encontre_lugar = false;
     while (!encontre_lugar){
+      cout << "llego aca45\n";
       if (!this->existeVenta(this->numero_venta)){
         encontre_lugar = true;
       }
       else this->numero_venta++;
     }
-
+    cout << "llego aca45\n";
     Cliente* mi_cliente = cont_cliente -> getCliente(telefono_recordado);
     bool tiene_menu = false;
     map<int, CantidadProducto*> cant_prods = cont_prod -> getProductosAlmacenados(tiene_menu);
     int el_descuento = descuento;
+    cout << "llego aca45\n";
     if (tiene_menu) {
         el_descuento = 0;
     }
     if (quiere_repartidor) {
+        cout << "llego aca45\n";
         ControladorEmpleado *cont_emp;
         cont_emp = ControladorEmpleado::getInstance();
         Etapa* etapa = new Pedido();
@@ -190,6 +202,7 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, float descue
         ve -> setProdsDomicilio(cant_prods);
         venta_domicilio = ve;
     } else {
+        cout << "llego aca45\n";
         Etapa* etapa = new Recibido();
         VentaADomicilio* ve = new VentaADomicilio(this -> numero_venta, el_descuento, nullptr, etapa, mi_cliente, mi_cliente, nullptr);
         ve -> setProdsDomicilio(cant_prods);
@@ -314,13 +327,14 @@ map<int, VentaADomicilio *> ControladorVenta::obtenerVentasRepartidor(int num){
 //CARGAR DATOS DE PRUEBA
 bool ControladorVenta::existeVenta(int num){
   map<int, VentaLocal *>::iterator it_local = this->ventasLocales.find(num);
+  map<int, VentaADomicilio *>::iterator it_domicilio;
   if (it_local == this->ventasLocales.end()){
-    map<int, VentaADomicilio *>::iterator it_domicilio = this->ventasDomicilio.find(num);
+    it_domicilio = this->ventasDomicilio.find(num);
     if (it_domicilio == this->ventasDomicilio.end())
-      return true;
-    else return false;
+      return false;
+    else return true;
   }
-  else return false;
+  else return true;
 
 }
 

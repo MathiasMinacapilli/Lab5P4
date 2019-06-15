@@ -55,6 +55,8 @@ DtFactura* VentaADomicilio::facturar() {
     if (miRepartidor != nullptr) {
         DtFacturaDomicilio res_domicilio = DtFacturaDomicilio(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total, this -> miRepartidor -> getNombre(), this -> miRepartidor -> getTransporte());
         DtFactura* res = &res_domicilio;
+        cout << "\nse creo el dtfactura";
+        fflush(stdout);
         return res;
     } else {
         DtFactura res_domicilio_sin_repartidor = DtFactura(this->getNumero(), fecha_y_hora, datos_productos, valor_iva, this->getDescuento(), precio_sub_total, precio_total);

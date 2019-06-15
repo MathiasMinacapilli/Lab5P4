@@ -105,28 +105,18 @@ static string conseguirTelefono() {
 
 /* Obtiene el porcentaje de descuento. */
 static float conseguirDescuento() {
-    cout << "\nIngrese el porcentaje de descuento que desea aplicar. \n"
-        << " Porcentaje: ";
-    string porcentaje;
-    cin >> porcentaje;
-    float descuento = 0;
+    cout << "\nIngrese el descuento que desea aplicar. \n"
+        << " Descuento: ";
+    float descuento;
+    cin >> descuento;
     bool no_lo_consigo = true;
-    bool es_numero = false;
     while (no_lo_consigo) {
-        es_numero = all_of(porcentaje.begin(), porcentaje.end(), ::isdigit);
-        if (es_numero) {
-            descuento = ::atof(porcentaje.c_str());
-            if ((descuento < 0) || (descuento >= 101)) {
-                cout << "Porcentaje no válido. Ingrese un porcentaje entre 0 y 100. \n"
-                    << " Porcentaje: ";
-                cin >> porcentaje;
-            } else
-                no_lo_consigo = false;
-        } else {
-            cout << "Porcentaje no válido. Ingrese un porcentaje entre 0 y 100. \n"
-                    << " Porcentaje: ";
-            cin >> porcentaje;
-        }
+        if ((descuento < 0) || (descuento >= 101)) {
+            cout << "Descuento no válido. Ingrese un descuento entre 0 y 100. \n"
+                << " Descuento: ";
+            cin >> descuento;
+        } else
+            no_lo_consigo = false;
     }
     return descuento;
 }
@@ -143,11 +133,6 @@ static void es_valido_codigo(int codigo, map<int, DtProducto> productos_disponib
 static void es_valida_cantidad(int cantidad) {
     if (cantidad <= 0)
         throw new invalid_argument ("Cantidad ingresada no válida.");
-}
-
-static void es_valido_descuento(int descuento) {
-    if (!((0  <= descuento) && (descuento <= 100)))
-        throw new invalid_argument ("Descuento ingresado no válido.");
 }
 
 /* Chequea que sea valido el codigo del repartidor buscando el codigo en la coleccion
@@ -605,7 +590,6 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
-                #if 0
                 case 6:
                     try {
                         system("clear");
@@ -622,7 +606,6 @@ int main() {
                         break;
                     }
                     break;
-                #endif
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -775,17 +758,26 @@ int main() {
                         bool quiero_confirmar = confirmacion();
                         if (quiero_confirmar) {
                             float descuento = conseguirDescuento();
+                            cout << "llego aca45\n";
                             iventa -> crearVentaADomicilio(quiero_repartidor, descuento);
+                            cout << "llego aca36\n";
                             DtFactura* factura = iventa -> generarFacturaADomicilio();
+                            cout << "llego aca67\n";
                             if(quiero_repartidor) {
+                                cout << "llego aca1";
+                                fflush(stdout);
                                 DtFacturaDomicilio* ptr_factura_domicilio = dynamic_cast<DtFacturaDomicilio*>(factura);
                                 if (ptr_factura_domicilio != nullptr) {
+                                    cout << "entre al if null";
+                                    fflush(stdout);
                                     DtFacturaDomicilio factura_domicilio = *ptr_factura_domicilio;
                                     cout << factura_domicilio;
                                 } else
                                     throw new invalid_argument("La venta es local.");
-                            } else
+                            } else {
                                 cout << *factura;
+                                cout << "llego aca2";
+                            }
                         } else
                             iventa -> cancelarVentaADomicilio();
                     } catch(exception* e) {
@@ -917,19 +909,7 @@ int main() {
                         int num_mesa = conseguirNumeroMesa();
                         iventa -> ingresarNumeroMesa(num_mesa);
                         float porcentaje = conseguirDescuento();
-                        //
-                        //hay que aplicar el descuento a la venta en caso de que corresponda
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
+                        iventa -> ingresarPorcentajeDescuento(porcentaje);
                         DtFactura* factura = iventa -> generarFactura();
                         DtFacturaLocal* ptr_factura_local = dynamic_cast<DtFacturaLocal*>(factura);
                         if (ptr_factura_local != nullptr) {
