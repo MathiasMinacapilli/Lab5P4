@@ -15,6 +15,9 @@ public:
     //Constructor
     FacturaLocal(int codigo, DtFechaYHora fechaYHora, map<int, DtProductoCantidad> productosCantidad, float iva, float descuento, float precioSubTotal, float precioTotal, string nombreMozo);
 
+    //Getters
+    string getNombreMozo();
+
     //Destructor
     ~FacturaLocal();
 };

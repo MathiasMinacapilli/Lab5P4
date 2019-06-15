@@ -9,5 +9,9 @@ FacturaLocal::FacturaLocal(int codigo, DtFechaYHora fechaYHora, map<int, DtProdu
   this -> nombreMozo = nombreMozo;
 }
 
+string FacturaLocal::getNombreMozo() {
+  return this->nombreMozo;
+}
+
 FacturaLocal::~FacturaLocal() {
 }

@@ -23,9 +23,11 @@ ostream &operator<< (ostream& o, DtFacturaDomicilio dtf) {
     o << "\n Código: " << dtf.getCodigo() << "\n"
       << "\n Fecha y hora: " << dtf.getFechaYHora() << "\n"
       << "\n Productos de la venta.\n";
+    map<int, DtProductoCantidad> map_prod = dtf.getProductos();
     map<int, DtProductoCantidad>::iterator it;
-    for (it = (dtf.getProductos()).begin(); it != (dtf.getProductos()).end(); ++it)
+    for (it = map_prod.begin(); it != map_prod.end(); ++it) {
       o << "    " << (it -> second) << "\n";
+    }
     o  << "\n Iva: " << dtf.getIva() << "\n"
       << "\n Descuento: " << dtf.getDescuento() << "\n"
       << "\n Precio Subtotal: $" << dtf.getPrecioSubTotal() << "\n"

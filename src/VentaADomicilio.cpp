@@ -45,12 +45,6 @@ DtFactura* VentaADomicilio::facturar() {
         precio_sub_total = precio_sub_total + (((it->second)->getProducto())->getPrecio());
         //Aumentar la cantidad de vendidos en el producto. Lo aumento la cantidad del producto_cantidad
         (it->second)->getProducto()->aumentarCantidadVendidos(it->second->getCantidad());
-        //al facturarse una venta, borramos los cantidad productos, 
-        //ya que si posteriormente se da de baja un producto, no queremos que CantidadProducto tenga una referencia al elemento borrado
-        /*CantidadProducto *a_borrar = it->second;
-        this->cants_productos.erase(it->second->getProducto()->getCodigo());
-        delete a_borrar;
-*/
     }
     int precio_total = 0;
     if (this -> getDescuento() != 0) { 

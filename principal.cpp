@@ -698,13 +698,7 @@ int main() {
                         } while(!es_valido_el_codigo);
                         if(!cancelar) {
                             DtProducto* prod = iproducto->getProducto();
-                            DtProductoSimple* dtprodsimple_ptr = dynamic_cast<DtProductoSimple*>(prod);
                             DtMenu* dtmenu_ptr = dynamic_cast<DtMenu*>(prod);
-                            if(dtprodsimple_ptr != nullptr) {
-                                DtProductoSimple* prod = dtprodsimple_ptr;
-                            } else {
-                                DtMenu* prod = dtmenu_ptr;
-                            }
                             system("clear");
                             cout << "--------------------" << "Información de un producto" << "-------------------- \n \n";
                             cout << "Información del producto. \n";
@@ -722,10 +716,13 @@ int main() {
                                     cout << "   " << it->second.getProducto().getCodigo() << " - " << it->second.getProducto().getDescripcion() << " - Cantidad: " << it->second.getCantidad() << "\n";
                                 }
                             }
+                            delete prod;
                             cout<< "\nPresione <enter> para continuar...";
                             getchar();
                             string continuar;
                             getline(cin, continuar);
+                            
+
                         } else {
                             iproducto->cancelarInformacion();
                         }
@@ -761,11 +758,14 @@ int main() {
                         for (itf = facturas_fecha.begin(); itf != facturas_fecha.end(); ++itf) {
                             cout << (itf -> second) << "\n\n";
                         }
+                        cout<< "\nPresione <enter> para continuar...";
+                        getchar();
+                        string cont;
+                        getline(cin, cont);
                         system("clear");
                         cout << "--------------------" << "Resumen facturación de 1 día dada la fecha" << "-------------------- \n \n";
                         cout << "Total facturado en la fecha " << fecha << " : $ " << total_facturado << "\n";
                         cout << "\nPresione <enter> para continuar...";
-                        getchar();
                         string continuar;
                         getline(cin, continuar);
                     } catch(exception* e) {
@@ -908,7 +908,7 @@ int main() {
                             cout << "\nNo hay ventas facturadas en ese rango de fechas. \n";
                         for(map_it = ventas_facturadas.begin(); map_it != ventas_facturadas.end(); ++map_it) {
                             //Ver que imprimir
-                            cout << (map_it->second).getCodigo();
+                            cout << map_it->second;
                         }
                         cout<< "\nPresione <enter> para continuar...";
                         getchar();
@@ -1138,7 +1138,7 @@ int main() {
                         bool quiero_confirmar;
                         while (quiero_quitar) {
                             map<int, DtProducto>::iterator it;
-                            cout << "Estos son los productos disponibles. \n";
+                            cout << "\nEstos son los productos disponibles. \n";
                             for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
                                 cout << (it -> second) << "\n";
                             cout << "Ingrese el código del producto a quitar. \n"

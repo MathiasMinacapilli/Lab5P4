@@ -3,6 +3,7 @@
 
 //Archivos
 #include "DtFacturaLocal.hpp"
+#include "FacturaLocal.hpp"
 #include "Venta.hpp"
 #include "Mozo.hpp"
 #include "Producto.hpp"

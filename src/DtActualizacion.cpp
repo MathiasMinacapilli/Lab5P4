@@ -45,7 +45,8 @@ ostream &operator<< (ostream& os, DtActualizacion dt_act){
         << " Cliente: " << dt_act.getNombre() << "\n"
         << " Teléfono: " << dt_act.getTelefono() << "\n";
     map<int, DtProductoCantidad>::iterator it;
-    for (it = dt_act.getDatosProductos().begin(); it != dt_act.getDatosProductos().end(); ++it)
+    map<int, DtProductoCantidad> datos_prods = dt_act.getDatosProductos();
+    for (it = datos_prods.begin(); it != datos_prods.end(); ++it)
         os << "    " << it->second << "\n";
     os << " Etapa del pedido: " << dt_act.getEtapaActual();
     return os;

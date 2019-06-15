@@ -352,3 +352,31 @@ void ControladorVenta::agregarVentaDomicilio(VentaADomicilio *v){
     this->ventasDomicilio[v->getNumero()] = v;
   else throw new invalid_argument("Error. Ya existe una venta con ese codigo");
 }
+
+//Caso de uso: ventas de un mozo
+map<int, DtFactura> ControladorVenta::getVentasLocalesDelMozoFacturadas(int num_mozo) {
+    map<int, Factura*> ret_objeto;
+    map<int, DtFactura> ret;
+    map<int, VentaLocal *>::iterator it;
+    ControladorEmpleado* cont_empleado = ControladorEmpleado::getInstance();
+    for(it = this->ventasLocales.begin(); it != this->ventasLocales.end(); ++it) {
+        //Si la venta esta facturada chequeo que el nombre del mozo de la venta
+        //es igual al nombre del mozo que tiene codigo num_mozo
+        if(it->second->estaFacturada()) {
+            Factura* factura = it->second->getFactura();
+            FacturaLocal* factura_local = dynamic_cast<FacturaLocal*>(factura);
+            if(factura_local != nullptr)
+                if(factura_local->getNombreMozo() == cont_empleado->getNombreMozo(num_mozo))
+                    ret_objeto[factura_local->getCodigo()] = factura;
+        }
+    }
+    map<int, Factura*>::iterator it_factura;
+    //Recorro mi conjunto de objetos y creo los data values para agregarlos
+    //a la coleccion a retornar
+    for(it_factura = ret_objeto.begin(); it_factura != ret_objeto.end(); ++it_factura) {
+        Factura* factura = it_factura->second;
+        DtFactura dtfactura = factura->getDatosFactura();
+        ret[dtfactura.getCodigo()] = dtfactura;
+    }
+    return ret;
+}
