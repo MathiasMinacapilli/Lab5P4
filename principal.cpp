@@ -232,7 +232,7 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
                 cout << datos << "\n";
             }
 
-            cout << "\n¿Desea confirmar el ingreso del cliente? S/N \n";
+            cout << "\n¿Desea confirmar el ingreso del cliente? Ingrese S o N. \n";
             bool confirma_cliente = confirmacion();
             if (confirma_cliente){
                 icliente->ingresarCliente();
@@ -249,7 +249,6 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
         }
     }
 }
-
 
 /*
 ------------------------------------------
@@ -588,7 +587,7 @@ int main() {
                         break;
                     }
                     break;
-                    
+
                 /* 5) Baja de producto. (Hay Diagrama de Comunicacion) */
                 case 5:
                     try {
@@ -627,7 +626,7 @@ int main() {
                     break;
 
                 /* 6) Consultar actualizaciones de pedidos a domicilio. */
-                
+
                 case 6:
                     try {
                         system("clear");
@@ -650,7 +649,7 @@ int main() {
                         break;
                     }
                     break;
-               
+
                 /* 7) Información de un producto. */
                 case 7:
                     try {
@@ -658,18 +657,22 @@ int main() {
                         cout << "--------------------" << "Información de un producto" << "-------------------- \n \n";
                         map<int, DtProducto> productos_disponibles = iproducto->getProductosDisponibles();
                         map<int, DtProducto>::iterator it;
+                        cout << "Estos son los productos disponibles. \n";
                         //Muestro los productos disponibles para seleccionar cual se quiere ver su info
                         for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
-                            cout << (it->second).getCodigo() << "-" << (it->second).getDescripcion() << "\n";
+                            cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
                         }
                         int codigo = 0;
                         bool es_valido_el_codigo = true;
                         bool cancelar = false;
                         do {
-                            cout << "Ingrese el código del producto que desea ver su información: "; cin >> codigo;
-                            es_valido_el_codigo = iproducto->ingresarCodigoProductoAConsultar(codigo);
+                            cout << "\nIngrese el código del producto que desea ver la información. \n"
+                                << " Código: ";
+                            cin >> codigo;
+                            es_valido_el_codigo = iproducto -> ingresarCodigoProductoAConsultar(codigo);
                             if(!es_valido_el_codigo) {
-                                cout << "Código inválido, ¿Desea cancelar la consulta? (S/N): ";
+                                cout << "Código inválido. ¿Desea cancelar la consulta? Ingrese S o N. \n"
+                                    << " Opción: ";
                                 if(confirmacion()) {
                                     es_valido_el_codigo = true;
                                     cancelar = true;
@@ -1177,7 +1180,7 @@ int main() {
             break;
 
         /* 5) Cargar datos de prueba. */
-        case 5: 
+        case 5:
             try {
                 //Cargo productos
                 cargarDatosDePrueba();
@@ -1189,7 +1192,7 @@ int main() {
                 break;
             }
             break;
-        
+
 
         /* 0) Salir. */
         case 0:
