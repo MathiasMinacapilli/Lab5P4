@@ -137,24 +137,30 @@ void cargarDatosDePrueba() {
     Repartidor *r2 = cont_empleado -> getRepartidor(5);
     Cliente *c1 = cont_cliente -> getCliente("098217523");
     Cliente *c2 = cont_cliente -> getCliente("091651249");
+    
+    DtFactura *f4, *f5, *f6;
+
     //V4
     EnCamino *enCamino_v4 = new EnCamino();
     VentaADomicilio *v4 = new VentaADomicilio(4, 0, nullptr, enCamino_v4, c2, c2, r1);
     v4 -> agregarProductoAVenta(p7, 5);
     cont_venta -> agregarVentaDomicilio(v4);
-    v4 -> facturar();
+    f4 = v4 -> facturar();
+    delete f4;
     //V5
     Recibido *recibido_v5 = new Recibido();
     VentaADomicilio* v5 = new VentaADomicilio(5, 0, nullptr, recibido_v5, c2, c2, r2);
     v5 -> agregarProductoAVenta(p2, 2);
     cont_venta -> agregarVentaDomicilio(v5);
-    v5 -> facturar();
+    f5 = v5 -> facturar();
+    delete f5;
     //V6
     EnCamino *enCamino_v6 = new EnCamino();
     VentaADomicilio *v6 = new VentaADomicilio(6, 0, nullptr, enCamino_v6, c1, c1, r1);
     v6 -> agregarProductoAVenta(p6, 1);
     cont_venta -> agregarVentaDomicilio(v6);
-    v6 -> facturar();
+    f6 = v6 -> facturar();
+    delete f6;
 
     //NOTIFICACIONES
 
@@ -228,8 +234,4 @@ void cargarDatosDePrueba() {
     DtActualizacion act_n5 = DtActualizacion(f_n5, "Martin", "091651249", datos_v5, etapa_n5);
     v5->agregarActualizacion(act_n5);    
 
-    string waste = "";
-    getline(cin, waste);
-    cout << "\nPresione <enter> para continuar.";
-    getline(cin, waste);
 }

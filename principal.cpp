@@ -698,13 +698,7 @@ int main() {
                         } while(!es_valido_el_codigo);
                         if(!cancelar) {
                             DtProducto* prod = iproducto->getProducto();
-                            DtProductoSimple* dtprodsimple_ptr = dynamic_cast<DtProductoSimple*>(prod);
                             DtMenu* dtmenu_ptr = dynamic_cast<DtMenu*>(prod);
-                            if(dtprodsimple_ptr != nullptr) {
-                                DtProductoSimple* prod = dtprodsimple_ptr;
-                            } else {
-                                DtMenu* prod = dtmenu_ptr;
-                            }
                             system("clear");
                             cout << "--------------------" << "Información de un producto" << "-------------------- \n \n";
                             cout << "Información del producto. \n";
