@@ -18,7 +18,7 @@ public:
     Mozo();
     Mozo(int numero, string nombre);
     
-    void agregarMesaAColleccion(Mesa* mesa);
+    void agregarMesaAColeccion(Mesa* mesa);
 
     //Desctructor
     ~Mozo();

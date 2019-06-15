@@ -28,17 +28,6 @@ ControladorMesa *ControladorMesa::getInstance(){
   return instance;
 }
 
-//Asignar automáticamente mozos a mesas
-map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
-    //FALTAA , TENEMOS DUDA
-  //
-  //
-  //
-  map<int, DtMesasMozo> res;
-  res.clear();
-  return res;
-}
-
 //Facturación de una venta - generarFactura() - ControladorVenta
 
 void ControladorMesa::finalizarVenta() {
@@ -121,4 +110,57 @@ void ControladorMesa::cancelarVenta() {
 //Caso de uso: Asignar automaticamente mozos a mesas
 map<int, Mesa*> ControladorMesa::getMesas() {
     return this->mesas;
+}
+
+//Caso de uso: Asignar automaticamente mozos a mesas
+/* Se retorna una coleccion de DtMesasMozo el cual contiene el codigo de un mozo
+y el conjunto de mesas (los numeros) asignados a el.
+El método consiste en asignar PISO(Me/Mo) mesas a cada mozo (donde Me es la cantidad
+de mesas y Mo la de mozos) y el resto (de la división entera) de las mesas se
+asignan aleatoriamente a los mozos. */
+map<int, DtMesasMozo> ControladorMesa::asignarMozosAMesas() {
+    map<int, DtMesasMozo> col_ret; //Coleccion a retornar
+	ControladorEmpleado* cont_empleado = ControladorEmpleado::getInstance();
+	map<int, Mozo*> mozos = cont_empleado->getMozos();
+	map<int, Mozo*>::iterator it_mozos = mozos.begin();
+	map<int, Mesa*>::iterator it_mesas = this->mesas.begin();
+	int cant_mesas = mozos.size();
+	int cant_mozos = this->mesas.size();
+    double cant_mesas_a_asignar = 0;
+    if(cant_mozos != 0) {
+	    cant_mesas_a_asignar = floor(cant_mesas/cant_mozos);
+    } else {
+        throw new invalid_argument("Debe haber al menos un mozo en el sistema para poder realizar esta operación.");
+    }
+	//Recorro la coleccion de mozos asignandole a cada mozo (en el while)
+	//cant_mesas_a_asignar (que es la cuenta piso(me/mo)) mesas.
+	for(it_mozos = mozos.begin(); it_mozos != mozos.end(); ++it_mozos) {
+        set<int> mesas_mozo;
+		double i = 0;
+		while(i<cant_mesas_a_asignar) {
+			it_mozos->second->agregarMesaAColeccion(it_mesas->second);
+            mesas_mozo.insert(it_mesas->second->getNum());
+			++it_mesas;
+			i++;
+		}
+        DtMesasMozo dt_mesas_mozo = DtMesasMozo(it_mozos->second->getNumero(), mesas_mozo);
+        col_ret[it_mozos->second->getNumero()] = dt_mesas_mozo;
+	}
+	//Si luego de recorrer todos los mozos y asignarle el valor cant_mesas_a_asignar
+	//a cada uno aun me quedan mesas por asignar, asigno estas mesas aleatoriamente
+	if(it_mesas != this->mesas.end()) {
+		it_mozos = mozos.begin();
+		while(it_mesas != this->mesas.end()) {
+			it_mozos->second->agregarMesaAColeccion(it_mesas->second);
+            //Agrego el numero de la mesa al datatype (accedo con getMesas()) que contiene
+            //el conjunto de las mesas del mozo
+            col_ret[it_mozos->second->getNumero()].getMesas().insert(it_mesas->second->getNum());
+			++it_mesas;
+			++it_mozos;
+			if(it_mozos == mozos.end()) { //Para hacerlo circular
+				it_mozos = mozos.begin();
+			}
+		}
+	}
+    return col_ret;
 }

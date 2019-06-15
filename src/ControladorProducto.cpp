@@ -217,7 +217,7 @@ DtProducto* ControladorProducto::getProducto() {
 		ProductoSimple* prod_simple = dynamic_cast<ProductoSimple*>(prod);
 		DtProductoSimple datos_prod_simple = DtProductoSimple(prod_simple->getCodigo(), prod_simple->getDescripcion(), prod_simple->getPrecio());
 		DtProductoSimple* datos_prod_simple_ptr = &datos_prod_simple;
-		dtprod = dynamic_cast<DtProducto*>(datos_prod_simple_ptr);
+		dtprod = datos_prod_simple_ptr;
 	} else { //Es Menu*
 		Menu* datos_menu = dynamic_cast<Menu*>(prod);
 		map<int, ProductoEnMenu*> prods_en_menu = datos_menu->getProductos();
@@ -230,7 +230,7 @@ DtProducto* ControladorProducto::getProducto() {
 		}
 		DtMenu dt_menu = DtMenu(datos_menu->getCodigo(), datos_menu->getDescripcion(), datos_menu->getPrecio(), dt_prods_en_menu);
 		DtMenu* dt_menu_ptr = &dt_menu;
-		dtprod = dynamic_cast<DtProducto*>(dt_menu_ptr);
+		dtprod = dt_menu_ptr;
 	}
 	return dtprod;
 }

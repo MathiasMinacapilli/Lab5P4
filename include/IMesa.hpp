@@ -14,6 +14,7 @@ class IMesa {
 protected:
     IMesa();
 public:
+    //Caso de uso: Asignar automaticamente mozos a mesas
     virtual map<int, DtMesasMozo> asignarMozosAMesas() = 0;
     virtual void cancelarVenta() = 0;
     virtual void finalizarVenta() = 0;

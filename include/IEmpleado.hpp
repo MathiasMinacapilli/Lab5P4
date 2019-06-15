@@ -42,8 +42,6 @@ public:
     virtual void ingresarNumeroPedido(int nro) = 0;
     virtual void avanzarEtapaPedido() = 0;
     virtual void cancelarPedido() = 0;
-    //Caso de uso: Asignar automaticamente mozos a mesas
-    virtual map<int, DtMesasMozo> asignarMozosAMesas() = 0;
 
     virtual DtRepartidor getDatosIngresados() = 0;
 

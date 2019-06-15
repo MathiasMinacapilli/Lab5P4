@@ -29,6 +29,11 @@ map<int, Repartidor*> ControladorEmpleado::getRepartidoresDisponibles() {
 	return res;
 }
 
+/* Retorna la coleccion de mozos almacenada en el controlador */
+map<int, Mozo *> ControladorEmpleado::getMozos() {
+	return this->mozos;
+}
+
 //ALTA EMPLEADO
 
 void ControladorEmpleado::ingresarNombreEmpleado(string nombre){
@@ -159,42 +164,6 @@ void ControladorEmpleado::cancelarPedido(){
 	venta->cancelarVenta();
 }
 
-//Caso de uso: Asignar automaticamente mozos a mesas
-/* El método consiste en asignar PISO(Me/Mo) mesas a cada mozo (donde Me es la cantidad
-de mesas y Mo la de mozos) y el resto (de la división entera) de las mesas se
-asignan aleatoriamente a los mozos. */
-map<int, DtMesasMozo> ControladorEmpleado::asignarMozosAMesas() {
-	ControladorMesa* cont_mesa = ControladorMesa::getInstance();
-	map<int, Mesa*> mesas = cont_mesa->getMesas();
-	map<int, Mesa*>::iterator it_mesas = mesas.begin();
-	map<int, Mozo *>::iterator it_mozos;
-	int cant_mesas = mesas.size();
-	int cant_mozos = mesas.size();
-	double cant_mesas_a_asignar = floor(cant_mesas/cant_mozos);
-	//Recorro la coleccion de mozos asignandole a cada mozo (en el while)
-	//cant_mesas_a_asignar (que es la cuenta piso(me/mo)) mesas.
-	for(it_mozos = this->mozos.begin(); it_mozos != this->mozos.end(); ++it_mozos) {
-		double i = 0;
-		while(i<cant_mesas_a_asignar) {
-			it_mozos->second->agregarMesaAColleccion(it_mesas->second);
-			++it_mesas;
-			i++;
-		}
-	}
-	//Si luego de recorrer todos los mozos y asignarle el valor cant_mesas_a_asignar
-	//a cada uno aun me quedan mesas por asignar, asigno estas mesas aleatoriamente
-	if(it_mesas != mesas.end()) {
-		it_mozos = this->mozos.begin();
-		while(it_mesas != mesas.end()) {
-			it_mozos->second->agregarMesaAColleccion(it_mesas->second);
-			++it_mesas;
-			++it_mozos;
-			if(it_mozos == this->mozos.end()) { //Para hacerlo circular
-				it_mozos = this->mozos.begin();
-			}
-		}
-	}
-}
 //cargar datos de prueba
 Repartidor *ControladorEmpleado::getRepartidor(int numero_repartidor){
 	map<int, Repartidor *>::iterator it = this->repartidores.find(numero_repartidor);

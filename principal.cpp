@@ -518,8 +518,10 @@ int main() {
                                     int codigo_producto_simple = 0;
                                     int cantidad = 0;
                                     cout << "Ingrese el código y la cantidad del producto que desea agregar al menú. \n";
-                                    cout << " Código: "; cin >> codigo_producto_simple;
-                                    cout << " Cantidad: "; cin >> cantidad;
+                                    cout << " Código: "; 
+                                    cin >> codigo_producto_simple;
+                                    cout << " Cantidad: ";
+                                    cin >> cantidad;
                                     it = productos_simples.find(codigo_producto_simple);
                                     if(it == productos_simples.end())
                                         throw new invalid_argument("Se ingresó un código incorrecto.");
@@ -563,15 +565,29 @@ int main() {
                 break;
 
                 /* 4) Asignar automáticamente mozos a mesas. */
-                #if 0
                 case 4:
                     try {
-                        iemple
+                        map<int, DtMesasMozo> mesas_mozo = imesa->asignarMozosAMesas();
+                        map<int, DtMesasMozo>::iterator it_mesas_mozo;
+                        for(it_mesas_mozo = mesas_mozo.begin(); it_mesas_mozo != mesas_mozo.end(); ++it_mesas_mozo) {
+                            cout << "Mozo: " << it_mesas_mozo->second.getCodigoMozo() << "\nMesas: ";
+                            set<int> mesas = it_mesas_mozo->second.getMesas();
+                            set<int>::iterator it_mesas;
+                            for (it_mesas = mesas.begin(); it_mesas != mesas.end(); ++it_mesas) {
+                                cout << *it_mesas;
+                            }
+                            cout << "\n";
+                        }
+                        string waste = "";
+                        cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
                     } catch(exception* e) {
-
+                        system("clear");
+                        msj = e -> what();
+                        delete e;
+                        break;
                     }
                     break;
-                #endif
+                    
                 /* 5) Baja de producto. (Hay Diagrama de Comunicacion) */
                 case 5:
                     try {
@@ -676,7 +692,6 @@ int main() {
                                 }
                             }
                             cout << "\nPresione cualquier tecla y luego enter para continuar."; cin >> waste;
-                            /* FALTA POR HACER -> COMO VER SI ES UN MENU Y RECORRER SUS PRODUCTOS */
                         } else {
                             iproducto->cancelarInformacion();
                         }

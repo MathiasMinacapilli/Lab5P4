@@ -1,6 +1,8 @@
 //Archivos
 #include "../include/DtMesasMozo.hpp"
 
+DtMesasMozo::DtMesasMozo() {}
+
 DtMesasMozo::DtMesasMozo(int codigoMozo, set<int> mesas) {
     this->codigoMozo = codigoMozo;
     this->mesas = mesas;

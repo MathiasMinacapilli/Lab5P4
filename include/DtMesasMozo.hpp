@@ -10,6 +10,7 @@ private:
     set<int> mesas;
 public:
     //Constructor
+    DtMesasMozo();
     DtMesasMozo(int codigoMozo, set<int> mesas);
 
     //Destructor

@@ -9,7 +9,7 @@ Mozo::Mozo(): Empleado() {}
 Mozo::Mozo(int numero, string nombre) : Empleado(numero, nombre){}
 
 /* Agrega la mesa a la coleccion de mesas del mozo */
-void Mozo::agregarMesaAColleccion(Mesa* mesa) {
+void Mozo::agregarMesaAColeccion(Mesa* mesa) {
     this->mesas_mozo[mesa->getNum()] = mesa;
 }
 

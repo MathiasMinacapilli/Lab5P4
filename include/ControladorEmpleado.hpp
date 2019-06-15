@@ -41,6 +41,10 @@ public:
 	static ControladorEmpleado *getInstance();
 	Mozo* getMozo(int num_mozo);
 	map<int, Repartidor*> getRepartidoresDisponibles();
+
+	//Getters
+	map<int, Mozo*> getMozos();
+
     //caso de uso: Alta empleado
     void ingresarNombreEmpleado(string nombre);
     set<Transporte> getTransportes();
@@ -62,8 +66,6 @@ public:
     void ingresarNumeroPedido(int nro);
     void avanzarEtapaPedido();
     void cancelarPedido();
-    //Caso de uso: Asignar automaticamente mozos a mesas
-    map<int, DtMesasMozo> asignarMozosAMesas();
 
 	Repartidor* getRepartidor(int num_repartidor);
 
