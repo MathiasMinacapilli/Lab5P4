@@ -927,17 +927,32 @@ int main() {
                 /* 10) Ventas de un mozo. */
                 case 10:
                     try {
-                        system("clear");
-                        cout << "--------------------" << "Ventas de un mozo" << "-------------------- \n \n";
-                        set<int> ids = iempleado->getIdsMozo();
-                        set<int>::iterator it;
-                        cout << "Estos son los mozos disponibles. \n";
-                        for(it = ids.begin(); it != ids.end(); ++it)
-                            cout << " " << (*it) << ") " << (iempleado -> getNombreMozo(*it)) << "\n";
-                        int id_mozo, dia_ini, mes_ini, anio_ini, dia_fin, mes_fin, anio_fin;
-                        cout << "\nSeleccione el ID del mozo. \n"
-                            << " ID: ";
-                        cin >> id_mozo;
+                        bool existe_id = true;
+                        int id_mozo;
+                        do {
+                            system("clear");
+                            cout << "--------------------" << "Ventas de un mozo" << "-------------------- \n \n";
+                            set<int> ids = iempleado->getIdsMozo();
+                            set<int>::iterator it;
+                            cout << "Estos son los mozos disponibles. \n";
+                            for(it = ids.begin(); it != ids.end(); ++it)
+                                cout << " " << (*it) << ") " << (iempleado -> getNombreMozo(*it)) << "\n";
+                            cout << "\nSeleccione el ID del mozo. \n"
+                                << " ID: ";
+                            cin >> id_mozo;
+                            it = ids.find(id_mozo);
+                            if(it != ids.end()) {
+                                existe_id = true;
+                            } else { //No existe mozo con id ingresado
+                                cout << "\nNo existe mozo con id ingresado. Por favor ingrese un id válido.";
+                                existe_id = false;
+                                cout<< "\nPresione <enter> para continuar...";
+                                getchar();
+                                string continuar;
+                                getline(cin, continuar);
+                            }
+                        } while(!existe_id);
+                        int dia_ini, mes_ini, anio_ini, dia_fin, mes_fin, anio_fin;
                         cout << "\nIngrese la fecha desde la cual ver las ventas (dd/mm/aaaa): "; cin >> dia_ini; cin.get(); cin >> mes_ini; cin.get(); cin >> anio_ini;
                         cout << "\nIngrese la fecha hasta la cual ver las ventas (dd/mm/aaaa): "; cin >> dia_fin; cin.get(); cin >> mes_fin; cin.get(); cin >> anio_fin;
                         DtFecha fecha_ini = DtFecha(dia_ini, mes_ini, anio_ini);
