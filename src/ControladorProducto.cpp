@@ -32,7 +32,7 @@ void ControladorProducto::ingresarDatosProducto(DtProductoSimple datos){
 	if(this->encontrarProducto(datos_producto) == nullptr) {
 		this->datos_prod_simple = datos;
 	} else {
-		throw new invalid_argument("Ya existe un producto con el codigo ingresado");
+		throw new invalid_argument("Error. Ya existe un producto con el codigo ingresado");
 	}
 }
 
@@ -50,8 +50,13 @@ void ControladorProducto::cancelarProductoSimple(){
 
 /* Ingresa los datos del menu al controlador para que este los recuerde */
 void ControladorProducto::ingresarDatosMenu(int codigo, string desc){
-	this->codigo_menu = codigo;
-	this->desc_menu = desc;
+	DtProductoCantidad datos_menu = DtProductoCantidad(DtProducto(codigo, desc, 0), 1);
+	if (this->encontrarProducto(datos_menu) == nullptr){
+		this->codigo_menu = codigo;
+		this->desc_menu = desc;
+	}
+	else throw new invalid_argument("Error. Ya existe un producto con el codigo ingresado");
+
 }
 
 /* Devuelve la coleccion de productos simples almacenada en el controlador */
