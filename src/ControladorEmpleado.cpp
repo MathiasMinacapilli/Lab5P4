@@ -31,15 +31,6 @@ map<int, Repartidor*> ControladorEmpleado::getRepartidoresDisponibles() {
 }
 
 
-set<int> ControladorEmpleado::getNumeroRepartidores() {
-	map<int, Repartidor*>::iterator it;
-	set<int> res;
-	res.clear();
-	for(it = this -> repartidores.begin(); it != this -> repartidores.end(); ++it)
-		res.insert(it -> first);
-	return res;
-}
-
 /* Retorna la coleccion de mozos almacenada en el controlador */
 map<int, Mozo *> ControladorEmpleado::getMozos() {
 	return this->mozos;
@@ -113,13 +104,23 @@ void ControladorEmpleado::cancelarMozo(){
 
 //Caso de uso: Ventas de un Mozo
 /* Retorna un set de int que contienen todos los id de los mozos */
-set<int> ControladorEmpleado::getIds() {
+set<int> ControladorEmpleado::getIdsMozo() {
 	set<int> ret;
 	map<int, Mozo*>::iterator it;
 	for(it = this->mozos.begin(); it != this->mozos.end(); ++it)
 		ret.insert((it->second)->getNumero());
 	return ret;
 }
+
+set<int> ControladorEmpleado::getIdsRepartidor() {
+	map<int, Repartidor*>::iterator it;
+	set<int> res;
+	res.clear();
+	for(it = this -> repartidores.begin(); it != this -> repartidores.end(); ++it)
+		res.insert(it -> first);
+	return res;
+}
+
 /* Selecciona el id y el rango de fechas para obtener las ventas facturadas*/
 void ControladorEmpleado::seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin) {
 	this->id_mozo_recordado = id;
@@ -210,9 +211,17 @@ string ControladorEmpleado::getNombreMozo(int num_mozo) {
 	if(it != this->mozos.end()) {
 		Mozo *mozo = getMozo(num_mozo);
 		return mozo -> getNombre();
-	} else {
-		throw new invalid_argument("No existe mozo con el numero ingresado");
-	}
+	} else
+		throw new invalid_argument("No existe mozo con el número ingresado");
+}
+
+string ControladorEmpleado::getNombreRepartidor(int num_repartidor) {
+	map<int, Repartidor*>::iterator it = this -> repartidores.find(num_repartidor);
+	if (it != this -> repartidores.end()) {
+		Repartidor *repartidor = getRepartidor(num_repartidor);
+		return repartidor -> getNombre();
+	} else
+		throw new invalid_argument ("No existe repartidor con el número ingresado");
 }
 
 //destructor

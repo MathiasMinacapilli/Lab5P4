@@ -656,9 +656,8 @@ int main() {
                         vector<DtActualizacion> actualizaciones = iventa -> getListadoActualizaciones();
                         vector<DtActualizacion>::iterator it_actualizacion;
                         cout<< "Se listan las actualizaciones de todos los pedidos a domicilio. \n\n";
-                        for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion){
+                        for (it_actualizacion = actualizaciones.begin(); it_actualizacion != actualizaciones.end(); ++it_actualizacion)
                            cout << *it_actualizacion << "\n\n";
-                        }
                         cout<< "Presione <enter> para continuar...";
                         getchar();
                         string continuar;
@@ -902,7 +901,7 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Ventas de un mozo" << "-------------------- \n \n";
-                        set<int> ids = iempleado->getIds();
+                        set<int> ids = iempleado->getIdsMozo();
                         set<int>::iterator it;
                         cout << "Estos son los mozos disponibles. \n";
                         for(it = ids.begin(); it != ids.end(); ++it)
@@ -1077,7 +1076,7 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Iniciar venta en mesas" << "-------------------- \n \n";
-                        set<int> ids = iempleado->getIds();
+                        set<int> ids = iempleado->getIdsMozo();
                         set<int>::iterator it_ini;
                         cout << "Estos son los mozos disponibles. \n";
                         for(it_ini = ids.begin(); it_ini != ids.end(); ++it_ini)
@@ -1199,7 +1198,7 @@ int main() {
                     break;
 
                 default: {
-                    msj = "Número inválido. Ingrese valor entre 0 y 4.";
+                    msj = "Número inválido. Ingrese valor entre 0 y 4";
                 }
                 break;
                 }//fin switch opcion_mozo
@@ -1226,38 +1225,39 @@ int main() {
                     try {
                         system("clear");
                         cout << "--------------------" << "Modificar estado de pedido" << "-------------------- \n \n";
-                        set<int> repartidores = iempleado -> getNumeroRepartidores();
-                        cout << "Estos son los repartidores disponibles. \n";
+                        set<int> repartidores = iempleado -> getIdsRepartidor();
                         set<int>::iterator it_repartidor;
-                        cout << " ";
-                        for (it_repartidor = repartidores.begin(); it_repartidor != repartidores.end(); ++it_repartidor)
-                            cout << *it_repartidor << " ";
-                        cout << "\n\n";
-
-                        cout << "Ingrese su id de empleado: ";
+                        cout << "Estos son los repartidores disponibles. \n";
+                        for(it_repartidor = repartidores.begin(); it_repartidor != repartidores.end(); ++it_repartidor)
+                            cout << " " << (*it_repartidor) << ") " << (iempleado -> getNombreRepartidor(*it_repartidor)) << "\n";
+                        cout << "\nSeleccione su ID de repartidor. \n"
+                            << " ID: ";
                         int id;
                         cin >> id;
                         iempleado -> ingresarIdRepartidor(id);
                         map<int, DtDireccion> pedidos = iempleado -> getVentasRepartidor();
                         map<int, DtDireccion>::iterator it;
                         if (pedidos.empty())
-                            msj = "No hay pedidos para este repartidor";
+                            msj = "No hay pedidos para el repartidor seleccionado";
                         else {
-                            cout << "Sus pedidos son: \n";
+                            system("clear");
+                            cout << "--------------------" << "Modificar estado de pedido" << "-------------------- \n \n";
+                            cout << "Los pedidos para el repartidor con ID " << id << " son: \n\n";
                             for (it = pedidos.begin(); it != pedidos.end(); ++it){
-                                cout << "Venta nro. " << it->first << " ( " << it->second << ") \n";
+                                cout << " Venta n°" << it->first << " (" << it->second << ") \n";
                             }
-                            cout << "Ingrese el numero del pedido cuyo estado quiere modificar: ";
+                            cout << "\nIngrese el número de la venta cuyo estado quiere modificar. \n"
+                                << " Número: ";
                             int numero;
                             cin >> numero;
                             while (pedidos.find(numero) == pedidos.end()){
-                                cout << "Error. Ese numero no pertence a ninguno de sus pedidos. \n";
-                                cout << "Por favor, ingrese otro numero: ";
+                                cout << "\nEl número ingresado no pertence a ninguno de sus pedidos. Por favor, ingrese otro número. \n"
+                                    << " Número: ";
                                 cin >> numero;
                             }
                             iempleado -> ingresarNumeroPedido(numero);
                             system("clear");
-                            cout << "-----------------" << "Modificar estado de pedido nro. " << numero << "----------------- \n \n"
+                            cout << "-----------------" << "Modificar estado de pedido n°" << numero << " ----------------- \n \n"
                                 << " - Elija la opción deseada -  \n \n"
                                 << " 1) Avanzar etapa. \n"
                                 << " 2) Cancelar pedido. \n"
@@ -1268,17 +1268,17 @@ int main() {
                             switch(opcion){
                                 case 1:
                                     iempleado -> avanzarEtapaPedido();
-                                    msj = "Etapa modificada correctamente ";
+                                    msj = "Etapa modificada correctamente";
                                     break;
                                 case 2:
                                     iempleado -> cancelarPedido();
-                                    msj = "Pedido cancelado correctamente ";
+                                    msj = "Pedido cancelado correctamente";
                                     break;
                                 case 0:
-                                    msj = "No se realizaron cambios en los pedidos ";
+                                    msj = "No se realizaron cambios en los pedidos";
                                     break;
                                 default:
-                                    cout << "Numero invalido. Ingrese un numero entre 0 y 2. ";
+                                    msj = "Número inválido. Ingrese valor entre 0 y 2";
                                     break;
                             }
                         }
@@ -1296,7 +1296,7 @@ int main() {
                     break;
 
                 default: {
-                    msj = "Número inválido. Ingrese valor entre 0 y 1.";
+                    msj = "Número inválido. Ingrese valor entre 0 y 1";
                 }
                 break;
                 }//fin switch
@@ -1324,15 +1324,15 @@ int main() {
                 /* 1) Consultar actualizaciones de pedidos. */
                 case 1:
                     try {
+                        msj = "";
                         system("clear");
                         cout << "--------------------" << "Consultar actualizaciones de pedidos" << "-------------------- \n \n";
                         string tel_cliente = conseguirTelefono();
                         vector<DtActualizacion> act_cliente = iventa->getActualizacionesCliente(tel_cliente);
                         vector<DtActualizacion>::iterator it_act;
-                        cout << "Actualizaciones de sus pedidos: \n";
+                        cout << "\nSe listan las actualizaciones de sus pedidos. \n\n";
                         for (it_act = act_cliente.begin(); it_act != act_cliente.end(); it_act++)
                             cout << *it_act << "\n\n";
-
                         string dummy;
                         getline(cin, dummy);
                         cout << "Presione <enter> para continuar...";
@@ -1351,7 +1351,7 @@ int main() {
                     break;
 
                 default: {
-                    msj = "Número inválido. Ingrese valor entre 0 y 1.";
+                    msj = "Número inválido. Ingrese valor entre 0 y 1";
                 }
                 break;
                 }//fin switch opcion_cliente
@@ -1365,7 +1365,7 @@ int main() {
             try {
                 //Cargo productos
                 cargarDatosDePrueba();
-                msj = "Datos cargados correctamente.";
+                msj = "Datos cargados correctamente";
             } catch(exception* e) {
                 system("clear");
                 msj = e -> what();
@@ -1385,7 +1385,7 @@ int main() {
             break;
 
         default: {
-            msj = "Número inválido. Ingrese valor entre 0 y 5.";
+            msj = "Número inválido. Ingrese valor entre 0 y 5";
         }
         break;
 

@@ -24,7 +24,7 @@ public:
     virtual Mozo *getMozo(int num_mozo) = 0;
     virtual void ingresarNombreEmpleado(string nombre) = 0;
     virtual set<Transporte> getTransportes() = 0;
-    virtual set<int> getNumeroRepartidores() = 0;
+    virtual set<int> getIdsRepartidor() = 0;
     virtual map<int, Repartidor*> getRepartidoresDisponibles() = 0;
     virtual void seleccionarTransporte(Transporte t) = 0;
     virtual void seleccionarRepartidor(int numero_repartidor) = 0;
@@ -35,7 +35,7 @@ public:
     virtual void ingresarMozo() = 0;
     virtual void cancelarMozo() = 0;
     //Caso de uso: Ventas de un Mozo
-    virtual set<int> getIds() = 0;
+    virtual set<int> getIdsMozo() = 0;
     virtual void seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin) = 0;
     virtual map<int, DtFactura> getVentasFacturadas() = 0;
     //Caso de uso: Modificar etapa de un pedido
@@ -49,6 +49,7 @@ public:
     virtual DtMozo getDatosIngresadosMozo() = 0;
 
     virtual string getNombreMozo(int num_mozo) = 0;
+    virtual string getNombreRepartidor(int num_repartidor) = 0;
 
 
     //destructor

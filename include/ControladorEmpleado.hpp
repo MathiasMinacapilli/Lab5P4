@@ -40,7 +40,7 @@ public:
 	//operacion patron Singleton
 	static ControladorEmpleado *getInstance();
 	Mozo* getMozo(int num_mozo);
-	set<int> getNumeroRepartidores();
+	set<int> getIdsRepartidor();
 	map<int, Repartidor*> getRepartidoresDisponibles();
 
 	//Getters
@@ -58,7 +58,7 @@ public:
     void ingresarMozo();
     void cancelarMozo();
     //Caso de uso: Ventas de un Mozo
-    set<int> getIds();
+    set<int> getIdsMozo();
     void seleccionarIdyFechas(int id, DtFecha fecha_ini, DtFecha fecha_fin);
     map<int, DtFactura> getVentasFacturadas();
     //Caso de uso: Modificar estado de un pedido
@@ -74,6 +74,7 @@ public:
 	DtMozo getDatosIngresadosMozo();
 
 	string getNombreMozo(int num_mozo);
+	string getNombreRepartidor(int num_repartidor);
 
 
 	//cargar datos de prueba
