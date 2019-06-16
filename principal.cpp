@@ -183,7 +183,7 @@ static bool confirmacion () {
 static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
     bool existe_cliente = icliente->existeCliente(telefono);
     if (existe_cliente)
-        throw new invalid_argument("Error. Ya existe un cliente con ese teléfono ingresado en el sistema. ");
+        throw new invalid_argument("Ya existe un cliente con ese teléfono ingresado en el sistema");
     else{
         //consumo el enter que quedo del ingreso del telefono
         getchar();
@@ -331,6 +331,7 @@ int main() {
                 /* 2) Alta empleado. */
                 case 2:
                     try {
+                        msj = "";
                         bool quiere_ingresar_empleado = false;
                         do{
                             system("clear");
@@ -400,7 +401,7 @@ int main() {
                                     }
                                     else {
                                         iempleado->cancelarRepartidor();
-                                        msj = "Ingreso de repartidor cancelado";
+                                        cout << "\nIngreso de repartidor cancelado. \n";
                                     }
                                 }
                                 else
@@ -420,7 +421,7 @@ int main() {
                                         }
                                         else {
                                             iempleado -> cancelarMozo();
-                                            msj = "Ingreso de mozo cancelado";
+                                            cout << "\nIngreso de mozo cancelado. \n";
                                         }
                                     }
                                     //tipo incorrecto
@@ -461,12 +462,18 @@ int main() {
                                 float precio = 0;
                                 string descripcion = "";
                                 cin >> tipo_producto;
+                                map<int, DtProducto> productos_disponibles = iproducto->getProductosDisponibles();
+                                map<int, DtProducto>::iterator it;
                                 switch(tipo_producto) {
                                 case 1: {
                                     //Agregar producto simple
                                     system("clear");
                                     cout << "--------------------" << "Agregar producto simple" << "-------------------- \n \n";
-                                    cout << "Ingrese los datos del producto simple a ingresar. \n"
+                                    cout << "Estos son los productos disponibles. \n";
+                                    //Muestro los productos disponibles
+                                    for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
+                                        cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
+                                    cout << "\nIngrese los datos del producto simple a ingresar. \n"
                                         << " Código: "; cin >> codigo;
                                     cout << " Descripción: ";
                                     getchar();
@@ -491,7 +498,11 @@ int main() {
                                     //Agregar menu
                                     system("clear");
                                     cout << "--------------------" << "Agregar menú" << "-------------------- \n \n";
-                                    cout << "Ingrese los datos del menú a ingresar. \n"
+                                    cout << "Estos son los productos disponibles. \n";
+                                    //Muestro los productos disponibles
+                                    for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
+                                        cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
+                                    cout << "\nIngrese los datos del menú a ingresar. \n"
                                         << " Código: ";
                                     cin >> codigo;
                                     cout << " Descripción: ";
@@ -505,7 +516,7 @@ int main() {
                                     do {
                                         system("clear");
                                         cout << "--------------------" << "Agregar productos al menú" << "-------------------- \n \n";
-                                        cout << "Estos son los productos disponibles. \n";
+                                        cout << "Estos son los productos disponibles para agregar al menú. \n";
                                         //Muestro los productos simples para que se seleccione cuales integran el menu
                                         for (it = productos_simples.begin(); it != productos_simples.end(); ++it){
                                             cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
@@ -632,12 +643,12 @@ int main() {
                         }
                         string waste = "";
                         getline(cin, waste);
-                        cout << "\nPresione <enter> para continuar.";
+                        cout << "\nPresione <enter> para continuar...";
                         getline(cin, waste);
                         if (se_elimino)
-                            msj = "Se eliminó el producto correctamente.";
+                            msj = "Se eliminó el producto correctamente";
                         else
-                            msj = "El producto no se eliminó.";
+                            msj = "El producto no se eliminó";
                     } catch(exception *e) {
                         system("clear");
                         msj = e -> what();
@@ -678,22 +689,22 @@ int main() {
                         cout << "--------------------" << "Información de un producto" << "-------------------- \n \n";
                         map<int, DtProducto> productos_disponibles = iproducto->getProductosDisponibles();
                         map<int, DtProducto>::iterator it;
-                        cout << "Estos son los productos disponibles. \n";
-                        //Muestro los productos disponibles para seleccionar cual se quiere ver su info
-                        for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
-                            cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
-                        }
                         int codigo = 0;
                         bool es_valido_el_codigo = true;
                         bool cancelar = false;
                         do {
+                            system("clear");
+                            cout << "--------------------" << "Información de un producto" << "-------------------- \n \n";
+                            cout << "Estos son los productos disponibles. \n";
+                            //Muestro los productos disponibles para seleccionar cual se quiere ver su info
+                            for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
+                                cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
                             cout << "\nIngrese el código del producto que desea ver la información. \n"
                                 << " Código: ";
                             cin >> codigo;
                             es_valido_el_codigo = iproducto -> ingresarCodigoProductoAConsultar(codigo);
                             if(!es_valido_el_codigo) {
-                                cout << "Código inválido. ¿Desea cancelar la consulta? Ingrese S o N. \n"
-                                    << " Opción: ";
+                                cout << "\nCódigo inválido. ¿Desea cancelar la consulta? Ingrese S o N. \n";
                                 if(confirmacion()) {
                                     es_valido_el_codigo = true;
                                     cancelar = true;
