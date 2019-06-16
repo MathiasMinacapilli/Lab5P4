@@ -599,7 +599,7 @@ int main() {
                 case 4:
                     try {
                         system("clear");
-                        cout << "--------------------" << "Asignar automáticamente mozos a mesas" << "-------------------- \n \n";
+                        cout << "--------------------" << "Asignar automáticamente mozos a mesas" << "-------------------- \n";
                         map<int, DtMesasMozo> mesas_mozo = imesa->asignarMozosAMesas();
                         map<int, DtMesasMozo>::iterator it_mesas_mozo;
                         for(it_mesas_mozo = mesas_mozo.begin(); it_mesas_mozo != mesas_mozo.end(); ++it_mesas_mozo) {
@@ -670,6 +670,7 @@ int main() {
                 case 6:
                     try {
                         msj = "";
+                        system("clear");
                         system("clear");
                         cout << "-----------------" << "Actualizaciones de pedidos a domicilio" << "----------------- \n \n";
                         vector<DtActualizacion> actualizaciones = iventa -> getListadoActualizaciones();
@@ -944,7 +945,7 @@ int main() {
                             if(it != ids.end()) {
                                 existe_id = true;
                             } else { //No existe mozo con id ingresado
-                                cout << "\nNo existe mozo con id ingresado. Por favor ingrese un id válido.";
+                                cout << "\nNo existe mozo con el ID ingresado. \n";
                                 existe_id = false;
                                 cout<< "\nPresione <enter> para continuar...";
                                 getchar();
