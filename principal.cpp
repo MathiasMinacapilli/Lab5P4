@@ -123,10 +123,9 @@ static float conseguirDescuento() {
 
 /* Chequea que sea valido el codigo del producto buscando el codigo en la coleccion
 de productos disponibles. Si el codigo no existe en esta coleccion tira una excepcion */
-static void es_valido_codigo(int codigo, map<int, DtProducto> productos_disponibles) {
+static bool es_valido_codigo(int codigo, map<int, DtProducto> productos_disponibles) {
     map<int, DtProducto>::iterator it = productos_disponibles.find(codigo);
-    if (it == productos_disponibles.end())
-        throw new invalid_argument ("No existe producto con ese código");
+    return (it != productos_disponibles.end());
 }
 
 /* Si la cantidad es menor o igual a 0 tira una excepcion invalid_argument */
@@ -482,7 +481,8 @@ int main() {
                                     for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
                                         cout << " " << (it->second).getCodigo() << " - " << (it->second).getDescripcion() << "\n";
                                     cout << "\nIngrese los datos del producto simple a ingresar. \n"
-                                        << " Código: "; cin >> codigo;
+                                        << " Código: ";
+                                    cin >> codigo;
                                     cout << " Descripción: ";
                                     getchar();
                                     getline(cin, descripcion);
@@ -539,7 +539,7 @@ int main() {
                                         cin >> cantidad;
                                         it = productos_simples.find(codigo_producto_simple);
                                         if(it == productos_simples.end())
-                                            throw new invalid_argument("Se ingresó un código incorrecto.");
+                                            throw new invalid_argument("Se ingresó un código incorrecto");
                                         DtProductoCantidad datos_producto_cantidad = DtProductoCantidad(productos_simples[codigo_producto_simple], cantidad);
                                         iproducto->seleccionarProductoYCantidad(datos_producto_cantidad);
                                         string agregar_mas = "";
@@ -830,21 +830,31 @@ int main() {
                             cout << "Estos son los productos disponibles. \n";
                             for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
                                     cout << it -> second << "\n";
+                            bool es_valido = false;
                             cout << "\nIngrese el código del producto.\n"
                                 << " Código: ";
-                            int codigo;
-                            cin >> codigo;
-                            es_valido_codigo(codigo, productos_disponibles);
-                            cout << "\nIngrese la cantidad que quiere de dicho producto.\n"
-                                << " Cantidad: ";
-                            int cantidad;
-                            cin >> cantidad;
-                            es_valida_cantidad(cantidad);
-                            it = productos_disponibles.find(codigo);
-                            DtProductoCantidad prod_y_cant = DtProductoCantidad((it -> second), cantidad);
-                            iventa -> almacenarProducto(prod_y_cant);
-                            cout << "\n¿Desea agregar más productos? Ingrese S o N. \n";
-                            quiero_agregar = confirmacion();
+                            while (!es_valido) {
+                                int codigo;
+                                cin >> codigo;
+                                es_valido = es_valido_codigo(codigo, productos_disponibles);
+                                if (es_valido) {
+                                    cout << "\nIngrese la cantidad que quiere de dicho producto.\n"
+                                        << " Cantidad: ";
+                                    int cantidad;
+                                    cin >> cantidad;
+                                    es_valida_cantidad(cantidad);
+                                    it = productos_disponibles.find(codigo);
+                                    DtProductoCantidad prod_y_cant = DtProductoCantidad((it -> second), cantidad);
+                                    iventa -> almacenarProducto(prod_y_cant);
+                                    cout << "\nProducto ingresado correctamente. \n";
+                                    cout << "\n¿Desea agregar más productos? Ingrese S o N. \n";
+                                    quiero_agregar = confirmacion();
+                                } else {
+                                    cout << "\nCódigo ingresado no válido. Ingrese un código válido. \n"
+                                        << " Código: ";
+                                }
+
+                            }
                         }
                         cout << "\n¿Desea que el pedido sea entregado? Ingrese S o N. \n";
                         bool quiero_recibir = confirmacion();
@@ -892,7 +902,7 @@ int main() {
                                     getline(cin, continuar);
                                     delete ptr_factura_domicilio;
                                 } else
-                                    throw new invalid_argument("La venta es local.");
+                                    throw new invalid_argument("La venta es local");
                             } else {
                                 cout << *factura
                                     << "\n--------------------------------------------";
@@ -959,7 +969,7 @@ int main() {
                     break;
 
                 default: {
-                    msj = "Número inválido. Ingrese valor entre 0 y 10.";
+                    msj = "Número inválido. Ingrese valor entre 0 y 10";
                 }
                 break;
                 }//fin switch opcion_administrador
@@ -1030,11 +1040,11 @@ int main() {
                                 quiero_confirmar = confirmacion();
                                 if (quiero_confirmar) {
                                     iventa -> agregarProductoAVenta();
-                                    cout << "\nSe agregó/agregaron el/los producto/s correctamente. \n";
+                                    cout << "\nSe agregó el producto correctamente. \n";
                                     msj = "Se agregó/agregaron el/los producto/s correctamente";
                                     primera_vez = false;
                                 } else {
-                                    cout << "\nEl/los producto/s no se agregó/agregaron. \n";
+                                    cout << "\nEl producto no se agregó. \n";
                                     if(primera_vez) //Si es la primera vez (no agrego ningun producto aun) entonces muestro este mensaje en el principal
                                         msj = "Se canceló el agregado de productos a una venta";
                                 }
@@ -1084,9 +1094,9 @@ int main() {
                             cout << "\nPresione <enter> para continuar...";
                             string continuar;
                             getline(cin, continuar);
-                            msj = "Venta facturada correctamente.";
+                            msj = "Venta facturada correctamente";
                         } else
-                            throw new invalid_argument("La venta es a domicilio.");
+                            throw new invalid_argument("La venta es a domicilio");
                         delete factura;
                     } catch(exception* e) {
                         system("clear");

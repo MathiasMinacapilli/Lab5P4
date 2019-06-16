@@ -32,7 +32,7 @@ void ControladorProducto::ingresarDatosProducto(DtProductoSimple datos){
 	if(this->encontrarProducto(datos_producto) == nullptr) {
 		this->datos_prod_simple = datos;
 	} else {
-		throw new invalid_argument("Error. Ya existe un producto con el codigo ingresado");
+		throw new invalid_argument("Ya existe un producto con el código ingresado");
 	}
 }
 
@@ -55,7 +55,7 @@ void ControladorProducto::ingresarDatosMenu(int codigo, string desc){
 		this->codigo_menu = codigo;
 		this->desc_menu = desc;
 	}
-	else throw new invalid_argument("Error. Ya existe un producto con el codigo ingresado");
+	else throw new invalid_argument("Ya existe un producto con el código ingresado");
 
 }
 
@@ -177,11 +177,11 @@ void ControladorProducto::eliminarProductoDeMenu(int cod){
             if(vacio_menu) {
             	Menu* menu = it -> second;
                 it = menus.erase(it);
-                menu -> eliminar();		
+                menu -> eliminar();
             }
         	else ++it;
 		}
-		else ++it;		
+		else ++it;
 	}
 }
 
@@ -258,13 +258,13 @@ int ControladorProducto::getCantidadProductoTotalVendidos() {
 		return 0;
 }
 
-/* Agrega el producto simple ps a la coleccion ??? */
+/* Agrega el producto simple ps a la coleccion */
 void ControladorProducto::agregarProductoSimple(ProductoSimple *ps) {
 	map<int, ProductoSimple*>::iterator it = this -> productosSimples.find(ps -> getCodigo());
 	if (it == this -> productosSimples.end())
 		(this -> productosSimples).insert(pair<int, ProductoSimple*>(ps -> getCodigo(), ps));
 	else
-		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
+		throw new invalid_argument("Ya existe un producto con el código ingresado");
 }
 
 /* Agrega el menu a la coleccion de menus si no existe menu con codigo
@@ -274,7 +274,7 @@ void ControladorProducto::agregarMenu(Menu *menu) {
 	if (it == this -> menus.end())
 		(this -> menus).insert(pair<int, Menu*>(menu -> getCodigo(), menu));
 	else
-		throw new invalid_argument("Ya existe un producto con el codigo ingresado.");
+		throw new invalid_argument("Ya existe un producto con el código ingresado");
 }
 
 //caso de uso: venta a domicilio
