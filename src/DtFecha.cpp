@@ -1,3 +1,7 @@
+//Librerias de C
+#include <string>
+using namespace std;
+
 //Archivos
 #include "../include/DtFecha.hpp"
 
@@ -30,8 +34,17 @@ bool DtFecha::operator==(const DtFecha &f2) {
 }
 
 ostream &operator<< (ostream& o, DtFecha dtf) {
-    o << dtf.getDia()
-		<< "/" << dtf.getMes()
-		<< "/" << dtf.getAnio();
-		return o;
+
+    int dia_int = dtf.getDia();
+    string dia = to_string(dia_int);
+    if (dia_int < 10)
+        dia = "0" + dia;
+
+    int mes_int = dtf.getMes();
+    string mes = to_string(mes_int);
+    if (mes_int < 10)
+        mes = "0" + mes;
+
+    o << dia << "/" << mes << "/" << dtf.getAnio();
+	return o;
 }

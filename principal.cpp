@@ -257,8 +257,8 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
             else{
                 icliente->cancelarCliente();
                 mensaje = "Ingreso de cliente cancelado";
+                throw new invalid_argument ("Ingreso de cliente cancelado");
             }
-
         }
         catch(exception *e){
             throw e;
@@ -819,18 +819,17 @@ int main() {
                             cout << "\nNo existe un cliente asociado a este teléfono. "
                                 << "Ingrese los datos correspondientes. \n";
                             altaCliente(telefono, icliente, msj);
-                        }
-                        cout << "\nEstos son los productos disponibles. \n";
-                        map<int, DtProducto> productos_disponibles = iventa -> obtenerProductosDisponibles();
-                        map<int, DtProducto>::iterator it;
-                        for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it){
-                            cout << (it -> second).getCodigo()
-                                << " - "
-                                << (it -> second).getDescripcion()
-                                << "\n";
+                            cout << "\nCliente ingresado correctamente. \n";
                         }
                         bool quiero_agregar = true;
                         while (quiero_agregar) {
+                            system("clear");
+                            cout << "--------------------" << "Venta a domicilio" << "-------------------- \n \n";
+                            map<int, DtProducto> productos_disponibles = iventa -> obtenerProductosDisponibles();
+                            map<int, DtProducto>::iterator it;
+                            cout << "Estos son los productos disponibles. \n";
+                            for (it = productos_disponibles.begin(); it != productos_disponibles.end(); ++it)
+                                    cout << it -> second << "\n";
                             cout << "\nIngrese el código del producto.\n"
                                 << " Código: ";
                             int codigo;
@@ -1006,9 +1005,11 @@ int main() {
                         bool quiero_agregar = true;
                         bool quiero_confirmar;
                         while (quiero_agregar) {
+                            system("clear");
+                            cout << "--------------------" << "Agregar producto a venta en mesa n°" << numero_mesa << " -------------------- \n \n";
                             map<int, DtProducto> productos = iventa -> obtenerProductosDisponibles();
                             map<int, DtProducto>::iterator it;
-                            cout << "\nEstos son los productos disponibles. \n";
+                            cout << "Estos son los productos disponibles. \n";
                             for (it = productos.begin(); it != productos.end(); ++it) {
                                 cout << (it -> second) << "\n";
                             }
