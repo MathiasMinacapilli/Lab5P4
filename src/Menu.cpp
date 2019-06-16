@@ -59,6 +59,5 @@ void Menu::eliminar(){
 		for (it=productos.begin(); it!=productos.end(); ++it)
 			delete (it->second);
 	productos.clear();
-	cout << "voy a eliminar el menu!!!";
 	delete this;
 }

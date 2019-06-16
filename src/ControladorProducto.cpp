@@ -166,7 +166,6 @@ void ControladorProducto::eliminarProductoDeMenu(int cod){
   	map<int, ProductoEnMenu*> prods_menu;
 	while (it != this->menus.end()){
 		prods_menu = (it->second)->getProductos();
-		cout << "No era vacio \n";
 		map<int, ProductoEnMenu *>::iterator it_p = prods_menu.find(cod);
 	 	if ( it_p != prods_menu.end()) {
             bool vacio_menu = (it->second) -> eliminarProducto(cod);
