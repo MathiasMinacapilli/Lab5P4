@@ -46,10 +46,14 @@ void Venta::setProdsDomicilio(map<int, CantidadProducto*> prods_domicilio) {
 }
 
 void Venta::agregarProductoAVenta(Producto* producto, int cantidad) {
-    map<int, CantidadProducto*>::iterator it;
+    map<int, CantidadProducto*> cant_prods = this->cants_productos;
+    map<int, CantidadProducto*>::iterator it = cant_prods.begin();
     bool esta_producto = false;
-    for(it = this->cants_productos.begin(); ((it != this->cants_productos.end()) && (!esta_producto)); ++it)
-        esta_producto = (it->second)->estaProducto(producto->getCodigo());
+    while ((it != cant_prods.end()) && (!esta_producto)) {
+      esta_producto = (it->second)->estaProducto(producto->getCodigo());
+      if (!esta_producto)
+        ++it;
+    }
     if (esta_producto)
         (it->second)->aumentarCantidad(cantidad);
     else {

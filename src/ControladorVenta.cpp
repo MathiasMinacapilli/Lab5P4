@@ -58,11 +58,17 @@ VentaLocal *ControladorVenta::crearVenta() {
 //AGREGAR PRODUCTO A UNA VENTA
 void ControladorVenta::ingresarNumeroMesa(int numero) {
     ControladorMesa* cont_mesa = ControladorMesa::getInstance();
-    if (cont_mesa -> existeMesa(numero)){
+    if (cont_mesa -> existeMesa(numero)) {
         this -> numero_mesa = numero;
-    } else {
-        throw new invalid_argument("No existe mesa asociada al número ingresado");
-    }
+        ControladorMesa *cont_mesa;
+        cont_mesa = ControladorMesa::getInstance();
+        Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
+        if(v == nullptr)
+          throw new invalid_argument("La mesa seleccionada no tiene una venta iniciada.");
+        else
+          this -> v = v;
+    } else
+      throw new invalid_argument("No existe mesa asociada al número ingresado");
 }
 map<int, DtProducto> ControladorVenta::obtenerProductosDisponibles() {
   ControladorProducto *cont_prod;
@@ -80,13 +86,7 @@ void ControladorVenta::seleccionarProdYCant(DtProductoCantidad producto_cantidad
 }
 
 void ControladorVenta::agregarProductoAVenta() {
-    ControladorMesa *cont_mesa;
-    cont_mesa = ControladorMesa::getInstance();
-    Venta* v = cont_mesa -> obtenerVenta(this -> numero_mesa);
-    if(v != nullptr)
-        v -> agregarProductoAVenta(this -> prod, this -> cantidad);
-    else
-        throw new invalid_argument("La mesa seleccionada no tiene una venta iniciada.");
+  (this -> v) -> agregarProductoAVenta(this -> prod, this -> cantidad);
 }
 
 void ControladorVenta::cancelarProductoAVenta() {
