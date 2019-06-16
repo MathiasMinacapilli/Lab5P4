@@ -1034,7 +1034,6 @@ int main() {
                                     msj = "Se agregó/agregaron el/los producto/s correctamente";
                                     primera_vez = false;
                                 } else {
-                                    iventa -> cancelarProductoAVenta();
                                     cout << "\nEl/los producto/s no se agregó/agregaron. \n";
                                     if(primera_vez) //Si es la primera vez (no agrego ningun producto aun) entonces muestro este mensaje en el principal
                                         msj = "Se canceló el agregado de productos a una venta";
@@ -1042,6 +1041,7 @@ int main() {
                                 cout << "\n¿Desea agregar más productos a la venta? Ingrese S o N.\n";
                                 quiero_agregar = confirmacion();
                         }
+                        iventa -> cancelarProductoAVenta();
                     } catch(exception* e) {
                         system("clear");
                         msj = e -> what();
