@@ -18,7 +18,7 @@ Mozo *ControladorEmpleado::getMozo(int num_mozo){
 	if (it != mozos.end())
 		return it->second;
 	else
-		throw new invalid_argument("Error. No existe mozo con ese numero");
+		throw new invalid_argument("No existe mozo con el ID ingresado");
 }
 
 
@@ -67,7 +67,7 @@ Repartidor* ControladorEmpleado::getRepartidorRecordado(){
 	if (it != this->repartidores.end())
 		return (it -> second);
 	else
-		throw new invalid_argument("Error. No existe un repartidor con ese id. ");
+		throw new invalid_argument("No existe repartidor con el ID ingresado");
 }
 
 void ControladorEmpleado::borrarNumero() {
@@ -142,7 +142,7 @@ void ControladorEmpleado::ingresarIdRepartidor(int id){
 	if (it != this->repartidores.end()){
 		this -> id_repartidor_recordado = id;
 	}
-	else throw new invalid_argument("Error. No existe un repartidor con ese id. ");
+	else throw new invalid_argument("No existe repartidor con el ID ingresado");
 }
 
 map<int, DtDireccion> ControladorEmpleado::getVentasRepartidor(){
@@ -181,7 +181,7 @@ Repartidor *ControladorEmpleado::getRepartidor(int numero_repartidor){
 	map<int, Repartidor *>::iterator it = this->repartidores.find(numero_repartidor);
 	if (it != this->repartidores.end())
 		return it->second;
-	else throw new invalid_argument("Error. No existe un repartidor con ese id. ");
+	else throw new invalid_argument("No existe repartidor con el ID ingresado");
 }
 bool ControladorEmpleado::existeEmpleado(int num){
 	map<int, Mozo*>::iterator it_mozos = this->mozos.find(num);
@@ -212,7 +212,7 @@ string ControladorEmpleado::getNombreMozo(int num_mozo) {
 		Mozo *mozo = getMozo(num_mozo);
 		return mozo -> getNombre();
 	} else
-		throw new invalid_argument("No existe mozo con el número ingresado");
+		throw new invalid_argument("No existe mozo con el ID ingresado");
 }
 
 string ControladorEmpleado::getNombreRepartidor(int num_repartidor) {
@@ -221,7 +221,7 @@ string ControladorEmpleado::getNombreRepartidor(int num_repartidor) {
 		Repartidor *repartidor = getRepartidor(num_repartidor);
 		return repartidor -> getNombre();
 	} else
-		throw new invalid_argument ("No existe repartidor con el número ingresado");
+		throw new invalid_argument ("No existe repartidor con el ID ingresado");
 }
 
 //destructor

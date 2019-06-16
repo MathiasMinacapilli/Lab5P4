@@ -205,11 +205,11 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
         int nro;
         cin >> nro;
         getchar();
-        cout << "Desea ingresar esquinas? Ingrese S o N. \n ";
+        cout << "\n¿Desea ingresar esquinas? Ingrese S o N. \n";
         bool esq = confirmacion();
         if (esq){
             getchar();
-            cout << " Esquina 1: ";
+            cout << "\n Esquina 1: ";
             getline(cin, esq1);
             cout << " Esquina 2: ";
             getline(cin, esq2);
