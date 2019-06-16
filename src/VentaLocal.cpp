@@ -22,7 +22,7 @@ DtFactura* VentaLocal::facturar() {
         int cant = (it -> second)->getCantidad();
         DtProductoCantidad prod_cant = DtProductoCantidad(datos, cant);
         datos_productos.insert(pair<int, DtProductoCantidad>(datos.getCodigo(), prod_cant));
-        precio_sub_total = precio_sub_total + (((it->second)->getProducto())->getPrecio());
+        precio_sub_total = precio_sub_total + (((it->second)->getProducto())->getPrecio())*cant;
         //Aumentar la cantidad de vendidos en el producto. Lo aumento la cantidad del producto_cantidad
         (it->second)->getProducto()->aumentarCantidadVendidos(it->second->getCantidad());
         /*CantidadProducto *a_borrar = it->second;

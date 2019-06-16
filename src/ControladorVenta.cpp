@@ -220,6 +220,11 @@ void ControladorVenta::crearVentaADomicilio(bool quiere_repartidor, float descue
         this->ventasDomicilio[ve->getNumero()] = ve;
     }
     this->numero_venta++;
+    this -> telefono_recordado = ' ';
+    ControladorEmpleado *cont_emp;
+    cont_emp = ControladorEmpleado::getInstance();
+    cont_prod -> borrarProductos();
+    cont_emp -> borrarNumero();
 }
 
 void ControladorVenta::cancelarVentaADomicilio() {
