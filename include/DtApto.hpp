@@ -15,7 +15,7 @@ private:
 public:
     //Constructor
 	DtApto();
-    DtApto(string calle, int numeroPuerta, string esquina1, string esquina2, string nombreEdificio, int numeroApto);
+    DtApto(string calle, int numeroPuerta, bool hay_esquinas, string esquina1, string esquina2, string nombreEdificio, int numeroApto);
 
     //Destructor
     ~DtApto();

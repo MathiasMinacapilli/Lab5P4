@@ -187,6 +187,9 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
     else{
         //consumo el enter que quedo del ingreso del telefono
         getchar();
+        string esq1 = " ";
+        string esq2 = " ";
+
         //ingresar datos del cliente
         cout << "\nIngrese el nombre del cliente. \n"
             << " Nombre: ";
@@ -202,12 +205,17 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
         int nro;
         cin >> nro;
         getchar();
-        cout << " Esquina 1: ";
-        string esq1;
-        getline(cin, esq1);
-        cout << " Esquina 2: ";
-        string esq2;
-        getline(cin, esq2);
+        cout << "Desea ingresar esquinas? Ingrese S o N. \n ";
+        bool esq = confirmacion();
+        if (esq){
+            getchar();
+            cout << " Esquina 1: ";
+            getline(cin, esq1);
+            cout << " Esquina 2: ";
+            getline(cin, esq2);
+        }
+        if (!esq)
+            getchar();
         cout << "\n¿Vive en un apartamento? Ingrese S o N. \n";
         bool es_apto = confirmacion();
         getchar();
@@ -219,10 +227,10 @@ static void altaCliente(string telefono, ICliente *icliente, string &mensaje) {
             cout<< " Número de apartamento: ";
             int nro_apto;
             cin >> nro_apto;
-            apto = DtApto(calle, nro, esq1, esq2, nombre_edificio, nro_apto);
+            apto = DtApto(calle, nro, esq, esq1, esq2, nombre_edificio, nro_apto);
         }
         else
-            casa = DtDireccion(calle, nro, esq1, esq2);
+            casa = DtDireccion(calle, nro, esq, esq1, esq2);
         try{
             system("clear");
             cout << "--------------------" << "Alta Cliente" << "-------------------- \n \n";

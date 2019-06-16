@@ -144,15 +144,15 @@ void cargarDatosDePrueba() {
     DtApto apto;
     DtDireccion direccion;
     //C1
-    apto = DtApto("18 de Julio", 2033, "", "", "Mar Austral", 701);
+    apto = DtApto("18 de Julio", 2033, false, "", "", "Mar Austral", 701);
     cont_cliente -> ingresarDatosCliente("098217523", "Vladimir", apto);
     cont_cliente -> ingresarCliente();
     //C2
-    direccion = DtDireccion("Cabildo", 500, "", "");
+    direccion = DtDireccion("Cabildo", 500, false, "", "");
     cont_cliente -> ingresarDatosCliente("091651249", "Martin", direccion);
     cont_cliente -> ingresarCliente();
     //C3
-    apto = DtApto("Avenida Brasil", 842, "", "", "Atlantis", 302);
+    apto = DtApto("Avenida Brasil", 842, false, "", "", "Atlantis", 302);
     cont_cliente -> ingresarDatosCliente("097321590", "Ronaldo", apto);
     cont_cliente -> ingresarCliente();
 

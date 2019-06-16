@@ -11,12 +11,13 @@ class DtDireccion {
 private:
    string calle;
    int numeroPuerta;
+   bool hay_esquinas;
    string esquina1;
    string esquina2;
 public:
     //Constructor
     DtDireccion();
-    DtDireccion(string calle, int numeroPuerta, string esquina1, string esquina2);
+    DtDireccion(string calle, int numeroPuerta, bool esq, string esquina1, string esquina2);
 
     //Destructor virtual porque tiene clases derivadas
     virtual ~DtDireccion();
@@ -24,6 +25,7 @@ public:
     //Getters
     string getCalle();
     int getNumeroPuerta();
+    bool hayEsquinas();
     string getEsquina1();
     string getEsquina2();
 };

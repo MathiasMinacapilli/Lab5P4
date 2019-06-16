@@ -5,8 +5,8 @@
 DtApto::DtApto():DtDireccion(){}
 
 //constructor por defecto
-DtApto::DtApto(string calle, int numeroPuerta, string esquina1, string esquina2, string nombreEdificio, int numeroApto)
-:DtDireccion(calle, numeroPuerta, esquina1, esquina2) {
+DtApto::DtApto(string calle, int numeroPuerta, bool hay_esquina, string esquina1, string esquina2, string nombreEdificio, int numeroApto)
+:DtDireccion(calle, numeroPuerta, hay_esquina, esquina1, esquina2) {
     this->nombreEdificio = nombreEdificio;
     this->numeroApto = numeroApto;
 }
