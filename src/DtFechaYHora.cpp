@@ -1,5 +1,4 @@
 //Librerias de C
-#include <stdlib.h>
 #include <string>
 using namespace std;
 
@@ -69,16 +68,29 @@ bool DtFechaYHora::operator<=(const DtFechaYHora &f2){
 }
 
 ostream &operator<< (ostream& o, DtFechaYHora dtfh) {
-    int minutos = dtfh.getMinutos();
-    string min = to_string(minutos);
-    if (minutos < 10)
-        min = "0" + min;
-    o << dtfh.getDia()
-			<< "/" << dtfh.getMes()
-			<< "/" << dtfh.getAnio()
-			<< " - " << dtfh.getHora()
-			<< ":" << min;
-		return o;
+
+    int dia_int = dtfh.getDia();
+    string dia = to_string(dia_int);
+    if (dia_int < 10)
+        dia = "0" + dia;
+
+    int mes_int = dtfh.getMes();
+    string mes = to_string(mes_int);
+    if (mes_int < 10)
+        mes = "0" + mes;
+
+    int hora_int = dtfh.getHora();
+    string hora = to_string(hora_int);
+    if (hora_int < 10)
+        hora = "0" + hora;
+
+    int minutos_int = dtfh.getMinutos();
+    string minutos = to_string(minutos_int);
+    if (minutos_int < 10)
+        minutos = "0" + minutos;
+
+    o << dia << "/" << mes << "/" << dtfh.getAnio() << " - " << hora << ":" << minutos;
+	return o;
 }
 
 DtFechaYHora::~DtFechaYHora() {}
